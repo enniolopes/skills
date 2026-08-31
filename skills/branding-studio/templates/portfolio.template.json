@@ -1,0 +1,30 @@
+{
+  "studio": {
+    "name": "",
+    "default_architecture": "house-of-brands | endorsed | hybrid",
+    "shared_tokens": {
+      "_note": "DTCG tokens ALL brands inherit when there is endorsement (e.g., the studio's institutional typography). Empty in a pure house-of-brands."
+    }
+  },
+  "occupied_territories": {
+    "_note": "quick view consulted at creation time — regenerate from the brands list",
+    "oklch_hues": [],
+    "morphologies": [],
+    "name_types": []
+  },
+  "brands": [
+    {
+      "brand_name": "ExampleCo",
+      "spec_path": "specs/exampleco/brand-spec.json",
+      "status": "active | discontinued | in_creation",
+      "tier": "provisional | full",
+      "category": "",
+      "portfolio_summary": {
+        "name": { "name": "ExampleCo", "approach": "suggestive", "construct": "compound" },
+        "primary_color_oklch": { "L": 0.55, "C": 0.21, "H": 263 },
+        "logo_morphology": ["geometric", "monogram"],
+        "personality": ["precise", "approachable"]
+      }
+    }
+  ]
+}

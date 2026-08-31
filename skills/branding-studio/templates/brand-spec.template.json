@@ -1,0 +1,172 @@
+{
+  "meta": {
+    "brand_name": "",
+    "version": "1.0.0",
+    "date": "",
+    "tier": "provisional | full",
+    "briefing_register": "startup | research_institute",
+    "touchpoints": ["declared at creation: where this brand will live (web, pitch deck, print, product UI, signage...) — deliverable formats are compiled from this list"],
+    "architecture": {
+      "model": "house-of-brands | endorsed | branded-house | hybrid",
+      "studio_endorsement": "none | discreet | explicit",
+      "tokens_inherited_from_studio": [],
+      "$rationale": ""
+    },
+    "changelog": [
+      { "version": "1.0.0", "date": "", "trigger": "creation", "changes": "initial spec" }
+    ]
+  },
+
+  "strategy": {
+    "customer": {
+      "who_it_is": "",
+      "who_it_is_NOT": "",
+      "insight": "",
+      "$rationale": "where this insight came from (interview, data, founder observation)"
+    },
+    "right_to_win": {
+      "statement": "",
+      "$rationale": "founding ethos / technical capability / evidence"
+    },
+    "differentiation": {
+      "statement": "",
+      "competitors_analyzed": [
+        { "name": "", "positioning": "", "visual_code": "" }
+      ],
+      "category_conventions": ["what everyone in this category does"],
+      "conventions_kept": ["signal category membership"],
+      "conventions_broken": ["generate distinctiveness"],
+      "$rationale": ""
+    },
+    "context": {
+      "chosen_trend": "",
+      "longevity_evidence": "why this is not a fad",
+      "$rationale": ""
+    },
+    "theme": {
+      "statement": "",
+      "because_test": "theme BECAUSE right_to_win — the sentence must close logically",
+      "onliness": "Our [offering] is the only [category] that [benefit]"
+    },
+    "manifesto": "",
+    "category_entry_points": ["situations in which the brand must come to mind"]
+  },
+
+  "naming": {
+    "name": "",
+    "approach": "descriptive | suggestive | abstract",
+    "construct": "real-word | compound | coined",
+    "$rationale": "why this name expresses the theme",
+    "$excludes": "name types/names deliberately avoided and why",
+    "phonosemantics": "sound profile vs target attributes (modest effect: record it, never decide by it)",
+    "clearance": {
+      "inpi_nice_classes": [],
+      "inpi_search_date": "",
+      "inpi_status": "not_searched | no_apparent_collision | collision | filed | registered",
+      "domains": { "com_br": "", "com": "" },
+      "handles": {},
+      "language_disaster_check": ["pt-BR", "en"],
+      "human_legal_clearance": "PENDING — the skill triages; the final opinion is a lawyer's"
+    }
+  },
+
+  "verbal": {
+    "principles": ["principle 1", "principle 2", "principle 3"],
+    "voice_chart": {
+      "_format": "for each principle: Podmajersky's 6 dimensions",
+      "principle 1": {
+        "concepts": "", "vocabulary": "", "verbosity": "",
+        "grammar": "", "punctuation": "", "capitalization": ""
+      }
+    },
+    "not_like_this": [
+      { "example": "a sentence another brand could legitimately say", "why_not": "" }
+    ],
+    "moments": {
+      "_note": "voice is constant, tone varies by moment — audits compare against the right moment",
+      "error": { "tone": "", "example": "" },
+      "celebration": { "tone": "", "example": "" },
+      "onboarding": { "tone": "", "example": "" },
+      "institutional": { "tone": "", "example": "" }
+    }
+  },
+
+  "visual": {
+    "$overall_rationale": "how the visual territory derives from the theme",
+    "$excludes": "visual territory deliberately avoided (e.g., the broken conventions)",
+
+    "tokens": {
+      "_format": "W3C DTCG: $value/$type. 3 layers: primitive -> semantic -> component",
+      "color": {
+        "primitive": {
+          "brand-500": { "$value": "#000000", "$type": "color" }
+        },
+        "semantic": {
+          "action": { "$value": "{color.primitive.brand-500}", "$type": "color" },
+          "text": { "$value": "{color.primitive.neutral-900}", "$type": "color" },
+          "background": { "$value": "{color.primitive.neutral-50}", "$type": "color" }
+        }
+      },
+      "dimension": {
+        "space": { "_note": "4/8pt scale", "1": { "$value": "4px", "$type": "dimension" } }
+      },
+      "fontFamily": {
+        "heading": { "$value": [""], "$type": "fontFamily" },
+        "body": { "$value": [""], "$type": "fontFamily" }
+      }
+    },
+
+    "palette": {
+      "primary_color": { "hex": "", "oklch": { "L": 0, "C": 0, "H": 0 } },
+      "$rationale": "",
+      "$excludes": "hues avoided (category convention or portfolio collision)",
+      "scale_generated_by": "scripts/color_tools.py scale — WCAG contrast targets",
+      "hierarchy_warning": "color is the WEAKEST distinctive asset (12% fame / 39% uniqueness); reinforcement, never the main axis"
+    },
+
+    "contrast_pairs": [
+      { "text": "{color.semantic.text}", "background": "{color.semantic.background}", "usage": "body" },
+      { "text": "{color.primitive.brand-500}", "background": "{color.semantic.background}", "usage": "ui" }
+    ],
+
+    "typography": {
+      "scale": { "base_px": 16, "ratio": 1.25, "steps": [12.8, 16, 20, 25, 31.25, 39.06] },
+      "$rationale": "why this ratio / these families express the theme",
+      "$excludes": ""
+    },
+
+    "logo": {
+      "type": "constructible (monogram | letterform | geometric symbol) | expressive (OUT OF SCOPE — brief for external designer)",
+      "construction": {
+        "_note": "parameterized geometric construction, never freehand drawing; SVG with declared grid and coordinates",
+        "grid": "",
+        "primitives": [],
+        "parameters": {}
+      },
+      "clear_space": "proportional: x = [logo dimension]; minimum margin = 1x on all sides",
+      "minimum_size": { "digital_px": 24, "print_mm": 8 },
+      "derived_variants": ["primary", "monochrome", "reduced", "favicon"],
+      "optical_adjustments": "overshoot on curves/apexes; vertical nudge of centered elements — the eye is the arbiter, not pure geometry",
+      "$rationale": "",
+      "$excludes": "morphologies avoided (category convention or portfolio collision)"
+    },
+
+    "imagery_and_icons": {
+      "photographic_style": "",
+      "icon_system": "shared grid, stroke coherent with the typography",
+      "$rationale": ""
+    }
+  },
+
+  "discarded_routes": [
+    { "route": "", "why_discarded": "attached as justification for the single delivered route (Malinic: one big idea)" }
+  ],
+
+  "portfolio_summary": {
+    "_note": "block copied into the portfolio registry when the brand is approved",
+    "name": { "name": "", "approach": "", "construct": "" },
+    "primary_color_oklch": { "L": 0, "C": 0, "H": 0 },
+    "logo_morphology": ["tags: geometric, monogram, angular, organic, circular-grid, ..."],
+    "personality": ["territory adjectives"]
+  }
+}
