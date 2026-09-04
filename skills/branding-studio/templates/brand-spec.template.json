@@ -1,7 +1,7 @@
 {
   "meta": {
     "brand_name": "",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "date": "",
     "tier": "provisional | full",
     "briefing_register": "startup | research_institute | other",
@@ -15,21 +15,25 @@
     },
     "changelog": [
       {
-        "version": "2.0.0",
+        "version": "3.0.0",
         "date": "",
         "trigger": "creation",
-        "changes": "initial spec"
+        "evidence_refs": [],
+        "changes": "initial spec",
+        "affected_touchpoints": []
       }
     ]
   },
   "research": {
     "findings": [
       {
+        "id": "E-001",
         "claim": "",
         "kind": "fact | observation | hypothesis",
         "source": "",
         "confidence": "high | medium | low",
-        "validation": "verified | needs_field_research"
+        "validation": "verified | needs_field_research",
+        "state": "active | challenged | superseded"
       }
     ],
     "open_questions": [],
