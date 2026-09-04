@@ -1,16 +1,35 @@
 {
   "studio": {
     "name": "",
-    "default_architecture": "house-of-brands | endorsed | hybrid",
-    "shared_tokens": {
-      "_note": "DTCG tokens ALL brands inherit when there is endorsement (e.g., the studio's institutional typography). Empty in a pure house-of-brands."
-    }
-  },
-  "occupied_territories": {
-    "_note": "quick view consulted at creation time — regenerate from the brands list",
-    "oklch_hues": [],
-    "morphologies": [],
-    "name_types": []
+    "default_architecture": "house-of-brands | endorsed | branded-house | hybrid",
+    "relationship_policies": {
+      "house-of-brands": {
+        "name": "separate",
+        "morphology": "separate",
+        "color": "prefer_separate",
+        "creative_territory": "separate"
+      },
+      "endorsed": {
+        "name": "separate",
+        "morphology": "separate",
+        "color": "allow",
+        "creative_territory": "separate"
+      },
+      "branded-house": {
+        "name": "allow_related",
+        "morphology": "allow_related",
+        "color": "allow_related",
+        "creative_territory": "allow_related"
+      },
+      "hybrid": {
+        "name": "custom",
+        "morphology": "custom",
+        "color": "custom",
+        "creative_territory": "custom"
+      }
+    },
+    "shared_tokens": {},
+    "shared_cues": []
   },
   "brands": [
     {
@@ -19,11 +38,27 @@
       "status": "active | discontinued | in_creation",
       "tier": "provisional | full",
       "category": "",
+      "architecture_model": "house-of-brands",
       "portfolio_summary": {
-        "name": { "name": "ExampleCo", "approach": "suggestive", "construct": "compound" },
-        "primary_color_oklch": { "L": 0.55, "C": 0.21, "H": 263 },
-        "logo_morphology": ["geometric", "monogram"],
-        "personality": ["precise", "approachable"]
+        "name": {
+          "name": "ExampleCo",
+          "approach": "suggestive",
+          "construct": "compound"
+        },
+        "primary_color_oklch": {
+          "L": 0.55,
+          "C": 0.21,
+          "H": 263
+        },
+        "logo_morphology": [
+          "geometric",
+          "monogram"
+        ],
+        "creative_territory": [
+          "precise",
+          "approachable"
+        ],
+        "shared_cues": []
       }
     }
   ]

@@ -1,72 +1,280 @@
-# CREATE mode — a new brand from zero
+# CREATE mode — build a brand system from evidence to application
 
-The value of creation lives in the interrogation and the derivation, not in the generation. A nonexistent brief produces dozens of plausible ideas and none that work (Malinic). Never generate anything before strategy is closed.
+Creation is not a sequence of asset-generation prompts. The operating sequence is:
 
-## Choose the tier first
+**Interrogate → Research → Strategy → Creative Direction → Naming & Verbal → Identity Grammar → Trial Applications → Converge → Validate → Deliver**
 
-Venture-studio reality: most theses die or pivot before an identity can become an asset (new assets start at fame ~0; memory only builds with prolonged repetition). Ask which tier this brand needs:
+Do not skip from strategy directly to logo/palette/type.
 
-- **PROVISIONAL** (default for a new thesis): one session. Name with preliminary triage only (quick INPI/domain look, no deep clearance), typographic wordmark instead of a constructed symbol, minimal validated palette + type scale, essential strategy (customer/NOT-customer, right to win, onliness), pitch-deck template. Enough for deck + MVP. The spec uses the same schema with `meta.tier: "provisional"` and pending blocks marked — designed to be **promoted without rework**.
-- **FULL** (the thesis survived, or the user asks): everything below. Promotion of a provisional = fill the pending blocks, complete clearance, construct the mark, re-run validators.
+## 0. Choose the investment tier
 
-## Mandatory sequence
+### PROVISIONAL
+For a thesis that may still pivot. Preserve the same spec structure, but allow explicitly pending depth.
 
-### 1. Interrogation (do not skip; do not invent answers)
-Ask only what cannot be deduced. The core only the founder has:
-- What the business does, for whom, and **for whom NOT** (mandatory — appealing to everyone appeals to no one).
-- What the customer would use if the business did not exist (competitive alternatives, Dunford — includes "a spreadsheet" and "doing nothing").
-- What only this business offers, and the evidence (right to win — for a new venture it comes from the founding ethos).
-- Geographic ambitions (defines name-clearance scope) and relationship to the studio (defines architecture/endorsement).
-- **Touchpoints: where will this brand live?** (web/product UI, pitch deck, print/institutional documents, signage, social...). Record in `meta.touchpoints` — this list drives which deliverable formats get compiled at the end.
+Minimum:
+- customer / not-customer;
+- competitive alternative;
+- right to win;
+- differentiation/theme;
+- preliminary naming triage;
+- concise verbal principles + negatives;
+- creative direction;
+- simple identity grammar suitable for declared MVP touchpoints;
+- at least one trial application;
+- explicit pending items.
 
-**Pick the briefing register** and adapt the questions:
-- **startup**: compression, category (existing or to be created?), recognition speed, investor audience.
-- **research_institute (ICT)**: institutional credibility, funding agencies and agreements, scientific authority, longevity over fashion, multiple stakeholders (researchers, funders, government).
+A provisional identity should be promotable without throwing away its reasoning.
 
-### 2. Research (you do it; don't ask the user)
-- Direct and indirect competitors: positioning and visual code of each (matrix: name, positioning, colors, typography, mark morphology). Web-search for current reality.
-- **Category conventions**: list what everyone does. Then decide explicitly what to keep (signals membership) and what to break (generates distinctiveness). Record both in the spec.
-- Context: a relevant long-term trend, with evidence it is not a fad.
+### FULL
+For a durable venture, an existing organization, or when the user explicitly needs a production-grade system.
 
-### 3. Portfolio consultation (mandatory BEFORE generating)
-Read the portfolio registry. Note hues, morphologies, name types and personalities already occupied by sister brands. They enter as **negative constraints** ($excludes). After generating, run `scripts/portfolio_distance.py` to verify numerically.
+Requires the complete workflow below, deeper evidence, production decisions, trial applications, semantic review, legal pendencies and migration/usage guidance where relevant.
 
-### 4. Strategy (four levers → theme → manifesto)
-Fill the four levers (customer insight, right to win, differentiation, context), each with `$rationale`. Connect them into a theme and apply two hard tests:
-- **Because test** (Fielding): "[theme] BECAUSE [right to win]" — the sentence must close logically. If it doesn't, redo it.
-- **Onliness** (Neumeier): "Our X is the only Y that Z." If "only" doesn't fit, there is no real differentiation — go back to lever 3.
-Write the manifesto (long, inspiring version of the theme, internal use). List category entry points (situations where the brand must come to mind).
+## 1. Interrogate — ask only for authority the model cannot invent
 
-### 5. Naming
-Follow `references/naming.md` (full pipeline with gates). Never deliver a name without clearance triage (provisional tier: preliminary triage, explicitly marked pending).
+Obtain the minimum non-derivable truth:
 
-### 6. Verbal system
-Podmajersky voice chart: for each principle (3 is typical), define the 6 dimensions (concepts, vocabulary, verbosity, grammar, punctuation, capitalization). Add "not_like_this" counter-examples (sentences another brand could legitimately say) and the **moments** (error, celebration, onboarding, institutional) with tone and example — voice is constant, tone varies. Provisional tier: principles + not_like_this at minimum, chart marked pending.
+- What does the organization/product do?
+- For whom? **For whom not?**
+- What would the audience use/do if this did not exist?
+- What capability, asset, ethos or evidence gives this brand a right to win?
+- What geographic and language markets matter?
+- What is the relationship to the venture studio / parent brand?
+- Where will the brand live first? Record those touchpoints in `meta.touchpoints`.
+- What constraints are real: legal names, legacy equity, accessibility, production, budget, timing?
 
-### 7. Visual system
-- **Palette**: pick the hue derived from the theme (and outside the sisters' hues and the broken convention). Generate the scale with `python scripts/color_tools.py scale '#HEX' --bg '#BG'` — steps come out with contrast targets built in. Declare the contrast pairs in the spec. **Color is the weakest distinctive asset (12% fame / 39% uniqueness): treat it as reinforcement, never as the differentiation axis.**
-- **Typography**: two families (heading with personality, sober body), modular scale with a declared ratio derived from use (1.2–1.25 for dense product; 1.333+ for editorial/marketing).
-- **Tokens**: DTCG format ($value/$type), three layers: primitive → semantic → component. If there is studio endorsement, inherit the shared tokens from the registry.
-- **Logo**: constructible domain only — monogram, letterform, geometric symbol. Specify as **parameterized geometric construction** (declared grid, primitives, coordinates), never freehand SVG. Derive the variants (monochrome, reduced, favicon) from the same construction. Apply optical adjustments (overshoot on curves/apexes; centered elements nudge up slightly) — the eye is the arbiter, not pure geometry. Proportional clear space (x = a dimension of the logo itself). If the territory calls for an organic/illustrative/expressive mark: **declare out of scope** and produce the brief for an external designer with auditable acceptance criteria (see audit.md).
-- **Shape is the strongest asset** (40% fame / 71% uniqueness): differentiation against sisters and category anchors on morphology and name.
+Adapt the register:
+- **startup** — category legibility, speed of comprehension, investor/customer dual audience, pivot tolerance.
+- **research_institute** — scientific/institutional authority, multiple stakeholders, funding/government context, longevity and documentation.
 
-### 8. Single convergence (one big idea, Malinic)
-Explore internally as many routes as needed; **deliver ONE**. Discarded routes go into the spec under `discarded_routes` with the why — they justify the chosen one, they are not a menu. Never present 3 options for the user to pick unless explicitly asked.
+Do not ask the user for information that can be responsibly discovered by desk research.
 
-### 9. Validation, compilation and delivery
-1. `python scripts/validate_spec.py spec.json` — must come out VALID.
-2. `python scripts/portfolio_distance.py portfolio.json spec.json` — must come out APPROVED.
-3. Fill `portfolio_summary` in the spec and add the brand to the portfolio registry.
-4. **Compile deliverables from `meta.touchpoints`** — only the formats the declared touchpoints consume, nothing speculative:
-   - web/product → a plain CSS custom-properties file generated from the tokens (`--color-action: ...`). Do not assume Tailwind/Figma or any tool unless the user names it.
-   - pitch deck → a templated deck (pptx skill) applying tokens, type scale and logo rules — usually the highest-turnover piece in a studio.
-   - print/institutional → CMYK conversions and a document template (letterhead/report) when the register is research_institute or print is declared.
-   - **application mini-kit** (full tier): email signature + one-pager + social template derived from the spec — brand only exists in touchpoints; delivering the system without a single application pushes the translation cost onto the user.
-5. Deliver: brand-spec.json + construction SVG(s) + updated registry + compiled formats + readable guidelines (a document derived from the spec, never a parallel source of truth) + the explicit list of human pendencies: definitive legal clearance (lawyer), external designer if any (brief ready), and the user's final aesthetic verdict.
+## 2. Research — distinguish evidence from inference
 
-## Anti-patterns (refuse, citing the rule)
-- Generating without a brief ("create my branding" with no info → interrogate).
-- Filling $rationale with circular rhetoric ("blue because it conveys trust" — universal color psychology is weak; derive from theme and convention-breaking, not from an emotion table).
-- Geometric sans-serif + minimalism + "friendly" tone by default: that is *blanding*, the formula that makes everything look alike. If used, it must be a derived decision, not inertia.
-- Golden ratio as an argument (myth; the real thing is optical adjustment).
-- Archetypes as science (if used, use as a voice-consistency heuristic — and say so).
+Research direct and indirect alternatives, category language, category visual codes, current context and relevant legacy material.
+
+Every material finding that feeds a decision should be representable in `research.findings`:
+
+```json
+{
+  "claim": "what was found",
+  "kind": "fact | observation | hypothesis",
+  "source": "URL, document, interview, dataset or 'founder statement'",
+  "confidence": "high | medium | low",
+  "validation": "verified | needs_field_research"
+}
+```
+
+Rules:
+- competitor websites can support observations about competitor behavior;
+- desk research cannot prove what customers actually perceive or remember;
+- founder statements are useful evidence of intent/inside knowledge, but are not automatically market facts;
+- if the decision depends on audience perception and no field evidence exists, state the hypothesis and validation need.
+
+### Category map
+
+Record:
+- conventions worth keeping because they aid category recognition;
+- conventions worth breaking because they cause sameness or contradict strategy;
+- why each choice matters.
+
+Do not break convention merely to appear novel.
+
+## 3. Portfolio fit — before creative generation
+
+Load the portfolio registry and the candidate's architecture model.
+
+Use sister brands as constraints only where the architecture requires separation. A house of brands and a branded house have different goals.
+
+Record relevant overlaps/avoidances in the spec, then later run:
+
+```bash
+python scripts/portfolio_collision.py portfolio.json spec.json
+```
+
+Treat its output as **collision signals produced by a studio policy**, not scientific measurement of brand distinctiveness.
+
+## 4. Strategy — compress the evidence into choices
+
+Build:
+- customer and not-customer;
+- competitive alternatives;
+- right to win;
+- differentiation;
+- context;
+- theme / organizing idea;
+- category entry points or equivalent demand situations;
+- manifesto/mission only when useful to the register.
+
+Use the Because test as a **reasoning check**, not a machine-proof:
+> `[theme] because [right_to_win/evidence]`
+
+Use an onliness statement when it clarifies a real positioning difference. Do not force the word "only" when the market does not support an exclusivity claim.
+
+Before proceeding, perform a semantic review:
+- Does the strategy make a choice?
+- Is it supported by available evidence?
+- Does it give the creative work useful tension?
+- Is any claim stronger than its evidence?
+
+If not, iterate strategy before design.
+
+## 5. Creative Direction — bridge strategy and identity
+
+Read `creative-direction.md`.
+
+Create a creative direction that translates strategy into:
+- central brand idea;
+- narrative/metaphoric territory;
+- 3–5 visual/verbal principles;
+- productive tensions (e.g. precise ↔ humane);
+- reference frame and anti-reference frame;
+- distinctive-asset hypotheses;
+- art-direction rules;
+- explicit exclusions.
+
+Explore multiple genuinely different creative routes. Different routes must differ in underlying idea/grammar, not merely color or font.
+
+Record meaningful alternatives in `creative_direction.exploration`. There is no mandatory number of client-facing options.
+
+## 6. Naming and verbal identity
+
+If naming is needed, follow `naming.md`.
+
+Build the verbal system from strategy + creative direction:
+- voice principles;
+- vocabulary and concepts;
+- verbosity / grammar / punctuation / capitalization where useful;
+- counter-examples (`not_like_this`);
+- tone by moment/context;
+- key message hierarchy where the brand needs it.
+
+Avoid personality adjectives that cannot change actual writing behavior.
+
+## 7. Identity Grammar — build a language, not a bag of assets
+
+Read `identity-craft.md`.
+
+Define:
+- visual principles;
+- mark/wordmark/signature concept and production status;
+- typography roles and hierarchy model;
+- color system;
+- imagery/illustration;
+- iconography;
+- composition/grid behavior;
+- motion/sound only if relevant;
+- reusable distinctive devices;
+- tokens where machine-consumable reuse is valuable.
+
+### Important non-laws
+
+The following are choices, not invariants:
+- one vs two+ type families;
+- modular vs custom type scale;
+- 4/8pt spacing;
+- geometric vs expressive mark;
+- minimalism;
+- one client-facing route vs several.
+
+Choose from the brand's communication problem and touchpoints.
+
+### Color
+
+Use OKLCH tooling where useful for scales and comparisons. Accessibility contrast is a constraint for relevant digital/text applications, not a rationale for choosing the brand hue.
+
+Do not infer meaning from universal "color psychology" tables.
+
+### Logo / signature
+
+The skill may concept and art-direct any morphology.
+
+Set `visual.logo.production.status`:
+- `final` — a reproducible master exists and has passed applicable deterministic checks;
+- `concept` — concept is approved but production craft remains;
+- `external_craft_required` — specialist execution is needed.
+
+Do not call a generated raster image a final logo master.
+
+## 8. Trial Applications — stress the system before freezing it
+
+Create representative applications from `meta.touchpoints` **before** final convergence.
+
+Choose the smallest set that exposes different stresses:
+- tiny vs large;
+- dense information vs expressive communication;
+- light vs dark;
+- static vs motion;
+- institutional vs promotional;
+- screen vs print where relevant.
+
+For each trial:
+- state the job;
+- apply the same identity grammar;
+- note what broke;
+- fix the system cause, not only the mockup.
+
+A full-tier identity should have at least one completed trial application and normally several where the touchpoints differ materially.
+
+## 9. Converge
+
+Select the route that best satisfies:
+1. strategy;
+2. creative specificity;
+3. distinctiveness in context;
+4. application performance;
+5. production feasibility;
+6. portfolio policy.
+
+Recommend a preferred route. Show alternatives only when they add decision value or the user asks.
+
+Do not use a composite "creative score" as a substitute for judgment.
+
+## 10. Validate and deliver
+
+### Deterministic
+```bash
+python scripts/validate_structure.py spec.json
+python scripts/portfolio_collision.py portfolio.json spec.json
+python scripts/asset_checks.py path/to/logo.svg   # for SVG masters
+```
+
+### Semantic
+Review:
+- rationale quality;
+- evidence-to-claim fit;
+- strategy-to-creative derivation;
+- coherence of verbal/visual grammar;
+- category fit vs distinction;
+- trial-application performance;
+- unresolved contradictions.
+
+### External/human
+List explicitly:
+- legal/trademark review;
+- field research still required;
+- specialist craft dependencies;
+- final organizational decision/approval.
+
+### Compile deliverables from touchpoints
+
+Examples:
+- web/product → semantic tokens/CSS only when useful;
+- deck → deck template/application;
+- print/institutional → print color specs/document template;
+- social/campaign → reusable composition and content templates;
+- signage/environment → production and legibility rules.
+
+Do not generate formats the brand does not need.
+
+## Delivery
+
+Deliver:
+- updated `brand-spec.json`;
+- identity masters or production briefs with status;
+- trial applications;
+- portfolio registry update;
+- compiled touchpoint artifacts;
+- readable guidelines derived from the spec;
+- semantic review summary;
+- explicit pending evidence/legal/craft decisions.
