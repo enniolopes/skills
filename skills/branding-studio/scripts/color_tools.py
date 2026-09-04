@@ -4,11 +4,14 @@ color_tools.py — Color tooling for the branding-studio skill.
 
 Functions:
   - sRGB (hex) <-> OKLab / OKLCH conversion (Björn Ottosson)
-  - WCAG 2.x contrast (luminance ratio) — legal floor
-  - APCA/Lc contrast (APCA-W3 0.1.9 constants, SAPC-4g) — quality score
-  - OKLCH tonal-scale generation targeting contrast ratios (Leonardo logic:
+  - WCAG 2.x contrast (luminance ratio) — accessibility conformance baseline
+  - APCA/Lc contrast (APCA-W3 0.1.9 constants, SAPC-4g) — perceptual quality signal
+  - OKLCH tonal-scale generation targeting contrast ratios (Leonardo-style logic:
     binary search on L; contrast is monotonic in L for fixed hue/chroma)
   - Gamut clamp via chroma reduction
+
+WCAG is not described here as a universal legal requirement; applicable law varies
+by jurisdiction and context.
 
 CLI usage:
   python color_tools.py contrast '#1a1a1a' '#ffffff'
@@ -19,7 +22,6 @@ import json
 import math
 import sys
 
-# ---------------------------------------------------------------- sRGB básico
 
 def hex_to_rgb(hexstr):
     h = hexstr.strip().lstrip('#')
@@ -42,8 +44,6 @@ def linear_to_srgb(c):
     c = max(0.0, min(1.0, c))
     return 12.92 * c if c <= 0.0031308 else 1.055 * (c ** (1 / 2.4)) - 0.055
 
-# ------------------------------------------------------------------- OKLab/CH
-# Björn Ottosson matrices (bottosson.github.io/posts/oklab)
 
 def linear_rgb_to_oklab(r, g, b):
     l = 0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b
@@ -85,8 +85,7 @@ def oklch_in_gamut(L, C, H):
 
 
 def oklch_to_hex(L, C, H, clamp_chroma=True):
-    """OKLCH -> sRGB hex. If out of gamut, reduce chroma by bisection
-    (preserves L and H, which carry perceived lightness and hue)."""
+    """OKLCH -> sRGB hex. If out of gamut, reduce chroma by bisection."""
     if clamp_chroma and not oklch_in_gamut(L, C, H):
         lo, hi = 0.0, C
         for _ in range(32):
@@ -101,7 +100,6 @@ def oklch_to_hex(L, C, H, clamp_chroma=True):
     rgb_lin = oklab_to_linear_rgb(L, a, b)
     return rgb_to_hex(tuple(linear_to_srgb(c) for c in rgb_lin))
 
-# ------------------------------------------------------------------ WCAG 2.x
 
 def wcag_luminance(hexstr):
     r, g, b = (srgb_to_linear(c) for c in hex_to_rgb(hexstr))
@@ -113,11 +111,8 @@ def wcag_ratio(fg, bg):
     return (l1 + 0.05) / (l2 + 0.05)
 
 
-WCAG_MIN = {"body": 4.5, "large": 3.0, "ui": 3.0}  # AA
+WCAG_MIN = {"body": 4.5, "large": 3.0, "ui": 3.0}
 
-# ------------------------------------------------------------------ APCA/Lc
-# APCA-W3 0.1.9 constants (SAPC-4g), Myndex. APCA is a WCAG 3 candidate,
-# NOT an adopted standard: use as quality score, WCAG 2 as the legal floor.
 
 _APCA = dict(
     exp=2.4, rco=0.2126729, gco=0.7151522, bco=0.0721750,
@@ -137,30 +132,24 @@ def _apca_y(hexstr):
 
 
 def apca_lc(fg, bg):
-    """Lc of text fg over background bg. Sign indicates polarity
-    (positive = dark text on light background). Swapping fg/bg changes the value."""
+    """Lc of text fg over background bg. Sign indicates polarity."""
     ytx, ybg = _apca_y(fg), _apca_y(bg)
     if abs(ybg - ytx) < _APCA['deltaYmin']:
         return 0.0
-    if ybg > ytx:  # normal polarity
+    if ybg > ytx:
         sapc = (ybg ** _APCA['normBG'] - ytx ** _APCA['normTXT']) * _APCA['scale']
         lc = 0.0 if sapc < _APCA['loClip'] else sapc - _APCA['loOffset']
-    else:          # reverse polarity
+    else:
         sapc = (ybg ** _APCA['revBG'] - ytx ** _APCA['revTXT']) * _APCA['scale']
         lc = 0.0 if sapc > -_APCA['loClip'] else sapc + _APCA['loOffset']
     return lc * 100
 
 
-# Practical Lc thresholds (APCA guidance): 60 ≈ body (old 4.5:1), 45 ≈ large
-# (old 3:1), 30 absolute minimum for any text, 15 minimum for non-text.
 APCA_MIN = {"body": 60, "large": 45, "ui": 45, "minimum": 30, "non_text": 15}
 
-# ---------------------------------------------- scale generation (Leonardo)
 
 def solve_l_for_wcag(target_ratio, hue, chroma, bg_hex, damp=True):
-    """Binary search on L (OKLCH) to hit the target WCAG ratio against bg.
-    Returns hex. If damp, chroma is damped at the extremes with sin(pi*L)
-    (Radix technique) to avoid washed-out/muddy endpoints."""
+    """Binary search on L (OKLCH) to hit a target WCAG ratio against bg."""
     bg_lum = wcag_luminance(bg_hex)
 
     def ratio_at(L):
@@ -168,7 +157,7 @@ def solve_l_for_wcag(target_ratio, hue, chroma, bg_hex, damp=True):
         h = oklch_to_hex(L, c, hue)
         return wcag_ratio(h, bg_hex), h
 
-    darker_needed = bg_lum > 0.5  # light bg: darker text increases contrast
+    darker_needed = bg_lum > 0.5
     lo, hi = (0.0, 1.0)
     best = None
     for _ in range(28):
@@ -179,37 +168,41 @@ def solve_l_for_wcag(target_ratio, hue, chroma, bg_hex, damp=True):
             hi = mid
         else:
             lo = mid
-    return best  # (achieved_ratio, hex, L)
+    return best
 
 
 def generate_scale(seed_hex, bg_hex='#ffffff',
                    targets=(1.1, 1.3, 1.8, 3.0, 4.5, 7.0, 10.0, 13.0)):
-    """Generate a tonal scale from a seed color, preserving hue, targeting
-    increasing WCAG ratios against the background. Reports WCAG and Lc per step."""
+    """Generate a tonal scale preserving seed hue and targeting contrast ratios."""
     L0, C0, H0 = hex_to_oklch(seed_hex)
     out = []
-    for i, t in enumerate(targets, start=1):
-        ratio, h, L = solve_l_for_wcag(t, H0, max(C0, 0.02), bg_hex)
+    for i, target in enumerate(targets, start=1):
+        ratio, h, L = solve_l_for_wcag(target, H0, max(C0, 0.02), bg_hex)
         out.append({
-            "step": i * 100, "hex": h,
+            "step": i * 100,
+            "hex": h,
             "oklch": {"L": round(L, 4), "C_seed": round(C0, 4), "H": round(H0, 2)},
             "wcag_vs_bg": round(ratio, 2),
             "apca_lc_vs_bg": round(apca_lc(h, bg_hex), 1),
         })
     return {"seed": seed_hex, "background": bg_hex, "scale": out}
 
-# ----------------------------------------------------------------------- CLI
 
 def check_pair(fg, bg, usage="body"):
-    r = wcag_ratio(fg, bg)
+    ratio = wcag_ratio(fg, bg)
     lc = apca_lc(fg, bg)
     return {
-        "text": fg, "background": bg, "usage": usage,
-        "wcag_ratio": round(r, 2),
-        "wcag_aa": r >= WCAG_MIN.get(usage, 4.5),
+        "text": fg,
+        "background": bg,
+        "usage": usage,
+        "wcag_ratio": round(ratio, 2),
+        "wcag_aa": ratio >= WCAG_MIN.get(usage, 4.5),
         "apca_lc": round(lc, 1),
         "apca_ok": abs(lc) >= APCA_MIN.get(usage, 60),
-        "note": "WCAG 2.2 is the legal floor (pass/fail); Lc/APCA is a perceptual quality score (WCAG 3 candidate, not adopted).",
+        "note": (
+            "WCAG 2.x is used here as an accessibility conformance baseline; "
+            "APCA/Lc is reported as a perceptual quality signal. Applicable legal requirements vary."
+        ),
     }
 
 
@@ -229,8 +222,11 @@ if __name__ == '__main__':
         print(json.dumps(generate_scale(args[1], bg), indent=2, ensure_ascii=False))
     elif cmd == 'inspect':
         L, C, H = hex_to_oklch(args[1])
-        print(json.dumps({"hex": args[1], "oklch": {"L": round(L, 4), "C": round(C, 4), "H": round(H, 2)},
-                          "wcag_luminance": round(wcag_luminance(args[1]), 4)}, indent=2))
+        print(json.dumps({
+            "hex": args[1],
+            "oklch": {"L": round(L, 4), "C": round(C, 4), "H": round(H, 2)},
+            "wcag_luminance": round(wcag_luminance(args[1]), 4)
+        }, indent=2))
     else:
         print(f"unknown command: {cmd}")
         sys.exit(1)

@@ -1,36 +1,144 @@
 # Brand spec and portfolio registry schema
 
-Canonical templates live in `templates/brand-spec.template.json` and `templates/portfolio.template.json`. Copy the template; never invent your own structure — the validator (`scripts/validate_spec.py`) depends on these exact paths.
+Canonical templates:
+- `templates/brand-spec.template.json`
+- `templates/portfolio.template.json`
 
-## Structural invariants (the validator fails without them)
+The spec is a **semantic contract and source of truth**, not proof that the brand is strategically or aesthetically good.
 
-1. **`$rationale` mandatory** in: strategy.customer, right_to_win, differentiation, context, naming, visual.palette, visual.typography, visual.logo. Real content, not circular rhetoric — it must point to the lever/brief that generated the decision.
-2. **Negative specification mandatory**: `strategy.customer.who_it_is_NOT`, `naming.$excludes`, `visual.$excludes`, `visual.logo.$excludes`, `verbal.not_like_this` (≥1 counter-example).
-3. **`strategy.theme.because_test`** filled ("[theme] BECAUSE [right to win]" closing logically) and `onliness` containing "only".
-4. **DTCG tokens**: every leaf has `$value` and `$type`; aliases as `{color.primitive.x}`; three layers (primitive → semantic → component where applicable).
-5. **`visual.contrast_pairs`**: ≥1 pair with `usage` ∈ {body, large, ui}; references resolve to hex; all pass WCAG AA.
-6. **`visual.typography.scale`**: base_px + ratio + steps consistent (step ≈ base·ratio^n, 1.5% tolerance).
-7. **`visual.logo.clear_space`** proportional (defined in terms of the logo itself), never absolute px.
-8. **`verbal.voice_chart`**: each principle covers the 6 dimensions (concepts, vocabulary, verbosity, grammar, punctuation, capitalization).
-9. **`meta.touchpoints`** declared — drives which deliverable formats are compiled.
-10. **`meta.tier`**: "provisional" tolerates a pending voice chart and pending clearance (as warnings); "full" requires triaged clearance (inpi_status ≠ not_searched).
+## Validation classes
 
-## Blocks and purpose
+### Structural / deterministic
+`validate_structure.py` can verify:
+- required fields exist;
+- decision blocks contain non-empty rationales/negatives;
+- evidence records have provenance/status;
+- DTCG token leaves are structurally valid;
+- declared token references resolve;
+- declared contrast pairs meet configured WCAG criteria;
+- modular scales are mathematically consistent **when the type-system mode is modular**;
+- logo production status/brief fields are coherent;
+- full-tier naming triage is not unresolved collision/not-searched;
+- trial applications exist where required.
 
-| Block | Purpose | Feeds |
-|---|---|---|
-| `meta` | document identity, tier, touchpoints, portfolio architecture, changelog | EVOLVE (versioning), deliverable compilation |
-| `strategy` | four levers + theme + manifesto + CEPs | derivation of everything |
-| `naming` | decision + taxonomy + clearance with status | portfolio_distance, legal pendencies |
-| `verbal` | voice chart + negatives + moments | copy audits |
-| `visual` | DTCG tokens + palette + typography + constructed logo | deterministic checks |
-| `discarded_routes` | justification of the single route (Malinic) | defense of the decision |
-| `portfolio_summary` | comparable projection of the brand | portfolio_distance.py |
+### Semantic
+The model must review:
+- rationale quality;
+- strategy coherence;
+- evidence-to-claim fit;
+- creative specificity;
+- identity grammar;
+- application performance;
+- whether exclusions are useful rather than arbitrary.
+
+Never infer semantic validity from `exit 0`.
+
+## Required conceptual blocks
+
+| Block | Purpose |
+|---|---|
+| `meta` | identity, version, tier, touchpoints, architecture, changelog |
+| `research` | evidence/provenance and unresolved validation needs |
+| `strategy` | audience, alternatives, right-to-win, differentiation, context, theme |
+| `creative_direction` | central idea, tensions, principles, references, exploration |
+| `naming` | selected name and clearance triage |
+| `verbal` | voice, tone/moments, negatives |
+| `visual` | identity grammar and production rules |
+| `trial_applications` | stress tests before freezing a full system |
+| `portfolio_summary` | small comparable projection for portfolio collision checks |
+
+## Rationales
+
+Important decisions should contain `$rationale`.
+
+Structural validation checks only that rationale text exists and is not placeholder-like. Semantic review determines whether the reasoning is actually causal, evidence-backed and non-circular.
+
+## Negative specification
+
+Minimum negatives:
+- `strategy.customer.who_it_is_NOT`;
+- `naming.$excludes` when naming is in scope;
+- `creative_direction.$excludes`;
+- `verbal.not_like_this`;
+- `visual.$excludes`.
+
+Negatives should reduce ambiguity, not merely add adjectives.
+
+## Research evidence
+
+Each material finding:
+
+```json
+{
+  "claim": "...",
+  "kind": "fact | observation | hypothesis",
+  "source": "...",
+  "confidence": "high | medium | low",
+  "validation": "verified | needs_field_research"
+}
+```
+
+`source` may be a URL, internal document, founder statement, interview or dataset. A hypothesis may intentionally remain unverified, but downstream decisions must not overstate it.
+
+## Typography
+
+`visual.typography.hierarchy.mode`:
+- `modular` → provide `base_px`, `ratio`, `steps`; validator checks math.
+- `custom` → provide explicit role relationships; no mathematical scale is required.
+- `fluid` → provide min/max/behavior and touchpoint rules; no modular-scale requirement.
+
+Family count is not fixed.
+
+## Spacing / grids
+
+No universal 4/8pt requirement.
+
+If a touchpoint/system needs spacing tokens or a grid, encode the relevant rules and tokens. Their existence is conditional.
+
+## Logo / signature production
+
+`visual.logo.production.status`:
+- `final`;
+- `concept`;
+- `external_craft_required`.
+
+A concept can be strategically approved without pretending a production master exists.
+
+When `final` and SVG is the declared master, run `asset_checks.py`.
+
+## Trial applications
+
+For `full` tier:
+- at least one real trial application is required;
+- more are expected when touchpoints stress materially different conditions.
+
+A trial records:
+- touchpoint;
+- job;
+- artifact/reference;
+- failures found;
+- system changes caused by the test;
+- status.
 
 ## Portfolio registry
 
-One file per studio. When a brand is approved: copy the spec's `portfolio_summary` into `brands[]`, point `spec_path`, set `tier`, update `occupied_territories`. Morphology tags use a controlled vocabulary (so Jaccard works): `geometric, organic, monogram, letterform, wordmark, abstract-symbol, circular-grid, square-grid, angular, curved, negative-space, modular`.
+The registry stores:
+- studio architecture defaults;
+- relationship policy by architecture model;
+- shared/inherited cues;
+- each brand's compact `portfolio_summary`.
+
+`portfolio_collision.py` reports raw similarity/collision signals. Missing evidence is `UNKNOWN`.
+
+Do not interpret sister-brand similarity without the declared architecture:
+- house of brands usually wants separation;
+- endorsed systems may share parent cues;
+- branded house may intentionally share many cues;
+- hybrid requires explicit policy.
 
 ## File lifecycle
 
-The environment resets between conversations: the spec and the registry live in the user's files (git repository or project knowledge in Claude.ai). Every mode starts by requesting/reading those files and ends by delivering updated versions as presented files. Never assume a previous version is "in memory".
+Each operation reads the current spec/registry from persistent files.
+
+CREATE/EVOLVE return updated canonical files.
+APPLY/AUDIT should not mutate the spec unless a real system-level change is explicitly accepted.

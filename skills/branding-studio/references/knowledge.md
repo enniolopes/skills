@@ -1,42 +1,114 @@
-# Knowledge base — what is solid, what is contested, what is myth
+# Knowledge calibration — how strongly may the skill claim something?
 
-Use this reference to calibrate claims. The skill never presents contested knowledge as consensus. When any of these topics appears in conversation, flag its status.
+Do not flatten every useful branding idea into "consensus". Use the status that matches the evidence.
 
-## Solid consensus (use with confidence)
+## ROBUST PRINCIPLE
 
-- **Strategic derivation**: every identity decision derives from strategy and justifies itself ("because"); decisions without a rationale tend to fail (Fielding, Malinic — independent convergence).
-- **Negative specification**: defining who the customer is NOT, what the voice does NOT say, what the visual avoids — this is what makes the system decidable.
-- **Design tokens (W3C DTCG)**: $value/$type, three layers (primitive → semantic → component), versionable, diffable. Stable standard since Oct/2025, adopted by Figma, Adobe, Salesforce, etc.
-- **WCAG 2.2** as the legal contrast floor (4.5:1 body, 3:1 large/UI); **APCA/Lc** as the superior perceptual metric (Lc 60 ≈ body, 45 ≈ large) — but APCA is a WCAG 3 candidate, NOT an adopted standard. Report both, with that status.
-- **Perceptually uniform spaces (OKLCH/OKLab)** for generating and comparing colors; contrast is monotonic in L for fixed hue/chroma (the basis of binary-search generation).
-- **Empirical hierarchy of distinctive assets** (Ehrenberg-Bass/Romaniuk, 1,162-asset benchmark across 21 categories): shape/logo strongest (~40% fame / 71% uniqueness); **color weakest** (~12% / 39%; only ~4% of colors uniquely identify a brand). Differentiation anchors on shape and name; color reinforces.
-- **Distinctive Asset Grid** (Fame × Uniqueness): new assets are born at fame ~0 — a new brand's goal is high uniqueness + consistent repetition. Measuring real fame/uniqueness requires field research; without it, treat values as hypotheses.
-- **Optical adjustments** (overshoot of curves/apexes beyond baseline/cap-height; nudging centered elements): real and necessary — perfect geometry looks wrong.
-- **Phonosemantics**: real, replicated effect (Yorkston & Menon 2004), but modest — a signal, not a decider.
-- **Voice vs tone** (Podmajersky): voice constant, tone varies by moment; auditing tone requires knowing the moment.
-- **Color as property**: legally, a color becomes a trademark only through secondary meaning and decades of consistent use (Qualitex, Louboutin, Cadbury); empirically coherent with color's weakness in the grid. Never promise a new brand it will "own a color".
+Broad, durable operating principles supported by repeated professional convergence and/or strong reasoning.
 
-## Contested (use with the explicit caveat)
+- Strategy/research should precede irreversible identity decisions.
+- Brand identity is broader than a logo; verbal, visual and experiential cues work as a system.
+- Repetition and consistency help assets accumulate recognition; unnecessary change can destroy equity.
+- Trial applications expose identity-system failures that isolated logo boards cannot.
+- A brand is ultimately perception/reputation in people, not merely what the organization declares.
+- Accessibility, legibility, production feasibility and legal constraints are part of real identity performance.
 
-- **Brand archetypes** (Mark & Pearson): no falsifiable empirical base; the Jung link is tenuous. Real value: a consistency heuristic for personality. If the user asks, use it — saying what it is.
-- **Universal color psychology** ("blue = trust"): weak, context- and category-dependent effects. What is real: category base rates (≈30% of the world's logos are blue; retail is dominated by reds) — useful as a convention map to break, not as an emotion table.
-- **How Brands Grow laws** (double jeopardy, penetration > loyalty): derived from mature mass-consumer brands; do not transfer directly to small-base deep-tech B2B. What transfers: mental availability, category entry points, distinctive assets.
-- **Category design / Play Bigger** ("category kings take ~70–80% of the category's economics"): influential thesis for deep tech, but critics point to oversimplification; rely on case evidence, not the promise.
+## ESTABLISHED PRACTICE
 
-## Myth (never use as an argument; correct it if the user brings it)
+Common professional methods that are useful but not universal laws.
 
-- **Golden ratio in logos**: no scientific basis (the reputation traces to Zeising, 19th century). The real things are optical adjustments and consistent grids.
-- **"Blanding" as good practice**: the geometric-sans + minimalism + friendly tone + -ify name formula is not neutral, it is active convergence — it erases distinctiveness. The defensible part is functional (legibility at small sizes); the rest is inertia. Simplification that removes recognized assets destroys brand memory.
+- Competitive/category audits.
+- Positioning platforms and creative briefs.
+- Naming pipelines with linguistic and legal triage.
+- Voice principles and tone-by-context.
+- Grids, type systems, logo clear-space rules, monochrome/reduced variants.
+- Brand guidelines/centers and asset management.
+- Presenting identity in realistic applications.
+- Versioning and migration during rebrands.
 
-## Register-specific notes
+## STUDIO HEURISTIC
 
-- **Research institute (ICT) / academic spin-off**: scientific credibility > emotional appeal; multiple stakeholders (funding agencies, government, academia, industry); longevity and sobriety; names lean acronym-with-meaning or institutional-descriptive; INPI class 42 (scientific research) almost always present; the "manifesto" becomes the institutional mission.
-- **Deep-tech B2B startup**: Dunford-style positioning (real competitive alternatives, not "slide competitors"); frequently category creation (onliness mandatory); dual audience (technical customer + investor); the brand must survive pivots — avoid names that lock product scope.
+Deliberate rules of this skill/venture studio. Useful because they make agent behavior more reliable; do not misrepresent them as scientific laws.
 
-## Declared limits of the skill (say them when relevant)
+- Mandatory `$rationale` for important decisions.
+- Negative specification (`not_customer`, `$excludes`, `not_like_this`).
+- Provisional vs full investment tiers.
+- A central versioned brand spec as source of truth.
+- Portfolio registry and architecture-aware collision checks.
+- Prefer one recommended direction over an unranked menu.
+- Separate deterministic validation, semantic judgment, evidence gaps and opinion.
 
-1. **Organic/illustrative/expressive marks**: outside the constructible domain — the skill writes the brief and acceptance criteria, and audits the external designer's delivery.
-2. **Definitive legal clearance**: a lawyer's opinion; the skill triages.
-3. **Real fame/uniqueness**: require field research; the skill treats them as hypotheses.
-4. **Final aesthetic verdict**: the user's — informed by the skill, never usurped by it.
-5. **Raster image generation**: not a brand asset (no vector, no construction, no reproducibility, similarity risk with existing marks). The skill produces declarative geometric construction (parameterized SVG).
+## EMPIRICAL FINDING
+
+Evidence exists, but scope/sample matters.
+
+- Distinctive-asset research indicates asset types differ in average fame/uniqueness; shape/logo often performs more strongly than color in reported samples. Use this directionally. Do **not** convert those averages into universal portfolio-distance weights.
+- Mental availability and category-entry-point concepts have strong evidence in mature consumer-brand research; transfer to small-base deep-tech/institutional contexts should be reasoned, not automatic.
+- Sound symbolism/phonosemantics has replicated effects, but effects are modest and context-dependent.
+- Perceptually uniform color spaces such as OKLab/OKLCH are useful technical tools for color manipulation/comparison.
+
+## CONTESTED / CONTEXT-DEPENDENT
+
+Use with an explicit caveat.
+
+- Brand archetypes: can be a useful personality/storytelling heuristic; not a falsifiable scientific identity system.
+- Universal color psychology ("blue means trust"): effects are strongly context-, culture- and category-dependent.
+- Category-design claims about dominant "category kings": useful strategic frame in some markets, not a guaranteed economic law.
+- Any fixed formula for how many concepts, fonts, colors or grid units a brand "should" have.
+
+## LEGAL / CURRENT FACT
+
+Must be checked against current authoritative sources when it matters.
+
+- INPI procedures, fees, timelines and filing rules.
+- Nice-class interpretation for a specific filing.
+- Trademark conflicts/registrability.
+- Domain/handle availability.
+- Accessibility/legal obligations in a jurisdiction.
+
+The skill may triage. Definitive legal conclusions require qualified counsel where stakes justify it.
+
+### WCAG / APCA
+
+- WCAG 2.x contrast criteria are a widely used accessibility-conformance baseline for web/digital content.
+- Do not call WCAG a universal "legal floor"; applicable law varies by jurisdiction and context.
+- APCA/Lc is a perceptual contrast approach associated with ongoing accessibility-standard work. Treat it as a quality signal, not an adopted universal compliance requirement.
+
+## MYTH / NON-EVIDENCE
+
+Do not use as proof.
+
+- Golden ratio as a universal reason a logo is good.
+- "A color means X emotion" as a sufficient rationale.
+- "Minimal geometric sans = modern/professional" as neutral best practice.
+- Precise numerical creative/brand scores that are not tied to validated measurement.
+- A generated image being unique merely because it looks original.
+- Structural JSON validity proving strategic or creative quality.
+
+## Register notes
+
+### Research institute / ICT
+Typical concerns:
+- scientific/institutional authority;
+- funders, government, academia and industry as different stakeholders;
+- long lifespan;
+- documentation and formal applications;
+- multilingual/acronym considerations;
+- architecture with university/lab/parent institution.
+
+Do not assume "sobriety" must mean generic or visually conservative.
+
+### Deep-tech B2B startup
+Typical concerns:
+- real alternatives may include internal process/spreadsheets/status quo;
+- technical buyer + executive/investor audiences;
+- product/category may still move;
+- name should tolerate reasonable scope change;
+- identity must remain credible under technical scrutiny without collapsing into category blanding.
+
+## Declared boundaries
+
+1. **Real perception/fame/uniqueness** — requires field evidence.
+2. **Definitive trademark clearance** — requires appropriate legal review.
+3. **Production master** — requires reproducible craft/tooling; concept authority is broader than production authority.
+4. **Aesthetic preference** — stakeholder preference may decide among strategically valid routes, but preference should not be disguised as compliance.

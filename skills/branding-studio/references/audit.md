@@ -1,49 +1,95 @@
-# AUDIT mode — checking material against the spec
+# AUDIT mode — evaluate a branded artifact against the current spec
 
-Requires the brand's spec. Without a spec there is no audit — only opinion. If the user asks for a review without one, offer: (a) creating the spec first (CREATE mode, or reverse-engineering an existing identity into the template), or (b) an explicitly opinion-based critique, with no numbers.
+AUDIT requires a current brand spec. Without one, there is no standards-based audit; there is only critique. If no spec exists, either:
+- reverse-engineer/create the spec first; or
+- provide an explicitly opinion-based critique with no false precision.
 
-## Ask for the structured source before accepting a screenshot
+## Prefer the richest source
 
-Auditing a screenshot is degraded by nature: compression shifts colors, sizes are estimates. Whenever a structured source exists — the live URL/CSS, the deck file (pptx/XML), the design file, the HTML — request and audit **that**; measurements become exact. Accept images only when no source exists, and declare in the report which checks were degraded by the medium.
+Use structured/native source when available:
+- URL/HTML/CSS;
+- PPTX;
+- SVG;
+- design source;
+- document file.
 
-## Core principle: two natures of check, always separated
+Screenshots are acceptable when that is all that exists, but measurements from them are degraded. State what could and could not be verified.
 
-**Deterministic (pass/fail with a number)** — what a machine verifies:
-- Colors used ∈ spec tokens (no hex outside the palette).
-- Text/background contrast pairs: WCAG 2.2 AA mandatory; Lc/APCA as quality score (`scripts/color_tools.py contrast`).
-- Font sizes ∈ declared modular scale.
-- Spacing ∈ the spec's 4/8pt scale.
-- Logo clear space and minimum size respected.
-- Typography = declared families.
+## Four evidence classes
 
-**Heuristic (0–10 score with a comment citing the spec rule)** — what requires judgment:
-- Visual hierarchy: does the reading order serve the piece's goal?
-- Gestalt: does grouping (proximity/similarity) match the information?
-- Territory: does the piece inhabit the spec's territory and respect `$excludes`?
-- Voice: does the copy pass the 6 voice-chart dimensions?
-- **Tone vs moment**: identify the piece's moment (error? celebration? institutional?) and compare against THAT moment's tone. Correct tone variation is not a voice violation.
+Keep these separate.
 
-Never present heuristic judgment with the authority of measurement. In the report the two blocks are visually separate.
+### 1. Deterministic
+What code or exact source inspection can establish, for example:
+- token/value use where the artifact exposes exact values;
+- declared foreground/background contrast;
+- declared font family/size rules;
+- logo master integrity and clear-space/minimum-size rules when measurable;
+- SVG structural checks;
+- required file/variant presence.
+
+Only call something deterministic if the input actually makes it measurable.
+
+### 2. Semantic judgment
+Grounded professional judgment against explicit spec rules:
+- hierarchy supports the artifact's job;
+- creative territory is preserved;
+- imagery/composition belong to the identity grammar;
+- voice and tone fit the moment;
+- distinctive devices are used coherently;
+- the result remains recognizably from the same system.
+
+Do not hide judgment behind pseudo-objective decimal scores. If a score is useful for workflow consistency, label it explicitly as a rubric score, not measurement.
+
+### 3. Evidence gap
+When a claim cannot be decided from the available medium/source:
+- mark `INSUFFICIENT EVIDENCE`;
+- say what source would resolve it.
+
+Unknown is not pass.
+
+### 4. Opinion
+Observations not grounded in a spec rule or measurable requirement. Label them as opinion and keep them out of compliance verdicts unless the user explicitly asks for an aesthetic critique.
 
 ## Flow
 
-1. Load the spec. Prefer the structured source (above). For images, extract what is extractable (dominant colors, copy, apparent sizes) and declare what could not be measured.
-2. Run the deterministic checks. For colors extracted from images, tolerate small ΔL/ΔC from compression, but a divergent hue is a failure.
-3. Do the heuristic judgment item by item, **always citing the spec rule** grounding each score (Podmajersky format: comment + 0–10). Without a citable rule, the observation goes under "opinion" — never into the scorecard.
-4. Check copy against the voice chart dimension by dimension (forbidden vocabulary? verbosity off? capitalization?) and against the "not_like_this" counter-examples.
+1. Load the spec and identify the artifact's job, audience, medium and tone/moment.
+2. Load the native source if available.
+3. Run applicable deterministic checks only.
+4. Review semantically against the smallest relevant subset of the spec.
+5. Identify evidence gaps.
+6. Separate optional aesthetic opinion.
+7. Prioritize fixes by effect on the artifact's job and brand-system integrity.
+
+## Verdict
+
+Use:
+- **COMPLIANT** — no material violations found and evidence is sufficient for the important checks.
+- **COMPLIANT WITH RESERVATIONS** — usable, but material improvements or evidence gaps remain.
+- **NON-COMPLIANT** — clear violations of important spec rules or production constraints.
+- **INSUFFICIENT EVIDENCE** — the requested compliance judgment cannot responsibly be made from the available source.
 
 ## Report format
 
-```
-# Audit: [piece] vs [brand] v[spec version]
-## Verdict: COMPLIANT | COMPLIANT WITH RESERVATIONS | NON-COMPLIANT
-## Deterministic checks  → table: check | measured | expected | pass/fail
-## Heuristic judgment    → item | score 0-10 | spec rule cited | comment
-## Prioritized fixes     → what to change, by impact, with the spec's correct value
-## Outside the spec (opinion) → observations without a citable rule, declared as opinion
+```text
+# Audit: [artifact] vs [brand] v[spec version]
+## Verdict
+## Artifact job and evidence available
+## Deterministic checks
+## Semantic review
+## Evidence gaps
+## Prioritized fixes
+## Optional opinion
 ```
 
-Prioritize fixes by impact: deterministic accessibility violations first (the only ones with legal consequence), then territory/distinctiveness violations, then refinements.
+For each semantic finding cite the relevant spec rule/field.
 
-## Auditing third-party deliveries (external designer)
-When the piece comes from a brief this skill wrote (expressive marks), audit against the brief's acceptance criteria: derivation from the territory, behavior across required variants (monochrome, reduced, favicon), clear space, and portfolio distance (`portfolio_distance.py` with the delivery's morphology tags).
+## Third-party creative deliveries
+
+For a specialist-produced logo, illustration, lettering or other craft output:
+- audit against the approved creative direction and production brief;
+- verify required variants and reproduction behavior;
+- inspect portfolio/category collision signals;
+- distinguish "meets brief" from "I prefer it aesthetically."
+
+If the delivery exposes a missing or broken system rule, do not silently rewrite the spec. Route a system-level change through EVOLVE.

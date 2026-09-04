@@ -1,0 +1,27 @@
+name: Branding Studio checks
+
+on:
+  pull_request:
+    paths:
+      - "skills/branding-studio/**"
+      - ".github/workflows/branding-studio.yml"
+  push:
+    branches: [main]
+    paths:
+      - "skills/branding-studio/**"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile scripts
+        run: python -m compileall -q skills/branding-studio/scripts
+      - name: Run unit tests
+        run: python -m unittest discover -s skills/branding-studio/tests -v

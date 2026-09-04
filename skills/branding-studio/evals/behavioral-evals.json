@@ -1,0 +1,143 @@
+{
+  "version": "2.0",
+  "skill": "branding-studio",
+  "purpose": "Regression cases for routing, epistemic boundaries, creative workflow and deterministic-tool discipline.",
+  "cases": [
+    {
+      "id": "route-create-empty-brief",
+      "prompt": "Cria a marca da minha nova startup.",
+      "setup": "No brand spec is available and no business facts are provided.",
+      "must": [
+        "Route to CREATE.",
+        "Ask only for non-derivable authority needed to establish minimum strategy before generating identity.",
+        "Do not generate name/logo/palette yet."
+      ],
+      "must_not": [
+        "Invent the business, audience or right-to-win."
+      ]
+    },
+    {
+      "id": "route-apply",
+      "prompt": "Aqui está a brand spec. Crie um deck comercial para o time de vendas.",
+      "setup": "Current spec exists.",
+      "must": [
+        "Route to APPLY, not AUDIT.",
+        "Use only the relevant subset of the spec.",
+        "Create the artifact and self-audit without mutating the spec by default."
+      ]
+    },
+    {
+      "id": "route-audit-native-source",
+      "prompt": "Veja se esse deck está on brand.",
+      "setup": "Brand spec and PPTX are available; a screenshot is also present.",
+      "must": [
+        "Route to AUDIT.",
+        "Prefer the PPTX/native structure for measurable checks.",
+        "Keep deterministic findings separate from semantic judgment."
+      ],
+      "must_not": [
+        "Treat screenshot-estimated values as exact."
+      ]
+    },
+    {
+      "id": "evolve-bored-stakeholder",
+      "prompt": "O novo diretor enjoou do logo e quer modernizar tudo.",
+      "setup": "Current spec exists; no evidence of strategy/audience/context failure.",
+      "must": [
+        "Route to EVOLVE.",
+        "Challenge the trigger as insufficient to destroy equity.",
+        "Ask for the actual business/communication problem before authorizing broad change."
+      ],
+      "must_not": [
+        "Automatically launch a full rebrand."
+      ]
+    },
+    {
+      "id": "custom-typography-no-modular-law",
+      "prompt": "A identidade é editorial e usa uma hierarquia tipográfica customizada, sem escala modular.",
+      "setup": "Spec hierarchy mode is custom and explicit role rules are present.",
+      "must": [
+        "Accept custom hierarchy as legitimate.",
+        "Do not force a modular scale or two font families."
+      ]
+    },
+    {
+      "id": "expressive-logo",
+      "prompt": "O território pede lettering expressivo e orgânico.",
+      "setup": "The environment can concept and art-direct but cannot produce a trustworthy final vector master.",
+      "must": [
+        "Keep the concept inside branding-studio scope.",
+        "Set production status to concept or external_craft_required.",
+        "Produce a production brief/acceptance criteria when specialist craft is needed."
+      ],
+      "must_not": [
+        "Reject expressive marks as outside branding itself.",
+        "Call a raster concept a final master."
+      ]
+    },
+    {
+      "id": "desk-research-perception",
+      "prompt": "Pesquise concorrentes e diga o que nosso público pensa da categoria.",
+      "setup": "Only public desk-research sources are available.",
+      "must": [
+        "Research competitor/category behavior.",
+        "Treat inferred audience perception as a hypothesis or evidence gap unless field evidence exists.",
+        "Record provenance/status."
+      ],
+      "must_not": [
+        "Present desk-research inference as measured customer perception."
+      ]
+    },
+    {
+      "id": "portfolio-branded-house",
+      "prompt": "A nova submarca usa a mesma cor e parte da morfologia da marca-mãe.",
+      "setup": "Architecture model is branded-house and relationship policy allows related cues.",
+      "must": [
+        "Interpret similarity under the branded-house policy.",
+        "Avoid rejecting the brand simply for being similar.",
+        "Use portfolio_collision rather than composite-distance optimization."
+      ]
+    },
+    {
+      "id": "portfolio-unknown",
+      "prompt": "Compare a nova marca com o portfólio.",
+      "setup": "A sister brand has no morphology tags.",
+      "must": [
+        "Report morphology comparison as UNKNOWN/insufficient data.",
+        "Do not convert missing evidence into maximum distance or a pass."
+      ]
+    },
+    {
+      "id": "full-clearance-collision",
+      "prompt": "Valide esta spec full.",
+      "setup": "naming.clearance.status is collision.",
+      "must": [
+        "Structural validation must fail or block full delivery on unresolved collision."
+      ],
+      "must_not": [
+        "Pass merely because a search was performed."
+      ]
+    },
+    {
+      "id": "oklch-zero-hue",
+      "prompt": "Valide esta spec.",
+      "setup": "portfolio_summary.primary_color_oklch.H is 0.",
+      "must": [
+        "Treat H=0 as a valid hue value, not missing data."
+      ]
+    },
+    {
+      "id": "creative-bridge-required",
+      "prompt": "Temos posicionamento pronto; agora faça o logo e a paleta.",
+      "setup": "Strategy exists but no creative direction has been established.",
+      "must": [
+        "Build or recover a creative direction before freezing identity assets.",
+        "Explore genuinely different creative routes before convergence.",
+        "Stress the preferred grammar in trial applications."
+      ],
+      "must_not": [
+        "Jump directly from positioning to arbitrary logo/color/font choices."
+      ]
+    }
+  ]
+}

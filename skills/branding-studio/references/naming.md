@@ -1,36 +1,112 @@
-# Naming — a pipeline with gates
+# Naming — a strategy-led pipeline with gates
 
-A name is a strategy decision, not a brainstorm. It comes AFTER the levers and the theme. Changing a name early is cheap; late is expensive — the pipeline exists to get it right before reputation accumulates.
+A name is a strategic and legal-risk decision, not a brainstorming exercise. It requires enough positioning to know what the name should do.
 
-## Two-axis taxonomy (agency standard)
+## Taxonomy
 
-Every candidate is classified on:
-- **Approach**: descriptive (says what it does: PayPal) → suggestive (association: Spotify, Uber) → abstract (no semantic link: Apple, Kodak).
-- **Construct**: real-word | compound (Facebook) | coined (Zapier, Cisco).
+Classify candidates on two useful axes:
 
-Central trade-off: descriptive communicates instantly but is legally weak (hard to register) and locks scope; abstract/coined is legally strong and flexible but requires investment to mean anything. **Research institutes lean descriptive/institutional (an acronym with buildable meaning); category-creating startups lean suggestive/coined.**
+**Approach**
+- descriptive;
+- suggestive/evocative;
+- abstract.
 
-## Pipeline
+**Construct**
+- real word;
+- compound;
+- coined;
+- acronym/initialism where appropriate.
 
-### 1. Forced generation across the types
-Generate candidates in ALL relevant cells of the taxonomy (do not let sampling converge to the default type). Sources: theme metaphors, evocative real words, Latin/other languages, invention by blending/truncation, acronym with meaning. Consult the portfolio: types and prefixes/suffixes already used by sisters go into `$excludes`.
+These are working categories, not quality rankings.
 
-### 2. Phonosemantic score (real but modest effect)
-Empirical base (Yorkston & Menon 2004; Klink): front vowels (/i/, /e/) evoke small-light-fast-near; back vowels (/o/, /u/) evoke large-robust-heavy; plosives (k, t, p) → angular/technical; sonorants (l, m, n) → soft/organic (bouba/kiki). Compare the sound profile with the theme's target attributes. **Record as a signal, never as the decider** — the effect is modest and depends on semantic congruence.
+## 1. Define the naming job
 
-### 3. Language disaster check
-Pronunciation and connotation in pt-BR + English + declared target markets. Say it out loud. Slang and double meanings (history is cruel: Pajero, Fitta, Mondelez). Spellable over the phone.
+Before generating, specify:
+- what the name must signal or leave open;
+- geographic/language markets;
+- category legibility required;
+- future scope/pivot tolerance;
+- architecture/endorsement relationship;
+- verbal/phonetic constraints;
+- legal classes likely relevant;
+- portfolio naming patterns to avoid or deliberately share.
 
-### 4. Clearance triage (the skill triages; the final opinion is a lawyer's)
-- **INPI (Brazil)**: search e-Marcas per Nice class. Fees are PER CLASS. Typical tech classes: **42** (SaaS, development, scientific research — the natural class for research institutes too), **9** (downloadable software, hardware), **35** (commerce/management), **41** (education/training). Relevant collision = identical/confusable name in the same or an adjacent class. Typical registration timeline: 12–24+ months. Identical marks in distinct classes can coexist.
-- **Domains**: .com.br and .com (or a declared viable variation). **Handles** on the relevant networks.
-- **International**: with global ambition, plan via the Madrid System (single filing from the INPI base registration). Mind the **5-year dependency** (central attack): if the base mark falls, the international registration falls with it — coined names are safer base marks (lower refusal risk).
-- Always web-search: fees and rules change; confirm current values before quoting numbers to the user.
+## 2. Divergent generation
 
-### 5. Final gate
-Shortlist of up to 3 survivors → SINGLE choice with written rationale ($rationale: why this name expresses the theme) + record of what was excluded ($excludes). Explicit recommendation to the user: full legal search by a lawyer BEFORE investing in the mark, and buy the domains immediately after deciding.
+Generate across multiple relevant naming mechanisms rather than sampling one default pattern.
 
-Provisional tier: steps 1–3 + a quick look at INPI/domains, with `human_legal_clearance: PENDING` and `inpi_status: not_searched` explicitly kept — full clearance happens at promotion.
+Sources may include:
+- strategy/theme;
+- metaphors;
+- category/customer language;
+- real words;
+- compounds;
+- coined constructions;
+- morphology/etymology;
+- acronyms when the institutional context supports them.
 
-## Recording in the spec
-Fill the spec's `naming` block completely, including clearance status. A name without triaged clearance does NOT leave full-tier CREATE.
+Do not force every taxonomy cell if it clearly conflicts with the naming job.
+
+## 3. Language and speech check
+
+For declared markets:
+- pronunciation;
+- spelling;
+- ambiguity;
+- unintended slang/connotation;
+- phone/spoken transfer;
+- cross-language risk.
+
+A model can triage; local/native review may still be needed.
+
+## 4. Phonosemantic signal
+
+Sound symbolism can be used as a modest heuristic when relevant. It is not a naming proof and should never override semantics, strategy, legal risk or language reality.
+
+Record it as a secondary signal only.
+
+## 5. Current clearance triage
+
+Search current sources when legal/domain availability matters.
+
+For Brazil:
+- search INPI/e-Marcas by relevant Nice classes;
+- inspect confusingly similar marks, not only exact strings;
+- search domains/handles when they matter operationally.
+
+Do not hard-code current fees, timelines or legal conclusions in the skill. Search current official sources when quoting them.
+
+The skill's result is:
+- no apparent collision found in the triage;
+- apparent collision/risk found;
+- uncertain / specialist review needed.
+
+It is **not** definitive legal clearance.
+
+## 6. Converge
+
+Evaluate survivors against:
+- strategic fit;
+- distinctiveness in category/portfolio context;
+- memorability/usability;
+- scope flexibility;
+- language robustness;
+- legal/domain risk;
+- creative potential.
+
+Recommend a preferred name.
+
+Present alternatives when they materially help the decision or the user asks; do not use an unranked menu to outsource judgment.
+
+## 7. Record
+
+Fill the spec's naming block:
+- selected name;
+- approach/construct;
+- rationale;
+- excludes;
+- language check;
+- triage evidence and date;
+- legal status/pending specialist review.
+
+A full-tier brand cannot leave naming clearance as `not_searched` when a new/protected name is being adopted. A detected collision is not a passing state; resolve or escalate it.
