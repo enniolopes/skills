@@ -1,280 +1,234 @@
-# CREATE mode — build a brand system from evidence to application
+# CREATE intent — establish a brand system
 
-Creation is not a sequence of asset-generation prompts. The operating sequence is:
+CREATE is the intent for a new brand or an existing identity that has no canonical spec. It runs the global **SEARCH → PROVE → COMMIT → ADAPT** control plane from `SKILL.md`.
 
-**Interrogate → Research → Strategy → Creative Direction → Naming & Verbal → Identity Grammar → Trial Applications → Converge → Validate → Deliver**
+The goal is not to complete a human agency checklist. The goal is to reach the smallest defensible brand commitment that can govern the venture's real touchpoints.
 
-Do not skip from strategy directly to logo/palette/type.
-
-## 0. Choose the investment tier
+## Investment tier
 
 ### PROVISIONAL
-For a thesis that may still pivot. Preserve the same spec structure, but allow explicitly pending depth.
+Use when the thesis, market or offering may still pivot.
 
-Minimum:
+Minimum committed state:
 - customer / not-customer;
-- competitive alternative;
+- competitive alternatives;
 - right to win;
 - differentiation/theme;
-- preliminary naming triage;
+- preliminary naming triage when naming is in scope;
 - concise verbal principles + negatives;
 - creative direction;
-- simple identity grammar suitable for declared MVP touchpoints;
-- at least one trial application;
-- explicit pending items.
+- identity grammar sufficient for declared MVP touchpoints;
+- at least one representative trial application;
+- explicit V4/legal/craft pendencies.
 
-A provisional identity should be promotable without throwing away its reasoning.
+A provisional identity must be promotable without discarding valid reasoning.
 
 ### FULL
-For a durable venture, an existing organization, or when the user explicitly needs a production-grade system.
+Use for durable ventures, existing organizations, or when a production-grade system is justified.
 
-Requires the complete workflow below, deeper evidence, production decisions, trial applications, semantic review, legal pendencies and migration/usage guidance where relevant.
+Requires deeper evidence, production decisions, representative trials across materially different stresses, semantic review, current legal/market triage where relevant, and operational guidance for the declared touchpoints.
 
-## 1. Interrogate — ask only for authority the model cannot invent
+Do not force FULL merely because the model can generate more work.
 
-Obtain the minimum non-derivable truth:
+## SEARCH
 
-- What does the organization/product do?
-- For whom? **For whom not?**
-- What would the audience use/do if this did not exist?
-- What capability, asset, ethos or evidence gives this brand a right to win?
-- What geographic and language markets matter?
-- What is the relationship to the venture studio / parent brand?
-- Where will the brand live first? Record those touchpoints in `meta.touchpoints`.
-- What constraints are real: legal names, legacy equity, accessibility, production, budget, timing?
+### 1. Inspect before interrupting
 
-Adapt the register:
-- **startup** — category legibility, speed of comprehension, investor/customer dual audience, pivot tolerance.
-- **research_institute** — scientific/institutional authority, multiple stakeholders, funding/government context, longevity and documentation.
+Use available context and tools to recover:
+- what the organization/product does;
+- existing name/assets/equity;
+- category and direct/indirect alternatives;
+- public audience/category evidence;
+- current market/geographic/language context;
+- portfolio/parent relationship;
+- existing touchpoints and production constraints.
 
-Do not ask the user for information that can be responsibly discovered by desk research.
+Do not ask the user to repeat facts already available in files, sites, repositories or other inspectable sources.
 
-## 2. Research — distinguish evidence from inference
+### 2. Use human input only where it has unique value
 
-Research direct and indirect alternatives, category language, category visual codes, current context and relevant legacy material.
+Invoke the global gates when needed:
+- **Truth** — unpublished strategy, future direction, internal capability, ownership, constraints;
+- **Authority** — strategic commitments such as positioning, architecture or high-cost naming;
+- **Reality** — audience/stakeholder evidence that does not exist in inspectable sources.
 
-Every material finding that feeds a decision should be representable in `research.findings`:
+Examples of good questions:
+- "Which of these two future business directions is actually committed for the next 12–24 months?"
+- "Is this legacy name an asset the company intends to preserve, or is replacement genuinely on the table?"
+
+Examples of bad questions:
+- "Do you prefer serif or sans?"
+- "Which palette do you like?"
+
+### 3. Record evidence without overstating it
+
+Material findings belong in `research.findings`:
 
 ```json
 {
+  "id": "E-001",
   "claim": "what was found",
   "kind": "fact | observation | hypothesis",
-  "source": "URL, document, interview, dataset or 'founder statement'",
+  "source": "URL, document, interview, dataset or founder statement",
   "confidence": "high | medium | low",
-  "validation": "verified | needs_field_research"
+  "validation": "verified | needs_field_research",
+  "state": "active | challenged | superseded"
 }
 ```
 
 Rules:
-- competitor websites can support observations about competitor behavior;
-- desk research cannot prove what customers actually perceive or remember;
-- founder statements are useful evidence of intent/inside knowledge, but are not automatically market facts;
-- if the decision depends on audience perception and no field evidence exists, state the hypothesis and validation need.
+- competitor behavior observed publicly is evidence about competitors;
+- it is not proof of what customers perceive or remember;
+- founder statements are evidence of intent/internal knowledge, not automatically market facts;
+- if a consequential decision rests on an unverified perception hypothesis, mark the V4 gap explicitly.
 
-### Category map
+### 4. Build strategy from evidence
 
-Record:
-- conventions worth keeping because they aid category recognition;
-- conventions worth breaking because they cause sameness or contradict strategy;
-- why each choice matters.
-
-Do not break convention merely to appear novel.
-
-## 3. Portfolio fit — before creative generation
-
-Load the portfolio registry and the candidate's architecture model.
-
-Use sister brands as constraints only where the architecture requires separation. A house of brands and a branded house have different goals.
-
-Record relevant overlaps/avoidances in the spec, then later run:
-
-```bash
-python scripts/portfolio_collision.py portfolio.json spec.json
-```
-
-Treat its output as **collision signals produced by a studio policy**, not scientific measurement of brand distinctiveness.
-
-## 4. Strategy — compress the evidence into choices
-
-Build:
+Compress the evidence into choices:
 - customer and not-customer;
 - competitive alternatives;
 - right to win;
 - differentiation;
-- context;
+- relevant cultural/category context;
 - theme / organizing idea;
-- category entry points or equivalent demand situations;
-- manifesto/mission only when useful to the register.
+- category entry points or equivalent demand situations when useful;
+- mission/manifesto only when it changes behavior.
 
-Use the Because test as a **reasoning check**, not a machine-proof:
-> `[theme] because [right_to_win/evidence]`
+Use the Because test as a reasoning aid, not machine proof:
 
-Use an onliness statement when it clarifies a real positioning difference. Do not force the word "only" when the market does not support an exclusivity claim.
+`[theme] because [right_to_win/evidence]`
 
-Before proceeding, perform a semantic review:
-- Does the strategy make a choice?
-- Is it supported by available evidence?
-- Does it give the creative work useful tension?
-- Is any claim stronger than its evidence?
+Use an onliness statement only when it clarifies a real difference; never manufacture exclusivity.
 
-If not, iterate strategy before design.
-
-## 5. Creative Direction — bridge strategy and identity
+### 5. Search creative lineages
 
 Read `creative-direction.md`.
 
-Create a creative direction that translates strategy into:
-- central brand idea;
-- narrative/metaphoric territory;
-- 3–5 visual/verbal principles;
-- productive tensions (e.g. precise ↔ humane);
-- reference frame and anti-reference frame;
+Translate strategy into:
+- central idea;
+- productive tensions;
+- visual/verbal principles;
+- reference and anti-reference properties;
 - distinctive-asset hypotheses;
-- art-direction rules;
-- explicit exclusions.
+- art direction;
+- meaningful exclusions.
 
-Explore multiple genuinely different creative routes. Different routes must differ in underlying idea/grammar, not merely color or font.
+Explore **different organizing ideas/grammars**, not a fixed number of cosmetic variants. Stop when new routes are no longer materially different or useful.
 
-Record meaningful alternatives in `creative_direction.exploration`. There is no mandatory number of client-facing options.
+### 6. Build naming/verbal/identity candidates
 
-## 6. Naming and verbal identity
+Naming → use `naming.md`.
 
-If naming is needed, follow `naming.md`.
+Identity → use `identity-craft.md`.
 
-Build the verbal system from strategy + creative direction:
-- voice principles;
-- vocabulary and concepts;
-- verbosity / grammar / punctuation / capitalization where useful;
-- counter-examples (`not_like_this`);
-- tone by moment/context;
-- key message hierarchy where the brand needs it.
-
-Avoid personality adjectives that cannot change actual writing behavior.
-
-## 7. Identity Grammar — build a language, not a bag of assets
-
-Read `identity-craft.md`.
-
-Define:
-- visual principles;
-- mark/wordmark/signature concept and production status;
-- typography roles and hierarchy model;
+The identity is a grammar, not a bag of assets. Define only what the declared touchpoints need:
+- signature/mark/wordmark concept and production state;
+- typography roles/hierarchy;
 - color system;
-- imagery/illustration;
-- iconography;
-- composition/grid behavior;
-- motion/sound only if relevant;
+- imagery/illustration/iconography;
+- composition behavior;
+- motion/sound only when relevant;
 - reusable distinctive devices;
-- tokens where machine-consumable reuse is valuable.
+- machine-consumable tokens only when useful.
 
-### Important non-laws
+Choices such as number of type families, modular/custom scale, geometry vs expression, minimalism or route count are contextual decisions — not laws.
 
-The following are choices, not invariants:
-- one vs two+ type families;
-- modular vs custom type scale;
-- 4/8pt spacing;
-- geometric vs expressive mark;
-- minimalism;
-- one client-facing route vs several.
+## PROVE
 
-Choose from the brand's communication problem and touchpoints.
+Apply verification proportional to commitment.
 
-### Color
+### V1 Structural
+Run applicable deterministic checks:
 
-Use OKLCH tooling where useful for scales and comparisons. Accessibility contrast is a constraint for relevant digital/text applications, not a rationale for choosing the brand hue.
-
-Do not infer meaning from universal "color psychology" tables.
-
-### Logo / signature
-
-The skill may concept and art-direct any morphology.
-
-Set `visual.logo.production.status`:
-- `final` — a reproducible master exists and has passed applicable deterministic checks;
-- `concept` — concept is approved but production craft remains;
-- `external_craft_required` — specialist execution is needed.
-
-Do not call a generated raster image a final logo master.
-
-## 8. Trial Applications — stress the system before freezing it
-
-Create representative applications from `meta.touchpoints` **before** final convergence.
-
-Choose the smallest set that exposes different stresses:
-- tiny vs large;
-- dense information vs expressive communication;
-- light vs dark;
-- static vs motion;
-- institutional vs promotional;
-- screen vs print where relevant.
-
-For each trial:
-- state the job;
-- apply the same identity grammar;
-- note what broke;
-- fix the system cause, not only the mockup.
-
-A full-tier identity should have at least one completed trial application and normally several where the touchpoints differ materially.
-
-## 9. Converge
-
-Select the route that best satisfies:
-1. strategy;
-2. creative specificity;
-3. distinctiveness in context;
-4. application performance;
-5. production feasibility;
-6. portfolio policy.
-
-Recommend a preferred route. Show alternatives only when they add decision value or the user asks.
-
-Do not use a composite "creative score" as a substitute for judgment.
-
-## 10. Validate and deliver
-
-### Deterministic
 ```bash
 python scripts/validate_structure.py spec.json
 python scripts/portfolio_collision.py portfolio.json spec.json
-python scripts/asset_checks.py path/to/logo.svg   # for SVG masters
+python scripts/asset_checks.py path/to/logo.svg   # when SVG is a final master
 ```
 
-### Semantic
-Review:
-- rationale quality;
+Use `color_tools.py` where exact color/contrast work is relevant.
+
+### V2 Semantic
+Critique:
 - evidence-to-claim fit;
-- strategy-to-creative derivation;
+- whether strategy makes a useful choice;
+- causal quality of rationales;
+- strategy → creative direction derivation;
+- creative specificity vs category cliché;
 - coherence of verbal/visual grammar;
-- category fit vs distinction;
-- trial-application performance;
-- unresolved contradictions.
+- whether exclusions actually constrain behavior.
 
-### External/human
-List explicitly:
-- legal/trademark review;
-- field research still required;
-- specialist craft dependencies;
-- final organizational decision/approval.
+Do not let model consensus masquerade as external validation.
 
-### Compile deliverables from touchpoints
+### V3 Contextual
+Before a FULL commitment, and whenever the system choice has material radius, create representative trial applications from `meta.touchpoints`.
 
-Examples:
-- web/product → semantic tokens/CSS only when useful;
-- deck → deck template/application;
-- print/institutional → print color specs/document template;
-- social/campaign → reusable composition and content templates;
-- signage/environment → production and legibility rules.
+Choose a small set that exposes different stresses, for example:
+- tiny vs large;
+- dense information vs expressive communication;
+- institutional vs promotional;
+- screen vs print;
+- static vs motion.
 
-Do not generate formats the brand does not need.
+For each trial:
+- state the job;
+- apply the same grammar;
+- identify what broke;
+- fix the system cause when the failure recurs across applications;
+- otherwise fix only the artifact.
+
+### V4 Reality
+Use when a market-level claim or high-cost commitment depends on reality:
+- customer/stakeholder interviews;
+- recognition/comprehension/recall tests;
+- behavioral/analytics evidence;
+- current legal/trademark specialist opinion;
+- operational constraints owned by the organization.
+
+If V4 evidence is unavailable, distinguish `hypothesis`, `pending proof` and `approved risk`. Do not fabricate closure.
+
+## COMMIT
+
+Converge aggressively. Recommend the route that best satisfies:
+1. strategy;
+2. evidence strength;
+3. creative specificity;
+4. contextual performance;
+5. production feasibility;
+6. portfolio architecture;
+7. commitment radius.
+
+Do not expose a menu merely because generation was cheap.
+
+Before committing MARKET/HIGH-COST decisions, verify that the required human authority and V4 evidence are sufficient. Lower-radius design choices should normally be made autonomously.
+
+Commit by updating:
+- `brand-spec.json`;
+- production masters or explicit production briefs/status;
+- representative trials;
+- portfolio registry where applicable;
+- only the touchpoint deliverables the brand actually needs.
+
+## ADAPT
+
+Creation may surface new evidence during trials or launch preparation.
+
+Classify it:
+- artifact issue → fix artifact;
+- guidance gap that will recur → small system patch;
+- challenged belief → update finding state/confidence;
+- invalidated rationale/system failure → create EVOLVE candidate.
+
+Do not restart CREATE because one downstream asset is imperfect.
 
 ## Delivery
 
-Deliver:
-- updated `brand-spec.json`;
-- identity masters or production briefs with status;
-- trial applications;
-- portfolio registry update;
+Deliver the **committed result**, not the exploration transcript:
+- current `brand-spec.json`;
+- selected identity route;
+- final masters where verifiable, otherwise concept/production brief status;
+- representative trial applications;
+- portfolio registry update where needed;
 - compiled touchpoint artifacts;
-- readable guidelines derived from the spec;
-- semantic review summary;
-- explicit pending evidence/legal/craft decisions.
+- concise semantic review;
+- explicit V4/legal/craft pendencies.

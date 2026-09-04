@@ -1,57 +1,123 @@
-# Brand spec and portfolio registry schema
+# Brand spec and portfolio registry schema — v3 semantics
 
 Canonical templates:
 - `templates/brand-spec.template.json`
 - `templates/portfolio.template.json`
 
-The spec is a **semantic contract and source of truth**, not proof that the brand is strategically or aesthetically good.
+The spec is a **semantic contract and persistent brand state**. It is not a transcript of the agent's reasoning and not proof that the brand is strategically or aesthetically good.
 
-## Validation classes
+## State model
 
-### Structural / deterministic
-`validate_structure.py` can verify:
-- required fields exist;
-- decision blocks contain non-empty rationales/negatives;
-- evidence records have provenance/status;
-- DTCG token leaves are structurally valid;
-- declared token references resolve;
-- declared contrast pairs meet configured WCAG criteria;
-- modular scales are mathematically consistent **when the type-system mode is modular**;
-- logo production status/brief fields are coherent;
-- full-tier naming triage is not unresolved collision/not-searched;
-- trial applications exist where required.
+The single `brand-spec.json` contains three semantic kinds of persistent state.
 
-### Semantic
-The model must review:
+### 1. Contract
+
+Committed decisions that govern future work:
+- `strategy`;
+- `creative_direction` preferred/committed direction;
+- `naming`;
+- `verbal`;
+- `visual`;
+- architecture/touchpoint constraints.
+
+Contract changes require COMMIT discipline and versioning.
+
+### 2. Beliefs / evidence
+
+`research.findings` stores evidence and hypotheses that support or challenge decisions.
+
+V3 finding shape:
+
+```json
+{
+  "id": "E-001",
+  "claim": "...",
+  "kind": "fact | observation | hypothesis",
+  "source": "...",
+  "confidence": "high | medium | low",
+  "validation": "verified | needs_field_research",
+  "state": "active | challenged | superseded"
+}
+```
+
+Rules:
+- `id` is stable and unique inside the spec so rationales/changelog entries can refer to evidence without copying it;
+- `active` means still usable as evidence;
+- `challenged` means credible new signal creates material doubt;
+- `superseded` means newer evidence has replaced it for current decisions;
+- challenged/superseded findings remain history; do not silently delete consequential evidence;
+- a hypothesis may remain active while awaiting V4 proof, but downstream claims must preserve that uncertainty.
+
+Existing pre-v3 specs may lack `id`/`state`; migrate them when they next undergo meaningful CREATE/EVOLVE work. Do not force a redesign merely to update schema metadata.
+
+### 3. History
+
+`meta.changelog` is the compact decision history. Store only events useful for future judgment:
+- creation/promotion;
+- system-level patches;
+- EVOLVE commitments;
+- meaningful evidence shifts;
+- migrations of important equity.
+
+Do not persist prompts, every explored route, every generated candidate or routine application.
+
+## Validation ladder
+
+### V1 Structural / deterministic
+
+`validate_structure.py` can verify only machine-checkable properties such as:
+- required structure / non-placeholder decision fields;
+- evidence record shape/provenance and v3 evidence IDs/states;
+- negative specifications;
+- DTCG token structure/reference resolution;
+- declared contrast pairs;
+- modular scale math **only when mode=modular**;
+- logo production-state coherence;
+- naming-triage state;
+- trial-application presence.
+
+### V2 Semantic
+
+The model reviews:
 - rationale quality;
 - strategy coherence;
 - evidence-to-claim fit;
 - creative specificity;
 - identity grammar;
 - application performance;
-- whether exclusions are useful rather than arbitrary.
+- usefulness of exclusions.
 
-Never infer semantic validity from `exit 0`.
+### V3 Contextual
+
+Representative applications/renders prove whether the system works in the environments that matter.
+
+### V4 Reality
+
+External evidence covers real perception, behavior, recognition, stakeholder truth/authority and specialist/legal conclusions.
+
+Never infer V2/V3/V4 validity from `exit 0`.
 
 ## Required conceptual blocks
 
 | Block | Purpose |
 |---|---|
-| `meta` | identity, version, tier, touchpoints, architecture, changelog |
-| `research` | evidence/provenance and unresolved validation needs |
+| `meta` | identity, version, tier, touchpoints, architecture, compact changelog |
+| `research` | beliefs/evidence, provenance and unresolved reality needs |
 | `strategy` | audience, alternatives, right-to-win, differentiation, context, theme |
-| `creative_direction` | central idea, tensions, principles, references, exploration |
+| `creative_direction` | central idea, tensions, principles, references, meaningful exploration |
 | `naming` | selected name and clearance triage |
 | `verbal` | voice, tone/moments, negatives |
 | `visual` | identity grammar and production rules |
-| `trial_applications` | stress tests before freezing a full system |
-| `portfolio_summary` | small comparable projection for portfolio collision checks |
+| `trial_applications` | contextual proof before freezing consequential system decisions |
+| `portfolio_summary` | compact projection for architecture-aware collision checks |
 
-## Rationales
+## Rationales and evidence references
 
-Important decisions should contain `$rationale`.
+Important decisions contain `$rationale`.
 
-Structural validation checks only that rationale text exists and is not placeholder-like. Semantic review determines whether the reasoning is actually causal, evidence-backed and non-circular.
+Where specific findings materially support a decision, use existing `evidence_refs` fields or mention stable evidence IDs in the rationale/changelog rather than duplicating claims.
+
+Structural validation checks rationale presence, not causal quality. V2 review determines whether reasoning is genuinely supported and non-circular.
 
 ## Negative specification
 
@@ -62,55 +128,33 @@ Minimum negatives:
 - `verbal.not_like_this`;
 - `visual.$excludes`.
 
-Negatives should reduce ambiguity, not merely add adjectives.
+Negatives must reduce ambiguity, not merely add adjectives.
 
-## Research evidence
-
-Each material finding:
-
-```json
-{
-  "claim": "...",
-  "kind": "fact | observation | hypothesis",
-  "source": "...",
-  "confidence": "high | medium | low",
-  "validation": "verified | needs_field_research"
-}
-```
-
-`source` may be a URL, internal document, founder statement, interview or dataset. A hypothesis may intentionally remain unverified, but downstream decisions must not overstate it.
-
-## Typography
+## Typography and spacing
 
 `visual.typography.hierarchy.mode`:
-- `modular` → provide `base_px`, `ratio`, `steps`; validator checks math.
-- `custom` → provide explicit role relationships; no mathematical scale is required.
-- `fluid` → provide min/max/behavior and touchpoint rules; no modular-scale requirement.
+- `modular` → provide `base_px`, `ratio`, `steps`; validator checks math;
+- `custom` → explicit role relationships; no mathematical scale required;
+- `fluid` → explicit rules/min/max behavior; no modular-scale requirement.
 
-Family count is not fixed.
+Family count is contextual.
 
-## Spacing / grids
-
-No universal 4/8pt requirement.
-
-If a touchpoint/system needs spacing tokens or a grid, encode the relevant rules and tokens. Their existence is conditional.
+There is no universal 4/8pt spacing requirement. Encode grids/spacing only where the touchpoints need them.
 
 ## Logo / signature production
 
 `visual.logo.production.status`:
-- `final`;
-- `concept`;
-- `external_craft_required`.
+- `final` — reproducible master exists and applicable production checks can pass;
+- `concept` — strategic/creative concept exists, production remains;
+- `external_craft_required` — specialist execution is needed and a production brief is required.
 
-A concept can be strategically approved without pretending a production master exists.
-
-When `final` and SVG is the declared master, run `asset_checks.py`.
+A raster concept must not be promoted to `final` merely because it looks finished.
 
 ## Trial applications
 
 For `full` tier:
-- at least one real trial application is required;
-- more are expected when touchpoints stress materially different conditions.
+- at least one tested representative application is required;
+- more are expected when declared touchpoints stress the grammar differently.
 
 A trial records:
 - touchpoint;
@@ -120,25 +164,30 @@ A trial records:
 - system changes caused by the test;
 - status.
 
+Trials are V3 contextual evidence, not V4 market evidence.
+
 ## Portfolio registry
 
 The registry stores:
-- studio architecture defaults;
+- architecture defaults;
 - relationship policy by architecture model;
 - shared/inherited cues;
 - each brand's compact `portfolio_summary`.
 
-`portfolio_collision.py` reports raw similarity/collision signals. Missing evidence is `UNKNOWN`.
+`portfolio_collision.py` reports collision/similarity signals. Missing evidence is `UNKNOWN`.
 
-Do not interpret sister-brand similarity without the declared architecture:
-- house of brands usually wants separation;
+Similarity is interpreted by architecture:
+- house of brands usually seeks separation;
 - endorsed systems may share parent cues;
 - branded house may intentionally share many cues;
 - hybrid requires explicit policy.
 
 ## File lifecycle
 
-Each operation reads the current spec/registry from persistent files.
+Each mission reads the current persistent state first.
 
-CREATE/EVOLVE return updated canonical files.
-APPLY/AUDIT should not mutate the spec unless a real system-level change is explicitly accepted.
+- CREATE/EVOLVE may commit updated canonical files;
+- APPLY/AUDIT do not mutate the contract for a one-off artifact problem;
+- recurring/system-level failures may create a patch/EVOLVE candidate;
+- evidence can move `active → challenged → superseded` without automatically changing the contract;
+- every contract change must be versioned and explained in `meta.changelog`.

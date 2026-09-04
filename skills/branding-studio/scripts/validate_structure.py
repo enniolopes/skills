@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-validate_structure.py — deterministic structural validator for branding-studio v2.
+validate_structure.py — deterministic structural validator for branding-studio v3.
 
 This tool checks only what code can prove from the brand spec:
 - required structure / non-placeholder decision fields;
-- evidence record shape and provenance;
+- evidence record shape, provenance and v3 lifecycle identifiers;
 - negative specifications;
 - DTCG token shape and alias resolution;
 - declared WCAG 2.x contrast pairs;
@@ -14,7 +14,7 @@ This tool checks only what code can prove from the brand spec:
 - trial-application presence.
 
 Exit 0 means STRUCTURALLY_VALID. It does NOT mean the strategy, rationale,
-creative direction or aesthetics are good. Those require semantic review.
+creative direction or aesthetics are good. Those require semantic/contextual/reality review.
 """
 
 import json
@@ -39,6 +39,7 @@ PLACEHOLDER_MARKERS = (
 VALID_KINDS = {"fact", "observation", "hypothesis"}
 VALID_CONFIDENCE = {"high", "medium", "low"}
 VALID_VALIDATION = {"verified", "needs_field_research"}
+VALID_EVIDENCE_STATES = {"active", "challenged", "superseded"}
 VALID_TIERS = {"provisional", "full"}
 VALID_HIERARCHY = {"modular", "custom", "fluid"}
 VALID_PRODUCTION = {"final", "concept", "external_craft_required"}
@@ -76,6 +77,11 @@ def _nonempty_list(value):
         (isinstance(x, str) and x.strip()) or isinstance(x, dict)
         for x in value
     )
+
+
+def _major_version(value):
+    match = re.match(r"^\s*(\d+)", str(value or ""))
+    return int(match.group(1)) if match else 0
 
 
 def resolve_token(spec, ref):
@@ -145,6 +151,14 @@ def _validate_modular_scale(hierarchy, failures, passed):
 def validate(spec):
     failures, warnings, passed = [], [], []
 
+    version = _get(spec, "meta.version", "")
+    spec_major = _major_version(version)
+    v3_evidence = spec_major >= 3
+    if spec_major:
+        passed.append(f"spec major version detected: {spec_major}")
+    else:
+        warnings.append("meta.version is missing or not semver-like")
+
     tier = str(_get(spec, "meta.tier", "")).strip().lower()
     if tier not in VALID_TIERS:
         failures.append("meta.tier must be provisional or full")
@@ -211,6 +225,7 @@ def validate(spec):
 
     findings = _get(spec, "research.findings", [])
     valid_findings = 0
+    evidence_ids = set()
     if isinstance(findings, list):
         for i, finding in enumerate(findings):
             if not isinstance(finding, dict):
@@ -221,6 +236,8 @@ def validate(spec):
             source = finding.get("source")
             confidence = str(finding.get("confidence", "")).strip()
             validation_state = str(finding.get("validation", "")).strip()
+            evidence_id = str(finding.get("id", "")).strip()
+            evidence_state = str(finding.get("state", "")).strip()
             problems = []
             if not _text(claim):
                 problems.append("claim")
@@ -232,6 +249,15 @@ def validate(spec):
                 problems.append("confidence")
             if validation_state not in VALID_VALIDATION:
                 problems.append("validation")
+            if v3_evidence:
+                if not evidence_id:
+                    problems.append("id")
+                elif evidence_id in evidence_ids:
+                    problems.append("id(duplicate)")
+                else:
+                    evidence_ids.add(evidence_id)
+                if evidence_state not in VALID_EVIDENCE_STATES:
+                    problems.append("state")
             if problems:
                 failures.append(
                     f"research.findings[{i}] invalid fields: {', '.join(problems)}"
@@ -241,10 +267,15 @@ def validate(spec):
 
     if valid_findings:
         passed.append(f"research provenance records valid: {valid_findings}")
+        if v3_evidence:
+            passed.append("v3 evidence ids/states are structurally valid and unique")
     else:
         (warnings if provisional else failures).append(
-            "no valid research finding with claim/kind/source/confidence/validation"
+            "no valid research finding with required provenance fields"
         )
+
+    if not v3_evidence and valid_findings:
+        warnings.append("pre-v3 evidence format accepted; add stable id/state on next meaningful CREATE/EVOLVE migration")
 
     principles = _get(spec, "creative_direction.principles", [])
     good_principles = [
@@ -397,15 +428,15 @@ def validate(spec):
     verdict = "STRUCTURALLY_VALID" if not failures else "STRUCTURALLY_INVALID"
     return {
         "brand": _get(spec, "meta.brand_name", "?"),
-        "version": _get(spec, "meta.version", "?"),
+        "version": version or "?",
         "tier": tier or "?",
         "verdict": verdict,
         "failures": failures,
         "warnings": warnings,
         "passed": passed,
         "scope_note": (
-            "Deterministic structural validation only. Semantic quality, strategic coherence, "
-            "creative quality, field perception and legal conclusions are outside this verdict."
+            "V1 deterministic structural validation only. Semantic quality (V2), contextual performance (V3), "
+            "field perception and legal/reality conclusions (V4) are outside this verdict."
         ),
     }
 

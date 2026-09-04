@@ -23,11 +23,13 @@ def valid_spec(tier="full"):
     spec["meta"]["architecture"]["$rationale"] = "Independent venture inside the studio portfolio."
 
     spec["research"]["findings"] = [{
+        "id": "E-001",
         "claim": "Competitor A uses a blue geometric identity.",
         "kind": "observation",
         "source": "https://example.com/competitor-a",
         "confidence": "high",
-        "validation": "verified"
+        "validation": "verified",
+        "state": "active"
     }]
 
     spec["strategy"]["customer"]["who_it_is"] = "Technical operations leaders."
@@ -35,6 +37,7 @@ def valid_spec(tier="full"):
     spec["strategy"]["customer"]["insight"] = "They need fast comprehension without consumer-tech tropes."
     spec["strategy"]["customer"]["$rationale"] = "Derived from founder interviews and buying-process evidence."
     spec["strategy"]["right_to_win"]["statement"] = "Proprietary operational data and domain expertise."
+    spec["strategy"]["right_to_win"]["evidence_refs"] = ["E-001"]
     spec["strategy"]["right_to_win"]["$rationale"] = "Supported by internal capability evidence."
     spec["strategy"]["differentiation"]["statement"] = "Operational clarity rather than generic AI automation."
     spec["strategy"]["differentiation"]["$rationale"] = "Competitor audit shows category convergence around generic AI claims."
@@ -145,6 +148,32 @@ class ValidateStructureTests(unittest.TestCase):
         report = validate_structure.validate(valid_spec())
         self.assertEqual(report["verdict"], "STRUCTURALLY_VALID")
         self.assertTrue(any("mode=custom" in x for x in report["passed"]))
+
+    def test_v3_requires_evidence_id_and_state(self):
+        spec = valid_spec()
+        del spec["research"]["findings"][0]["id"]
+        del spec["research"]["findings"][0]["state"]
+        report = validate_structure.validate(spec)
+        self.assertEqual(report["verdict"], "STRUCTURALLY_INVALID")
+        self.assertTrue(any("id" in x and "state" in x for x in report["failures"]))
+
+    def test_v3_rejects_duplicate_evidence_ids(self):
+        spec = valid_spec()
+        duplicate = deepcopy(spec["research"]["findings"][0])
+        duplicate["claim"] = "A second independent observation exists."
+        spec["research"]["findings"].append(duplicate)
+        report = validate_structure.validate(spec)
+        self.assertEqual(report["verdict"], "STRUCTURALLY_INVALID")
+        self.assertTrue(any("duplicate" in x for x in report["failures"]))
+
+    def test_pre_v3_evidence_remains_backward_compatible(self):
+        spec = valid_spec()
+        spec["meta"]["version"] = "2.4.0"
+        del spec["research"]["findings"][0]["id"]
+        del spec["research"]["findings"][0]["state"]
+        report = validate_structure.validate(spec)
+        self.assertEqual(report["verdict"], "STRUCTURALLY_VALID")
+        self.assertTrue(any("pre-v3 evidence format accepted" in x for x in report["warnings"]))
 
 
 class PortfolioCollisionTests(unittest.TestCase):

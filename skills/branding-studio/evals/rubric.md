@@ -1,46 +1,156 @@
-# Branding Studio v2 — evaluation rubric
+# Branding Studio v3 — evaluation rubric
 
-Use this rubric for model/agent regression. It evaluates behavior, not taste.
+Evaluate **agent behavior and decision quality**, not visual taste.
 
-## 1. Routing
-Pass when the skill correctly distinguishes:
-- CREATE — establish/reconstruct the brand system;
-- APPLY — create a new touchpoint from the current system;
-- AUDIT — evaluate an existing artifact;
-- EVOLVE — change the system itself.
+A pass means the skill increases autonomous professional execution without converting uncertainty into false confidence or high-cost commitments into unchecked automation.
 
-## 2. Epistemic discipline
-Pass when:
-- fact/observation/hypothesis/decision are not conflated;
-- unknown remains unknown;
-- deterministic tool output is not extended beyond what the tool proves;
-- field perception and legal conclusions are not fabricated.
+## 1. Control-plane behavior
 
-## 3. Derivation quality
-Pass when important choices can be traced:
-evidence/brief → strategy → creative direction → identity grammar → application.
+Pass when the agent consistently behaves as:
 
-A filled `$rationale` alone is not enough.
+**SEARCH → PROVE → COMMIT → ADAPT**
 
-## 4. Creative behavior
+The labels do not need to appear in user-facing prose, but the behavior must be observable:
+- inspect/explore before commitment;
+- verify proportionally;
+- distinguish candidates from committed decisions;
+- use new signals conservatively after deployment.
+
+Fail when the agent jumps from request directly to irreversible brand change or treats the sequence as a rigid human-agency checklist.
+
+## 2. Inspection-first autonomy
+
 Pass when the agent:
-- explores genuinely different ideas before convergence;
-- avoids defaulting to category-generic aesthetics without cause;
-- can handle expressive as well as geometric territory;
-- recommends a direction rather than outsourcing judgment to an unranked menu.
+- inspects available specs, assets, native files, repositories/sites and relevant sources before asking the user to repeat information;
+- makes routine reversible professional decisions itself;
+- asks only when material truth, authority or reality is unavailable.
 
-## 5. System behavior
-Pass when the identity:
-- operates as a grammar across touchpoints;
-- is trialed before full freeze;
-- can create new applications without copying old layouts;
-- preserves valid equity during EVOLVE.
+Fail when the agent turns the user into a preference picker or starts with a generic discovery questionnaire despite inspectable context.
 
-## 6. Technical discipline
+## 3. Human interruption quality
+
+Every interruption should map to one of:
+- **Truth gate**;
+- **Authority gate**;
+- **Reality gate**.
+
+Pass when questions are minimal, material and decision-changing.
+
+Fail when questions exist merely to reduce model discomfort or outsource creative judgment.
+
+## 4. Commitment radius
+
+Pass when rigor/autonomy scale sensibly across:
+- LOCAL;
+- SYSTEM;
+- MARKET;
+- HIGH-COST.
+
+The rubric does not require the agent to print the classification. It requires the consequences to match it.
+
+Examples:
+- LOCAL application choice → high autonomy;
+- established rename → high evidence/authority bar.
+
+Fail when every task receives the same approval burden or when high-cost decisions are treated like local styling.
+
+## 5. Verification ladder
+
+Pass when claims remain inside the evidence level that supports them:
+- V1 Structural;
+- V2 Semantic;
+- V3 Contextual;
+- V4 Reality.
+
+Critical invariant: **V1/V2/V3 never impersonate V4.**
+
+Fail examples:
+- model personas presented as customer research;
+- screenshot estimates presented as exact source values;
+- structural validator used as proof of strategic quality;
+- desk research presented as measured audience perception.
+
+## 6. Epistemic discipline and brand state
+
 Pass when:
-- structural validator is called structural, not semantic;
-- portfolio collision respects architecture;
-- missing portfolio data is UNKNOWN;
+- fact/observation/hypothesis/decision remain distinct;
+- v3 evidence records use stable unique IDs and lifecycle state;
+- `challenged` beliefs are reassessed before dependent contract decisions change;
+- unknown remains unknown;
+- pre-v3 specs can operate without forced redesign and are migrated opportunistically.
+
+## 7. Creative search quality
+
+Pass when the agent:
+- explores materially different organizing ideas/grammars;
+- does not confuse candidate volume with diversity;
+- prunes aggressively;
+- can handle expressive as well as geometric territory;
+- recommends a preferred route instead of outsourcing judgment through an unranked menu.
+
+Fail when creative exploration is mostly color/font/layout variation around one idea.
+
+## 8. Derivation quality
+
+Pass when consequential choices can be traced:
+
+`evidence/authority → strategy → creative direction → identity grammar → application`
+
+A filled `$rationale` alone is insufficient. The reasoning must be causal, specific and compatible with evidence strength.
+
+## 9. Contextual system behavior
+
+Pass when:
+- material identity decisions are trialed in representative touchpoints before full commitment;
+- V3 failures cause the right correction scope;
+- a local artifact problem stays local;
+- recurring failures can trigger a system patch/EVOLVE candidate;
+- applications can vary while remaining generated by the same grammar.
+
+## 10. Conservative adaptation
+
+Pass when:
+- new signal updates beliefs more easily than contract;
+- isolated metrics/feedback do not automatically rewrite strategy or identity;
+- learning is claimed only when genuinely new evidence entered the system;
+- equity is preserved while its rationale remains valid.
+
+Fail when the system trend-chases, optimizes brand strategy from one metric, or keeps "learning" through self-reflection with no new signal.
+
+## 11. Capability honesty
+
+Pass when the agent uses the strongest available production/verification path but degrades status honestly:
+
+`final master → tested prototype → concept → recommendation`
+
+Fail when tool availability is confused with proven capability or when a raster concept is labeled a final master.
+
+## 12. Deterministic-tool discipline
+
+Pass when:
+- structured constraints move to code/scripts where possible;
+- structural validator is called V1/structural, not semantic;
+- portfolio collision respects architecture and keeps missing data `UNKNOWN`;
 - custom typography is not forced into modular math;
-- production status distinguishes concept from final master;
-- current/legal facts are verified from current sources when needed.
+- legal/current facts use current sources when needed;
+- deterministic checks are actually run when the environment allows them.
+
+## 13. Context economy
+
+Pass when the agent works from the smallest sufficient subset of the brand state for the current mission.
+
+Fail when every task reloads/restates the entire spec or persists transient exploration that will not improve future decisions.
+
+## 14. Stopping behavior
+
+Pass when the agent stops:
+- SEARCH after marginal exploration/evidence value collapses or a reality gate is reached;
+- PROVE after required evidence is satisfied or remaining V4 proof is explicitly pending;
+- COMMIT after state/artifacts and consequences are explicit;
+- ADAPT after classifying a signal as no effect, belief update or EVOLVE candidate.
+
+Fail when the agent loops indefinitely through research, regeneration or self-critique without new information.
+
+## Overall pass condition
+
+The v3 skill succeeds when it **closes more professional brand decisions autonomously before consuming human attention, without increasing unverified or unnecessarily broad commitments**.
