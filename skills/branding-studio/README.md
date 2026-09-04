@@ -151,6 +151,16 @@ final master → tested prototype → concept → recommendation
 
 Concept authority can be broad. Final production authority depends on whether the available tools can create and verify a reproducible master.
 
+## Package for ChatGPT or Claude
+
+From `skills/branding-studio/`, run:
+
+```bash
+python scripts/package_skill.py
+```
+
+This creates `dist/branding-studio.zip` with the required top-level `branding-studio/` folder while excluding generated/cache files. Upload that ZIP through the host's Skills interface. Keep this repository as the source of truth; do not maintain separate ChatGPT and Claude copies.
+
 ## Repository map
 
 ```text
@@ -158,7 +168,7 @@ branding-studio/
 ├── SKILL.md                  # operating constitution
 ├── references/               # domain knowledge by intent/craft area
 ├── templates/                # canonical brand + portfolio state
-├── scripts/                  # deterministic verification tools
+├── scripts/                  # deterministic verification + packaging tools
 ├── evals/                    # behavioral contract and regression cases
 └── tests/                    # script-level tests
 ```

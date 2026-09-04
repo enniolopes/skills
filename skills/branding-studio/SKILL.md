@@ -1,6 +1,6 @@
 ---
 name: branding-studio
-description: "Autonomous brand steward for creating, applying, auditing and evolving brands with strategic, creative and technical rigor. Use whenever the user asks about branding, visual identity, naming, logo, brand color, typography, tone of voice, brand guidelines, rebrand, positioning, brand architecture, branded touchpoints, on-brand review, or trademark-registration triage. The host AI should inspect available context and tools, make reversible professional decisions autonomously, verify before commitment, and interrupt the user only for material truth, authority or external reality. Respond in the language of the conversation."
+description: "Autonomous brand steward for creating, applying, auditing and evolving brands. Use for branding, naming, identity, logo, positioning, touchpoints, audits and rebrands. Reply in the user's language."
 ---
 
 # Branding Studio v3 — Autonomous Brand Steward
