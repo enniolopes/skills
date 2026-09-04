@@ -1,117 +1,140 @@
-# EVOLVE mode — change the brand system without discarding accumulated equity
+# EVOLVE intent — change the contract only when its rationale no longer serves
 
-Evolution is a controlled change to the source of truth. Regeneration is not the default.
+EVOLVE changes the brand system without discarding accumulated equity. It uses the global **SEARCH → PROVE → COMMIT → ADAPT** loop with a deliberately high bar for MARKET/HIGH-COST commitments.
 
-## Admission gate
+Evolution is controlled change to the source of truth. Regeneration is not the default.
 
-Establish what changed and what evidence supports change.
+## SEARCH — establish whether change is actually needed
+
+Start from the current spec, not from aesthetic preference.
 
 Legitimate triggers include:
 - customer/audience changed;
-- competitive context changed;
-- offering/category changed;
-- organizational strategy changed;
-- an important new touchpoint cannot be served by the current system;
-- field evidence shows the identity is failing materially;
+- competitive/category context changed materially;
+- offering or organizational strategy changed;
+- an important new touchpoint cannot be served by the current grammar;
+- V4 evidence shows a material perception/behavior problem;
+- recurring application failures reveal a system gap;
 - production/accessibility/legal constraints changed.
 
 Weak triggers include:
 - stakeholder boredom;
 - trend chasing;
-- "make it modern" without a business/communication problem;
-- replacing a recognized asset only because a new team prefers something else.
+- vague "make it modern" requests;
+- replacing recognized assets because a new team prefers something else;
+- a single local metric moving without broader evidence.
 
-A weak trigger does not automatically forbid all change, but it is insufficient to justify destroying equity. Challenge it and request the real problem.
+For every affected element ask:
+- What was the committed rationale?
+- Which evidence/belief supported it?
+- Is that premise still active, challenged or superseded?
+- What new signal exists?
+- What happens if we preserve it?
+- What equity/dependencies are lost if we change it?
 
-## Flow
+If no genuinely new evidence or strategic truth exists, treat the work as refinement/AUDIT/APPLY rather than claiming learning or broad evolution.
 
-### 1. Diagnose
-Audit the current system and evidence.
+## Minimize the change surface
 
-For each relevant element:
-- current rationale;
-- whether the premise is still true;
-- what changed;
-- evidence;
-- impact if preserved;
-- impact if changed.
-
-### 2. Minimize scope
-Preserve elements whose rationale still holds unless a new system-level reason overrides it.
-
-Classify:
+Classify each relevant element:
 - preserve;
 - refine;
 - replace;
 - retire;
 - add.
 
-### 3. Re-open only necessary phases
-Examples:
+Re-open only the necessary dependency chain:
 - strategy changed → revisit creative direction and downstream identity;
-- new touchpoint only → first test whether APPLY can solve it;
-- naming/legal issue → rerun naming without gratuitously changing visual identity;
-- typography production failure → revisit type system, not the whole brand.
-
-### 4. Re-explore where the premise changed
-For affected creative dimensions, use CREATE's creative-direction / identity-craft process.
+- new touchpoint only → first test APPLY;
+- naming/legal problem → reopen naming without gratuitous visual redesign;
+- typography production failure → reopen the type system, not the whole brand;
+- repeated execution ambiguity → patch guidance before redesigning identity.
 
 Do not preserve a broken decision merely because it exists; do not destroy a valid decision merely because change is exciting.
 
-### 5. Version
-Update `meta.version`:
-- major — positioning/theme/architecture changes that materially redefine the system;
-- minor — identity/verbal system change with strategy mostly intact;
-- patch — correction/refinement with no meaningful semantic change.
+## PROVE — scale rigor with equity and consequence
 
-Record:
+### V1 Structural
+Validate the changed spec/assets with applicable deterministic tools.
+
+### V2 Semantic
+Prove that:
+- the old rationale is actually invalidated or insufficient;
+- the new decision is causally derived from current evidence;
+- unchanged elements remain coherent;
+- the change does not create gratuitous category/portfolio collision.
+
+### V3 Contextual
+Re-run representative applications for every materially affected touchpoint. Compare old vs new when doing so reveals whether the change solves the actual problem.
+
+### V4 Reality
+Require stronger external evidence as commitment radius rises, especially for:
+- established renaming;
+- positioning changes;
+- architecture changes;
+- retirement of distinctive assets with possible equity;
+- claims about perception, recognition or customer behavior.
+
+A high-cost change with weak V4 evidence should remain a recommendation/experiment, not an automatic contract mutation.
+
+## COMMIT — minimum justified delta
+
+Before commit:
+1. evidence is sufficient for the radius;
+2. the legitimate authority owner has approved MARKET/HIGH-COST changes;
+3. migration/rollback consequences are understood.
+
+Version `meta.version`:
+- **major** — positioning/theme/architecture changes that materially redefine the system;
+- **minor** — identity/verbal system change with strategy mostly intact;
+- **patch** — correction/refinement with no meaningful semantic change.
+
+Record in `meta.changelog`:
 - trigger;
-- evidence;
-- before;
-- after;
-- new rationale;
-- affected touchpoints.
+- evidence refs/new signal;
+- before/after summary;
+- affected touchpoints;
+- migration consequence.
 
-### 6. Trial and migrate
-Re-run representative trial applications for affected touchpoints.
-
-Create a migration plan:
-- immediate;
-- next production cycle;
-- legacy allowed;
-- deprecated date where relevant.
-
-### 7. Revalidate
 Run:
+
 ```bash
 python scripts/validate_structure.py spec.json
 python scripts/portfolio_collision.py portfolio.json spec.json
 ```
 
-Run `asset_checks.py` on changed SVG masters.
+Run `asset_checks.py` on changed SVG masters and perform V2/V3 checks appropriate to the change.
 
-Then perform semantic review of the changed derivation.
+## ADAPT — learn without destabilizing the brand
+
+After deployment, new signals should first update beliefs/evidence state:
+
+`active → challenged → superseded`
+
+Only when evidence materially invalidates a committed rationale should the contract change again.
+
+Do not optimize a long-lived brand system for every short-term metric. Stability is a feature when the rationale still holds.
 
 ## Provisional → full
 
 Promotion is an EVOLVE operation:
-- fill evidence/strategy gaps;
+- resolve important evidence gaps;
 - complete naming/legal triage;
-- deepen verbal/visual system;
+- deepen only the verbal/visual dimensions needed by durable touchpoints;
 - resolve production masters;
-- complete trial applications;
+- complete representative trials;
 - update portfolio registry.
 
-Promotion should strengthen the existing reasoning when it is still valid, not automatically redesign the brand.
+Promotion strengthens valid reasoning; it does not automatically redesign the brand.
 
 ## Delivery
 
 Deliver:
 - updated spec;
 - explicit versioned diff;
+- evidence/authority basis for the change;
 - changed masters/briefs;
-- updated trial applications;
+- updated representative applications;
 - migration plan;
-- updated portfolio registry;
-- validation outputs;
-- unresolved evidence/legal/craft pendencies.
+- updated portfolio registry where applicable;
+- V1/V2/V3 results and unresolved V4/legal/craft pendencies.
