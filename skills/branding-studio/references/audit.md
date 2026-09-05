@@ -1,14 +1,12 @@
-# AUDIT intent — prove what an artifact does and does not satisfy
+# AUDIT — evaluate an existing artifact
 
-AUDIT evaluates an existing branded artifact against the current brand state. It uses the global **SEARCH → PROVE → COMMIT → ADAPT** loop, with most work concentrated in SEARCH and PROVE.
+Use AUDIT when a current brand spec exists and an existing artifact must be evaluated against it.
 
-Without a current spec there is no standards-based compliance audit. Either reconstruct/create the spec first or provide an explicitly opinion-based critique with no false precision.
+Without a current spec, do not present a standards-based compliance audit. Reconstruct/create the spec first, or provide an explicitly opinion-based critique without false precision.
 
-## SEARCH
+## 1. Inspect the richest available source
 
-### Prefer the richest source
-
-Inspect native/structured source when available:
+Prefer native/structured source over screenshots when available:
 - URL/HTML/CSS;
 - PPTX;
 - SVG;
@@ -16,93 +14,49 @@ Inspect native/structured source when available:
 - document file;
 - code/components.
 
-A screenshot is a degraded source when native structure exists. State what cannot be measured exactly.
+Use screenshots only for what they can establish. State when exact measurement is impossible.
 
-Compile the smallest relevant spec subset for the artifact's job, audience, medium and moment.
+Compile the smallest spec subset relevant to the artifact's job, audience, medium and moment.
 
-Search for:
-- machine-checkable violations;
-- semantic/creative mismatches;
-- contextual failures;
-- missing evidence;
-- recurring failures that may indicate a system problem.
+## 2. Separate evidence classes
 
-## PROVE
+Apply the verification ladder from `SKILL.md` and keep findings distinct.
 
-Keep the verification ladder explicit.
+**V1 Structural** — only what exact source or deterministic tooling can establish, such as token/value usage, declared contrast pairs, measurable type rules, SVG/master integrity, file/variant presence, dimensions and production constraints.
 
-### V1 Structural
+**V2 Semantic** — grounded professional judgment against explicit spec rules, including hierarchy, strategy/creative territory, imagery/composition, voice/tone, distinctive devices and recognizability of the system.
 
-What exact source or deterministic tooling can establish, for example:
-- token/value usage;
-- declared foreground/background contrast;
-- font/size rules when measurable;
-- SVG/master integrity;
-- required file/variant presence;
-- dimensions and production constraints.
+**V3 Contextual** — behavior in the environment where the artifact must operate: viewport/device, print/packaging scale, presentation sequence, shelf/category context, signage distance or actual content density.
 
-Only call a finding deterministic if the available source makes it measurable.
+**V4 Reality** — external claims about perception, behavior, recall, stakeholder response, legal status or other outcomes. If required evidence is missing, report `INSUFFICIENT EVIDENCE` for that claim.
 
-### V2 Semantic
+Do not hide judgment behind pseudo-objective decimal scores. Label any rubric score as a rubric score.
 
-Grounded professional judgment against explicit spec rules:
-- hierarchy serves the artifact's job;
-- strategy/creative territory is preserved;
-- imagery/composition belongs to the identity grammar;
-- voice/tone fits the moment;
-- distinctive devices are coherent;
-- the artifact remains recognizably from the same system.
+## 3. Issue a verdict
 
-Do not hide judgment behind pseudo-objective decimal scores. A rubric score, if used, must be labeled as a rubric score.
-
-### V3 Contextual
-
-When possible, inspect the artifact in the environment where it must operate:
-- viewport/device;
-- print/packaging scale;
-- presentation sequence;
-- shelf/category context;
-- signage distance;
-- actual content density.
-
-A source can be V1-valid and still fail V3.
-
-### V4 Reality
-
-Use only for claims about real perception, behavior, recall, stakeholder response, legal status or other external outcomes.
-
-When V4 evidence is missing, report `INSUFFICIENT EVIDENCE` for that claim. Model critique, simulated personas and desk research do not upgrade the evidence level.
-
-## COMMIT
-
-AUDIT normally commits a **diagnosis**, not a brand-system change.
-
-Verdicts:
-- **COMPLIANT** — no material violations found and evidence is sufficient for the important checks;
+Use one:
+- **COMPLIANT** — no material violations found and evidence is sufficient for important checks;
 - **COMPLIANT WITH RESERVATIONS** — usable, but material improvements or evidence gaps remain;
 - **NON-COMPLIANT** — clear violations of important spec/production constraints;
 - **INSUFFICIENT EVIDENCE** — the requested judgment cannot responsibly be made from available evidence.
 
 Prioritize fixes by:
-1. artifact job failure;
+1. artifact-job failure;
 2. accessibility/legal/production risk;
 3. brand-system integrity;
 4. distinctiveness/recognition cues;
 5. refinement.
 
-Do not silently mutate the spec because an artifact is weak.
+Do not mutate the spec merely because an artifact is weak.
 
-## ADAPT
+## 4. Classify system consequence
 
-After diagnosis classify the cause:
 - one-off artifact error → fix artifact;
-- repeated execution ambiguity → small guidance patch candidate;
+- repeated execution ambiguity → guidance-patch candidate;
 - repeated failure across legitimate touchpoints → EVOLVE candidate;
 - new external evidence contradicting a belief → update evidence state/confidence before changing contract.
 
-This is where AUDIT can improve the system without turning every critique into a redesign.
-
-## Report format
+## Report
 
 ```text
 # Audit: [artifact] vs [brand] v[spec version]
@@ -117,13 +71,6 @@ This is where AUDIT can improve the system without turning every critique into a
 ## Optional aesthetic opinion
 ```
 
-For semantic findings, cite the relevant spec field/rule.
+For semantic findings, cite the governing spec field/rule.
 
-## Third-party creative deliveries
-
-For specialist-produced logos, illustration, lettering or other craft:
-- audit against approved creative direction and production brief;
-- verify required variants/reproduction behavior;
-- inspect portfolio/category collision where relevant;
-- distinguish "meets brief" from personal aesthetic preference;
-- never label concept quality as production validity without the appropriate evidence level.
+For specialist-produced logos, illustration, lettering or other craft, audit against approved creative direction/production brief, required variants, reproduction behavior and relevant category/portfolio collision. Keep “meets brief”, aesthetic preference and production validity separate.

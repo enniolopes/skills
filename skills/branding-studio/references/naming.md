@@ -1,55 +1,34 @@
-# Naming — a strategy-led pipeline with gates
+# Naming — strategy-led generation and clearance triage
 
-A name is a strategic and legal-risk decision, not a brainstorming exercise. It requires enough positioning to know what the name should do.
-
-## Taxonomy
-
-Classify candidates on two useful axes:
-
-**Approach**
-- descriptive;
-- suggestive/evocative;
-- abstract.
-
-**Construct**
-- real word;
-- compound;
-- coined;
-- acronym/initialism where appropriate.
-
-These are working categories, not quality rankings.
+Treat naming as a strategic and legal-risk decision. Establish enough positioning to know what the name must do before generating candidates.
 
 ## 1. Define the naming job
 
-Before generating, specify:
+Specify:
 - what the name must signal or leave open;
 - geographic/language markets;
-- category legibility required;
+- required category legibility;
 - future scope/pivot tolerance;
 - architecture/endorsement relationship;
 - verbal/phonetic constraints;
-- legal classes likely relevant;
+- likely relevant legal classes;
 - portfolio naming patterns to avoid or deliberately share.
 
-## 2. Divergent generation
+## 2. Generate across relevant mechanisms
 
-Generate across multiple relevant naming mechanisms rather than sampling one default pattern.
+Classify candidates when useful on two axes:
 
-Sources may include:
-- strategy/theme;
-- metaphors;
-- category/customer language;
-- real words;
-- compounds;
-- coined constructions;
-- morphology/etymology;
-- acronyms when the institutional context supports them.
+**Approach** — descriptive, suggestive/evocative, abstract.
 
-Do not force every taxonomy cell if it clearly conflicts with the naming job.
+**Construct** — real word, compound, coined, acronym/initialism when appropriate.
 
-## 3. Language and speech check
+These are working categories, not quality rankings.
 
-For declared markets:
+Generate across mechanisms supported by the naming job, including strategy/theme, metaphors, category/customer language, real words, compounds, coined constructions, morphology/etymology and acronyms where context supports them. Do not force every taxonomy cell.
+
+## 3. Check language and speech
+
+For declared markets, inspect:
 - pronunciation;
 - spelling;
 - ambiguity;
@@ -57,33 +36,29 @@ For declared markets:
 - phone/spoken transfer;
 - cross-language risk.
 
-A model can triage; local/native review may still be needed.
+Use model judgment only for triage. Require local/native review when material uncertainty remains.
 
-## 4. Phonosemantic signal
+Treat phonosemantic/sound-symbolism signals as secondary heuristics only; never let them override semantics, strategy, legal risk or language reality.
 
-Sound symbolism can be used as a modest heuristic when relevant. It is not a naming proof and should never override semantics, strategy, legal risk or language reality.
+## 4. Run current clearance triage
 
-Record it as a secondary signal only.
-
-## 5. Current clearance triage
-
-Search current sources when legal/domain availability matters.
+Search current authoritative sources when legal/domain availability matters.
 
 For Brazil:
-- search INPI/e-Marcas by relevant Nice classes;
+- search INPI/e-Marcas in relevant Nice classes;
 - inspect confusingly similar marks, not only exact strings;
-- search domains/handles when they matter operationally.
+- check domains/handles when operationally relevant.
 
-Do not hard-code current fees, timelines or legal conclusions in the skill. Search current official sources when quoting them.
+When quoting procedures, fees, timelines or filing rules, verify them against current official sources.
 
-The skill's result is:
-- no apparent collision found in the triage;
+Report clearance as one of:
+- no apparent collision found in triage;
 - apparent collision/risk found;
 - uncertain / specialist review needed.
 
-It is **not** definitive legal clearance.
+Never present triage as definitive legal clearance.
 
-## 6. Converge
+## 5. Converge
 
 Evaluate survivors against:
 - strategic fit;
@@ -94,19 +69,17 @@ Evaluate survivors against:
 - legal/domain risk;
 - creative potential.
 
-Recommend a preferred name.
+Recommend a preferred name. Present alternatives only when they materially improve the decision or the user requests them; do not use an unranked menu to outsource judgment.
 
-Present alternatives when they materially help the decision or the user asks; do not use an unranked menu to outsource judgment.
+## 6. Record
 
-## 7. Record
-
-Fill the spec's naming block:
+Update the naming block with:
 - selected name;
 - approach/construct;
 - rationale;
-- excludes;
+- exclusions;
 - language check;
-- triage evidence and date;
+- dated triage evidence;
 - legal status/pending specialist review.
 
-A full-tier brand cannot leave naming clearance as `not_searched` when a new/protected name is being adopted. A detected collision is not a passing state; resolve or escalate it.
+For a full-tier brand adopting a new/protected name, do not leave clearance as `not_searched`. Resolve detected collisions or escalate them before commitment.

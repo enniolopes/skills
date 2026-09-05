@@ -1,47 +1,36 @@
-# Creative Direction — the bridge from strategy to expression
+# Creative direction — derive expression from strategy
 
-Creative direction converts strategic choices into a generative grammar. It exists to prevent the common failure where strategy is thoughtful but the identity is a generic set of fonts, colors and a logo.
+Translate strategic choices into a generative verbal/visual grammar. Prevent generic identity by making the bridge from evidence/strategy to expression explicit.
 
-## Required output
+## 1. Central idea
 
-A useful creative direction contains:
+Define a compact idea that can generate many expressions. It should be narrower than the whole strategy and richer than a mood adjective.
 
-### 1. Central brand idea
-A compact idea that can generate many expressions. It should be narrower than the whole strategy and richer than a mood adjective.
+Avoid empty adjectives such as `innovative`, `trustworthy` or `modern`. Prefer a productive metaphor, tension, behavior or point of view that can influence language, form, imagery and composition.
 
-Bad:
-- innovative;
-- trustworthy;
-- modern.
+## 2. Productive tensions
 
-Better:
-- a productive metaphor, tension, behavior or point of view that can influence language, form, imagery and composition.
-
-### 2. Productive tensions
-Most distinctive identities live in controlled tension rather than one-dimensional adjectives.
-
-Examples of the structure:
+Use controlled tensions when they increase specificity, for example:
 - technical ↔ human;
 - institutional ↔ experimental;
 - calm ↔ urgent;
 - rigorous ↔ playful.
 
-Define which side dominates in which contexts.
+Specify which side dominates in which contexts.
 
-### 3. Creative principles
-Usually 3–5 behavioral principles. Each must change actual decisions.
+## 3. Creative principles
 
-For each:
-- principle;
+Define a small set of behavioral principles; each must change actual decisions.
+
+For each principle record:
 - derivation;
 - what it enables;
 - what it excludes;
-- examples across at least two identity dimensions.
+- how it appears across more than one identity dimension.
 
-### 4. Reference frame
-References are evidence and stimulus, not templates to copy.
+## 4. Reference frame
 
-Decompose references into properties:
+Use references as evidence/stimulus, not templates to copy. Decompose useful properties such as:
 - proportion;
 - rhythm;
 - density;
@@ -51,63 +40,50 @@ Decompose references into properties:
 - motion;
 - verbal behavior.
 
-Also record anti-references: familiar category solutions that would create the wrong meaning or convergence.
+Record anti-references when familiar category solutions would create the wrong meaning or convergence.
 
-### 5. Distinctive-asset hypotheses
-Identify the cues intended to carry recognition over time:
+## 5. Distinctive-asset hypotheses
+
+Identify cues intended to carry recognition over time:
 - shape;
 - name;
 - typography;
 - color;
 - graphic device;
 - imagery behavior;
-- sound/motion where relevant.
+- sound/motion when relevant.
 
-These are **hypotheses** until field evidence establishes fame/uniqueness.
+Keep them as hypotheses until field evidence establishes real fame/uniqueness.
 
-### 6. Art-direction rules
-Define how the brand sees and stages the world:
-- what subjects appear;
-- perspective and framing;
+## 6. Art direction
+
+Define only rules that materially govern expression:
+- subjects;
+- perspective/framing;
 - realism vs abstraction;
 - texture/materiality;
 - light;
 - crop;
 - people/product relationship;
 - illustration logic;
-- motion logic if applicable.
+- motion logic when applicable.
 
-## Divergent exploration
+## 7. Explore and converge
 
-Before convergence, create genuinely different routes.
+A route is materially different only when its underlying idea or grammar changes. Font, color or logo swaps within the same organizing idea are not new routes.
 
-A route is different only if its underlying creative idea or grammar changes. Swapping colors, fonts or logo shapes inside the same idea is not divergence.
-
-For each route, capture:
+For each serious route, establish:
 - thesis;
 - strategic derivation;
 - signature expression;
-- likely strengths;
+- likely strength;
 - likely failure mode;
 - representative application.
 
-Do not require a fixed number of routes. Continue until additional routes stop creating materially different strategic/creative possibilities.
+Do not target a fixed route count. Continue only while additional routes create materially different useful possibilities.
 
-## Convergence
-
-Select based on:
-- strategic coherence;
-- specificity;
-- ability to generate a full identity system;
-- performance across trial applications;
-- category and portfolio fit;
-- production feasibility.
-
-The model should recommend, not outsource judgment by presenting an unranked menu.
+Converge based on strategic coherence, specificity, ability to generate a system, trial-application performance, category/portfolio fit and production feasibility. Recommend rather than presenting an unranked menu.
 
 ## Epistemic boundary
 
-Creative direction is expert judgment. It can be reasoned and compared against explicit criteria, but it is not made objective by assigning precise numerical scores. Preserve the distinction between:
-- evidence;
-- design judgment;
-- stakeholder preference.
+Treat creative direction as V2 professional judgment. Compare it against explicit criteria, but do not make it artificially objective with precise numerical scores. Keep evidence, design judgment and stakeholder preference distinct.

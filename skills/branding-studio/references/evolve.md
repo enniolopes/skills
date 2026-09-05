@@ -1,12 +1,10 @@
-# EVOLVE intent — change the contract only when its rationale no longer serves
+# EVOLVE — change only what evidence invalidates
 
-EVOLVE changes the brand system without discarding accumulated equity. It uses the global **SEARCH → PROVE → COMMIT → ADAPT** loop with a deliberately high bar for MARKET/HIGH-COST commitments.
+Use EVOLVE when a committed rationale or system may no longer serve. Preserve valid equity and change the smallest justified surface.
 
-Evolution is controlled change to the source of truth. Regeneration is not the default.
+## 1. Establish whether change is warranted
 
-## SEARCH — establish whether change is actually needed
-
-Start from the current spec, not from aesthetic preference.
+Start from current state and committed rationales, not aesthetic preference.
 
 Legitimate triggers include:
 - customer/audience changed;
@@ -20,21 +18,21 @@ Legitimate triggers include:
 Weak triggers include:
 - stakeholder boredom;
 - trend chasing;
-- vague "make it modern" requests;
+- vague “make it modern” requests;
 - replacing recognized assets because a new team prefers something else;
-- a single local metric moving without broader evidence.
+- one local metric moving without broader evidence.
 
-For every affected element ask:
-- What was the committed rationale?
-- Which evidence/belief supported it?
-- Is that premise still active, challenged or superseded?
-- What new signal exists?
-- What happens if we preserve it?
-- What equity/dependencies are lost if we change it?
+For every affected element trace:
+- committed rationale;
+- supporting evidence/belief;
+- current evidence state;
+- genuinely new signal;
+- consequence of preserving it;
+- equity/dependencies lost by changing it.
 
-If no genuinely new evidence or strategic truth exists, treat the work as refinement/AUDIT/APPLY rather than claiming learning or broad evolution.
+If no new evidence or strategic truth exists, route the work to refinement/AUDIT/APPLY rather than claiming broad evolution.
 
-## Minimize the change surface
+## 2. Minimize the change surface
 
 Classify each relevant element:
 - preserve;
@@ -44,45 +42,29 @@ Classify each relevant element:
 - add.
 
 Re-open only the necessary dependency chain:
-- strategy changed → revisit creative direction and downstream identity;
-- new touchpoint only → first test APPLY;
+- strategy changed → revisit creative direction and affected downstream identity;
+- new touchpoint only → test APPLY first;
 - naming/legal problem → reopen naming without gratuitous visual redesign;
-- typography production failure → reopen the type system, not the whole brand;
+- typography production failure → reopen typography, not the whole brand;
 - repeated execution ambiguity → patch guidance before redesigning identity.
 
-Do not preserve a broken decision merely because it exists; do not destroy a valid decision merely because change is exciting.
+Do not preserve a broken decision merely because it exists; do not destroy a valid one merely because change is attractive.
 
-## PROVE — scale rigor with equity and consequence
+## 3. Prove the delta
 
-### V1 Structural
-Validate the changed spec/assets with applicable deterministic tools.
+Apply the verification ladder from `SKILL.md` proportionally to equity and consequence.
 
-### V2 Semantic
-Prove that:
-- the old rationale is actually invalidated or insufficient;
-- the new decision is causally derived from current evidence;
-- unchanged elements remain coherent;
-- the change does not create gratuitous category/portfolio collision.
+At minimum:
+- run V1 checks on changed spec/assets;
+- at V2, show that the old rationale is invalidated/insufficient, the new decision follows from current evidence, unchanged elements remain coherent, and the delta does not create gratuitous category/portfolio collision;
+- at V3, re-run representative applications for materially affected touchpoints; compare old vs new when that reveals whether the actual problem is solved;
+- require stronger V4 evidence as radius rises, especially for established renaming, positioning/architecture changes, retirement of distinctive assets and claims about perception/behavior.
 
-### V3 Contextual
-Re-run representative applications for every materially affected touchpoint. Compare old vs new when doing so reveals whether the change solves the actual problem.
+A HIGH-COST change with weak V4 evidence remains a recommendation/experiment, not an automatic contract mutation.
 
-### V4 Reality
-Require stronger external evidence as commitment radius rises, especially for:
-- established renaming;
-- positioning changes;
-- architecture changes;
-- retirement of distinctive assets with possible equity;
-- claims about perception, recognition or customer behavior.
+## 4. Commit a versioned minimum delta
 
-A high-cost change with weak V4 evidence should remain a recommendation/experiment, not an automatic contract mutation.
-
-## COMMIT — minimum justified delta
-
-Before commit:
-1. evidence is sufficient for the radius;
-2. the legitimate authority owner has approved MARKET/HIGH-COST changes;
-3. migration/rollback consequences are understood.
+Before commit, ensure evidence, legitimate authority and migration/rollback understanding are sufficient for the radius.
 
 Version `meta.version`:
 - **major** — positioning/theme/architecture changes that materially redefine the system;
@@ -96,45 +78,37 @@ Record in `meta.changelog`:
 - affected touchpoints;
 - migration consequence.
 
-Run:
+Run applicable deterministic tools:
 
 ```bash
 python scripts/validate_structure.py spec.json
 python scripts/portfolio_collision.py portfolio.json spec.json
 ```
 
-Run `asset_checks.py` on changed SVG masters and perform V2/V3 checks appropriate to the change.
+Use `asset_checks.py` for changed SVG masters and complete appropriate V2/V3 verification.
 
-## ADAPT — learn without destabilizing the brand
-
-After deployment, new signals should first update beliefs/evidence state:
-
-`active → challenged → superseded`
-
-Only when evidence materially invalidates a committed rationale should the contract change again.
-
-Do not optimize a long-lived brand system for every short-term metric. Stability is a feature when the rationale still holds.
+After deployment, update beliefs first as new evidence arrives. Contract should change again only when evidence materially invalidates a committed rationale. Do not tune a long-lived brand system to every short-term metric.
 
 ## Provisional → full
 
-Promotion is an EVOLVE operation:
+Treat promotion as EVOLVE:
 - resolve important evidence gaps;
 - complete naming/legal triage;
-- deepen only the verbal/visual dimensions needed by durable touchpoints;
+- deepen only verbal/visual dimensions required by durable touchpoints;
 - resolve production masters;
 - complete representative trials;
 - update portfolio registry.
 
-Promotion strengthens valid reasoning; it does not automatically redesign the brand.
+Promotion strengthens valid reasoning; it does not imply redesign.
 
 ## Delivery
 
 Deliver:
 - updated spec;
 - explicit versioned diff;
-- evidence/authority basis for the change;
+- evidence/authority basis;
 - changed masters/briefs;
 - updated representative applications;
 - migration plan;
-- updated portfolio registry where applicable;
-- V1/V2/V3 results and unresolved V4/legal/craft pendencies.
+- portfolio update where applicable;
+- verification results and unresolved V4/legal/craft pendencies.
