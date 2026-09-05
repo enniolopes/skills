@@ -1,31 +1,29 @@
-# Identity Craft — designing and judging the visual/verbal system
+# Identity craft — build and judge the expression system
 
-Identity craft turns creative direction into repeatable expression. The goal is not uniformity; it is coherent recognizability across different applications.
+Turn creative direction into repeatable expression. Optimize for coherent recognizability across different applications, not uniformity.
 
 ## 1. Identity grammar
 
-Define a small set of rules that explain how the system behaves:
-- dominant forms and counterforms;
+Define the smallest ruleset that can generate new work without imitating old layouts:
+- dominant forms/counterforms;
 - typographic behavior;
 - color relationships;
-- image behavior;
+- imagery behavior;
 - spacing/density tendencies;
 - composition;
 - recurring devices;
-- interaction/motion if relevant.
-
-A strong grammar should generate new work without requiring imitation of old layouts.
+- interaction/motion when relevant.
 
 ## 2. Logo, wordmark and signature
 
-Treat the mark as one distinctive asset within the broader identity.
+Treat the mark as one distinctive asset within the broader system.
 
 Evaluate:
-- relevance to the central idea;
-- memorability/simplicity appropriate to the use case;
-- distinctiveness from category/portfolio collisions;
+- relationship to the central idea;
+- memorability/simplicity appropriate to use;
+- category/portfolio distinctiveness;
 - optical balance;
-- counterform and silhouette;
+- counterform/silhouette;
 - scalability;
 - monochrome behavior;
 - reproduction constraints;
@@ -33,151 +31,89 @@ Evaluate:
 
 ### Concept vs production
 
-The skill can ideate and art-direct:
-- wordmarks;
-- monograms;
-- letterforms;
-- geometric symbols;
-- abstract marks;
-- organic marks;
-- illustrative/expressive marks.
-
-But production status must be explicit:
+Ideate and art-direct wordmarks, monograms, letterforms, geometric/abstract/organic/illustrative marks as needed, but keep production status explicit:
 - `final`;
 - `concept`;
 - `external_craft_required`.
 
-A raster concept is not a production master. A final SVG master should pass `asset_checks.py`.
-
-Optical correction is legitimate; geometry is a construction aid, not the aesthetic authority.
+A raster concept is not a production master. A final SVG master should pass `scripts/asset_checks.py`. Use geometry as a construction aid, not aesthetic authority; apply optical correction where needed.
 
 ## 3. Typography
 
-Choose typography by:
-- meaning/personality;
-- legibility;
-- range of weights/widths/scripts;
-- licensing;
-- available character set;
-- touchpoints;
-- hierarchy needs;
-- relationship to the mark and other distinctive assets.
+Choose typography from meaning/personality, legibility, range, licensing, character set, touchpoints, hierarchy needs and relationship to other distinctive assets.
 
-Do not assume two families.
-
-Define roles rather than arbitrary family count:
+Do not assume a fixed family count. Define roles only when needed:
 - display;
 - text;
 - interface/data;
 - institutional/office fallback;
-- mono/special-purpose where needed.
+- mono/special-purpose.
 
-Hierarchy may be:
-- modular;
-- custom;
-- responsive/fluid.
-
-If modular, declare and validate the scale. If custom, document the intended hierarchy and relationships instead of forcing a ratio.
+Hierarchy may be `modular`, `custom` or `fluid`. If modular, declare/validate the scale. If custom/fluid, document explicit relationships instead of forcing a ratio.
 
 ## 4. Color
 
-Color is both expressive and functional.
+Derive color from creative direction, category/cultural context, medium, accessibility and production constraints.
 
-Decide it from:
-- creative direction;
-- category context;
-- cultural/market context;
-- medium;
-- accessibility/contrast needs;
-- production constraints.
-
-Use OKLCH/OKLab for technical manipulation and comparison when useful.
+Use OKLCH/OKLab for technical manipulation/comparison when useful.
 
 Do not:
 - derive strategy from universal color-emotion tables;
-- assume a color alone creates distinctiveness;
-- equate a technically accessible palette with a good identity.
+- assume color alone creates distinctiveness;
+- equate technical accessibility with identity quality.
 
-For digital/text contexts, declare the actual foreground/background pairs that need contrast verification.
+For digital/text contexts, declare actual foreground/background pairs requiring contrast verification.
 
 ## 5. Imagery and illustration
 
-Specify:
+Specify only behavior that constrains production:
 - subject matter;
-- perspective;
-- crop;
+- perspective/crop;
 - light;
 - color treatment;
 - realism/abstraction;
 - composition;
 - relationship to typography;
-- what is explicitly excluded.
+- explicit exclusions.
 
-If generative image tools are used, distinguish art direction from final rights/production review and avoid claiming uniqueness.
+When generative image tools are used, keep art direction separate from final rights/production review and do not claim uniqueness without evidence.
 
 ## 6. Iconography
 
-Define:
-- visual construction logic;
-- stroke/fill behavior;
-- corner logic;
-- optical size;
-- grid only when it improves consistency;
-- semantic clarity;
-- accessibility where relevant.
-
-Icons do not need to mimic the logo; they need to belong to the same visual language.
+Define construction logic, stroke/fill behavior, corner logic, optical size, semantic clarity and accessibility. Use a grid only when it improves consistency. Icons need to belong to the same visual language; they do not need to mimic the logo.
 
 ## 7. Composition and grid
 
-A grid is a tool for repeatable relationships, not a universal 4/8pt law.
+Specify meaningful relationships such as alignment, margin behavior, density, asymmetry/symmetry, image/type relationship, recurring spatial devices and responsive behavior.
 
-Specify what matters:
-- alignment;
-- margin behavior;
-- density;
-- asymmetry/symmetry;
-- image/type relationship;
-- recurring spatial device;
-- responsive behavior where applicable.
+Do not impose a universal 4/8pt system.
 
 ## 8. Motion, sound and sensory expression
 
 Add only when touchpoints justify them.
 
-For motion:
-- timing;
-- easing character;
-- entry/exit behavior;
-- transformation rules;
-- reduced-motion fallback.
-
-For sound/sensory elements:
-- define the intended role and production constraints;
-- avoid decorative additions that do not reinforce recognition or experience.
+For motion define timing, easing character, entry/exit behavior, transformation rules and reduced-motion fallback. For sound/sensory elements define intended role and production constraints; avoid decorative additions that do not reinforce recognition/experience.
 
 ## 9. Trial applications
 
-Identity decisions are provisional until tested in real contexts.
+Treat material identity decisions as provisional until they survive representative use. Choose applications that expose different stresses, such as:
+- mark at small scale;
+- dense information hierarchy;
+- imagery variety;
+- contrast-dependent color use;
+- expressive device vs content;
+- voice in institutional/error moments.
 
-Use applications that stress different conditions. The purpose is to discover system problems early:
-- mark disappears at small size;
-- type hierarchy collapses in dense data;
-- imagery rules cannot generate enough variety;
-- color pair fails contrast;
-- graphic device overwhelms content;
-- voice breaks in error/institutional moments.
-
-Fix the rule that caused the failure, then re-test.
+Fix recurring system causes, then re-test. Keep one-off failures local.
 
 ## 10. Craft review
 
-A semantic craft review asks:
-- Is the system specific to this strategy?
-- Does it remain recognizable without always showing the logo?
+At V2 ask:
+- Is expression specific to this strategy?
+- Is it recognizable without always showing the logo?
 - Are expressive and functional choices coherent?
-- Does it create enough variation without losing identity?
+- Is there enough variation without loss of identity?
 - Does it survive declared touchpoints?
-- Are production decisions actually reproducible?
+- Are production decisions reproducible?
 
-This is expert judgment, not deterministic validation.
+Treat these as professional judgments, not deterministic validation.

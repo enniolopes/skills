@@ -126,6 +126,7 @@ skills/branding-studio/                 # runtime source only
 └── scripts/                            # runtime deterministic tools only
 
 development/branding-studio/            # never shipped
+├── RUNTIME_CONTEXT.md                  # semantic source policy
 ├── evals/
 ├── tests/
 └── package_skill.py
@@ -136,6 +137,8 @@ docs/branding-studio/README.md           # human documentation
 The rule is strict:
 
 > **runtime may be tested by development assets; runtime must not contain or observe its tests, evals, build tooling or human documentation.**
+
+The same boundary applies inside runtime prose: it should change execution, provide necessary on-demand domain knowledge, define canonical state or enable runtime verification. Project explanation, architecture rationale and development history belong outside runtime.
 
 The runtime directory is intentionally limited to the kernel, on-demand domain references, canonical templates and deterministic tools used while operating the brand.
 
