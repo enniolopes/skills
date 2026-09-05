@@ -34,7 +34,7 @@ class RuntimeContextTests(unittest.TestCase):
             for phrase in FORBIDDEN_META_PHRASES:
                 self.assertNotIn(phrase, text, f"{path}: forbidden runtime meta-text: {phrase}")
 
-    def test_runtime_body_does_not_explain_itself_as_a_skill(self):
+    def test_runtime_prose_does_not_explain_itself_as_a_skill(self):
         for path in RUNTIME_MARKDOWN:
             text = path.read_text(encoding="utf-8")
             if path == SKILL:
@@ -43,6 +43,9 @@ class RuntimeContextTests(unittest.TestCase):
                 body = parts[2] if len(parts) == 3 else text
             else:
                 body = text
+
+            # Cross-references to the canonical filename are operational, not metadocumentation.
+            body = body.replace("`SKILL.md`", "")
             self.assertIsNone(
                 re.search(r"\bskill\b", body, flags=re.IGNORECASE),
                 f"{path}: runtime prose should instruct/define domain behavior, not explain the skill",
