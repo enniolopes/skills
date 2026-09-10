@@ -28,6 +28,12 @@ STATUSES = {"design", "shipped"}
 LICENSE = "CC-BY-NC-4.0"
 SEMVER = re.compile(r"^\d+\.\d+\.\d+$")
 
+# The always-loaded body of a skill. Claude Code's auto-compaction re-attaches only the first
+# 5,000 tokens of an invoked skill, silently dropping the tail in exactly the long sessions
+# where "always loaded" matters most. The cap is the platform's mechanic, not a preference;
+# depth beyond it belongs in references the skill loads on demand.
+SKILL_TOKEN_CAP = 5000
+
 # Runtime never carries development material, and never points into it.
 RUNTIME_FORBIDDEN_NAMES = {"README.md", "tests", "evals", "docs", "dist"}
 RUNTIME_FORBIDDEN_REFS = ("development/", "systems/")
@@ -63,6 +69,12 @@ def frontmatter(path: Path) -> dict[str, str]:
             parent = key.strip()
             fields[parent] = value.strip().strip("'\"")
     return {}
+
+
+def estimate_tokens(text: str) -> int:
+    """~4 chars per token for prose; a typographic character (→, ×, ≥) is usually a token by itself."""
+    wide = sum(1 for c in text if ord(c) > 127)
+    return round((len(text) - wide) / 4 + wide)
 
 
 def strip_fences(text: str) -> str:
@@ -109,6 +121,12 @@ def check_skills(errors: list[str]) -> dict[str, str]:
             errors.append(f"{rel(skill_md)}: frontmatter license must be {LICENSE} (the artifact installs alone and carries its license)")
         if not SEMVER.match(fm.get("metadata.version", "")):
             errors.append(f"{rel(skill_md)}: frontmatter metadata.version must be semver (units are versioned separately)")
+        tokens = estimate_tokens(skill_md.read_text(encoding="utf-8"))
+        if tokens > SKILL_TOKEN_CAP:
+            errors.append(
+                f"{rel(skill_md)}: ~{tokens} tokens, cap {SKILL_TOKEN_CAP} — auto-compaction re-attaches only the "
+                f"first {SKILL_TOKEN_CAP} tokens and drops the tail; move depth into a reference file"
+            )
         for path in entry.rglob("*"):
             if not visible(path):
                 continue

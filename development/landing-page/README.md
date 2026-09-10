@@ -29,7 +29,7 @@ It adds:
 
 Runtime lives in `skills/landing-page/` and contains only what the skill needs while operating.
 
-- `SKILL.md` — operating kernel and routing.
+- `SKILL.md` — operating kernel and routing: standard, operating model, modes, invariants, the method as one line per phase, gates, hard stops, completion. Kept under the 5,000-token budget CI enforces; each phase's procedure lives in the reference that owns it.
 - `references/discovery.md` — desk research, reference studies, synthesis, and question policy.
 - `references/marketing.md` — landing-page semantics, proof, claims, narrative, and conversion.
 - `references/design-quality.md` — high-end art direction, hierarchy, coherence, distinction, and craft.

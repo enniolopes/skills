@@ -87,6 +87,17 @@ For factual/product truth, prefer:
 
 For visual/creative research, provenance matters less than understanding what is being learned. Never copy protected artwork or another site's identity; extract abstract properties and create an original composition.
 
+## Internal evidence
+
+Before any external lane, inspect what is already available:
+
+- product/site/application and its real UI;
+- repository, framework, design primitives, tokens, fonts, assets, routing and patterns;
+- docs, pricing, changelog, demos and screenshots;
+- brand assets, copy and prior campaigns;
+- supplied customer evidence and claims;
+- existing analytics/research present in the working context.
+
 ## Desk research lanes
 
 Use only the lanes that answer material questions.
@@ -302,7 +313,18 @@ constraints:
   truth_or_authority_gaps:
 ```
 
-This is an internal decision object, not a mandatory user-facing document.
+This is an internal decision object, not a mandatory user-facing document. Its job is to make the agent decisive; expose it only when it helps collaboration.
+
+## Evidence classification
+
+Tag every item of the brief internally:
+
+- `KNOWN` — supported by user input or inspected evidence;
+- `INFERRED` — reasonable, reversible interpretation that creates no false fact;
+- `CREATIVE` — concept, expression, metaphor, art direction;
+- `UNKNOWN` — must not be represented as fact.
+
+Resolve `KNOWN`, `INFERRED` and `CREATIVE` yourself. Only an `UNKNOWN` that blocks truth, authority, or a material irreversible fork may become a question (see the question protocol). If a reversible default exists, take it and continue.
 
 ## Research stopping rule
 

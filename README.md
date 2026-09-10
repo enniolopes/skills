@@ -69,8 +69,10 @@ python development/validate.py
 ```
 
 That is also what CI runs on every pull request. It checks the topology, each unit's
-frontmatter contract, each system's manifest against the filesystem, the catalog above,
-relative links, then compiles the Python and runs every `development/<name>/tests/`.
+frontmatter contract, each `SKILL.md` against the 5,000-token budget (Claude Code's
+auto-compaction re-attaches only that much of an invoked skill; depth beyond it goes into
+`references/`), each system's manifest against the filesystem, the catalog above, relative
+links, then compiles the Python and runs every `development/<name>/tests/`.
 
 Per-unit tooling lives with the unit, e.g. `python development/branding-studio/package_skill.py`
 builds `dist/branding-studio.zip`.

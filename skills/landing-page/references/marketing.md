@@ -67,6 +67,13 @@ For each major region, know:
 
 Do not expose this schema to the user unless it improves collaboration.
 
+Consequences of the contract:
+
+- remove regions that perform no distinct communication job;
+- choose the strongest medium for each message — real product UI, image, demonstration, diagram, comparison, animation, data, or concise prose — rather than translating every idea into `icon + heading + paragraph + rounded card`;
+- treat the first viewport as a thesis, not a header template: identity, relevance, hierarchy, product signal and primary action, quickly;
+- plan full-page rhythm before obsessing over the hero; a brilliant hero followed by generic sections is a failed high-end page.
+
 ## Proof
 
 Prefer proof closest to reality:
