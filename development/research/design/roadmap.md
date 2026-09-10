@@ -18,20 +18,20 @@ One file per phase, short, in the shape "when this applies / what it requires / 
 it prevents / source". No file longer than a screen. Each carries the date of its last
 verification.
 
-## 3. Write `skills/scientific-method/SKILL.md`
+## 3. Write `systems/research/skills/scientific-method/SKILL.md`
 
 Frontmatter; ownership; the twelve invariants; the eight phases with gates and terminal
 states; delegation to `explorer`, `research-map`, `reviewer-2`; pointers to `reference/`.
 Target ≤ 2,500 words.
 
-## 4. Write `skills/research-map/SKILL.md` and its `validate` script
+## 4. Write `systems/research/skills/research-map/SKILL.md` and its `validate` script
 
 The map schema; the four modes; the session ritual; `scripts/validate.py` covering
 number-to-aggregate matching, decision revision conditions, citation resolution, notebook
 outputs, pointer integrity. Shipped so a consuming repository can call it from
 pre-commit.
 
-## 5. Write `agents/reviewer-2.md`
+## 5. Write `systems/research/agents/reviewer-2.md`
 
 The verifier contract adapted to manuscripts, with the fixed output headings and the
 figure ↔ code ↔ data check.
@@ -44,7 +44,8 @@ a rescued `CONFIRMED`.
 
 ## 7. Install in the origin repository
 
-Add to `delbem-research/cozsolidarias-research/skills-lock.json`; run `research-map init`
+In `delbem-research/cozsolidarias-research`, `/plugin marketplace add enniolopes/skills` and
+`/plugin install research@enniolopes` at project scope; run `research-map init`
 on `research/2026-kitchens-hunger-macro`; confirm `resume` restates the state correctly.
 
 ## Open decisions to close before step 3

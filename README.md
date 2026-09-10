@@ -1,8 +1,15 @@
 # skills
 
 Agent skills, agents and the systems that compose them, by Ennio Politi Lopes. Built for
-Claude Code following the [Agent Skills](https://agentskills.io) standard. Every unit
-installs on its own:
+Claude Code following the [Agent Skills](https://agentskills.io) standard. The repository
+is also a Claude Code plugin marketplace: every unit is one install.
+
+```text
+/plugin marketplace add enniolopes/skills
+/plugin install <name>@enniolopes
+```
+
+A standalone skill can also be installed on its own, without the marketplace:
 
 ```bash
 npx skills add enniolopes/skills --skill <name> --agent claude-code
@@ -18,35 +25,38 @@ upload: build it from `development/<name>/` when a packager exists there.
 | [branding-studio](skills/branding-studio/) | skill | shipped | [README](development/branding-studio/README.md) |
 | [landing-page](skills/landing-page/) | skill | shipped | [README](development/landing-page/README.md) |
 | [explorer](skills/explorer/) | skill | shipped | — |
-| [research](systems/research/) | system | design | [design](development/research/design/) |
+| [research](systems/research/) | system | design | [README](systems/research/README.md) · [design](development/research/design/) |
 
-CI checks this table against the filesystem: it lists exactly the units that exist.
+CI checks this table and `.claude-plugin/marketplace.json` against the filesystem: both
+list exactly the units that exist.
 
 ## Model
 
 Three concepts, one rule each.
 
 - **Unit** — a skill, an agent or a system. It has a name, a version, an owner and a reason
-  to change that is its own. The name is the same everywhere the unit appears.
-- **Runtime** — what a unit ships. Its location is fixed by the standard and by installers
-  that copy it wholesale: `skills/<name>/` (with `SKILL.md` at the root) and
-  `agents/<name>.md`. Runtime carries exactly what the agent needs while operating, no
-  more, and never refers back to this repository; it must work installed alone.
-- **System** — a composition of skills and agents that work together. It has no runtime
-  of its own: `systems/<name>/system.json` names the pieces and their status, and CI
-  checks that against what exists. Pieces install independently; a system may depend on
-  a standalone skill.
+  to change that is its own. Names are unique across the repository.
+- **Runtime** — what a unit ships. `skills/<name>/` (with `SKILL.md` at the root) and
+  `agents/<name>.md`, the locations installers copy wholesale. Runtime carries exactly
+  what the agent needs while operating, no more, and never refers back to this repository;
+  it must work installed alone.
+- **System** — several skills and agents that only make sense together, installed as one
+  unit. A system is a Claude Code plugin: `systems/<name>/` holds its manifest, its README
+  (how to install, how to use) and the pieces exclusive to it under `skills/` and
+  `agents/`. A piece that is also useful alone is a standalone unit the system declares in
+  `dependencies`; the host installs it transitively.
 
 Everything a unit needs that is not runtime — tests, evals, packaging, source policy,
 design records, its human README — lives in one place, `development/<name>/`, so a unit
 occupies at most two regions of the tree and deleting it means deleting two directories.
 
 ```text
-skills/<name>/            runtime skill
-agents/<name>.md          runtime agent
-systems/<name>/           system.json + README.md
-development/<name>/       everything else about the unit — never shipped
-development/validate.py   the model above as executable checks
+skills/<name>/                     standalone runtime skill; also a single-skill plugin
+agents/<name>.md                   standalone runtime agent
+systems/<name>/                    a plugin: .claude-plugin/plugin.json, README.md, skills/, agents/
+development/<name>/                everything else about the unit — never shipped
+.claude-plugin/marketplace.json    the catalog as the host reads it: one plugin per unit
+development/validate.py            the model above as executable checks
 ```
 
 Design decisions and their rationale:
@@ -55,9 +65,11 @@ Design decisions and their rationale:
 |---|---|---|
 | Top level is the *role* (runtime, composition, development), unit name second | the runtime path is dictated by installers; given that, the only choice is where the rest goes, and one companion directory per unit keeps change local | an installer accepts a nested runtime directory, which would allow unit-first layout |
 | Runtime contains no README, tests or evals | installers and packagers copy the directory as-is; every file becomes context or payload | never — this is the contract with the host |
-| Systems are manifests, not containers | pieces version and install separately, and a system may include a skill that exists on its own | a host offers a real multi-piece install unit (e.g. a plugin marketplace); then `system.json` gains a projection to it |
+| A system is a plugin, its exclusive pieces live inside it | the host's install unit is the plugin, and a plugin cannot reference files outside its own directory; "install one thing" is the requirement | a host installs a multi-piece unit from a manifest that may point anywhere in the repository — then pieces return to the flat catalog and the system becomes a manifest again (the layout this superseded) |
+| Standalone skills are single-skill plugins with `strict: false` | a `SKILL.md` at the plugin root is a plugin; `strict: false` keeps the manifest in the marketplace entry, so nothing non-runtime enters `skills/<name>/` | — |
 | One validator, one workflow, discovery by convention | adding a unit must not require touching CI; `development/<name>/tests/` is found and run | a unit needs a toolchain other than Python |
-| Version and license in each `SKILL.md` frontmatter | the installed artifact is the whole unit; identity and terms travel with it | — |
+| Version and license in each `SKILL.md` frontmatter and each `plugin.json` | the installed artifact is the whole unit; identity and terms travel with it | — |
+| `SKILL.md` under 5,000 estimated tokens | Claude Code's auto-compaction re-attaches only that much of an invoked skill; depth beyond it goes to `references/` | the platform changes the mechanic |
 
 New top-level directories and new roles are architecture decisions: the validator lists
 the allowed set and fails on anything else, so the change and the rule land together.
@@ -68,11 +80,11 @@ the allowed set and fails on anything else, so the change and the rule land toge
 python development/validate.py
 ```
 
-That is also what CI runs on every pull request. It checks the topology, each unit's
-frontmatter contract, each `SKILL.md` against the 5,000-token budget (Claude Code's
-auto-compaction re-attaches only that much of an invoked skill; depth beyond it goes into
-`references/`), each system's manifest against the filesystem, the catalog above, relative
-links, then compiles the Python and runs every `development/<name>/tests/`.
+That is also what CI runs on every pull request. It checks the topology, each runtime
+piece's frontmatter contract and token budget (standalone or inside a system), each
+system's `plugin.json` and its dependencies, the marketplace and the catalog above against
+the filesystem, relative links, then compiles the Python, runs `claude plugin validate`
+when the CLI is present, and runs every `development/<name>/tests/`.
 
 Per-unit tooling lives with the unit, e.g. `python development/branding-studio/package_skill.py`
 builds `dist/branding-studio.zip`.

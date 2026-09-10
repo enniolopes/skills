@@ -169,7 +169,7 @@ and the count of human decisions the skill correctly refused to invent.
 | Decision | Choice | Rationale |
 |---|---|---|
 | Language | English | matches sibling skills and the target venues; examples may be bilingual |
-| Hosting | `enniolopes/skills`, installed via `npx skills add` and pinned in each research repo's `skills-lock.json` | reusable across researches; same mechanism as devanity-skills |
+| Hosting | `enniolopes/skills` as a Claude Code plugin marketplace; the system is the plugin `research@enniolopes`, with `explorer` as a declared dependency (revised 2026-09-10 from per-skill `npx skills add`: one install for the whole system) | reusable across researches; one command installs skills and agent together |
 | Granularity | three pieces, separately versioned | they change at different rates |
 | `explorer` | dependency, not content | it already does phase 1 well |
 | Form | devanity shape (ownership, numbered invariants, phases, terminal states, reference files) | proven in the house; keeps `SKILL.md` short |
