@@ -1,6 +1,6 @@
 # Phase 6 — Writing
 
-Verified 2026-09-10 (sources located, not yet read at source).
+Sources located 2026-09-10, not yet read at source.
 
 **When this applies.** Any prose that will leave the repository: manuscript, abstract,
 registration text, slides, e-mail summarising results.
@@ -12,8 +12,8 @@ registration text, slides, e-mail summarising results.
 - **Every number with an interval and a source table.** The manuscript renders from
   committed aggregates only; a number typed by hand is a claim, not a result.
 - **Every variable defined as its source defines it**, with the common misreading named
-  ("sem PBF" is a counterfactual simulation on the same families, not families without
-  Bolsa Família — origin case, terminology drift).
+  (a variable labelled "without X" that is in fact a counterfactual simulation on the same
+  units, not a different population, will be read as the population unless you say so).
 - **Figure-level provenance.** Each figure names the notebook and the aggregate that
   produced it; the reviewer will check figure ↔ code ↔ data agreement.
 - **Limitations stated, not discovered.** The limitations section is written from the

@@ -1,14 +1,15 @@
 # Phase 7 — Review
 
-Verified 2026-09-10 (sources located, not yet read at source).
+Sources located 2026-09-10, not yet read at source.
 
 **When this applies.** Before submission, and on demand after any confirmatory run.
 
 **What it requires.**
 
-- **Hand to `reviewer-2`** with: protocol, decision log, manuscript, aggregates,
-  notebooks, and the permitted read-only commands (render, citation verification,
-  number-to-file matching). The reviewer does not inherit the author's reasoning.
+- **Hand to the `research:reviewer-2` agent** with the brief exactly as its "Required
+  brief" section lists it: protocol, decision log, manuscript, aggregates, notebooks,
+  permitted read-only commands, and the checklist (STROBE; RECORD when the data are
+  routinely collected). The reviewer does not inherit the author's reasoning.
 - **Reporting checklist**: STROBE for observational designs; RECORD in addition when the
   data are routinely collected administrative records (codes used, linkage, cleaning,
   access). Every item is answered or marked not applicable with a reason.

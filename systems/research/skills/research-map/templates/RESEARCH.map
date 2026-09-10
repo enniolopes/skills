@@ -4,12 +4,13 @@
 - protocol: <path/to/protocol.md>
 - decisions: <path/to/decisions.md>
 - aggregates: <path/to/aggregates/>
-- documents: <path/to/paper/>, <path/to/protocol.md>
+- documents: <path/to/paper/>
 - notebooks: <path/to/notebooks/>
 - references: <path/to/references.bib>
 
 ## Question
 <one line> → `<path/to/protocol.md#question>`
+Registration: none
 
 ## Hypotheses
 | Id | Prediction | Refutation | State | Pointer |
@@ -45,5 +46,5 @@
 - D-?: <what> — unblocked by: <who>
 
 ## Last session
-- <date>: <what changed>
+- <YYYY-MM-DD>: <what changed>
 - Next: <one concrete step>

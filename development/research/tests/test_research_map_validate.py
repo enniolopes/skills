@@ -12,30 +12,32 @@ rm = importlib.util.module_from_spec(spec)
 sys.modules["rm_validate"] = rm  # dataclasses resolve annotations through sys.modules
 spec.loader.exec_module(rm)
 
+GATES = "\n".join(f"| {i} {name} | pending | |" for i, name in enumerate(
+    ["Problem", "Literature", "Protocol", "Data", "Analysis", "Writing", "Review", "Publication"], 1))
 
-MAP = """# RESEARCH.map — fixture
+MAP = f"""# RESEARCH.map — fixture
 
 ## Layout
 - protocol: protocol.md
 - decisions: decisions.md
 - aggregates: aggregates/
-- documents: paper/, protocol.md
+- documents: paper/
 - notebooks: notebooks/
 - references: references.bib
 
 ## Question
 Does X change Y? → `protocol.md#question`
+Registration: none
 
 ## Hypotheses
 | Id | Prediction | Refutation | State | Pointer |
 |---|---|---|---|---|
-| H1 | Y < 0 | interval includes 0 | INCONCLUSIVE | `protocol.md#h1` |
+| H1 | Y < 0 | interval includes `0.05` | INCONCLUSIVE | `protocol.md#h1` |
 
 ## Gates
 | Phase | State | Blocked by |
 |---|---|---|
-| 1 Problem | reached | |
-| 8 Publication | blocked | ethics — PI |
+{GATES.replace("| 1 Problem | pending | |", "| 1 Problem | reached | |").replace("| 8 Publication | pending | |", "| 8 Publication | blocked | ethics — PI |")}
 
 ## Facts that were once wrong
 | Was | Is | Produced by |
@@ -70,6 +72,7 @@ Revision condition: Moran's I within null band.
 ### D-2 · 2026-09-02
 Decision: radius 873 m.
 Rationale: median geocoding drift.
+D-1 is unaffected by this decision.
 Revise when: drift distribution changes.
 """
 
@@ -82,110 +85,174 @@ Rationale: none.
 PAPER = """# Results
 
 We found 5,913 kitchens and a correlation of ρ = 0.61 (95% CI 0.55–0.67).
-The share was 12.5% in 2026.
+The coefficient was -0.31 (SE 0.09; p < 0.001), see Section 5.1 and Table 23.
+The share was 12.5% in 2026; see https://example.org/x for 5,913 units.
 Page 42 <!-- rm:ignore -->
 See doi:10.1000/xyz123 for 4,618 earlier kitchens.
 
 ```text
 9999 inside a fence is ignored
 ```
+
+~~~
+8888 inside a tilde fence is ignored
+~~~
 """
 
 NOTEBOOK_CLEAN = {"cells": [{"cell_type": "code", "source": "x = 1", "outputs": [], "execution_count": None}], "metadata": {}, "nbformat": 4, "nbformat_minor": 5}
 NOTEBOOK_DIRTY = {"cells": [{"cell_type": "code", "source": "x", "outputs": [{"output_type": "stream", "text": "1"}], "execution_count": 3}], "metadata": {}, "nbformat": 4, "nbformat_minor": 5}
 
-BIB = """@article{ok, title={T}, doi={10.1073/pnas.1708274114}}
+BIB = """@comment{This is a comment with no doi}
+@string{jpub = "Journal of Public Health"}
+@article{ok, title={T}, doi={10.1073/pnas.1708274114}}
+@book{kkv, title={Designing Social Inquiry}, isbn={9780691034713}}
 @article{nodoi, title={T2}}
 """
 
 
-def build(root: Path, decisions: str = DECISIONS_OK, extra_paper: str = "") -> None:
+def build(root: Path, decisions: str = DECISIONS_OK, extra_paper: str = "", bib: str = BIB) -> None:
     (root / "aggregates").mkdir()
     (root / "paper").mkdir()
     (root / "notebooks").mkdir()
     (root / "RESEARCH.map").write_text(MAP, encoding="utf-8")
     (root / "protocol.md").write_text("# Protocol\n\n## question\n\n## h1\n", encoding="utf-8")
     (root / "decisions.md").write_text(decisions, encoding="utf-8")
-    (root / "aggregates" / "results.csv").write_text("metric,value\nkitchens,5913\nrho,0.6083\nlow,0.5512\nhigh,0.6701\nshare,0.125\n", encoding="utf-8")
+    (root / "aggregates" / "results.csv").write_text(
+        "metric,value\nkitchens,5913\nrho,0.6083\nlow,0.5512\nhigh,0.6701\nshare,0.125\nbeta,-0.31\nse,0.09\n",
+        encoding="utf-8")
     (root / "paper" / "results.md").write_text(PAPER + extra_paper, encoding="utf-8")
     (root / "notebooks" / "clean.ipynb").write_text(json.dumps(NOTEBOOK_CLEAN), encoding="utf-8")
-    (root / "references.bib").write_text(BIB, encoding="utf-8")
+    (root / "references.bib").write_text(bib, encoding="utf-8")
 
 
-class ValidateTests(unittest.TestCase):
-    def run_all(self, root: Path):
-        results = rm.run(root / "RESEARCH.map", root, offline=True, min_int=20, only=None)
-        return {r.name: r for r in results}
+def run_all(root: Path):
+    return {r.name: r for r in rm.run(root / "RESEARCH.map", root, offline=True, min_int=20, only=None)}
 
-    def test_clean_repository_passes_except_offline_citations(self):
+
+class MapTests(unittest.TestCase):
+    def test_clean_map_passes(self):
         with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            build(root)
-            results = self.run_all(root)
-            self.assertEqual(results["map"].status, "PASS", results["map"].lines)
-            self.assertEqual(results["numbers"].status, "PASS", results["numbers"].lines)
-            self.assertEqual(results["decisions"].status, "PASS", results["decisions"].lines)
-            self.assertEqual(results["notebooks"].status, "PASS", results["notebooks"].lines)
-            # references.bib has an entry with neither doi nor url: that is a FAIL even offline
-            self.assertEqual(results["citations"].status, "FAIL")
-            self.assertTrue(any("nodoi" in l for l in results["citations"].lines))
+            build(root := Path(tmp))
+            self.assertEqual(run_all(root)["map"].status, "PASS", run_all(root)["map"].lines)
 
-    def test_numbers_rounding_percent_and_ignores(self):
+    def test_structure_failures(self):
         with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            build(root, extra_paper="\nUnsupported: 7,777 units and 0.99 precision.\n")
-            numbers = self.run_all(root)["numbers"]
-            self.assertEqual(numbers.status, "FAIL")
-            flagged = " ".join(numbers.lines)
-            self.assertIn("7,777", flagged)
-            self.assertIn("0.99", flagged)
-            self.assertNotIn("5,913", flagged)      # exact
-            self.assertNotIn("0.61", flagged)       # 0.6083 rounds to 0.61
-            self.assertNotIn("12.5", flagged)       # 0.125 as percent
-            self.assertNotIn("2026", flagged)       # year
-            self.assertNotIn("42", flagged)         # rm:ignore
-            self.assertNotIn("4,618", flagged)      # line carries doi → skipped
-            self.assertNotIn("9999", flagged)       # fenced
+            build(root := Path(tmp))
+            broken = MAP.replace("| 1 Problem | reached | |", "| 1 Problem | done | |") \
+                        .replace("`notebooks/clean.ipynb` |\n\n## Provenance", "`notebooks/missing.ipynb` |\n\n## Provenance") \
+                        .replace("## Open decisions\n", "") \
+                        .replace("Registration: none\n", "") \
+                        .replace("| 4 Data | pending | |\n", "")
+            (root / "RESEARCH.map").write_text(broken, encoding="utf-8")
+            joined = " ".join(run_all(root)["map"].lines)
+            for needle in ("state 'done'", "missing.ipynb", "Open decisions", "Registration", "missing phase(s) 4"):
+                self.assertIn(needle, joined)
 
-    def test_decisions_require_revision_condition_and_unique_increasing_ids(self):
+    def test_backticked_numbers_are_not_pointers(self):
         with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            build(root, decisions=DECISIONS_BAD)
-            decisions = self.run_all(root)["decisions"]
-            self.assertEqual(decisions.status, "FAIL")
-            joined = " ".join(decisions.lines)
+            build(root := Path(tmp))
+            self.assertNotIn("`0.05`", " ".join(run_all(root)["map"].lines))
+
+
+class NumbersTests(unittest.TestCase):
+    def flagged(self, extra_paper: str = "") -> str:
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp), extra_paper=extra_paper)
+            numbers = run_all(root)["numbers"]
+            return " ".join(numbers.lines)
+
+    def test_matches_and_ignores(self):
+        flagged = self.flagged()
+        self.assertNotIn("5,913", flagged)      # exact
+        self.assertNotIn("0.61", flagged)       # 0.6083 rounds to 0.61
+        self.assertNotIn("0.55", flagged)       # range endpoints
+        self.assertNotIn("0.67", flagged)
+        self.assertNotIn("12.5", flagged)       # 0.125 as percent
+        self.assertNotIn("2026", flagged)       # year
+        self.assertNotIn(" 42", flagged)        # rm:ignore
+        self.assertNotIn("9999", flagged)       # ``` fence
+        self.assertNotIn("8888", flagged)       # ~~~ fence
+        self.assertNotIn("0.001", flagged)      # p-value threshold
+        self.assertNotIn("5.1", flagged)        # Section label
+        self.assertNotIn(" 23", flagged)        # Table label
+
+    def test_negative_numbers_are_checked(self):
+        self.assertNotIn("0.31", self.flagged())                     # -0.31 present in aggregates
+        self.assertIn("0.77", self.flagged("\nEstimate -0.77 (SE 0.09).\n"))  # -0.77 absent → flagged
+
+    def test_identifiers_are_not_numbers(self):
+        self.assertNotIn("37", self.flagged("\nSee D-37 and H-21 and F10.\n"))
+
+    def test_url_skips_only_its_span(self):
+        flagged = self.flagged()
+        self.assertIn("4,618", flagged)         # on the doi line, still checked, absent → flagged
+        self.assertNotIn("units", flagged)      # 5,913 on the URL line matched
+
+    def test_unsupported_numbers_are_reported(self):
+        flagged = self.flagged("\nUnsupported: 7,777 units and 0.99 precision.\n")
+        self.assertIn("7,777", flagged)
+        self.assertIn("0.99", flagged)
+
+    def test_empty_inputs_are_not_verified(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp))
+            (root / "aggregates" / "results.csv").unlink()
+            self.assertEqual(run_all(root)["numbers"].status, "NOT_VERIFIED")
+
+
+class DecisionsTests(unittest.TestCase):
+    def test_cross_reference_does_not_open_a_block(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp))
+            decisions = run_all(root)["decisions"]
+            self.assertEqual(decisions.status, "PASS", decisions.lines)
+            self.assertIn("2 decision(s)", decisions.summary)
+
+    def test_duplicate_and_missing_revision(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp), decisions=DECISIONS_BAD)
+            joined = " ".join(run_all(root)["decisions"].lines)
             self.assertIn("appears twice", joined)
             self.assertIn("no `Revision condition:`", joined)
 
+    def test_no_blocks_is_not_verified(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp), decisions="# Decisions\n\nnothing yet\n")
+            self.assertEqual(run_all(root)["decisions"].status, "NOT_VERIFIED")
+
+
+class CitationsTests(unittest.TestCase):
+    def test_offline_skips_comment_and_accepts_isbn_but_flags_unsourced(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp))
+            citations = run_all(root)["citations"]
+            self.assertEqual(citations.status, "FAIL")
+            joined = " ".join(citations.lines)
+            self.assertIn("nodoi", joined)
+            self.assertNotIn("kkv", joined)
+            self.assertNotIn("comment", joined)
+
+    def test_offline_clean_bib_is_not_verified(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp), bib="@article{ok, doi={10.1/x}}\n@book{b, isbn={1}}\n")
+            citations = run_all(root)["citations"]
+            self.assertEqual(citations.status, "NOT_VERIFIED")
+            self.assertIn("1 book(s) by ISBN", citations.summary)
+
+
+class NotebooksAndCliTests(unittest.TestCase):
     def test_notebook_outputs_fail(self):
         with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            build(root)
+            build(root := Path(tmp))
             (root / "notebooks" / "dirty.ipynb").write_text(json.dumps(NOTEBOOK_DIRTY), encoding="utf-8")
-            notebooks = self.run_all(root)["notebooks"]
+            notebooks = run_all(root)["notebooks"]
             self.assertEqual(notebooks.status, "FAIL")
             self.assertTrue(any("dirty.ipynb" in l for l in notebooks.lines))
 
-    def test_map_structure_failures(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            build(root)
-            broken = MAP.replace("| 1 Problem | reached | |", "| 1 Problem | done | |") \
-                        .replace("`notebooks/clean.ipynb` |\n\n## Provenance", "`notebooks/missing.ipynb` |\n\n## Provenance") \
-                        .replace("## Open decisions\n", "")
-            (root / "RESEARCH.map").write_text(broken, encoding="utf-8")
-            result = self.run_all(root)["map"]
-            self.assertEqual(result.status, "FAIL")
-            joined = " ".join(result.lines)
-            self.assertIn("state 'done'", joined)
-            self.assertIn("missing.ipynb", joined)
-            self.assertIn("Open decisions", joined)
-
     def test_cli_exit_codes(self):
         with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            build(root)
-            (root / "references.bib").write_text("@article{ok, doi={10.1/x}}\n", encoding="utf-8")
+            build(root := Path(tmp), bib="@article{ok, doi={10.1/x}}\n")
+            (root / "paper" / "results.md").write_text("# Results\n\nWe found 5,913 kitchens.\n", encoding="utf-8")
             self.assertEqual(rm.main([str(root / "RESEARCH.map"), "--offline"]), 0)
             self.assertEqual(rm.main([str(root / "RESEARCH.map"), "--offline", "--strict"]), 1)
 

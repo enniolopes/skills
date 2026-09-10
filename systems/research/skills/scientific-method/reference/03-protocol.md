@@ -1,6 +1,6 @@
 # Phase 3 — Protocol
 
-Verified 2026-09-10 (sources located, not yet read at source).
+Sources located 2026-09-10, not yet read at source.
 
 **When this applies.** After the question and literature, before any confirmatory analysis
 runs. Any change to hypotheses, tests, populations or thresholds reopens this phase.
@@ -11,15 +11,15 @@ runs. Any change to hypotheses, tests, populations or thresholds reopens this ph
   primary test**. Secondary tests are named as secondary.
 - **Separable stages.** If the outcome is produced by more than one administrative act
   (applying, being approved), ask whether the stages are separable and pre-specify the
-  decomposition (origin case F2).
+  decomposition.
 - **Assumptions → check → fallback** per model, written before fitting. A fallback chosen
-  after seeing residuals is a forking path (F8).
-- **Equivalence bounds** fixed before any test that may claim "no effect" (F5).
+  after seeing residuals is a forking path.
+- **Equivalence bounds** fixed before any test that may claim "no effect".
 - **Thresholds** (radii, cut-offs) carry a data-derived or literature-derived rationale; a
-  round number is not a rationale (F4).
+  round number is not a rationale.
 - **Specification-curve dimensions.** Every analytic choice that could reasonably have gone
   another way — population definition, covariate set, functional form, threshold — is a
-  dimension, not a footnote (F6).
+  dimension, not a footnote.
 - **Identification.** For a causal claim from observational data, state the target trial
   and the assumptions (exchangeability, positivity, consistency) that stand in for
   randomisation; if they cannot be defended, the claim is associational and says so.

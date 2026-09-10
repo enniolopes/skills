@@ -1,6 +1,6 @@
 # Phase 5 — Analysis
 
-Verified 2026-09-10 (sources located, not yet read at source).
+Sources located 2026-09-10, not yet read at source.
 
 **When this applies.** You are about to fit a model, compute an interval, report a
 statistic, or compare two results.
@@ -12,7 +12,7 @@ statistic, or compare two results.
 - **Dependence before intervals.** Ask the dependence structure of the outcome — spatial,
   cluster, temporal — before any interval is reported. Spatially clustered outcomes get a
   cluster bootstrap over the relevant region and a reported Moran's I; with few clusters,
-  a bootstrap-t (origin case F3).
+  a bootstrap-t.
 - **Assumption checks executed and reported**, one row per model: assumption, check,
   result, fallback taken or not.
 - **Count models**: overdispersion, zero process (hurdle vs zero-inflated), exposure

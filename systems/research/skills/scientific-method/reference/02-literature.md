@@ -1,6 +1,6 @@
 # Phase 2 — Literature
 
-Verified 2026-09-10 (sources located, not yet read at source).
+Sources located 2026-09-10, not yet read at source.
 
 **When this applies.** Before the protocol is frozen, and again whenever a new claim about
 the state of knowledge enters the manuscript.

@@ -19,7 +19,7 @@ class ScientificMethodTests(unittest.TestCase):
     def test_reference_files_follow_the_distilled_shape(self):
         for path in REFERENCE.glob("*.md"):
             text = path.read_text(encoding="utf-8")
-            for marker in ("Verified 2026-", "**When this applies.**", "**What it requires.**",
+            for marker in ("Sources located 2026-", "**When this applies.**", "**What it requires.**",
                            "**The error it prevents.**", "**Exit gate.**", "**Sources.**"):
                 self.assertIn(marker, text, f"{path.name} lacks {marker}")
             self.assertLessEqual(len(text.splitlines()), 70, f"{path.name}: longer than a screen")
@@ -45,8 +45,14 @@ class ScientificMethodTests(unittest.TestCase):
         for state in states:
             self.assertIn(state, skill)
             self.assertIn(state, analysis)
-        for heading in ("VERDICT", "CLAIMS", "FINDINGS", "CHECKS RUN", "NOT VERIFIED", "BASIS"):
+        for heading in ("VERDICT", "CLAIMS", "FINDINGS", "CHECKS RUN", "NOT_VERIFIED", "BASIS"):
             self.assertIn(heading, agent)
+        self.assertNotIn("NOT VERIFIED", agent, "one spelling of the state everywhere")
+
+    def test_no_origin_case_codes_or_repo_paths_leak_into_runtime(self):
+        for path in [*REFERENCE.glob("*.md"), SKILL / "SKILL.md"]:
+            text = path.read_text(encoding="utf-8")
+            self.assertNotRegex(text, r"\bF\d{1,2}\)|origin case|design record", path.name)
 
 
 if __name__ == "__main__":

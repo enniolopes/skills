@@ -4,14 +4,18 @@
     python validate.py [RESEARCH.map] [--root DIR] [--offline] [--strict] [--min-int 20] [--only map,numbers,...]
 
 Checks (each PASS / FAIL / NOT_VERIFIED, with the offending lines):
-  map        sections present and ordered; pointers resolve; gate and hypothesis states valid;
-             every fact-once-wrong names a producing notebook; Last session has a date and a Next line
-  numbers    every number quoted in the documents exists in a committed aggregate at the quoted precision
-  decisions  every D-<n> has a revision condition; ids unique and increasing
-  citations  every DOI / URL in the references resolves (NOT_VERIFIED with --offline)
+  map        sections present and ordered; pointers resolve; all eight gates with valid states;
+             Registration line present; every fact-once-wrong names a producing notebook;
+             Last session has a dated line and a Next line
+  numbers    every number quoted in the documents is present in some committed aggregate at the
+             quoted precision (presence, not provenance — the source table is still required)
+  decisions  every D-<n> block has a revision condition; ids unique and increasing
+  citations  every reference resolves (Crossref, then doi.org; NOT_VERIFIED with --offline or when
+             the network refuses the check)
   notebooks  no committed notebook carries outputs or execution counts
 
-Exit 1 on any FAIL; with --strict also on NOT_VERIFIED. Standard library only.
+A check with nothing to examine reports NOT_VERIFIED, never PASS. Exit 1 on any FAIL; with
+--strict also on NOT_VERIFIED. Standard library only. The grammar is reference/map-schema.md.
 """
 
 from __future__ import annotations
@@ -30,16 +34,26 @@ SECTIONS = [
     "Provenance", "Verification", "Open decisions", "Last session",
 ]
 LAYOUT_KEYS = ["protocol", "decisions", "aggregates", "documents", "notebooks", "references"]
+PHASES = ["1", "2", "3", "4", "5", "6", "7", "8"]
 GATE_STATES = {"reached", "pending", "blocked"}
 HYPOTHESIS_STATES = {"CONFIRMED", "REFUTED", "INCONCLUSIVE", "BLOCKED", "NOT_VERIFIED", "—", "-"}
 IGNORE_MARK = "<!-- rm:ignore -->"
 DOC_SUFFIXES = {".md", ".qmd", ".rmd", ".tex", ".txt"}
 AGGREGATE_SUFFIXES = {".csv", ".tsv", ".json"}
+POINTER_SUFFIXES = (".md", ".qmd", ".ipynb", ".csv", ".tsv", ".json", ".bib", ".py", ".R", ".txt", ".yaml", ".yml")
 
-NUMBER = re.compile(r"(?<![\w.,\-])(\d{1,3}(?:[.,]\d{3})+(?:[.,]\d+)?|\d+(?:[.,]\d+)?)(?![\w])")
+# A number token; the sign is handled separately so that -0.31 is checked and D-37 is not.
+NUMBER = re.compile(r"(?<![\w.,])(\d{1,3}(?:[.,]\d{3})+(?:[.,]\d+)?|\d+(?:[.,]\d+)?)(?![\w])")
+URL_OR_DOI = re.compile(r"https?://\S+|\b10\.\d{4,9}/\S+", re.I)
+# Not results: a p-value or alpha threshold, and labels of sections, tables, figures, pages.
+THRESHOLD_BEFORE = re.compile(r"(?:\bp|\balpha|α)\s*[<>≤≥=]\s*$", re.I)
+LABEL_BEFORE = re.compile(r"(?:\bsections?|\bsec\.|§|\bse[çc][aã]o|\btables?|\btabelas?|\bfig(?:ures?|\.)?|\bfiguras?|\beq\.|\bp\.|\bpp\.)\s*$", re.I)
+CONFIDENCE_AFTER = re.compile(r"\s?%\s?(?:CI|IC)\b")
 DOI = re.compile(r"\b(10\.\d{4,9}/[^\s\"'<>{}]+)")
-DECISION_START = re.compile(r"^(?:#{1,6}\s*|[-*]\s*\*\*|\*\*)?D-(\d+)\b", re.M)
+DECISION_START = re.compile(r"^(?:#{1,6}\s+|[-*]\s+\*\*|\*\*)D-(\d+)\b", re.M)
 REVISION = re.compile(r"^\s*(?:[-*]\s*)?(?:\*\*)?(?:Revision condition|Revise when)(?:\*\*)?\s*:", re.I | re.M)
+REGISTRATION = re.compile(r"^\s*(?:[-*]\s*)?\**Registration\**\s*:\s*(\S.*)$", re.I | re.M)
+NETWORK_REFUSED = {401, 403, 405, 429}
 
 
 @dataclass
@@ -52,6 +66,11 @@ class Result:
     def fail(self, line: str) -> None:
         self.status = "FAIL"
         self.lines.append(line)
+
+    def unverified(self, summary: str) -> None:
+        if self.status == "PASS":
+            self.status = "NOT_VERIFIED"
+        self.summary = summary
 
 
 # --- map ---------------------------------------------------------------------------------
@@ -94,9 +113,11 @@ def pointers_in(lines: list[str]) -> list[str]:
     found = []
     for line in lines:
         for token in re.findall(r"`([^`\n]+)`", line):
-            if " " in token or not ("/" in token or "." in token):
+            if " " in token:
                 continue
-            found.append(token)
+            path = token.split("#")[0]
+            if "/" in path or path.endswith(POINTER_SUFFIXES):
+                found.append(token)
     return found
 
 
@@ -129,14 +150,24 @@ def check_map(text: str, root: Path) -> tuple[Result, dict[str, list[str]]]:
             if target and not (root / target).exists():
                 result.fail(f"{name}: pointer `{pointer}` does not resolve")
 
+    question = "\n".join(sections.get("Question", []))
+    if not REGISTRATION.search(question):
+        result.fail("Question: missing `Registration: none | <URL or DOI, date>` — confirmatory code stays DRY_RUN while it is none")
+
+    seen_phases: set[str] = set()
     for row in table_rows(sections.get("Gates", [])):
         if len(row) < 2:
             continue
+        phase = row[0].strip()[:1]
+        seen_phases.add(phase)
         state = row[1].lower()
         if state not in GATE_STATES:
             result.fail(f"Gates: '{row[0]}' has state '{row[1]}' (valid: {sorted(GATE_STATES)})")
         elif state == "blocked" and (len(row) < 3 or not row[2]):
             result.fail(f"Gates: '{row[0]}' is blocked but names nobody in 'Blocked by'")
+    missing_phases = [p for p in PHASES if p not in seen_phases]
+    if "Gates" in sections and missing_phases:
+        result.fail(f"Gates: one row per phase; missing phase(s) {', '.join(missing_phases)}")
 
     for row in table_rows(sections.get("Hypotheses", [])):
         if len(row) >= 4 and row[3] not in HYPOTHESIS_STATES:
@@ -222,8 +253,8 @@ def aggregate_values(files: list[Path]) -> list[float]:
         for line in text.splitlines():
             for cell in re.split(r"[,;\t|]", line):
                 cell = cell.strip().strip('"\'')
-                if re.fullmatch(r"-?\d[\d.,]*", cell):
-                    values.extend(v for v, _ in interpretations(cell.lstrip("-")))
+                if re.fullmatch(r"[-−]?\d[\d.,]*", cell):
+                    values.extend(v for v, _ in interpretations(cell.lstrip("-−")))
     return values
 
 
@@ -238,31 +269,44 @@ class Matcher:
         return self.cache[decimals]
 
     def has(self, value: float, decimals: int) -> bool:
-        return round(value, decimals) in self.rounded(decimals)
+        rounded = self.rounded(decimals)
+        return round(value, decimals) in rounded or round(-value, decimals) in rounded
+
+
+def is_identifier(line: str, start: int) -> bool:
+    """`D-37`, `H-1`, `F10`: a letter (optionally with a hyphen) glued to the digits is a name, not a number."""
+    return bool(re.search(r"[A-Za-z]-?$", line[:start]))
 
 
 def check_numbers(root: Path, layout: dict[str, list[str]], min_int: int) -> Result:
     result = Result("numbers")
     documents = iter_files(root, layout.get("documents", []), DOC_SUFFIXES)
     aggregates = iter_files(root, layout.get("aggregates", []), AGGREGATE_SUFFIXES)
+    if not documents or not aggregates:
+        result.unverified(f"nothing to check: {len(documents)} document(s), {len(aggregates)} aggregate file(s) in Layout")
+        return result
     matcher = Matcher(aggregate_values(aggregates))
     checked = 0
     for doc in documents:
         fenced = False
-        for lineno, line in enumerate(doc.read_text(encoding="utf-8", errors="replace").splitlines(), 1):
-            if line.lstrip().startswith("```"):
+        for lineno, raw in enumerate(doc.read_text(encoding="utf-8", errors="replace").splitlines(), 1):
+            if re.match(r"\s*(```|~~~)", raw):
                 fenced = not fenced
                 continue
-            low = line.lower()
-            if fenced or IGNORE_MARK in line or line.lstrip().startswith("#") or "doi" in low or "http" in low:
+            if fenced or IGNORE_MARK in raw or raw.lstrip().startswith("#"):
                 continue
+            line = URL_OR_DOI.sub(" ", raw)
             for match in NUMBER.finditer(line):
                 token = match.group(1)
+                before = line[:match.start()]
+                if is_identifier(line, match.start()):
+                    continue
                 readings = interpretations(token)
                 if all(d == 0 and (v < min_int or (len(token) == 4 and 1900 <= v <= 2100)) for v, d in readings):
                     continue
-                tail = line[match.end():match.end() + 5]
-                if re.match(r"\s?%\s?(CI|IC)\b", tail):  # a confidence level, not a result
+                if THRESHOLD_BEFORE.search(before.rstrip("-−") if before.endswith(("-", "−")) else before) or LABEL_BEFORE.search(before):
+                    continue
+                if CONFIDENCE_AFTER.match(line[match.end():]):
                     continue
                 checked += 1
                 percent = line[match.end():match.end() + 1] == "%"
@@ -276,7 +320,10 @@ def check_numbers(root: Path, layout: dict[str, list[str]], min_int: int) -> Res
 # --- decisions ---------------------------------------------------------------------------
 def check_decisions(root: Path, layout: dict[str, list[str]]) -> Result:
     result = Result("decisions")
-    files = [root / p for p in layout.get("decisions", []) if (root / p).is_file()]
+    files = iter_files(root, layout.get("decisions", []), DOC_SUFFIXES)
+    if not files:
+        result.unverified("nothing to check: no decisions file in Layout")
+        return result
     total = 0
     for file in files:
         text = file.read_text(encoding="utf-8", errors="replace")
@@ -297,61 +344,103 @@ def check_decisions(root: Path, layout: dict[str, list[str]]) -> Result:
             previous = max(previous, number)
             if not REVISION.search(block):
                 result.fail(f"{label} has no `Revision condition:`")
+    if total == 0:
+        result.unverified(f"nothing to check: no `### D-<n>` blocks in {len(files)} file(s)")
+        return result
     result.summary = f"{total} decision(s) in {len(files)} file(s)"
     return result
 
 
 # --- citations ---------------------------------------------------------------------------
-def resolves(url: str, timeout: float = 10.0) -> str:
+def probe(url: str, timeout: float = 10.0) -> tuple[str, int]:
+    """('ok'|'refused'|'missing'|'unreachable', http status or 0)."""
     request = urllib.request.Request(url, method="HEAD", headers={"User-Agent": "research-map-validate"})
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
-            return "ok" if response.status < 400 else f"http {response.status}"
+            return ("ok", response.status)
     except urllib.error.HTTPError as exc:
-        return "ok" if exc.code < 400 else f"http {exc.code}"
-    except (urllib.error.URLError, TimeoutError, OSError) as exc:
-        return f"unreachable ({exc.reason if hasattr(exc, 'reason') else exc})"
+        if exc.code < 400:
+            return ("ok", exc.code)
+        if exc.code in NETWORK_REFUSED:
+            return ("refused", exc.code)
+        return ("missing", exc.code)
+    except (urllib.error.URLError, TimeoutError, OSError):
+        return ("unreachable", 0)
+
+
+def resolve_doi(doi: str) -> tuple[str, str]:
+    """Crossref record first (the verifier phase 2 names), doi.org as fallback."""
+    for url in (f"https://api.crossref.org/works/{doi}", f"https://doi.org/{doi}"):
+        status, code = probe(url)
+        if status == "ok":
+            return ("ok", url)
+        if status == "missing" and url.startswith("https://doi.org"):
+            return ("missing", f"{url} (http {code})")
+    return ("unverified", f"network refused or unreachable for {doi}")
+
+
+def bib_entries(text: str) -> list[tuple[str, str, str]]:
+    """(kind, key, body) for every bibliographic entry; @comment/@string/@preamble are skipped."""
+    entries = []
+    for chunk in re.split(r"(?m)^@", text)[1:]:
+        head = re.match(r"(\w+)\s*\{\s*([^,\s]*)", chunk)
+        if not head or head.group(1).lower() in {"comment", "string", "preamble"}:
+            continue
+        entries.append((head.group(1).lower(), head.group(2) or "?", chunk))
+    return entries
 
 
 def check_citations(root: Path, layout: dict[str, list[str]], offline: bool) -> Result:
     result = Result("citations")
     files = [root / p for p in layout.get("references", []) if (root / p).is_file()]
-    targets: list[tuple[str, str]] = []
+    if not files:
+        result.unverified("nothing to check: no references file in Layout")
+        return result
+    dois: list[tuple[str, str]] = []
+    urls: list[tuple[str, str]] = []
+    sourced = 0
     for file in files:
         text = file.read_text(encoding="utf-8", errors="replace")
         rel = str(file.relative_to(root))
         if file.suffix.lower() == ".bib":
-            entries = re.split(r"(?m)^@", text)[1:]
-            for entry in entries:
-                key = re.match(r"\w+\{([^,\s]+)", entry)
-                name = key.group(1) if key else "?"
-                doi = re.search(r"doi\s*=\s*[{\"]\s*(?:https?://doi\.org/)?([^}\"\s]+)", entry, re.I)
-                url = re.search(r"url\s*=\s*[{\"]\s*([^}\"\s]+)", entry, re.I)
+            for kind, key, body in bib_entries(text):
+                doi = re.search(r"\bdoi\s*=\s*[{\"]\s*(?:https?://doi\.org/)?([^}\"\s]+)", body, re.I)
+                url = re.search(r"\burl\s*=\s*[{\"]\s*([^}\"\s]+)", body, re.I)
+                isbn = re.search(r"\bisbn\s*=\s*[{\"]\s*([^}\"\s]+)", body, re.I)
                 if doi:
-                    targets.append((f"{rel}:{name}", "https://doi.org/" + doi.group(1)))
+                    dois.append((f"{rel}:{key}", doi.group(1)))
                 elif url:
-                    targets.append((f"{rel}:{name}", url.group(1)))
+                    urls.append((f"{rel}:{key}", url.group(1)))
+                elif isbn and kind in {"book", "inbook", "incollection", "manual", "techreport"}:
+                    sourced += 1  # a book is identified by its ISBN; nothing to resolve online
                 else:
-                    result.fail(f"{rel}: entry {name} has neither doi nor url")
+                    result.fail(f"{rel}: entry {key} has no doi, url or isbn")
         else:
             for doi in DOI.findall(text):
-                targets.append((rel, "https://doi.org/" + doi.rstrip(".,;)")))
+                dois.append((rel, doi.rstrip(".,;)")))
+    targets = len(dois) + len(urls)
     if offline:
-        if result.status == "PASS":
-            result.status = "NOT_VERIFIED"
-        result.summary = f"{len(targets)} target(s) not checked (--offline)"
+        result.unverified(f"{targets} target(s) not resolved (--offline); {sourced} book(s) by ISBN")
         return result
-    unreachable = 0
-    for label, url in targets:
-        status = resolves(url)
-        if status.startswith("unreachable"):
-            unreachable += 1
-            result.lines.append(f"{label}  {url}  {status}")
+    unverified = 0
+    for label, doi in dois:
+        status, detail = resolve_doi(doi)
+        if status == "missing":
+            result.fail(f"{label}  {detail}")
+        elif status == "unverified":
+            unverified += 1
+            result.lines.append(f"{label}  {detail}")
+    for label, url in urls:
+        status, code = probe(url)
+        if status == "missing":
+            result.fail(f"{label}  {url}  http {code}")
         elif status != "ok":
-            result.fail(f"{label}  {url}  {status}")
-    if unreachable and result.status == "PASS":
-        result.status = "NOT_VERIFIED"
-    result.summary = f"{len(targets)} target(s), {unreachable} unreachable"
+            unverified += 1
+            result.lines.append(f"{label}  {url}  {status}")
+    if unverified:
+        result.unverified(f"{targets} target(s), {unverified} not verifiable from here; {sourced} book(s) by ISBN")
+    else:
+        result.summary = f"{targets} target(s) resolved; {sourced} book(s) by ISBN"
     return result
 
 
@@ -359,6 +448,9 @@ def check_citations(root: Path, layout: dict[str, list[str]], offline: bool) -> 
 def check_notebooks(root: Path, layout: dict[str, list[str]]) -> Result:
     result = Result("notebooks")
     files = iter_files(root, layout.get("notebooks", []), {".ipynb"})
+    if not files:
+        result.unverified("nothing to check: no notebooks in Layout")
+        return result
     for file in files:
         try:
             notebook = json.loads(file.read_text(encoding="utf-8"))

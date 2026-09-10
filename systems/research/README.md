@@ -6,7 +6,7 @@ separately.
 
 ## Status
 
-**Built, acceptance pending** (plugin 0.2.0, pieces 0.1.0, 2026-09-10). All three pieces
+**Built, acceptance pending** (plugin 0.3.0, pieces 0.2.0, 2026-09-10). All three pieces
 exist and pass the repository's structural checks and unit tests. Two things are not yet
 done, and the pieces say so themselves:
 
@@ -35,12 +35,13 @@ brings new pieces as they ship.
 
 ## How to use
 
-There is one entry point: **`scientific-method`**. You talk to it; it decides which other
-piece owns the next step. You normally do not invoke `explorer`, `research-map` or
-`reviewer-2` yourself.
+There is one entry point for the method: **`scientific-method`**. You talk to it; it
+decides which other piece owns the next step and calls `explorer` and `reviewer-2` for you.
+The one piece you also call yourself is `research-map`, the session ritual below. Plugin
+skills are namespaced; the short form works when no other skill has the same name.
 
 ```text
-/scientific-method <what you want to do with this research>
+/research:scientific-method <what you want to do with this research>
 ```
 
 The skill also fires on its own when it recognises a phase trigger: you are about to fit
@@ -50,7 +51,7 @@ will leave the analysis environment.
 ### A research from the start
 
 ```text
-/scientific-method start: does state habilitação correct or amplify the geography of
+/research:scientific-method start: does state habilitação correct or amplify the geography of
 community kitchens relative to municipal food insecurity?
 ```
 
@@ -66,21 +67,25 @@ can fail; every hypothesis ends in a named state: `CONFIRMED`, `REFUTED`, `INCON
 
 ### Every session
 
-`research-map` keeps one `RESEARCH.map` per research: question and hypotheses, state per
-gate, **facts that were once wrong** with the notebook that now produces them, provenance
-of every input, verification commands, open decisions and who unblocks each.
+`research-map` keeps one `RESEARCH.map` per research: question and registration status,
+hypotheses, state per gate, **facts that were once wrong** with the notebook that now
+produces them, provenance of every input, verification commands, open decisions and who
+unblocks each.
 
 ```text
-/research-map resume     # session start: restate the state in one screen
-/research-map update     # session end: what changed, what is next — obligatory
-/research-map validate   # before any commit; also runnable as a pre-commit hook
+/research:research-map resume     # before the first action: restate the state in one screen
+/research:research-map update     # after any gate, state or number changes, and before a commit
+/research:research-map validate   # before any commit; also runnable as a pre-commit hook
 ```
 
-`validate` is mechanical: every number quoted in a `.md` exists in a committed aggregate,
+`validate` is mechanical: a number quoted in a document that no committed aggregate
+contains is reported (presence, not provenance — the source table is still required),
 every decision has a revision condition, every citation resolves, no committed notebook
-has outputs, every pointer in the map resolves.
+has outputs, every pointer in the map resolves, registration status is declared. A check
+with nothing to examine says `NOT_VERIFIED`, never `PASS`.
 
-`/research-map init` builds the map once from an existing protocol and decision log.
+`/research:research-map init` builds the map once from an existing protocol and decision
+log and copies the validator into the repository for pre-commit.
 
 ### The moment before a mistake
 
@@ -96,7 +101,7 @@ number that did not come out of executed code in the current repository state.
 ### Review
 
 ```text
-/scientific-method review paper/manuscript.qmd
+/research:scientific-method review paper/manuscript.qmd
 ```
 
 Phase 7 hands the manuscript to `reviewer-2`, an independent, non-editing agent that
@@ -104,7 +109,7 @@ treats the author's text as untrusted narrative and looks for the falsifying obs
 first: forking paths, a number without interval or source table, causal language in an
 ecological design, a figure that does not match its code or data, a citation that does not
 say what it is cited for. It returns fixed headings: `VERDICT` (`PASS` / `FAIL` /
-`NOT VERIFIED`), `CLAIMS`, `FINDINGS`, `CHECKS RUN`, `NOT VERIFIED`, `BASIS`. The gate
+`NOT_VERIFIED`), `CLAIMS`, `FINDINGS`, `CHECKS RUN`, `NOT_VERIFIED`, `BASIS`. The gate
 passes when every `FAIL` has a logged response.
 
 ### What it never does
@@ -117,9 +122,9 @@ decision degrades to `BLOCKED` or `NOT_VERIFIED`, never to a guess.
 
 | Piece | Kind | Owns |
 |---|---|---|
-| scientific-method | skill, entry point | the research lifecycle: problem → literature → protocol → data → analysis → writing → review → publication, each phase with an exit gate; distilled, source-verified method knowledge in `reference/` (`research-skills-system.md` §2) |
-| research-map | skill | memory and navigation across sessions: `RESEARCH.map`, modes `init`, `resume`, `update`, `validate` (§3) |
-| reviewer-2 | agent | independent, non-editing review of a manuscript against its own protocol and reporting checklists (§4) |
+| scientific-method | skill, entry point | the research lifecycle: problem → literature → protocol → data → analysis → writing → review → publication, each phase with an exit gate; distilled, source-verified method knowledge in `reference/` (design record §2, in `development/research/design/`) |
+| research-map | skill | memory and navigation across sessions: `RESEARCH.map`, modes `init`, `resume`, `update`, `validate` (design record §3) |
+| reviewer-2 | agent | independent, non-editing review of a manuscript against its own protocol and reporting checklists (design record §4) |
 | explorer | skill, dependency | phase 1: hypothesis portfolio with bridge certificates; a standalone unit at `skills/explorer/`, pulled in by `dependencies` |
 
 ## Where things live

@@ -1,6 +1,6 @@
 # Phase 4 — Data
 
-Verified 2026-09-10 (sources located, not yet read at source).
+Sources located 2026-09-10, not yet read at source.
 
 **When this applies.** Whenever an input enters the repository, two sources are joined, a
 population is defined, or an aggregate leaves the analysis environment.
@@ -15,9 +15,9 @@ population is defined, or an aggregate leaves the analysis environment.
   duplicates, and the expected effect of linkage error on results.
 - **Population definitions** stated for every pool ("registered" includes or excludes
   withdrawn units?); each defensible alternative becomes a specification-curve dimension
-  (origin case F6).
+  (a pool that silently includes withdrawn units is the classic error).
 - **Construct validation** for any modelled or proxy measure adopted from outside, with a
-  switch rule: what result would make you drop it (F7).
+  switch rule: what result would make you drop it.
 - **Disclosure floor.** Any aggregate that leaves the analysis environment respects the
   minimum cell size the repository sets; PII is dropped at the first step, and no
   identifiable row exists outside the cache.

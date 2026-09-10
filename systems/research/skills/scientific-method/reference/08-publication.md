@@ -1,7 +1,7 @@
 # Phase 8 — Publication
 
-Verified 2026-09-10 (sources located, not yet read at source; policies change — re-check
-the venue's and funder's current text before each submission).
+Sources located 2026-09-10, not yet read at source. Policies change: re-check the
+venue's and funder's current text before each submission.
 
 **When this applies.** Anything leaves the repository for a venue, a funder, a repository
 of record or the public.
