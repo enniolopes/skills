@@ -61,10 +61,12 @@ Triage is not definitive legal advice. Require qualified counsel when stakes jus
 
 Do not use as proof:
 - golden ratio as a universal reason a logo is good;
-- “a color means X emotion” as sufficient rationale;
+- “a color means X emotion” (“blue = trust”) as sufficient rationale;
+- brand archetypes, fixed font counts, modular scales or 4/8pt grids as universal rules rather than optional tools;
 - “minimal geometric sans = modern/professional” as neutral best practice;
 - precise numerical brand/creative scores without validated measurement;
 - a generated image being unique merely because it looks original;
+- model agreement or self-critique as market validation;
 - structural JSON validity proving strategic or creative quality.
 
 ## CONTEXT NOTES

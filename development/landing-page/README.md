@@ -27,7 +27,9 @@ It adds:
 
 ## Runtime files
 
-- `SKILL.md` — operating kernel and routing.
+Runtime lives in `skills/landing-page/` and contains only what the skill needs while operating.
+
+- `SKILL.md` — operating kernel and routing: standard, operating model, modes, invariants, the method as one line per phase, gates, hard stops, completion. Kept under the 5,000-token budget CI enforces; each phase's procedure lives in the reference that owns it.
 - `references/discovery.md` — desk research, reference studies, synthesis, and question policy.
 - `references/marketing.md` — landing-page semantics, proof, claims, narrative, and conversion.
 - `references/design-quality.md` — high-end art direction, hierarchy, coherence, distinction, and craft.
@@ -36,11 +38,13 @@ It adds:
 
 ## Development files
 
+Development assets belong in `development/landing-page/` and are never shipped. The v3 development bundle carried these files; they are not yet committed to this repository:
+
 - `evals/evals.json` — Anthropic skill-creator compatible behavioral evals.
 - `evals/trigger-evals.json` — positive and near-miss trigger cases.
 - `evals/rubric.md` — output-quality and blind-comparison rubric.
 
-The official Anthropic packager excludes root `evals/` from the runtime `.skill` package. Keep the development ZIP if you want to benchmark and evolve the skill.
+The official Anthropic packager excludes `evals/` from the runtime `.skill` package. Keep the development ZIP if you want to benchmark and evolve the skill.
 
 ## Installation
 
@@ -50,7 +54,7 @@ Upload the packaged `landing-page.skill` file when the product accepts `.skill` 
 
 ### Claude Code
 
-Copy the extracted `landing-page/` directory to either:
+Copy `skills/landing-page/` to either:
 
 - `~/.claude/skills/landing-page/` for personal/global use, or
 - `<project>/.claude/skills/landing-page/` for project-scoped use.

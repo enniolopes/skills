@@ -122,10 +122,17 @@ Inspect high-risk details:
 
 Ask:
 
-- Could an unrelated company use this with a logo swap?
-- Is the page memorable for a real idea or merely polished styling?
-- Are decorative devices carrying information?
-- Did I repeat a learned AI pattern without brief-specific justification?
+- Could most of this design survive an unrelated product/logo swap?
+- Did I choose a pattern because it is right here or because it was readily available?
+- Is the hero a thesis or a familiar arrangement?
+- Is imagery doing narrative/evidentiary work?
+- Are structural devices encoding information or decorating it?
+- Are sections mechanically rhyming?
+- Is there one memorable idea or many weak attempts at interest?
+- Did reference research broaden the solution or make it imitate the category?
+- Is any “premium” signal merely a current trend with no causal connection to the brief?
+
+If genericity appears, revise the underlying decision rather than adding decoration.
 
 ## Concept fidelity
 
@@ -140,6 +147,35 @@ When a visual concept/reference was accepted before implementation:
 Do not silently reinterpret the accepted design into a generic component system.
 
 A reference is not permission to ship screenshot-as-UI. Keep real UI, text, controls, and interactions code-native where appropriate.
+
+## Build in visual slices
+
+For material CREATE work, do not write the whole page blindly and review only at the end:
+
+1. implement the first viewport and the system foundation;
+2. render and correct large drift;
+3. implement the next narrative slice;
+4. render and check section continuity;
+5. continue until complete;
+6. run full-page rhythm and responsive passes.
+
+This preserves a coherent direction while reducing late-stage visual debt.
+
+## Render loop
+
+The first successful render begins QA. When browser/render tools exist:
+
+1. run the app using repository-declared commands;
+2. inspect the first viewport before scrolling;
+3. inspect the complete narrative at normal reading speed;
+4. exercise primary interactions and conversion actions;
+5. inspect representative desktop and mobile; add intermediate/short-height viewports when the layout warrants it;
+6. capture screenshots when possible;
+7. run the deterministic checks available in the environment;
+8. run the perceptual critiques and the multi-lens review below, as separate passes;
+9. identify the largest remaining defect;
+10. make a targeted correction and render again;
+11. repeat until no material defect remains or a concrete blocker prevents improvement.
 
 ## Refinement strategy
 

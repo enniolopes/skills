@@ -178,6 +178,40 @@ A compact design plan should specify:
 
 Review the plan before coding. Identify any decision that could have been made for an unrelated page and make it more specific or remove it.
 
+Also fix a `content thesis` (what dominates the first viewport and why) and an `interaction thesis` (what motion/interaction contributes, if anything). For technically ambitious work, the technical thesis in `technical-excellence.md` belongs to the same plan: technology is never the signature by itself; the experience it enables is.
+
+Bad: `modern, premium, dark, gradients`.
+
+Useful: `The page behaves like a forensic instrument: sparse editorial typography frames live evidence from the product, while one controlled network visualization turns complexity into visible order.`
+
+## Divergence and selection
+
+Do not code the first plausible concept merely because it is polished. For a new or major redesign where no direction clearly dominates, explore 2–3 **structurally different** directions: change the governing idea, not only palette or radius. Example territories: editorial authority; product-as-instrument; cinematic transformation; data-as-proof; tactile object/material world.
+
+Select the strongest direction yourself:
+
+`brief fit × specificity × communication power × evidence/assets × distinctiveness × implementation feasibility × technical integrity`
+
+Do not make a non-expert user choose between design jargon. Pause for concept approval only when the user explicitly wants a review step or when the direction encodes a material brand/commercial decision that cannot safely be assumed.
+
+When visual concept-generation or design-canvas tools are available, externalize high-value directions or hard sections before implementation. Treat concept output as art-direction evidence and target, not as a source of factual copy or production UI.
+
+## Visual grammar
+
+Before building, stabilize enough rules to prevent drift:
+
+- typography roles, scale, weight, line-height, measure and responsive behavior;
+- color roles and contrast hierarchy;
+- spacing rhythm and container logic;
+- grid/composition principles;
+- shape language, borders, radius and elevation logic;
+- imagery treatment, crop and lighting logic;
+- icon style where necessary;
+- motion grammar and reduced-motion behavior;
+- component families only where repetition is semantically real.
+
+Describe rules as relationships and roles, not arbitrary token lists. Use an existing coherent design system when appropriate and extend it deliberately rather than silently creating a second language.
+
 ## Typography
 
 Typography often carries more identity than chrome.
