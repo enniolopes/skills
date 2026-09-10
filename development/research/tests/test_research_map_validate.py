@@ -265,9 +265,11 @@ class NumbersTests(unittest.TestCase):
         self.assertNotIn("5.1", flagged)        # Section label
         self.assertNotIn(" 23", flagged)        # Table label
 
-    def test_negative_numbers_are_checked(self):
+    def test_negative_numbers_are_checked_with_their_sign(self):
         self.assertNotIn("0.31", self.flagged())                     # -0.31 present in aggregates
         self.assertIn("0.77", self.flagged("\nEstimate -0.77 (SE 0.09).\n"))  # -0.77 absent → flagged
+        self.assertIn("0.31", self.flagged("\nThe estimate was 0.31 (positive).\n"))  # sign error → flagged
+        self.assertNotIn("0.67", self.flagged("\nRange 0.55-0.67 with a hyphen.\n"))  # a range dash is not a sign
 
     def test_identifiers_are_not_numbers(self):
         self.assertNotIn("37", self.flagged("\nSee D-37 and H-21 and F10.\n"))

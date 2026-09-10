@@ -10,16 +10,16 @@ statistic, or compare two results.
 - **`DRY_RUN` until registration.** Confirmatory code runs with the outcome permuted until
   the registration exists; the switch is a repository flag, not a comment.
 - **Dependence before intervals.** Ask the dependence structure of the outcome — spatial,
-  cluster, temporal — before any interval is reported. Spatially clustered outcomes get a
-  cluster bootstrap over the relevant region and a reported Moran's I; with few clusters,
-  a bootstrap-t.
+  cluster, temporal — before any interval is reported. If spatially clustered: a cluster
+  bootstrap over the relevant region and a reported dependence statistic (Moran's I or
+  equivalent); with few clusters, a bootstrap-t.
 - **Assumption checks executed and reported**, one row per model: assumption, check,
   result, fallback taken or not.
-- **Count models**: overdispersion, zero process (hurdle vs zero-inflated), exposure
-  offset — decided and written before fitting, tested after.
+- **If the outcome is a count**: overdispersion, zero process (hurdle vs zero-inflated),
+  exposure offset — decided and written before fitting, tested after.
 - **Sensitivity to unmeasured confounding** for any causal-leaning estimate (E-value or
   equivalent), reported next to the estimate.
-- **Inequality measures** (concentration index, slope index) computed with their standard
+- **If inequality is measured** (concentration index, slope index): computed with standard
   errors and the ranking variable stated.
 - **Discordance is reported as such.** When two frameworks disagree (an interval excludes
   zero, a permutation test does not), the pre-specified primary test decides and the

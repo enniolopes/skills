@@ -46,7 +46,8 @@ DOC_SUFFIXES = {".md", ".qmd", ".rmd", ".tex", ".txt"}
 AGGREGATE_SUFFIXES = {".csv", ".tsv", ".json"}
 POINTER_SUFFIXES = (".md", ".qmd", ".ipynb", ".csv", ".tsv", ".json", ".bib", ".py", ".R", ".txt", ".yaml", ".yml")
 
-# A number token; the sign is handled separately so that -0.31 is checked and D-37 is not.
+# A number token; the sign is read separately (sign_before) so that -0.31 is checked with its sign
+# and D-37 is an identifier, not a number.
 NUMBER = re.compile(r"(?<![\w.,])(\d{1,3}(?:[.,]\d{3})+(?:[.,]\d+)?|\d+(?:[.,]\d+)?)(?![\w])")
 URL_OR_DOI = re.compile(r"https?://\S+|\b10\.\d{4,9}/\S+", re.I)
 # Not results: a p-value or alpha threshold, and labels of sections, tables, figures, pages.
@@ -295,9 +296,9 @@ def check_map(text: str, root: Path) -> tuple[Result, dict[str, list[str]]]:
 
 # --- numbers -----------------------------------------------------------------------------
 def interpretations(token: str) -> list[tuple[float, int]]:
-    """All (value, decimals) readings of a token: 5,913 · 5.913 · 1,234.56 · 1.234,56 · 0,61 · 0.61.
+    """All (value, decimals) readings of a token: 1,377 · 1.377 · 1,234.56 · 1.234,56 · 0,61 · 0.61.
 
-    `5.913` is thousands in pt-BR and three decimals in English; both readings are returned and a
+    `1.377` is thousands in pt-BR and three decimals in English; both readings are returned and a
     match on either counts. A leading zero (`0.125`, `0,613`) is never thousands.
     """
     grouped = re.fullmatch(r"(\d{1,3})((?:[.,]\d{3})+)", token)
@@ -360,7 +361,8 @@ def aggregate_values(files: list[Path]) -> list[float]:
             for cell in re.split(r"[,;\t|]", line):
                 cell = cell.strip().strip('"\'')
                 if re.fullmatch(r"[-−]?\d[\d.,]*", cell):
-                    values.extend(v for v, _ in interpretations(cell.lstrip("-−")))
+                    sign = -1.0 if cell[0] in "-−" else 1.0
+                    values.extend(sign * v for v, _ in interpretations(cell.lstrip("-−")))
     return values
 
 
@@ -375,8 +377,14 @@ class Matcher:
         return self.cache[decimals]
 
     def has(self, value: float, decimals: int) -> bool:
-        rounded = self.rounded(decimals)
-        return round(value, decimals) in rounded or round(-value, decimals) in rounded
+        return round(value, decimals) in self.rounded(decimals)
+
+
+def sign_before(before: str) -> float:
+    """-1 when a minus sign immediately precedes the number and is not a range dash between two numbers."""
+    if before.endswith(("-", "−")) and not before[:-1].rstrip().endswith(tuple("0123456789")):
+        return -1.0
+    return 1.0
 
 
 def is_identifier(line: str, start: int) -> bool:
@@ -415,8 +423,9 @@ def check_numbers(root: Path, layout: dict[str, list[str]], min_int: int) -> Res
                 if CONFIDENCE_AFTER.match(line[match.end():]):
                     continue
                 checked += 1
+                sign = sign_before(before)
                 percent = line[match.end():match.end() + 1] == "%"
-                if any(matcher.has(v, d) or (percent and matcher.has(v / 100, d + 2)) for v, d in readings):
+                if any(matcher.has(sign * v, d) or (percent and matcher.has(sign * v / 100, d + 2)) for v, d in readings):
                     continue
                 result.fail(f"{doc.relative_to(root)}:{lineno}  {token}")
     result.summary = f"{checked} numbers in {len(documents)} document(s) against {len(aggregates)} aggregate file(s)"

@@ -17,7 +17,7 @@ with these labelled fields. The seven marked ★ are checked by `research-map va
 ★ Claim: descriptive | associational | causal — descriptive is a full claim, not a lesser
   one; if causal, the identification assumptions that stand in for randomisation
   (exchangeability, positivity, consistency)
-★ Unit of analysis: <municipality | kitchen | family | event>; every count and rate inherits it
+★ Unit of analysis: <municipality | organisation | household | event>; every count and rate inherits it
 ★ Estimand: population <who, when>; exposure or contrast <A vs B>; outcome <variable, time>;
   intercurrent events <what can happen in between and how it is handled>; summary
   <difference, ratio, index>

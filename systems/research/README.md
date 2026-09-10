@@ -51,8 +51,8 @@ will leave the analysis environment.
 ### A research from the start
 
 ```text
-/research:scientific-method start: does state habilitação correct or amplify the geography of
-community kitchens relative to municipal food insecurity?
+/research:scientific-method start: does enrolment in programme P concentrate service units
+toward the areas of greatest need, relative to the distribution inherited before P?
 ```
 
 Phase 1 has two gates. 1A formulates: the problem statement — claim kind, unit of
@@ -62,9 +62,9 @@ hypothesis lineages. 1B demonstrates: a descriptive study, the problem brief, th
 problem exists, how large against a reference fixed beforehand, for whom, how it is handled
 today, and what was tried to make it disappear; its verdict (`SHOWN`, `NOT_SHOWN`,
 `INCONCLUSIVE`) sits in the map and the protocol cannot freeze before `SHOWN`. `NOT_SHOWN`
-is a result: the research closes or reformulates before any model is fit. Each surviving lineage becomes a hypothesis; its discriminating test becomes
-the primary test, its failure condition the refutation clause. The phase closes when the
-question is written with its refutation and the obvious reviewer objection is named.
+is a result: the research closes or reformulates before any model is fit. Each surviving
+lineage from `explorer` becomes a hypothesis; its discriminating test becomes the primary
+test, its failure condition the refutation clause.
 Then literature (every source verified at its DOI), protocol (prediction and refutation
 per hypothesis, one primary test each, assumptions → check → fallback per model,
 equivalence bounds fixed before any test), and so on. Every phase ends with a gate that
@@ -96,7 +96,7 @@ log and copies the validator into the repository for pre-commit.
 ### The moment before a mistake
 
 ```text
-Vou ajustar um modelo hurdle para o número de cozinhas por município.
+Vou ajustar um modelo de contagem para o número de unidades por município.
 ```
 
 `scientific-method` recognises a phase-5 trigger and, before any fit, requires the list of

@@ -52,6 +52,21 @@ class ScientificMethodTests(unittest.TestCase):
             self.assertIn(heading, agent)
         self.assertNotIn("NOT VERIFIED", agent, "one spelling of the state everywhere")
 
+    def test_runtime_is_domain_neutral(self):
+        """The pieces serve any research; the origin case lives in development/ only."""
+        origin_terms = re.compile(
+            r"cozinha|kitchen|habilita|solid[aá]ri|delbem|cozsolidarias|\bMDS\b|VIGISAN|CadInsan|Bolsa|\bPBF\b|"
+            r"regi[oõ]es imediatas|5,913|4,618|299/137|566/133",
+            re.I,
+        )
+        runtime = list((REPO_ROOT / "systems" / "research" / "skills").rglob("*")) + \
+            list((REPO_ROOT / "systems" / "research" / "agents").glob("*.md"))
+        for path in runtime:
+            if path.is_file() and path.suffix in {".md", ".py", ".json", ".map"}:
+                hit = origin_terms.search(path.read_text(encoding="utf-8"))
+                if hit:
+                    self.fail(f"{path.relative_to(REPO_ROOT)}: origin-case term {hit.group(0)!r} in runtime")
+
     def test_no_origin_case_codes_or_repo_paths_leak_into_runtime(self):
         for path in [*REFERENCE.glob("*.md"), SKILL / "SKILL.md"]:
             text = path.read_text(encoding="utf-8")

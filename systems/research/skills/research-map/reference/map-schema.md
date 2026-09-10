@@ -5,31 +5,32 @@ misordered section. Pointers are backticked repository-relative paths, optionall
 `#anchor`; every pointer must resolve. Tables are GitHub-flavoured Markdown.
 
 ```markdown
-# RESEARCH.map — <research slug>
+# RESEARCH.map — 2027-programme-coverage
 
 ## Layout
-- protocol: research/2026-kitchens/protocol.md
-- decisions: research/2026-kitchens/decisions.md
-- aggregates: research/2026-kitchens/aggregates/
-- documents: research/2026-kitchens/paper/
-- notebooks: research/2026-kitchens/notebooks/
-- references: research/2026-kitchens/references.bib
+- protocol: research/2027-programme-coverage/protocol.md
+- decisions: research/2027-programme-coverage/decisions.md
+- aggregates: research/2027-programme-coverage/aggregates/
+- documents: research/2027-programme-coverage/paper/
+- notebooks: research/2027-programme-coverage/notebooks/
+- references: research/2027-programme-coverage/references.bib
 
 ## Question
-Does state habilitação correct or amplify the geography of community kitchens inherited
-from civil society, relative to municipal severe food insecurity? → `research/2026-kitchens/protocol.md#question`
-Problem: SHOWN → `research/2026-kitchens/problem-brief.md`
-Registration: https://osf.io/xxxxx, 2026-09-08
+Does enrolment in programme P concentrate service units toward the areas of greatest need N,
+relative to the distribution inherited before P? → `research/2027-programme-coverage/protocol.md#question`
+Problem: SHOWN → `research/2027-programme-coverage/problem-brief.md`
+Registration: https://registry.example/record/12345, 2027-03-02
 
 ## Hypotheses
 | Id | Prediction | Refutation | State | Pointer |
 |---|---|---|---|---|
-| H1 | C_hab − C_reg < 0 (habilitação concentrates toward need) | interval includes 0 or sign > 0 under the primary test | INCONCLUSIVE | `research/2026-kitchens/protocol.md#h1` |
+| H1 | C_after − C_before < 0 (P concentrates toward need) | interval includes 0 or sign > 0 under the primary test | INCONCLUSIVE | `research/2027-programme-coverage/protocol.md#h1` |
 
 ## Gates
 | Phase | State | Blocked by |
 |---|---|---|
-| 1 Problem | reached | |
+| 1A Problem — formulate | reached | |
+| 1B Problem — demonstrate | reached | |
 | 2 Literature | reached | |
 | 3 Protocol | reached | |
 | 4 Data | reached | |
@@ -41,13 +42,13 @@ Registration: https://osf.io/xxxxx, 2026-09-08
 ## Facts that were once wrong
 | Was | Is | Produced by |
 |---|---|---|
-| 4,618 kitchens | 5,913 | `research/2026-kitchens/notebooks/01_reconcile.ipynb` |
-| 566/133 asymmetric absences | 299/137 | `research/2026-kitchens/notebooks/01_reconcile.ipynb` |
+| 1,204 service units | 1,377 | `research/2027-programme-coverage/notebooks/01_reconcile.ipynb` |
+| 92/31 asymmetric absences | 58/34 | `research/2027-programme-coverage/notebooks/01_reconcile.ipynb` |
 
 ## Provenance
 | Input | Location | Read by |
 |---|---|---|
-| MDS kitchens registry, 2026-08-30 | `data/cache/mds_kitchens_2026-08-30.csv` | `research/2026-kitchens/notebooks/01_reconcile.ipynb` |
+| programme registry, 2027-02-20 | `data/cache/registry_2027-02-20.csv` | `research/2027-programme-coverage/notebooks/01_reconcile.ipynb` |
 
 ## Verification
 ```bash
@@ -57,15 +58,15 @@ python tools/research_map_validate.py RESEARCH.map --offline
 ```
 
 ## Open decisions
-- D-?: include withdrawn kitchens in the "registered" pool? — unblocked by: PI, after D-42 alternatives are computed
+- D-?: include withdrawn units in the "enrolled" pool? — unblocked by: PI, after D-12 alternatives are computed
 
 ## Deferred
-- 2026-09-09: spatial lag model as an alternative to the cluster bootstrap — enters when: H1 has a terminal state and Moran's I is reported
-- 2026-09-09: qualitative interviews with state coordinators — enters when: the next research is scoped (out of this study's design)
+- 2027-03-01: spatial lag model as an alternative to the cluster bootstrap — enters when: H1 has a terminal state and the dependence check is reported
+- 2027-03-01: interviews with programme coordinators — enters when: the next research is scoped (out of this study's design)
 
 ## Last session
-- 2026-09-09: reconciled registry; 5,913 kitchens (was 4,618); D-37..D-42 logged.
-- Next: run 03_models in DRY_RUN; list hurdle assumptions before fitting (phase 5).
+- 2027-03-01: reconciled registry; 1,377 units (was 1,204); D-9..D-12 logged.
+- Next: run 03_models in DRY_RUN; list the count model's assumptions before fitting (phase 5).
 ```
 
 ## Rules `validate` applies
@@ -105,10 +106,10 @@ Each decision is a block starting with a heading or bold id, containing a date, 
 decision, a rationale and a revision condition:
 
 ```markdown
-### D-39 · 2026-09-08
-Decision: cluster bootstrap over regiões imediatas; report Moran's I.
-Rationale: outcome is spatially clustered (Moran's I = 0.31, p < 0.001, notebook 03).
-Revision condition: a dependence check on the final sample shows Moran's I within the null band.
+### D-11 · 2027-02-28
+Decision: cluster bootstrap over regions; report the spatial dependence statistic.
+Rationale: outcome is spatially clustered (dependence statistic 0.31, p < 0.001, notebook 03).
+Revision condition: a dependence check on the final sample shows the statistic within the null band.
 ```
 
 A block starts only at a heading (`### D-<n>`) or a bold id (`**D-<n>**`, `- **D-<n>**`);
@@ -121,9 +122,9 @@ order. The log is append-only by convention; git history is the check.
 A number in a document is *present* when some numeric value in an aggregate file (`.csv`,
 `.tsv`, `.json`) rounds to it at the quoted precision. Presence is not provenance: the check
 reports what is absent from every aggregate; a number that is present still needs its
-source table in the text (phase 6). Signs are compared both ways (`-0.31` and `0.31` match
-each other). Thousands separators (`5,913`, `5.913`) and decimal commas (`0,61`) are
-normalised; a token ambiguous between pt-BR thousands and three decimals (`5.913`) matches
+source table in the text (phase 6). Signs count: `-0.31` in the text matches only a negative value in the aggregates, so a
+flipped sign is reported; a hyphen between two numbers (`0.55-0.67`) is a range, not a sign. Thousands separators (`1,377`, `1.377`) and decimal commas (`0,61`) are
+normalised; a token ambiguous between pt-BR thousands and three decimals (`1.377`) matches
 on either reading, and a leading zero (`0.125`) is never read as thousands.
 
 Ignored by default: integers below 20; four-digit years 1900–2100; identifiers glued to a
