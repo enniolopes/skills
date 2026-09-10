@@ -18,6 +18,19 @@ npx skills add enniolopes/skills --skill <name> --agent claude-code
 Hosts that take a directory: copy `skills/<name>/`. Hosts that take a `.skill` or ZIP
 upload: build it from `development/<name>/` when a packager exists there.
 
+## Quick start
+
+```text
+/plugin marketplace add enniolopes/skills          # once per machine
+/plugin install research@enniolopes                 # a system: skills + agent + dependencies
+/plugin install branding-studio@enniolopes          # a standalone skill, when needed
+```
+
+Then, inside a research repository: `/research:research-map init` builds the map from the
+protocol and decision log, and `/research:scientific-method start: <question>` begins at
+phase 1. Each unit's README says how it is used; the research one is
+[`systems/research/README.md`](systems/research/README.md).
+
 ## Catalog
 
 | Unit | Kind | Status | Docs |
