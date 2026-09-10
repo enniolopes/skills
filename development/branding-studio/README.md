@@ -126,12 +126,11 @@ skills/branding-studio/                 # runtime source only
 └── scripts/                            # runtime deterministic tools only
 
 development/branding-studio/            # never shipped
+├── README.md                           # this document
 ├── RUNTIME_CONTEXT.md                  # semantic source policy
 ├── evals/
 ├── tests/
 └── package_skill.py
-
-docs/branding-studio/README.md           # human documentation
 ```
 
 The rule is strict:

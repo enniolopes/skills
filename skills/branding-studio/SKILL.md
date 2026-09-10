@@ -1,6 +1,9 @@
 ---
 name: branding-studio
 description: "Autonomous brand steward for creating, applying, auditing and evolving brands. Use for branding, naming, identity, logo, positioning, touchpoints, audits and rebrands. Reply in the user's language."
+license: CC-BY-NC-4.0
+metadata:
+  version: 1.0.0
 ---
 
 # Branding Studio

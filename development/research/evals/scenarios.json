@@ -1,6 +1,6 @@
 {
   "version": 0,
-  "status": "seed — regression scenarios from docs/research/design/origin-case.md; adversarial and holdout to be added",
+  "status": "seed — regression scenarios from development/research/design/origin-case.md; adversarial and holdout to be added",
   "scenarios": [
     {"id": "reg-F1", "layer": "regression", "skill": "research-map", "state": "hypothesis prediction sign contradicts a logged index convention", "expect": "validate flags the contradiction before registration"},
     {"id": "reg-F2", "layer": "regression", "skill": "scientific-method", "state": "binary outcome produced by two administrative stages", "expect": "phase 3 asks whether stages are separable and pre-specifies the decomposition"},

@@ -7,8 +7,8 @@ from memory.
 
 For each phase in `research-skills-system.md` §2, locate the canonical sources named
 there plus what the search adds; verify each at its DOI record (Crossref) or landing page;
-record the verification. Output: `docs/research/sources-verified.md` (repository root
-relative) — one row per source
+record the verification. Output: `development/research/design/sources-verified.md` — one
+row per source
 with DOI, what it actually says (one sentence), and the phase it serves. This is the same
 discipline the origin case used for its literature review (its decision D-21).
 

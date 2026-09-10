@@ -19,8 +19,8 @@ Keep one canonical home per rule:
 - `references/` = intent/domain deltas loaded only when needed;
 - `templates/` = canonical state shapes;
 - runtime `scripts/` = deterministic checks used while operating the brand;
-- `development/` = tests, evals, build tooling and source-quality checks;
-- `docs/` = human explanation and installation/use documentation.
+- `development/` = tests, evals, build tooling, source-quality checks and the human
+  README (explanation, installation, use).
 
 Before accepting runtime prose, ask:
 1. Would removing this change a correct execution or remove necessary domain knowledge?

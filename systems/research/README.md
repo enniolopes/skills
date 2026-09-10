@@ -2,24 +2,26 @@
 
 Agent skills for scientific research: method, memory across sessions, and adversarial
 review. A **system**: several pieces, installed separately, designed to work together.
+`system.json` is the composition; CI checks it against the repository.
 
 ## Status
 
-**Design stage.** No piece is installable yet. The consolidated design, the references it
-draws on, the origin case that motivated it and the build order live in
-`docs/research/design/`. Each piece's contract is written there in prose; its runtime
-files appear in `skills/` or `agents/` when built (see `docs/research/design/roadmap.md`).
+**Design stage.** No piece of this system is installable yet. The consolidated design, the
+references it draws on, the origin case that motivated it and the build order live in
+`development/research/design/`. Each piece's contract is written there in prose; its
+runtime files appear in `skills/` or `agents/` when built (see
+`development/research/design/roadmap.md`).
 
 ## Pieces
 
 Versioned separately because they change at different rates.
 
-| Piece | Kind | Runtime path (when built) | Owns | Status |
-|---|---|---|---|---|
-| scientific-method | skill | `skills/scientific-method/` | the research lifecycle: problem → literature → protocol → data → analysis → writing → review → publication, each phase with an exit gate; distilled, source-verified method knowledge in `reference/` | design — contract in `docs/research/design/research-skills-system.md` §2 |
-| research-map | skill | `skills/research-map/` | memory and navigation across sessions: an operational index per research (`RESEARCH.map`), read at session start, updated at session end, validated mechanically (`init`, `resume`, `update`, `validate`) | design — §3 |
-| reviewer-2 | agent | `agents/reviewer-2.md` | independent, non-editing review of a manuscript against its own protocol and reporting checklists; treats the author's text as untrusted narrative; fixed output headings (`VERDICT`, `CLAIMS`, `FINDINGS`, `CHECKS RUN`, `NOT VERIFIED`, `BASIS`) | design — §4 |
-| explorer | skill (dependency) | `skills/explorer/` | phase 1: hypothesis portfolio with bridge certificates | shipped, standalone |
+| Piece | Kind | Owns |
+|---|---|---|
+| scientific-method | skill | the research lifecycle: problem → literature → protocol → data → analysis → writing → review → publication, each phase with an exit gate; distilled, source-verified method knowledge in `reference/` (`research-skills-system.md` §2) |
+| research-map | skill | memory and navigation across sessions: an operational index per research (`RESEARCH.map`), read at session start, updated at session end, validated mechanically (`init`, `resume`, `update`, `validate`) (§3) |
+| reviewer-2 | agent | independent, non-editing review of a manuscript against its own protocol and reporting checklists; treats the author's text as untrusted narrative; fixed output headings (`VERDICT`, `CLAIMS`, `FINDINGS`, `CHECKS RUN`, `NOT VERIFIED`, `BASIS`) (§4) |
+| explorer | skill, dependency | phase 1: hypothesis portfolio with bridge certificates; shipped standalone in `skills/explorer/` |
 
 `scientific-method` declares `explorer` as a dependency for its first phase and does not
 reimplement it.
@@ -28,9 +30,10 @@ reimplement it.
 
 | What | Path |
 |---|---|
-| design, references studied, origin case, roadmap | `docs/research/design/` |
+| composition and status per piece | `systems/research/system.json` |
+| design, references studied, origin case, roadmap | `development/research/design/` |
 | evaluation scenarios (regression, adversarial, holdout) | `development/research/evals/scenarios.json` |
-| runtime pieces | `skills/<piece>/`, `agents/<piece>.md` |
+| runtime pieces, once built | `skills/<piece>/`, `agents/<piece>.md` |
 
 ## Install (once built)
 
@@ -61,4 +64,4 @@ Consuming research repositories pin versions in their `skills-lock.json`.
 Designed during the `delbem-research/cozsolidarias-research` project (September 2026),
 where a method audit found ten defects in an already-careful pipeline and a session
 boundary let wrong numbers survive. Both are recorded in
-`docs/research/design/origin-case.md` as the first evaluation scenarios.
+`development/research/design/origin-case.md` as the first evaluation scenarios.

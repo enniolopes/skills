@@ -1,65 +1,80 @@
 # skills
 
 Agent skills, agents and the systems that compose them, by Ennio Politi Lopes. Built for
-Claude Code following the Agent Skills standard; each skill is installable on its own:
+Claude Code following the [Agent Skills](https://agentskills.io) standard. Every unit
+installs on its own:
 
 ```bash
 npx skills add enniolopes/skills --skill <name> --agent claude-code
 ```
 
-For hosts that take a directory, copy `skills/<name>/`. For hosts that take a `.skill` or
-ZIP upload, build it from `development/<name>/` when a packager exists there.
+Hosts that take a directory: copy `skills/<name>/`. Hosts that take a `.skill` or ZIP
+upload: build it from `development/<name>/` when a packager exists there.
 
 ## Catalog
 
 | Unit | Kind | Status | Docs |
 |---|---|---|---|
-| [branding-studio](skills/branding-studio/) | skill | shipped | [docs](docs/branding-studio/README.md) |
-| [landing-page](skills/landing-page/) | skill | shipped | [docs](docs/landing-page/README.md) |
+| [branding-studio](skills/branding-studio/) | skill | shipped | [README](development/branding-studio/README.md) |
+| [landing-page](skills/landing-page/) | skill | shipped | [README](development/landing-page/README.md) |
 | [explorer](skills/explorer/) | skill | shipped | — |
-| [research](systems/research/) | system | design | [design](docs/research/design/) |
+| [research](systems/research/) | system | design | [design](development/research/design/) |
 
-A **system** is a set of skills and agents built to work together and versioned
-separately. `research` composes `scientific-method`, `research-map` (skills, to be built),
-`reviewer-2` (agent, to be built) and `explorer`.
+CI checks this table against the filesystem: it lists exactly the units that exist.
 
-## Topology
+## Model
 
-The first level is the *role* a file plays; the second level is the *unit* it belongs to.
+Three concepts, one rule each.
+
+- **Unit** — a skill, an agent or a system. It has a name, a version, an owner and a reason
+  to change that is its own. The name is the same everywhere the unit appears.
+- **Runtime** — what a unit ships. Its location is fixed by the standard and by installers
+  that copy it wholesale: `skills/<name>/` (with `SKILL.md` at the root) and
+  `agents/<name>.md`. Runtime carries exactly what the agent needs while operating, no
+  more, and never refers back to this repository; it must work installed alone.
+- **System** — a composition of skills and agents that work together. It has no runtime
+  of its own: `systems/<name>/system.json` names the pieces and their status, and CI
+  checks that against what exists. Pieces install independently; a system may depend on
+  a standalone skill.
+
+Everything a unit needs that is not runtime — tests, evals, packaging, source policy,
+design records, its human README — lives in one place, `development/<name>/`, so a unit
+occupies at most two regions of the tree and deleting it means deleting two directories.
 
 ```text
-skills/<name>/          runtime skill — SKILL.md + references/, templates/, scripts/; nothing else
-agents/<name>.md        runtime agent — one file, frontmatter name == file name
-systems/<name>/         composition — README.md naming the pieces, their status and dependencies
-development/<unit>/     tests, evals, packaging, source policy — never shipped
-docs/<unit>/            human documentation and design records
-development/check_structure.py   mechanical check of the rules above (runs in CI)
+skills/<name>/            runtime skill
+agents/<name>.md          runtime agent
+systems/<name>/           system.json + README.md
+development/<name>/       everything else about the unit — never shipped
+development/validate.py   the model above as executable checks
 ```
 
-The rule that holds it together: **runtime may be tested by development assets; runtime
-never contains its tests, evals, build tooling or human documentation.** An installer that
-copies `skills/<name>/` ships exactly what the skill needs to run.
+Design decisions and their rationale:
 
-Consequences:
+| Decision | Because | Revise when |
+|---|---|---|
+| Top level is the *role* (runtime, composition, development), unit name second | the runtime path is dictated by installers; given that, the only choice is where the rest goes, and one companion directory per unit keeps change local | an installer accepts a nested runtime directory, which would allow unit-first layout |
+| Runtime contains no README, tests or evals | installers and packagers copy the directory as-is; every file becomes context or payload | never — this is the contract with the host |
+| Systems are manifests, not containers | pieces version and install separately, and a system may include a skill that exists on its own | a host offers a real multi-piece install unit (e.g. a plugin marketplace); then `system.json` gains a projection to it |
+| One validator, one workflow, discovery by convention | adding a unit must not require touching CI; `development/<name>/tests/` is found and run | a unit needs a toolchain other than Python |
+| Version and license in each `SKILL.md` frontmatter | the installed artifact is the whole unit; identity and terms travel with it | — |
 
-- A unit's name is the same in every directory it appears in.
-- A skill that belongs to a system still lives in `skills/`; the system directory only
-  names it. Pieces install independently and a system can depend on a standalone skill.
-- Design-stage pieces have no runtime directory yet. Their contract lives in
-  `docs/<system>/`, their status in `systems/<system>/README.md`.
-- Anything under `development/` or `docs/` must be named after an existing unit.
+New top-level directories and new roles are architecture decisions: the validator lists
+the allowed set and fails on anything else, so the change and the rule land together.
 
 ## Development
 
 ```bash
-python development/check_structure.py                                  # topology
-python -m unittest discover -s development/branding-studio/tests -v    # branding-studio
-python development/branding-studio/package_skill.py                    # dist/branding-studio.zip
+python development/validate.py
 ```
 
-CI runs the structure check on every pull request and unit-specific checks when that
-unit's paths change (`.github/workflows/`).
+That is also what CI runs on every pull request. It checks the topology, each unit's
+frontmatter contract, each system's manifest against the filesystem, the catalog above,
+relative links, then compiles the Python and runs every `development/<name>/tests/`.
+
+Per-unit tooling lives with the unit, e.g. `python development/branding-studio/package_skill.py`
+builds `dist/branding-studio.zip`.
 
 ## License
 
-See [LICENCE](LICENCE).
+[CC BY-NC 4.0](LICENCE). Each runtime unit repeats the license in its frontmatter.
