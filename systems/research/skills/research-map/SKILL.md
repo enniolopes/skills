@@ -4,7 +4,7 @@ description: Memory and navigation across sessions for a research project. Keeps
 when_to_use: Triggers include the start of any session in a repository that has a RESEARCH.map, "onde parei", "resume", "o que mudou", "antes de commitar", "validate", "esse número está certo?", "de onde veio esse número", "atualiza o mapa".
 license: CC-BY-NC-4.0
 metadata:
-  version: 0.3.0
+  version: 0.4.0
 argument-hint: 'init|resume|update|validate [path to RESEARCH.map]'
 ---
 
@@ -24,7 +24,7 @@ are in `reference/map-schema.md`; a blank one is in `templates/RESEARCH.map`.
 | Section | Holds |
 |---|---|
 | `## Layout` | where things are: `protocol`, `decisions`, `aggregates`, `documents`, `notebooks`, `references` |
-| `## Question` | one line with a pointer into the protocol, and `Registration: none \| <URL or DOI, date>` — while `none`, confirmatory code is `DRY_RUN` |
+| `## Question` | one line with a pointer to the protocol's problem statement (whose seven required fields `validate` checks), and `Registration: none \| <URL or DOI, date>` — while `none`, confirmatory code is `DRY_RUN` |
 | `## Hypotheses` | one row each: prediction, refutation, terminal state, pointer |
 | `## Gates` | one row per phase, all eight: `reached` / `pending` / `blocked` and by whom |
 | `## Facts that were once wrong` | the wrong value, the right value, the notebook that now produces it — the most valuable block |
@@ -81,7 +81,7 @@ python3 tools/research_map_validate.py RESEARCH.map                   # the copy
 ```
 
 Five checks, each `PASS`, `FAIL` or `NOT_VERIFIED` with the offending lines; the rules are
-in `reference/map-schema.md`: `map` (structure, pointers, gates, registration), `numbers`
+in `reference/map-schema.md`: `map` (structure, pointers, gates, registration, problem statement fields), `numbers`
 (a number quoted in a document that no aggregate contains at the quoted precision is
 reported — a match is presence, not provenance; the source table is still required),
 `decisions` (revision condition per `D-<n>`, ids unique and increasing), `citations`

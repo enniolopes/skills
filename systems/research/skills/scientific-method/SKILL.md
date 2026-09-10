@@ -1,10 +1,10 @@
 ---
 name: scientific-method
 description: Run an empirical research project as a lifecycle with gates — problem, literature, protocol, data, analysis, writing, review, publication — for observational quantitative studies on administrative data. Use it to start a research, to check which gate you are at, to review a manuscript, and whenever you are about to fit a model, cite a source, report a number or write results. Delegates hypothesis generation to explorer, session memory to research-map, and review to the reviewer-2 agent.
-when_to_use: Triggers include "vou ajustar/rodar o modelo", "let me fit", "vou citar", "escrever os resultados", "deu/não deu efeito", "no effect", "qual o intervalo", "definir a amostra/população", "o raio de 500 m", "os dois resultados discordam", "pré-registro", "protocolo", "hipótese", "revisar o manuscrito", "submeter o artigo", "a gente devia testar também", "apareceu um método novo", "abrir mais uma frente".
+when_to_use: Triggers include "vou ajustar/rodar o modelo", "let me fit", "vou citar", "escrever os resultados", "deu/não deu efeito", "no effect", "qual o intervalo", "definir a amostra/população", "o raio de 500 m", "os dois resultados discordam", "pré-registro", "protocolo", "hipótese", "revisar o manuscrito", "submeter o artigo", "a gente devia testar também", "apareceu um método novo", "abrir mais uma frente", "qual é a pergunta", "definir o problema", "estimando", "para quem isso importa".
 license: CC-BY-NC-4.0
 metadata:
-  version: 0.3.0
+  version: 0.4.0
 argument-hint: '<start | phase | review <manuscript> | what you are about to do>'
 ---
 
@@ -67,6 +67,14 @@ of venue. Those belong to humans and are never invented; when one is missing the
 12. **A missing capability degrades explicitly** to `NOT_VERIFIED` or `BLOCKED`, never to a
     guess.
 
+## The problem first, as an artifact
+
+"Understanding the problem" is not time spent; it is `reference/problem-statement.md`
+complete, pointed to from the map's `## Question`, and checked by `validate`. Every later
+gate re-reads it; a change to it is a logged decision, never a silent rewrite. Most
+research failures are formulation failures found late: the estimand discovered in the
+results, a causal verb on an associational design, a question nobody's decision depends on.
+
 ## Scope: open wide once, then pay to reopen
 
 Divergence is a phase with a budget, not a disposition. In phase 1 the exploration budget
@@ -103,7 +111,7 @@ fired and apply its requirements **before** doing the thing.
 
 | # | Phase | Trigger (what the conversation shows) | Exit gate | Read |
 |---|---|---|---|---|
-| 1 | Problem | a research starts, restarts or gains a hypothesis | exploration budget logged before exploring; question written with its refutation; unit of analysis fixed; obvious reviewer objection named; lineages not adopted go to `## Deferred` | `reference/01-problem.md` |
+| 1 | Problem | a research starts, restarts or gains a hypothesis; the question is stated in one sentence and someone wants to start analysing | exploration budget logged before exploring; the problem statement complete (claim, unit, estimand, refutation, objection, who cares, non-goals); lineages not adopted go to `## Deferred` | `reference/01-problem.md`, `reference/problem-statement.md` |
 | 2 | Literature | a citation is about to be typed; a claim about the state of knowledge | verification log complete (each source at DOI, or `NOT_VERIFIED` and not in the text); gap in one paragraph | `reference/02-literature.md` |
 | 3 | Protocol | hypotheses, tests, populations or thresholds set or changed; a round-number threshold or radius proposed; "no effect" planned; "we should also test X" after the freeze | protocol frozen; registration text derived; assumption tables, bounds and dimensions listed; anything admitted after the freeze has its trade logged | `reference/03-protocol.md` |
 | 4 | Data | an input enters; sources are joined; a population or pool is named for the first time; an aggregate leaves | linkage report per join; provenance per input; no identifiable row outside the cache | `reference/04-data.md` |

@@ -9,7 +9,7 @@
 - references: <path/to/references.bib>
 
 ## Question
-<one line> → `<path/to/protocol.md#question>`
+<one line> → `<path/to/protocol.md#question>`   (that section carries the problem statement fields)
 Registration: none
 
 ## Hypotheses

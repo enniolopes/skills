@@ -75,6 +75,10 @@ python tools/research_map_validate.py RESEARCH.map --offline
   aggregate by construction.
 - `Question` carries `Registration: none` or `Registration: <URL or DOI>, <date>`; while it
   is `none`, confirmatory code is `DRY_RUN`.
+- The `Question` pointer leads to the protocol's problem statement: the section at that
+  anchor must carry the labelled fields `Claim`, `Unit of analysis`, `Estimand`,
+  `Refutation`, `Objection`, `Who cares`, `Non-goals` (scientific-method,
+  `reference/problem-statement.md`).
 - Backticks are reserved for pointers: a repository-relative path (with `/` or a known
   suffix), optionally with `#anchor`. A backticked number or symbol is not a pointer.
 - `Gates` has one row per phase, all eight; states are `reached`, `pending` or `blocked`;

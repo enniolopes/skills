@@ -5,7 +5,8 @@
 
 Checks (each PASS / FAIL / NOT_VERIFIED, with the offending lines):
   map        sections present and ordered; pointers resolve; all eight gates with valid states;
-             Registration line present; every fact-once-wrong names a producing notebook;
+             Registration line present; the Question pointer leads to a problem statement with its
+             seven fields; every fact-once-wrong names a producing notebook;
              every Deferred item is dated and names its entry condition;
              Last session has a dated line and a Next line
   numbers    every number quoted in the documents is present in some committed aggregate at the
@@ -54,6 +55,9 @@ DOI = re.compile(r"\b(10\.\d{4,9}/[^\s\"'<>{}]+)")
 DECISION_START = re.compile(r"^(?:#{1,6}\s+|[-*]\s+\*\*|\*\*)D-(\d+)\b", re.M)
 REVISION = re.compile(r"^\s*(?:[-*]\s*)?(?:\*\*)?(?:Revision condition|Revise when)(?:\*\*)?\s*:", re.I | re.M)
 REGISTRATION = re.compile(r"^\s*(?:[-*]\s*)?\**Registration\**\s*:\s*(\S.*)$", re.I | re.M)
+# The problem statement the Question pointer leads to must carry these labelled fields
+# (scientific-method, reference/problem-statement.md).
+PROBLEM_FIELDS = ["Claim", "Unit of analysis", "Estimand", "Refutation", "Objection", "Who cares", "Non-goals"]
 # A deferred idea carries the date it appeared and the condition under which it would enter.
 DEFERRED_ITEM = re.compile(r"^\s*[-*]\s*\d{4}-\d{2}-\d{2}:\s*.+\s[—-]\s*enters when:\s*\S.*$")
 NETWORK_REFUSED = {401, 403, 405, 429}
@@ -124,6 +128,44 @@ def pointers_in(lines: list[str]) -> list[str]:
     return found
 
 
+def slug(heading: str) -> str:
+    text = re.sub(r"[^\w\s-]", "", heading.strip().lower())
+    return re.sub(r"\s+", "-", text)
+
+
+def section_at(path: Path, anchor: str) -> str | None:
+    """Body of the section whose heading slugs to `anchor`, up to the next heading of the same or higher level."""
+    lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    start, level = None, 0
+    for i, line in enumerate(lines):
+        match = re.match(r"^(#{1,6})\s+(.*)$", line)
+        if not match:
+            continue
+        if start is None:
+            if slug(match.group(2)) == anchor.lower():
+                start, level = i, len(match.group(1))
+        elif len(match.group(1)) <= level:
+            return "\n".join(lines[start + 1:i])
+    return "\n".join(lines[start + 1:]) if start is not None else None
+
+
+def problem_statement_gaps(root: Path, pointer: str) -> list[str]:
+    """Why the problem statement behind the Question pointer is incomplete; empty when complete."""
+    path, _, anchor = pointer.partition("#")
+    if not anchor or not (root / path).is_file():
+        return []  # no anchor, or a missing file: the pointer check reports the latter
+    body = section_at(root / path, anchor)
+    if body is None:
+        return [f"has no heading for anchor #{anchor}"]
+    missing = [
+        f for f in PROBLEM_FIELDS
+        if not re.search(r"^\s*(?:[-*]\s*)?(?:★\s*)?\**" + re.escape(f) + r"\**\s*:", body, re.I | re.M)
+    ]
+    if missing:
+        return ["lacks the field(s) " + ", ".join(missing) + " (scientific-method reference/problem-statement.md)"]
+    return []
+
+
 def check_map(text: str, root: Path) -> tuple[Result, dict[str, list[str]]]:
     result = Result("map")
     sections, order = parse_sections(text)
@@ -156,6 +198,9 @@ def check_map(text: str, root: Path) -> tuple[Result, dict[str, list[str]]]:
     question = "\n".join(sections.get("Question", []))
     if not REGISTRATION.search(question):
         result.fail("Question: missing `Registration: none | <URL or DOI, date>` — confirmatory code stays DRY_RUN while it is none")
+    for pointer in pointers_in(sections.get("Question", [])):
+        for gap in problem_statement_gaps(root, pointer):
+            result.fail(f"Question: problem statement at `{pointer}` {gap}")
 
     seen_phases: set[str] = set()
     for row in table_rows(sections.get("Gates", [])):

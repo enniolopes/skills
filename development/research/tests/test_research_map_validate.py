@@ -65,6 +65,23 @@ make paper
 - Next: fit models in DRY_RUN.
 """
 
+PROTOCOL = """# Protocol
+
+## Question
+Does X change Y?
+
+- **Claim:** associational
+- **Unit of analysis:** municipality
+- **Estimand:** population all municipalities 2026; contrast X vs not X; outcome Y at t+1; intercurrent events none; summary difference
+- **Refutation:** interval includes 0 under the primary test
+- **Objection:** selection — answered in phase 3
+- **Who cares:** the state programme office
+- **Non-goals:** mechanisms
+
+## h1
+H1 text.
+"""
+
 DECISIONS_OK = """# Decisions
 
 ### D-1 · 2026-09-01
@@ -113,12 +130,15 @@ BIB = """@comment{This is a comment with no doi}
 """
 
 
+PROTOCOL_TEXT = PROTOCOL
+
+
 def build(root: Path, decisions: str = DECISIONS_OK, extra_paper: str = "", bib: str = BIB) -> None:
     (root / "aggregates").mkdir()
     (root / "paper").mkdir()
     (root / "notebooks").mkdir()
     (root / "RESEARCH.map").write_text(MAP, encoding="utf-8")
-    (root / "protocol.md").write_text("# Protocol\n\n## question\n\n## h1\n", encoding="utf-8")
+    (root / "protocol.md").write_text(PROTOCOL, encoding="utf-8")
     (root / "decisions.md").write_text(decisions, encoding="utf-8")
     (root / "aggregates" / "results.csv").write_text(
         "metric,value\nkitchens,5913\nrho,0.6083\nlow,0.5512\nhigh,0.6701\nshare,0.125\nbeta,-0.31\nse,0.09\n",
@@ -150,6 +170,18 @@ class MapTests(unittest.TestCase):
             joined = " ".join(run_all(root)["map"].lines)
             for needle in ("state 'done'", "missing.ipynb", "Open decisions", "Registration", "missing phase(s) 4"):
                 self.assertIn(needle, joined)
+
+    def test_problem_statement_fields_are_required_at_the_question_pointer(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp))
+            weakened = PROTOCOL_TEXT.replace("- **Estimand:**", "- Estimando:").replace("- **Who cares:**", "- Quem:")
+            (root / "protocol.md").write_text(weakened, encoding="utf-8")
+            joined = " ".join(run_all(root)["map"].lines)
+            self.assertIn("Estimand", joined)
+            self.assertIn("Who cares", joined)
+            self.assertNotIn("Refutation", joined)
+            (root / "protocol.md").write_text("# Protocol\n\n## Other\n", encoding="utf-8")
+            self.assertIn("no heading for anchor #question", " ".join(run_all(root)["map"].lines))
 
     def test_deferred_items_need_date_and_entry_condition(self):
         with tempfile.TemporaryDirectory() as tmp:
