@@ -3,7 +3,7 @@ name: branding-studio
 description: "Autonomous brand steward for creating, applying, auditing and evolving brands. Use for branding, naming, identity, logo, positioning, touchpoints, audits and rebrands. Reply in the user's language."
 license: CC-BY-NC-4.0
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # Branding Studio
@@ -66,15 +66,7 @@ Do not manufacture numeric risk scores. Commit the smallest defensible decision 
 
 ### ADAPT
 
-Classify genuinely new signals as:
-- no material effect;
-- supports an existing belief;
-- challenges a belief;
-- invalidates a rationale or reveals a recurring system failure.
-
-Update beliefs more readily than contract. Only material rationale invalidation or recurring system failure should normally create an EVOLVE candidate.
-
-Do not call self-critique, regeneration or polishing “learning” when no new evidence entered the system.
+Update beliefs more readily than contract. A genuinely new signal changes `research.findings`; only material rationale invalidation or a recurring system failure creates an EVOLVE candidate (`references/evolve.md` classifies the signal). Nothing entered the system when only self-critique, regeneration or polishing happened.
 
 ## Human gates
 
@@ -121,14 +113,11 @@ Load only what the mission needs:
 
 For APPLY/AUDIT, compile the smallest relevant subset of the brand spec instead of loading unrelated state.
 
-## Persistent brand state
+## Canonical state
 
-Use `brand-spec.json` as the canonical persistent state:
-- **contract** — committed strategy, creative/verbal/visual system and constraints;
-- **beliefs/evidence** — `research.findings` and their evidence lifecycle;
-- **history** — `meta.changelog` and material outcomes needed for future judgment.
+`brand-spec.json` is the persistent brand state — **contract**, **beliefs/evidence** (`research.findings`) and **history** (`meta.changelog`) — shaped by `templates/brand-spec.template.json`; `templates/portfolio.template.json` holds portfolio relationship policy. `references/spec-schema.md` owns the state model and what may be persisted.
 
-Do not persist internal exploration, prompts, discarded micro-variations or routine applications. Persist only information that governs future work or explains consequential commitments.
+Guidelines, CSS variables, decks, documents and other deliverables are compiled views of canonical state, not competing sources of truth.
 
 ## Invariants
 
@@ -153,31 +142,8 @@ Use deterministic tools only for claims they can establish:
 
 Use semantic review for V2, representative applications for V3, and external field/legal/stakeholder evidence for V4. Never infer V2–V4 from a V1 pass.
 
-## Canonical artifacts
-
-Use:
-- `templates/brand-spec.template.json` for one brand;
-- `templates/portfolio.template.json` for portfolio relationship policy.
-
-Treat guidelines, CSS variables, decks, documents and other deliverables as compiled views of canonical state, not competing sources of truth.
-
 ## Delivery
 
 Return committed decisions, artifacts, applicable verification and material unresolved dependencies. Do not return internal exploration transcripts.
 
-Follow the selected intent reference for intent-specific deliverables. Keep deterministic findings, semantic judgment, contextual evidence and V4 gaps distinguishable.
-
-## Avoid
-
-Correct rather than blindly execute:
-- identity generation before minimum strategy exists;
-- cosmetic variant volume presented as creative exploration;
-- generic rationale such as “blue = trust” treated as evidence;
-- universalizing archetypes, golden ratio, color psychology, fixed font counts, modular scales or 4/8pt grids;
-- model agreement presented as market validation;
-- brand strategy optimized from one local/short-term metric;
-- recognized assets replaced because stakeholders are bored;
-- exact audit measurements claimed from weak sources when native structure exists;
-- structurally valid JSON presented as validated strategy;
-- raster concepts presented as final logo masters;
-- trademark availability or owned mental associations claimed without appropriate V4 evidence.
+Follow the selected intent reference for intent-specific deliverables. Keep deterministic findings, semantic judgment, contextual evidence and V4 gaps distinguishable. Correct a request that violates an invariant or a verification boundary rather than executing it blindly; `references/knowledge.md` lists what never counts as proof.

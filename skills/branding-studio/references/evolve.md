@@ -6,6 +6,14 @@ Use EVOLVE when a committed rationale or system may no longer serve. Preserve va
 
 Start from current state and committed rationales, not aesthetic preference.
 
+Classify each genuinely new signal before anything else:
+- no material effect;
+- supports an existing belief;
+- challenges a belief (mark the finding `challenged`);
+- invalidates a rationale or reveals a recurring system failure.
+
+Only the last class normally warrants EVOLVE; the second and third update beliefs in `research.findings`, not the contract. Self-critique, regeneration or polishing without new evidence is none of these.
+
 Legitimate triggers include:
 - customer/audience changed;
 - competitive/category context changed materially;
