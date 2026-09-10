@@ -1,10 +1,10 @@
 ---
 name: scientific-method
 description: Run an empirical research project as a lifecycle with gates — problem, literature, protocol, data, analysis, writing, review, publication — for observational quantitative studies on administrative data. Use it to start a research, to check which gate you are at, to review a manuscript, and whenever you are about to fit a model, cite a source, report a number or write results. Delegates hypothesis generation to explorer, session memory to research-map, and review to the reviewer-2 agent.
-when_to_use: Triggers include "vou ajustar/rodar o modelo", "let me fit", "vou citar", "escrever os resultados", "deu/não deu efeito", "no effect", "qual o intervalo", "definir a amostra/população", "o raio de 500 m", "os dois resultados discordam", "pré-registro", "protocolo", "hipótese", "revisar o manuscrito", "submeter o artigo".
+when_to_use: Triggers include "vou ajustar/rodar o modelo", "let me fit", "vou citar", "escrever os resultados", "deu/não deu efeito", "no effect", "qual o intervalo", "definir a amostra/população", "o raio de 500 m", "os dois resultados discordam", "pré-registro", "protocolo", "hipótese", "revisar o manuscrito", "submeter o artigo", "a gente devia testar também", "apareceu um método novo", "abrir mais uma frente".
 license: CC-BY-NC-4.0
 metadata:
-  version: 0.2.0
+  version: 0.3.0
 argument-hint: '<start | phase | review <manuscript> | what you are about to do>'
 ---
 
@@ -67,6 +67,26 @@ of venue. Those belong to humans and are never invented; when one is missing the
 12. **A missing capability degrades explicitly** to `NOT_VERIFIED` or `BLOCKED`, never to a
     guess.
 
+## Scope: open wide once, then pay to reopen
+
+Divergence is a phase with a budget, not a disposition. In phase 1 the exploration budget
+(lineages, time, stopping rule) is logged as a decision **before** `explorer` runs; the
+default is three to five structurally different lineages and stop at revised saturation.
+After the protocol freezes, a new method, concept, test or front has exactly four
+destinations, and "open it" is the most expensive:
+
+1. a **specification-curve dimension**, when it is an alternative way of doing something
+   already in the protocol — absorbed, no new front;
+2. an **exploratory analysis**, labelled as such, hypothesis-generating, never confirmatory;
+3. the map's **`## Deferred`** section, dated, with the condition under which it would enter
+   — the default destination for "we should also test X";
+4. **reopening phase 3**, only by a logged decision that says what leaves the protocol for
+   this to enter; a research carries at most three hypotheses without a terminal state, and a
+   fourth requires that trade in the same decision.
+
+`resume` reports the count of open hypotheses and of deferred items every session, so
+growth is seen, not felt.
+
 ## Memory across sessions
 
 `research:research-map` owns it. Run its `resume` before the first action of a session,
@@ -83,9 +103,9 @@ fired and apply its requirements **before** doing the thing.
 
 | # | Phase | Trigger (what the conversation shows) | Exit gate | Read |
 |---|---|---|---|---|
-| 1 | Problem | a research starts, restarts or gains a hypothesis | question written with its refutation; unit of analysis fixed; obvious reviewer objection named | `reference/01-problem.md` |
+| 1 | Problem | a research starts, restarts or gains a hypothesis | exploration budget logged before exploring; question written with its refutation; unit of analysis fixed; obvious reviewer objection named; lineages not adopted go to `## Deferred` | `reference/01-problem.md` |
 | 2 | Literature | a citation is about to be typed; a claim about the state of knowledge | verification log complete (each source at DOI, or `NOT_VERIFIED` and not in the text); gap in one paragraph | `reference/02-literature.md` |
-| 3 | Protocol | hypotheses, tests, populations or thresholds set or changed; a round-number threshold or radius proposed; "no effect" planned | protocol frozen; registration text derived; assumption tables, bounds and dimensions listed | `reference/03-protocol.md` |
+| 3 | Protocol | hypotheses, tests, populations or thresholds set or changed; a round-number threshold or radius proposed; "no effect" planned; "we should also test X" after the freeze | protocol frozen; registration text derived; assumption tables, bounds and dimensions listed; anything admitted after the freeze has its trade logged | `reference/03-protocol.md` |
 | 4 | Data | an input enters; sources are joined; a population or pool is named for the first time; an aggregate leaves | linkage report per join; provenance per input; no identifiable row outside the cache | `reference/04-data.md` |
 | 5 | Analysis | "vou ajustar / rodar o modelo", "let me fit"; an interval or statistic about to be reported; two results disagree | assumptions → check → fallback listed before fitting; dependence structure asked; `DRY_RUN` status confirmed; every pre-specified check has a result; terminal state per hypothesis; discordance reported and the primary test decides | `reference/05-analysis.md` |
 | 6 | Writing | a number is about to be written into prose; any prose that will leave the repository | every number exists in a committed aggregate with interval and source table; figure provenance; definitions with misreadings | `reference/06-writing.md` |

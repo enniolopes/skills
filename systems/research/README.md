@@ -6,7 +6,7 @@ separately.
 
 ## Status
 
-**Built, acceptance pending** (plugin 0.3.0, pieces 0.2.0, 2026-09-10). All three pieces
+**Built, acceptance pending** (plugin 0.4.0, pieces 0.3.0, 2026-09-10). All three pieces
 exist and pass the repository's structural checks and unit tests. Two things are not yet
 done, and the pieces say so themselves:
 
@@ -111,6 +111,19 @@ ecological design, a figure that does not match its code or data, a citation tha
 say what it is cited for. It returns fixed headings: `VERDICT` (`PASS` / `FAIL` /
 `NOT_VERIFIED`), `CLAIMS`, `FINDINGS`, `CHECKS RUN`, `NOT_VERIFIED`, `BASIS`. The gate
 passes when every `FAIL` has a logged response.
+
+### When a new idea appears mid-way
+
+```text
+Apareceu um método novo, acho que a gente devia testar também.
+```
+
+Opening is cheap only before the protocol freezes; phase 1 opens wide, on a logged budget,
+and converges to at most three hypotheses. After the freeze, "we should also test X" has
+four destinations and the skill routes it: a specification-curve dimension (absorbed), a
+labelled exploratory analysis, the map's `## Deferred` with the condition under which it
+would enter (the default), or reopening phase 3 by a decision that names what leaves.
+`resume` shows the count of open hypotheses and deferred items every session.
 
 ### What it never does
 

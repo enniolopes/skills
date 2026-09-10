@@ -57,6 +57,9 @@ make paper
 ## Open decisions
 - D-?: pool definition — unblocked by: PI
 
+## Deferred
+- 2026-09-09: spatial lag model as an alternative specification — enters when: H1 reaches a terminal state and the cluster bootstrap is reported
+
 ## Last session
 - 2026-09-09: reconciled registry.
 - Next: fit models in DRY_RUN.
@@ -147,6 +150,15 @@ class MapTests(unittest.TestCase):
             joined = " ".join(run_all(root)["map"].lines)
             for needle in ("state 'done'", "missing.ipynb", "Open decisions", "Registration", "missing phase(s) 4"):
                 self.assertIn(needle, joined)
+
+    def test_deferred_items_need_date_and_entry_condition(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp))
+            broken = MAP.replace("## Deferred\n", "## Deferred\n- try a Bayesian version some day\n")
+            (root / "RESEARCH.map").write_text(broken, encoding="utf-8")
+            joined = " ".join(run_all(root)["map"].lines)
+            self.assertIn("Deferred", joined)
+            self.assertIn("enters when", joined)
 
     def test_backticked_numbers_are_not_pointers(self):
         with tempfile.TemporaryDirectory() as tmp:

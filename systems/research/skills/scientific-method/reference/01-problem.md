@@ -8,8 +8,12 @@ phase-1 act and goes through the same gate).
 
 **What it requires.**
 
+- **Budget before exploring.** Log a decision with the exploration budget: how many
+  structurally different lineages (default three to five), how much time, and the stopping
+  rule (revised saturation: no new lineage after the search ontology was revised once). Wide
+  and fast is the goal; "as much as possible" is not a stopping rule.
 - Invoke the `explorer` skill (`explorer:explorer` when installed from the marketplace) on
-  the problem as stated. Its output is a portfolio of lineages with
+  the problem as stated, with that budget. Its output is a portfolio of lineages with
   bridge certificates. Each surviving lineage is a candidate hypothesis: its
   *discriminating test* becomes the hypothesis's primary test, its *failure condition*
   becomes the refutation clause.
@@ -26,8 +30,13 @@ matter of interpretation after the fact (a predicted sign that contradicts an in
 convention already logged); a unit of analysis that shifts between the protocol and the
 code; a term the protocol names and no code computes.
 
-**Exit gate.** The question is written with its refutation; the unit of analysis is fixed;
-the obvious objection is named with the phase that will answer it. Otherwise the phase is
+- **Converge explicitly.** Adopt at most three hypotheses. Every surviving lineage not
+  adopted goes to the map's `## Deferred` with the condition under which it would enter;
+  nothing is silently dropped, nothing is silently kept open.
+
+**Exit gate.** The exploration budget was logged before exploring; the question is written
+with its refutation; the unit of analysis is fixed; the obvious objection is named with the
+phase that will answer it; lineages not adopted are in `## Deferred`. Otherwise the phase is
 not closed.
 
 **Sources.** King, Keohane & Verba, *Designing Social Inquiry* (one logic of inference;

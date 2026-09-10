@@ -3,7 +3,10 @@
 Sources located 2026-09-10, not yet read at source.
 
 **When this applies.** After the question and literature, before any confirmatory analysis
-runs. Any change to hypotheses, tests, populations or thresholds reopens this phase.
+runs. Any change to hypotheses, tests, populations or thresholds reopens this phase — and
+reopening has a price: the decision that admits something new says what leaves. A new idea
+that is an alternative way of doing something already here becomes a specification-curve
+dimension; one that is not goes to the map's `## Deferred` unless the trade is logged.
 
 **What it requires.**
 

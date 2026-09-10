@@ -6,6 +6,7 @@
 Checks (each PASS / FAIL / NOT_VERIFIED, with the offending lines):
   map        sections present and ordered; pointers resolve; all eight gates with valid states;
              Registration line present; every fact-once-wrong names a producing notebook;
+             every Deferred item is dated and names its entry condition;
              Last session has a dated line and a Next line
   numbers    every number quoted in the documents is present in some committed aggregate at the
              quoted precision (presence, not provenance — the source table is still required)
@@ -31,7 +32,7 @@ from pathlib import Path
 
 SECTIONS = [
     "Layout", "Question", "Hypotheses", "Gates", "Facts that were once wrong",
-    "Provenance", "Verification", "Open decisions", "Last session",
+    "Provenance", "Verification", "Open decisions", "Deferred", "Last session",
 ]
 LAYOUT_KEYS = ["protocol", "decisions", "aggregates", "documents", "notebooks", "references"]
 PHASES = ["1", "2", "3", "4", "5", "6", "7", "8"]
@@ -53,6 +54,8 @@ DOI = re.compile(r"\b(10\.\d{4,9}/[^\s\"'<>{}]+)")
 DECISION_START = re.compile(r"^(?:#{1,6}\s+|[-*]\s+\*\*|\*\*)D-(\d+)\b", re.M)
 REVISION = re.compile(r"^\s*(?:[-*]\s*)?(?:\*\*)?(?:Revision condition|Revise when)(?:\*\*)?\s*:", re.I | re.M)
 REGISTRATION = re.compile(r"^\s*(?:[-*]\s*)?\**Registration\**\s*:\s*(\S.*)$", re.I | re.M)
+# A deferred idea carries the date it appeared and the condition under which it would enter.
+DEFERRED_ITEM = re.compile(r"^\s*[-*]\s*\d{4}-\d{2}-\d{2}:\s*.+\s[—-]\s*enters when:\s*\S.*$")
 NETWORK_REFUSED = {401, 403, 405, 429}
 
 
@@ -176,6 +179,10 @@ def check_map(text: str, root: Path) -> tuple[Result, dict[str, list[str]]]:
     for row in table_rows(sections.get("Facts that were once wrong", [])):
         if len(row) < 3 or not pointers_in([row[2]]):
             result.fail(f"Facts that were once wrong: '{row[0] if row else '?'}' has no producing notebook pointer")
+
+    for line in sections.get("Deferred", []):
+        if line.strip().startswith(("-", "*")) and not DEFERRED_ITEM.match(line):
+            result.fail(f"Deferred: `{line.strip()[:60]}` must read `- YYYY-MM-DD: <idea> — enters when: <condition>`")
 
     last = sections.get("Last session", [])
     if not any(re.match(r"^\s*[-*]\s*\d{4}-\d{2}-\d{2}", l) for l in last):

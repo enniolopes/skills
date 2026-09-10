@@ -58,6 +58,10 @@ python tools/research_map_validate.py RESEARCH.map --offline
 ## Open decisions
 - D-?: include withdrawn kitchens in the "registered" pool? — unblocked by: PI, after D-42 alternatives are computed
 
+## Deferred
+- 2026-09-09: spatial lag model as an alternative to the cluster bootstrap — enters when: H1 has a terminal state and Moran's I is reported
+- 2026-09-09: qualitative interviews with state coordinators — enters when: the next research is scoped (out of this study's design)
+
 ## Last session
 - 2026-09-09: reconciled registry; 5,913 kitchens (was 4,618); D-37..D-42 logged.
 - Next: run 03_models in DRY_RUN; list hurdle assumptions before fitting (phase 5).
@@ -78,6 +82,10 @@ python tools/research_map_validate.py RESEARCH.map --offline
 - `Hypotheses` states are `CONFIRMED`, `REFUTED`, `INCONCLUSIVE`, `BLOCKED`,
   `NOT_VERIFIED`, or `—` before analysis.
 - Every row in `Facts that were once wrong` has a `Produced by` pointer that resolves.
+- `Deferred` holds what appeared after the protocol froze and was not admitted: each item
+  `- YYYY-MM-DD: <idea> — enters when: <condition>`. It is the destination for a new method,
+  concept or front that would otherwise open a parallel line of work; nothing leaves it
+  except by a logged decision that reopens phase 3 or by becoming the next research.
 - `Last session` has at least one dated line (`- YYYY-MM-DD: …`) and one `Next:` line.
 
 ## Decision log grammar (`decisions`)

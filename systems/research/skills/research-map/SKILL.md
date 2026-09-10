@@ -1,10 +1,10 @@
 ---
 name: research-map
-description: Memory and navigation across sessions for a research project. Keeps one RESEARCH.map per research — question, registration status, hypotheses, gate states, facts that were once wrong, provenance, verification commands, open decisions — read before the first action of a session (resume), written after any gate, state or number changes (update), built once (init) and checked mechanically before every commit (validate). Use /research:research-map <init|resume|update|validate>.
+description: Memory and navigation across sessions for a research project. Keeps one RESEARCH.map per research — question, registration status, hypotheses, gate states, facts that were once wrong, provenance, verification commands, open decisions, deferred ideas — read before the first action of a session (resume), written after any gate, state or number changes (update), built once (init) and checked mechanically before every commit (validate). Use /research:research-map <init|resume|update|validate>.
 when_to_use: Triggers include the start of any session in a repository that has a RESEARCH.map, "onde parei", "resume", "o que mudou", "antes de commitar", "validate", "esse número está certo?", "de onde veio esse número", "atualiza o mapa".
 license: CC-BY-NC-4.0
 metadata:
-  version: 0.2.0
+  version: 0.3.0
 argument-hint: 'init|resume|update|validate [path to RESEARCH.map]'
 ---
 
@@ -31,6 +31,7 @@ are in `reference/map-schema.md`; a blank one is in `templates/RESEARCH.map`.
 | `## Provenance` | each input, its location in the cache, the notebook that reads it |
 | `## Verification` | the commands that re-run the notebooks in order, render the paper, run hooks, verify citations |
 | `## Open decisions` | what is undecided and who unblocks it |
+| `## Deferred` | ideas, methods and fronts that appeared after the freeze and were not admitted: `- YYYY-MM-DD: <idea> — enters when: <condition>`; the destination for "we should also test X" |
 | `## Last session` | a dated line per change and one `Next:` line |
 
 Backticks in the map are reserved for pointers: repository-relative paths, optionally with
@@ -54,8 +55,10 @@ Finish by running `validate`.
 ### `resume` — before the first action of a session
 
 Read the map. Restate the state in one screen, in this order: the next action; gates and
-their states; registration status; hypotheses with terminal states; facts that were once
-wrong; open decisions and who unblocks each; what changed last session. The reader cannot
+their states; registration status; hypotheses with terminal states, and the count without
+one (more than three is reported as a scope finding); facts that were once wrong; open
+decisions and who unblocks each; deferred items, as a count and the one whose entry
+condition is closest; what changed last session. The reader cannot
 hold "step 3 of 5" between messages — the agent is that reader. Then run `validate` and
 report its result before any other work; a `FAIL` is the first item of the session.
 
