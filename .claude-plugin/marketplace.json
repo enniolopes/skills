@@ -1,0 +1,33 @@
+{
+  "name": "enniolopes",
+  "description": "Agent skills and systems by Ennio Politi Lopes: branding, landing pages, structural exploration, scientific research.",
+  "owner": {
+    "name": "Ennio Politi Lopes",
+    "url": "https://github.com/enniolopes"
+  },
+  "plugins": [
+    {
+      "name": "branding-studio",
+      "source": "./skills/branding-studio",
+      "strict": false,
+      "description": "Autonomous brand steward: create, apply, audit and evolve brands with verification scaled to consequence."
+    },
+    {
+      "name": "explorer",
+      "source": "./skills/explorer",
+      "strict": false,
+      "description": "Structural exploration: a portfolio of non-obvious, defensible connections with bridge certificates, for understanding a problem or generating hypotheses."
+    },
+    {
+      "name": "landing-page",
+      "source": "./skills/landing-page",
+      "strict": false,
+      "description": "Research, design, build and refine high-end marketing landing pages and homepages."
+    },
+    {
+      "name": "research",
+      "source": "./systems/research",
+      "description": "Scientific research system: method with gates (scientific-method), memory across sessions (research-map) and adversarial review (reviewer-2). Depends on explorer."
+    }
+  ]
+}
