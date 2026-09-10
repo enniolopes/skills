@@ -6,11 +6,13 @@
 Checks (each PASS / FAIL / NOT_VERIFIED, with the offending lines):
   map        sections present and ordered; pointers resolve; all eight gates with valid states;
              Registration line present; the Question pointer leads to a problem statement with its
-             seven fields; every fact-once-wrong names a producing notebook;
+             seven fields; the Problem line carries a state and, unless PENDING, a problem brief with
+             its seven fields and a matching Verdict; no phase >= 3 is reached before Problem is SHOWN;
+             every fact-once-wrong names a producing notebook;
              every Deferred item is dated and names its entry condition;
              Last session has a dated line and a Next line
-  numbers    every number quoted in the documents is present in some committed aggregate at the
-             quoted precision (presence, not provenance — the source table is still required)
+  numbers    every number quoted in the documents and in the problem brief is present in some
+             committed aggregate at the quoted precision (presence, not provenance)
   decisions  every D-<n> block has a revision condition; ids unique and increasing
   citations  every reference resolves (Crossref, then doi.org; NOT_VERIFIED with --offline or when
              the network refuses the check)
@@ -58,6 +60,12 @@ REGISTRATION = re.compile(r"^\s*(?:[-*]\s*)?\**Registration\**\s*:\s*(\S.*)$", r
 # The problem statement the Question pointer leads to must carry these labelled fields
 # (scientific-method, reference/problem-statement.md).
 PROBLEM_FIELDS = ["Claim", "Unit of analysis", "Estimand", "Refutation", "Objection", "Who cares", "Non-goals"]
+# Gate 1B: the Question section carries `Problem: <state> → `<brief file[#anchor]>``; the brief
+# (reference/problem-brief.md) carries these fields and a Verdict equal to the map's state.
+PROBLEM_STATES = {"PENDING", "SHOWN", "NOT_SHOWN", "INCONCLUSIVE"}
+PROBLEM_LINE = re.compile(r"^\s*(?:[-*]\s*)?\**Problem\**\s*:\**\s*(PENDING|SHOWN|NOT_SHOWN|INCONCLUSIVE)\b(.*)$", re.M)
+BRIEF_FIELDS = ["Construct", "Population", "Measure", "Reference", "Magnitude", "Falsification", "Verdict"]
+VERDICT = re.compile(r"^\s*(?:[-*]\s*)?(?:★\s*)?\**Verdict\**\s*:\**\s*(SHOWN|NOT_SHOWN|INCONCLUSIVE)\b", re.I | re.M)
 # A deferred idea carries the date it appeared and the condition under which it would enter.
 DEFERRED_ITEM = re.compile(r"^\s*[-*]\s*\d{4}-\d{2}-\d{2}:\s*.+\s[—-]\s*enters when:\s*\S.*$")
 NETWORK_REFUSED = {401, 403, 405, 429}
@@ -149,6 +157,42 @@ def section_at(path: Path, anchor: str) -> str | None:
     return "\n".join(lines[start + 1:]) if start is not None else None
 
 
+def labelled_field_gaps(body: str, fields: list[str]) -> list[str]:
+    return [
+        f for f in fields
+        if not re.search(r"^\s*(?:[-*]\s*)?(?:★\s*)?\**" + re.escape(f) + r"\**\s*:", body, re.I | re.M)
+    ]
+
+
+def check_problem_brief(result: Result, root: Path, question_lines: list[str]) -> str | None:
+    """Gate 1B in the map: the Problem line, and the brief it points to. Returns the brief path when there is one."""
+    match = PROBLEM_LINE.search("\n".join(question_lines))
+    if not match:
+        result.fail("Question: missing `Problem: PENDING | SHOWN | NOT_SHOWN | INCONCLUSIVE → `<problem-brief.md>`` (gate 1B)")
+        return None
+    state, rest = match.group(1), match.group(2)
+    pointers = pointers_in([rest])
+    if state == "PENDING":
+        return pointers[0].split("#")[0] if pointers else None
+    if not pointers:
+        result.fail(f"Question: Problem is {state} but names no problem brief")
+        return None
+    path, _, anchor = pointers[0].partition("#")
+    if not (root / path).is_file():
+        return None  # the pointer check reports it
+    body = section_at(root / path, anchor) if anchor else (root / path).read_text(encoding="utf-8", errors="replace")
+    if body is None:
+        result.fail(f"Question: problem brief `{pointers[0]}` has no heading for anchor #{anchor}")
+        return path
+    missing = labelled_field_gaps(body, BRIEF_FIELDS)
+    if missing:
+        result.fail(f"Question: problem brief `{path}` lacks the field(s) {', '.join(missing)} (scientific-method reference/problem-brief.md)")
+    verdict = VERDICT.search(body)
+    if verdict and verdict.group(1).upper() != state:
+        result.fail(f"Question: Problem is {state} in the map but the brief's Verdict is {verdict.group(1).upper()}")
+    return path
+
+
 def problem_statement_gaps(root: Path, pointer: str) -> list[str]:
     """Why the problem statement behind the Question pointer is incomplete; empty when complete."""
     path, _, anchor = pointer.partition("#")
@@ -157,10 +201,7 @@ def problem_statement_gaps(root: Path, pointer: str) -> list[str]:
     body = section_at(root / path, anchor)
     if body is None:
         return [f"has no heading for anchor #{anchor}"]
-    missing = [
-        f for f in PROBLEM_FIELDS
-        if not re.search(r"^\s*(?:[-*]\s*)?(?:★\s*)?\**" + re.escape(f) + r"\**\s*:", body, re.I | re.M)
-    ]
+    missing = labelled_field_gaps(body, PROBLEM_FIELDS)
     if missing:
         return ["lacks the field(s) " + ", ".join(missing) + " (scientific-method reference/problem-statement.md)"]
     return []
@@ -198,9 +239,18 @@ def check_map(text: str, root: Path) -> tuple[Result, dict[str, list[str]]]:
     question = "\n".join(sections.get("Question", []))
     if not REGISTRATION.search(question):
         result.fail("Question: missing `Registration: none | <URL or DOI, date>` — confirmatory code stays DRY_RUN while it is none")
-    for pointer in pointers_in(sections.get("Question", [])):
+    question_lines = sections.get("Question", [])
+    problem_match = PROBLEM_LINE.search("\n".join(question_lines))
+    problem_state = problem_match.group(1) if problem_match else None
+    brief_pointer = pointers_in([problem_match.group(2)]) if problem_match else []
+    for pointer in pointers_in(question_lines):
+        if pointer in brief_pointer:
+            continue
         for gap in problem_statement_gaps(root, pointer):
             result.fail(f"Question: problem statement at `{pointer}` {gap}")
+    brief_path = check_problem_brief(result, root, question_lines)
+    if brief_path:
+        layout["_brief"] = [brief_path]
 
     seen_phases: set[str] = set()
     for row in table_rows(sections.get("Gates", [])):
@@ -216,6 +266,10 @@ def check_map(text: str, root: Path) -> tuple[Result, dict[str, list[str]]]:
     missing_phases = [p for p in PHASES if p not in seen_phases]
     if "Gates" in sections and missing_phases:
         result.fail(f"Gates: one row per phase; missing phase(s) {', '.join(missing_phases)}")
+    for row in table_rows(sections.get("Gates", [])):
+        if len(row) >= 2 and row[0].strip()[:1] in set(PHASES[2:]) and row[1].lower() == "reached" and problem_state != "SHOWN":
+            result.fail(f"Gates: '{row[0]}' is reached but Problem is {problem_state or 'missing'}; the protocol does not freeze before the problem is SHOWN")
+            break
 
     for row in table_rows(sections.get("Hypotheses", [])):
         if len(row) >= 4 and row[3] not in HYPOTHESIS_STATES:
@@ -332,7 +386,7 @@ def is_identifier(line: str, start: int) -> bool:
 
 def check_numbers(root: Path, layout: dict[str, list[str]], min_int: int) -> Result:
     result = Result("numbers")
-    documents = iter_files(root, layout.get("documents", []), DOC_SUFFIXES)
+    documents = iter_files(root, layout.get("documents", []) + layout.get("_brief", []), DOC_SUFFIXES)
     aggregates = iter_files(root, layout.get("aggregates", []), AGGREGATE_SUFFIXES)
     if not documents or not aggregates:
         result.unverified(f"nothing to check: {len(documents)} document(s), {len(aggregates)} aggregate file(s) in Layout")

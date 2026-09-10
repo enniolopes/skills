@@ -27,6 +27,7 @@ MAP = f"""# RESEARCH.map — fixture
 
 ## Question
 Does X change Y? → `protocol.md#question`
+Problem: SHOWN → `problem-brief.md`
 Registration: none
 
 ## Hypotheses
@@ -132,6 +133,18 @@ BIB = """@comment{This is a comment with no doi}
 
 PROTOCOL_TEXT = PROTOCOL
 
+BRIEF = """# Problem brief — fixture
+
+- **Construct:** kitchens per 100k inhabitants; validated by: registry audit against field visits (ρ = 0.61)
+- **Population:** all municipalities, 2026
+- **Measure:** count of registered kitchens
+- **Reference:** the 3,000 kitchens the programme planned
+- **Magnitude:** 5,913 kitchens, from `aggregates/results.csv`
+- Distribution: concentrated in state capitals
+- **Falsification:** recount after de-duplication still 5,913; trend flat
+- **Verdict:** SHOWN — excess against the plan holds after falsification
+"""
+
 
 def build(root: Path, decisions: str = DECISIONS_OK, extra_paper: str = "", bib: str = BIB) -> None:
     (root / "aggregates").mkdir()
@@ -141,11 +154,12 @@ def build(root: Path, decisions: str = DECISIONS_OK, extra_paper: str = "", bib:
     (root / "protocol.md").write_text(PROTOCOL, encoding="utf-8")
     (root / "decisions.md").write_text(decisions, encoding="utf-8")
     (root / "aggregates" / "results.csv").write_text(
-        "metric,value\nkitchens,5913\nrho,0.6083\nlow,0.5512\nhigh,0.6701\nshare,0.125\nbeta,-0.31\nse,0.09\n",
+        "metric,value\nkitchens,5913\nrho,0.6083\nlow,0.5512\nhigh,0.6701\nshare,0.125\nbeta,-0.31\nse,0.09\nplanned,3000\n",
         encoding="utf-8")
     (root / "paper" / "results.md").write_text(PAPER + extra_paper, encoding="utf-8")
     (root / "notebooks" / "clean.ipynb").write_text(json.dumps(NOTEBOOK_CLEAN), encoding="utf-8")
     (root / "references.bib").write_text(bib, encoding="utf-8")
+    (root / "problem-brief.md").write_text(BRIEF, encoding="utf-8")
 
 
 def run_all(root: Path):
@@ -182,6 +196,37 @@ class MapTests(unittest.TestCase):
             self.assertNotIn("Refutation", joined)
             (root / "protocol.md").write_text("# Protocol\n\n## Other\n", encoding="utf-8")
             self.assertIn("no heading for anchor #question", " ".join(run_all(root)["map"].lines))
+
+    def test_problem_brief_fields_verdict_and_gate_rule(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp))
+            # missing fields
+            (root / "problem-brief.md").write_text(BRIEF.replace("- **Reference:**", "- Ref:").replace("- **Falsification:**", "- F:"), encoding="utf-8")
+            joined = " ".join(run_all(root)["map"].lines)
+            self.assertIn("Reference", joined)
+            self.assertIn("Falsification", joined)
+            # verdict disagrees with the map
+            (root / "problem-brief.md").write_text(BRIEF.replace("**Verdict:** SHOWN", "**Verdict:** NOT_SHOWN"), encoding="utf-8")
+            self.assertIn("Verdict is NOT_SHOWN", " ".join(run_all(root)["map"].lines))
+            # protocol reached before the problem is shown
+            (root / "problem-brief.md").write_text(BRIEF, encoding="utf-8")
+            broken = MAP.replace("Problem: SHOWN → `problem-brief.md`", "Problem: PENDING").replace("| 3 Protocol | pending | |", "| 3 Protocol | reached | |")
+            (root / "RESEARCH.map").write_text(broken, encoding="utf-8")
+            self.assertIn("does not freeze before the problem is SHOWN", " ".join(run_all(root)["map"].lines))
+            # PENDING without a brief is fine while nothing past phase 2 is reached
+            (root / "RESEARCH.map").write_text(MAP.replace("Problem: SHOWN → `problem-brief.md`", "Problem: PENDING"), encoding="utf-8")
+            self.assertEqual(run_all(root)["map"].status, "PASS", run_all(root)["map"].lines)
+            # missing Problem line
+            (root / "RESEARCH.map").write_text(MAP.replace("Problem: SHOWN → `problem-brief.md`\n", ""), encoding="utf-8")
+            self.assertIn("gate 1B", " ".join(run_all(root)["map"].lines))
+
+    def test_problem_brief_numbers_are_checked(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp))
+            (root / "problem-brief.md").write_text(BRIEF.replace("5,913 kitchens", "7,777 kitchens"), encoding="utf-8")
+            numbers = run_all(root)["numbers"]
+            self.assertEqual(numbers.status, "FAIL")
+            self.assertTrue(any("problem-brief.md" in l and "7,777" in l for l in numbers.lines), numbers.lines)
 
     def test_deferred_items_need_date_and_entry_condition(self):
         with tempfile.TemporaryDirectory() as tmp:

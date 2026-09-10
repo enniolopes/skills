@@ -10,6 +10,7 @@
 
 ## Question
 <one line> → `<path/to/protocol.md#question>`   (that section carries the problem statement fields)
+Problem: PENDING   (then: SHOWN | NOT_SHOWN | INCONCLUSIVE → `<path/to/problem-brief.md>`)
 Registration: none
 
 ## Hypotheses
@@ -20,7 +21,8 @@ Registration: none
 ## Gates
 | Phase | State | Blocked by |
 |---|---|---|
-| 1 Problem | pending | |
+| 1A Problem — formulate | pending | |
+| 1B Problem — demonstrate | pending | |
 | 2 Literature | pending | |
 | 3 Protocol | pending | |
 | 4 Data | pending | |

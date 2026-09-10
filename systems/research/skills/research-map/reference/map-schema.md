@@ -18,6 +18,7 @@ misordered section. Pointers are backticked repository-relative paths, optionall
 ## Question
 Does state habilitação correct or amplify the geography of community kitchens inherited
 from civil society, relative to municipal severe food insecurity? → `research/2026-kitchens/protocol.md#question`
+Problem: SHOWN → `research/2026-kitchens/problem-brief.md`
 Registration: https://osf.io/xxxxx, 2026-09-08
 
 ## Hypotheses
@@ -79,6 +80,12 @@ python tools/research_map_validate.py RESEARCH.map --offline
   anchor must carry the labelled fields `Claim`, `Unit of analysis`, `Estimand`,
   `Refutation`, `Objection`, `Who cares`, `Non-goals` (scientific-method,
   `reference/problem-statement.md`).
+- `Question` carries `Problem: PENDING | SHOWN | NOT_SHOWN | INCONCLUSIVE → `<brief>``. Unless
+  `PENDING`, the brief file must exist and carry `Construct`, `Population`, `Measure`,
+  `Reference`, `Magnitude`, `Falsification`, `Verdict` (scientific-method,
+  `reference/problem-brief.md`); its `Verdict` must equal the map's state; its numbers are
+  checked against the aggregates like any document. No gate from phase 3 on may be `reached`
+  while the problem is not `SHOWN`.
 - Backticks are reserved for pointers: a repository-relative path (with `/` or a known
   suffix), optionally with `#anchor`. A backticked number or symbol is not a pointer.
 - `Gates` has one row per phase, all eight; states are `reached`, `pending` or `blocked`;

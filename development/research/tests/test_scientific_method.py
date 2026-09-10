@@ -16,6 +16,7 @@ class ScientificMethodTests(unittest.TestCase):
         self.assertEqual(cited, present)
         self.assertEqual(len([n for n in present if n[:2].isdigit()]), 8)
         self.assertIn("problem-statement.md", present)
+        self.assertIn("problem-brief.md", present)
 
     def test_reference_files_follow_the_distilled_shape(self):
         for path in REFERENCE.glob("*.md"):
@@ -31,7 +32,8 @@ class ScientificMethodTests(unittest.TestCase):
 
     def test_every_reference_source_is_in_the_verification_table(self):
         table = (DESIGN / "sources-verified.md").read_text(encoding="utf-8")
-        expected = ["Getzels", "Chi, Feltovich", "Heilmeier", "E9(R1)", "Alvesson", "Hulley", "Simon", "Rittel", "Passi", "Nosek", "Lakens", "Simonsohn", "Gilbert", "Gebru", "Wilkinson", "VanderWeele",
+        expected = ["Lesko", "Fox", "Loeb", "Bardach", "Kingdon", "Mitroff", "Jacobs", "Shook", "Fitzpatrick",
+                    "Getzels", "Chi, Feltovich", "Heilmeier", "E9(R1)", "Alvesson", "Hulley", "Simon", "Rittel", "Passi", "Nosek", "Lakens", "Simonsohn", "Gilbert", "Gebru", "Wilkinson", "VanderWeele",
                     "Wagstaff", "Anselin", "Moran", "Cameron", "Gopen", "Schimel", "Heard", "von Elm",
                     "Benchimol", "Munafò", "King", "Booth", "Page", "Hernán", "Hundepool", "FAPESP",
                     "Elsevier", "SciELO", "Gelman", "Simmons"]

@@ -1,9 +1,11 @@
-# Problem statement — the artifact phase 1 produces
+# Problem statement — the artifact gate 1A produces
 
 Sources located 2026-09-10, not yet read at source.
 
-**When this applies.** Phase 1 writes it; every later gate re-reads it and logs any change
-as a decision. "Understanding the problem" is not time spent; it is this artifact, complete.
+**When this applies.** Gate 1A writes it; gate 1B (`reference/problem-brief.md`) then
+demonstrates the problem it states; every later gate re-reads it and logs any change as a
+decision. "Understanding the problem" is not time spent; it is this artifact, complete, and
+then shown.
 
 **What it requires.** One section in the protocol, pointed to from the map's `## Question`,
 with these labelled fields. The seven marked ★ are checked by `research-map validate`.
@@ -12,8 +14,9 @@ with these labelled fields. The seven marked ★ are checked by `research-map va
 ## Question
 <one sentence, no jargon, that a reviewer outside the field understands>
 
-★ Claim: descriptive | associational | causal — and, if causal, the identification
-  assumptions that stand in for randomisation (exchangeability, positivity, consistency)
+★ Claim: descriptive | associational | causal — descriptive is a full claim, not a lesser
+  one; if causal, the identification assumptions that stand in for randomisation
+  (exchangeability, positivity, consistency)
 ★ Unit of analysis: <municipality | kitchen | family | event>; every count and rate inherits it
 ★ Estimand: population <who, when>; exposure or contrast <A vs B>; outcome <variable, time>;
   intercurrent events <what can happen in between and how it is handled>; summary

@@ -57,6 +57,8 @@ asserts.
    - an interval computed as if independent on a clustered or spatial outcome;
    - a figure that does not match its code or its data (re-derive the figure's numbers
      from the aggregate it names; compare);
+   - a problem asserted without a brief: a magnitude with no reference fixed beforehand, a
+     construct never validated, an anecdote standing in for a rate;
    - a citation that does not say what it is cited for, or that resolves to nothing;
    - a variable used in a sense its source does not define;
    - a checklist item (STROBE/RECORD) unanswered.

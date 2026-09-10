@@ -6,7 +6,7 @@ separately.
 
 ## Status
 
-**Built, acceptance pending** (plugin 0.5.0, pieces 0.4.0, 2026-09-10). All three pieces
+**Built, acceptance pending** (plugin 0.6.0, pieces 0.5.0, 2026-09-10). All three pieces
 exist and pass the repository's structural checks and unit tests. Two things are not yet
 done, and the pieces say so themselves:
 
@@ -55,10 +55,14 @@ will leave the analysis environment.
 community kitchens relative to municipal food insecurity?
 ```
 
-Phase 1 writes the problem statement first — claim kind, unit of analysis, estimand,
-refutation, the obvious objection, who cares, non-goals — as a section of the protocol that
-`validate` checks field by field; then it delegates to `explorer`: a portfolio of hypothesis
-lineages, each with a bridge certificate. Each surviving lineage becomes a hypothesis; its discriminating test becomes
+Phase 1 has two gates. 1A formulates: the problem statement — claim kind, unit of
+analysis, estimand, refutation, the obvious objection, who cares, non-goals — as a section
+of the protocol that `validate` checks field by field, with `explorer` supplying the
+hypothesis lineages. 1B demonstrates: a descriptive study, the problem brief, that shows the
+problem exists, how large against a reference fixed beforehand, for whom, how it is handled
+today, and what was tried to make it disappear; its verdict (`SHOWN`, `NOT_SHOWN`,
+`INCONCLUSIVE`) sits in the map and the protocol cannot freeze before `SHOWN`. `NOT_SHOWN`
+is a result: the research closes or reformulates before any model is fit. Each surviving lineage becomes a hypothesis; its discriminating test becomes
 the primary test, its failure condition the refutation clause. The phase closes when the
 question is written with its refutation and the obvious reviewer objection is named.
 Then literature (every source verified at its DOI), protocol (prediction and refutation
