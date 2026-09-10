@@ -6,12 +6,19 @@ separately.
 
 ## Status
 
-**Design stage.** The plugin installs today but carries no piece yet, only its dependency
-on `explorer`. The consolidated design, the references it draws on, the origin case that
-motivated it and the build order live in `development/research/design/`. Each piece's
-contract is written there in prose; its runtime files appear in `skills/` and `agents/`
-of this directory as they are built (`development/research/design/roadmap.md`). This
-README states how the system is meant to be used; the build must honor it.
+**Built, acceptance pending** (plugin 0.2.0, pieces 0.1.0, 2026-09-10). All three pieces
+exist and pass the repository's structural checks and unit tests. Two things are not yet
+done, and the pieces say so themselves:
+
+- the method sources behind `reference/` were *located* (publisher landing page or DOI
+  found with matching metadata) but not *read* at source, because the build environment
+  blocked scholarly domains; `development/research/design/sources-verified.md` records the
+  level per source and is the first thing to upgrade in a session with network access;
+- no behavioural run has been recorded against `development/research/evals/`; acceptance
+  is by retro-test on the origin case (roadmap step 7).
+
+The consolidated design, the references it draws on, the origin case and the roadmap live
+in `development/research/design/`.
 
 ## Install
 
@@ -120,9 +127,12 @@ decision degrades to `BLOCKED` or `NOT_VERIFIED`, never to a guess.
 | What | Path |
 |---|---|
 | plugin manifest (name, version, dependencies) | `systems/research/.claude-plugin/plugin.json` |
-| runtime pieces, as built | `systems/research/skills/<piece>/`, `systems/research/agents/<piece>.md` |
-| design, references studied, origin case, roadmap | `development/research/design/` |
-| evaluation scenarios (regression, adversarial, holdout) | `development/research/evals/scenarios.json` |
+| `scientific-method` kernel and one reference per phase | `systems/research/skills/scientific-method/` |
+| `research-map` kernel, map grammar, blank map, `validate` script | `systems/research/skills/research-map/` |
+| `reviewer-2` agent | `systems/research/agents/reviewer-2.md` |
+| design, references studied, sources verified, origin case, roadmap | `development/research/design/` |
+| evaluation scenarios and the adversarial fixture generator | `development/research/evals/` |
+| unit tests (`validate` script; reference shape) | `development/research/tests/` |
 
 ## Principles
 

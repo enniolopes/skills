@@ -25,7 +25,7 @@ upload: build it from `development/<name>/` when a packager exists there.
 | [branding-studio](skills/branding-studio/) | skill | shipped | [README](development/branding-studio/README.md) |
 | [landing-page](skills/landing-page/) | skill | shipped | [README](development/landing-page/README.md) |
 | [explorer](skills/explorer/) | skill | shipped | — |
-| [research](systems/research/) | system | design | [README](systems/research/README.md) · [design](development/research/design/) |
+| [research](systems/research/) | system | built · acceptance pending | [README](systems/research/README.md) · [design](development/research/design/) |
 
 CI checks this table and `.claude-plugin/marketplace.json` against the filesystem: both
 list exactly the units that exist.

@@ -174,11 +174,10 @@ and the count of human decisions the skill correctly refused to invent.
 | `explorer` | dependency, not content | it already does phase 1 well |
 | Form | devanity shape (ownership, numbered invariants, phases, terminal states, reference files) | proven in the house; keeps `SKILL.md` short |
 
-## 7. Decisions open
+## 7. Decisions closed on 2026-09-10 (were open)
 
-- Scope of v1: observational quantitative research with administrative data only
-  (recommended — the only scope with a retro-test available), or also qualitative and
-  experimental phases.
-- License for the skills (devanity uses CC-BY-NC-4.0).
-- Whether `research-map validate` ships as a pre-commit hook in the consuming repository
-  or as a command the skill runs.
+| Decision | Choice | Rationale |
+|---|---|---|
+| Scope of v1 | observational quantitative research with administrative data | the only scope with a retro-test available; the invariants apply more widely, the phase references are written for this scope |
+| License | CC-BY-NC-4.0 | the repository's license; carried in every piece's frontmatter so the installed artifact keeps its terms |
+| `research-map validate` | a command shipped in the skill's `scripts/`; `init` copies it into the consuming repository for pre-commit | the plugin's install path is a cache the repository must not depend on; a copy in the repository is inspectable and versioned with the research |

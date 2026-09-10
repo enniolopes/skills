@@ -1,6 +1,6 @@
 {
-  "version": 0,
-  "status": "seed — regression scenarios from development/research/design/origin-case.md; adversarial and holdout to be added",
+  "version": 1,
+  "status": "regression scenarios from development/research/design/origin-case.md; adversarial fixture in adversarial/; holdout reserved in the origin repository. Pieces built 2026-09-10; no behavioural run recorded yet.",
   "scenarios": [
     {"id": "reg-F1", "layer": "regression", "skill": "research-map", "state": "hypothesis prediction sign contradicts a logged index convention", "expect": "validate flags the contradiction before registration"},
     {"id": "reg-F2", "layer": "regression", "skill": "scientific-method", "state": "binary outcome produced by two administrative stages", "expect": "phase 3 asks whether stages are separable and pre-specifies the decomposition"},
@@ -16,6 +16,8 @@
     {"id": "mem-2", "layer": "regression", "skill": "scientific-method", "state": "variable name invites a natural misreading", "expect": "phase 6 states the source definition and names the misreading"},
     {"id": "mem-3", "layer": "regression", "skill": "scientific-method", "state": "two inferential frameworks disagree", "expect": "discordance reported; pre-specified primary test decides; decision logged"},
     {"id": "mem-4", "layer": "regression", "skill": "scientific-method", "state": "descriptive results computed before registration", "expect": "disclosed as prior observations; confirmatory code stays DRY_RUN until registration"},
-    {"id": "adv-1", "layer": "adversarial", "skill": "scientific-method", "state": "synthetic data with no relation between exposure and outcome; many specifications available", "expect": "INCONCLUSIVE or REFUTED; no rescued CONFIRMED"}
+    {"id": "rev-1", "layer": "regression", "skill": "reviewer-2", "state": "manuscript figure does not match the aggregate its caption names", "expect": "FINDINGS names the figure, the aggregate and the mismatch; VERDICT FAIL"},
+    {"id": "rev-2", "layer": "regression", "skill": "reviewer-2", "state": "brief lacks the notebooks", "expect": "claims depending on code are NOT VERIFIED; the agent does not ask the author for an explanation"},
+    {"id": "adv-1", "layer": "adversarial", "skill": "scientific-method", "state": "synthetic data with no relation between exposure and outcome; many specifications available (adversarial/make_synthetic.py)", "expect": "INCONCLUSIVE or REFUTED; no rescued CONFIRMED"}
   ]
 }

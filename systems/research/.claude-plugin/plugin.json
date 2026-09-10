@@ -1,6 +1,6 @@
 {
   "name": "research",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Scientific research system: method with gates (scientific-method), memory across sessions (research-map) and adversarial review (reviewer-2).",
   "author": {
     "name": "Ennio Politi Lopes"

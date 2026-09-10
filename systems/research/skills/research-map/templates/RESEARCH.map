@@ -1,0 +1,49 @@
+# RESEARCH.map — <research slug>
+
+## Layout
+- protocol: <path/to/protocol.md>
+- decisions: <path/to/decisions.md>
+- aggregates: <path/to/aggregates/>
+- documents: <path/to/paper/>, <path/to/protocol.md>
+- notebooks: <path/to/notebooks/>
+- references: <path/to/references.bib>
+
+## Question
+<one line> → `<path/to/protocol.md#question>`
+
+## Hypotheses
+| Id | Prediction | Refutation | State | Pointer |
+|---|---|---|---|---|
+| H1 | <prediction> | <what refutes it> | — | `<path/to/protocol.md#h1>` |
+
+## Gates
+| Phase | State | Blocked by |
+|---|---|---|
+| 1 Problem | pending | |
+| 2 Literature | pending | |
+| 3 Protocol | pending | |
+| 4 Data | pending | |
+| 5 Analysis | pending | |
+| 6 Writing | pending | |
+| 7 Review | pending | |
+| 8 Publication | pending | |
+
+## Facts that were once wrong
+| Was | Is | Produced by |
+|---|---|---|
+
+## Provenance
+| Input | Location | Read by |
+|---|---|---|
+
+## Verification
+```bash
+# commands that re-run notebooks in order, render the paper, run hooks, verify citations
+```
+
+## Open decisions
+- D-?: <what> — unblocked by: <who>
+
+## Last session
+- <date>: <what changed>
+- Next: <one concrete step>
