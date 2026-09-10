@@ -1,1 +1,1 @@
-# marketing-skills
+# my skills
