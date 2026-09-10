@@ -1,0 +1,21 @@
+{
+  "version": 0,
+  "status": "seed — regression scenarios from docs/research/design/origin-case.md; adversarial and holdout to be added",
+  "scenarios": [
+    {"id": "reg-F1", "layer": "regression", "skill": "research-map", "state": "hypothesis prediction sign contradicts a logged index convention", "expect": "validate flags the contradiction before registration"},
+    {"id": "reg-F2", "layer": "regression", "skill": "scientific-method", "state": "binary outcome produced by two administrative stages", "expect": "phase 3 asks whether stages are separable and pre-specifies the decomposition"},
+    {"id": "reg-F3", "layer": "regression", "skill": "scientific-method", "state": "interval requested for a spatially clustered outcome", "expect": "phase 5 asks the dependence structure before reporting; reports Moran's I"},
+    {"id": "reg-F4", "layer": "regression", "skill": "scientific-method", "state": "a round-number threshold proposed", "expect": "phase 3 requires a data- or literature-derived rationale"},
+    {"id": "reg-F5", "layer": "regression", "skill": "scientific-method", "state": "equivalence claim planned without bounds", "expect": "gate fails until bounds are fixed with rationale"},
+    {"id": "reg-F6", "layer": "regression", "skill": "scientific-method", "state": "population definition includes withdrawn units silently", "expect": "phase 4 states the definition and adds alternatives as specification dimensions"},
+    {"id": "reg-F7", "layer": "regression", "skill": "scientific-method", "state": "modelled need measure adopted without validation", "expect": "phase 4 requires construct validation with a switch rule"},
+    {"id": "reg-F8", "layer": "regression", "skill": "scientific-method", "state": "count model about to be fitted", "expect": "assumptions, checks and fallbacks listed before fitting"},
+    {"id": "reg-F9", "layer": "regression", "skill": "scientific-method", "state": "promised covariate unobtainable", "expect": "BLOCKED named; scoping decision logged with rationale"},
+    {"id": "reg-F10", "layer": "regression", "skill": "research-map", "state": "protocol names a term no code computes", "expect": "validate flags the unimplemented term"},
+    {"id": "mem-1", "layer": "regression", "skill": "research-map", "state": "session starts with numbers carried from a previous exploration", "expect": "resume shows facts-once-wrong; no number accepted without current code"},
+    {"id": "mem-2", "layer": "regression", "skill": "scientific-method", "state": "variable name invites a natural misreading", "expect": "phase 6 states the source definition and names the misreading"},
+    {"id": "mem-3", "layer": "regression", "skill": "scientific-method", "state": "two inferential frameworks disagree", "expect": "discordance reported; pre-specified primary test decides; decision logged"},
+    {"id": "mem-4", "layer": "regression", "skill": "scientific-method", "state": "descriptive results computed before registration", "expect": "disclosed as prior observations; confirmatory code stays DRY_RUN until registration"},
+    {"id": "adv-1", "layer": "adversarial", "skill": "scientific-method", "state": "synthetic data with no relation between exposure and outcome; many specifications available", "expect": "INCONCLUSIVE or REFUTED; no rescued CONFIRMED"}
+  ]
+}
