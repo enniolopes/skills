@@ -12,7 +12,7 @@ rm = importlib.util.module_from_spec(spec)
 sys.modules["rm_validate"] = rm  # dataclasses resolve annotations through sys.modules
 spec.loader.exec_module(rm)
 
-GATES = "\n".join(f"| {i} {name} | pending | |" for i, name in enumerate(
+GATES = "\n".join(f"| {i} {name} | pending | | |" for i, name in enumerate(
     ["Problem", "Literature", "Protocol", "Data", "Analysis", "Writing", "Review", "Publication"], 1))
 
 MAP = f"""# RESEARCH.map — fixture
@@ -24,6 +24,7 @@ MAP = f"""# RESEARCH.map — fixture
 - documents: paper/
 - notebooks: notebooks/
 - references: references.bib
+- floor: 5
 
 ## Question
 Does X change Y? → `protocol.md#question`
@@ -36,9 +37,9 @@ Registration: none
 | H1 | Y < 0 | interval includes `0.05` | INCONCLUSIVE | `protocol.md#h1` |
 
 ## Gates
-| Phase | State | Blocked by |
-|---|---|---|
-{GATES.replace("| 1 Problem | pending | |", "| 1 Problem | reached | |").replace("| 8 Publication | pending | |", "| 8 Publication | blocked | ethics — PI |")}
+| Phase | State | Blocked by | Evidence |
+|---|---|---|---|
+{GATES.replace("| 1 Problem | pending | | |", "| 1 Problem | reached | | `decisions.md#d-1` |").replace("| 8 Publication | pending | | |", "| 8 Publication | blocked | ethics — PI | |")}
 
 ## Facts that were once wrong
 | Was | Is | Produced by |
@@ -108,7 +109,8 @@ PAPER = """# Results
 We found 5,913 kitchens and a correlation of ρ = 0.61 (95% CI 0.55–0.67).
 The coefficient was -0.31 (SE 0.09; p < 0.001), see Section 5.1 and Table 23.
 The share was 12.5% in 2026; see https://example.org/x for 5,913 units.
-Page 42 <!-- rm:ignore -->
+Page 42 <!-- rm:ignore: page reference, not a result -->
+Under Lei 14.628/2023 and Portaria GM nº 1.111 the registry is public.
 See doi:10.1000/xyz123 for 4,618 earlier kitchens.
 
 ```text
@@ -138,7 +140,8 @@ BRIEF = """# Problem brief — fixture
 - **Construct:** kitchens per 100k inhabitants; validated by: registry audit against field visits (ρ = 0.61)
 - **Population:** all municipalities, 2026
 - **Measure:** count of registered kitchens
-- **Reference:** the 3,000 kitchens the programme planned
+- **Reference:** the 3,000 kitchens the programme planned; fixed in D-1,
+  before the magnitude notebook existed
 - **Magnitude:** 5,913 kitchens, from `aggregates/results.csv`
 - Distribution: concentrated in state capitals
 - **Falsification:** recount after de-duplication still 5,913; trend flat
@@ -175,15 +178,55 @@ class MapTests(unittest.TestCase):
     def test_structure_failures(self):
         with tempfile.TemporaryDirectory() as tmp:
             build(root := Path(tmp))
-            broken = MAP.replace("| 1 Problem | reached | |", "| 1 Problem | done | |") \
+            broken = MAP.replace("| 1 Problem | reached | | `decisions.md#d-1` |", "| 1 Problem | done | | |") \
                         .replace("`notebooks/clean.ipynb` |\n\n## Provenance", "`notebooks/missing.ipynb` |\n\n## Provenance") \
-                        .replace("## Open decisions\n", "") \
+                        .replace("## Deferred\n", "") \
                         .replace("Registration: none\n", "") \
-                        .replace("| 4 Data | pending | |\n", "")
+                        .replace("| 4 Data | pending | | |\n", "")
             (root / "RESEARCH.map").write_text(broken, encoding="utf-8")
             joined = " ".join(run_all(root)["map"].lines)
-            for needle in ("state 'done'", "missing.ipynb", "Open decisions", "Registration", "missing phase(s) 4"):
+            for needle in ("state 'done'", "missing.ipynb", "missing section '## Deferred'", "Registration", "missing phase(s) 4"):
                 self.assertIn(needle, joined)
+
+    def test_optional_sections_may_be_absent_but_order_holds(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp))
+            lean = MAP.split("## Facts that were once wrong")[0] + "## Deferred" + MAP.split("## Deferred")[1]
+            (root / "RESEARCH.map").write_text(lean, encoding="utf-8")
+            self.assertEqual(run_all(root)["map"].status, "PASS", run_all(root)["map"].lines)
+            swapped = MAP.replace("## Provenance", "## Verif").replace("## Verification", "## Provenance").replace("## Verif", "## Verification")
+            (root / "RESEARCH.map").write_text(swapped, encoding="utf-8")
+            self.assertIn("out of order", " ".join(run_all(root)["map"].lines))
+
+    def test_reached_gate_needs_evidence(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp))
+            (root / "RESEARCH.map").write_text(MAP.replace("| reached | | `decisions.md#d-1` |", "| reached | | |"), encoding="utf-8")
+            self.assertIn("names no evidence", " ".join(run_all(root)["map"].lines))
+            (root / "RESEARCH.map").write_text(MAP.replace("| reached | | `decisions.md#d-1` |", "| reached | | `decisions/missing.md` |"), encoding="utf-8")
+            self.assertIn("does not resolve", " ".join(run_all(root)["map"].lines))
+            doi = MAP.replace("| 8 Publication | blocked | ethics — PI | |", "| 8 Publication | reached | | https://doi.org/10.1000/xyz |")
+            (root / "RESEARCH.map").write_text(doi, encoding="utf-8")
+            self.assertNotIn("8 Publication", " ".join(run_all(root)["map"].lines))
+
+    def test_more_than_three_open_hypotheses_fail(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp))
+            rows = "".join(f"| H{i} | p | r | — | `protocol.md#h1` |\n" for i in range(2, 6))
+            (root / "RESEARCH.map").write_text(MAP.replace("INCONCLUSIVE | `protocol.md#h1` |\n", "INCONCLUSIVE | `protocol.md#h1` |\n" + rows), encoding="utf-8")
+            joined = " ".join(run_all(root)["map"].lines)
+            self.assertIn("4 without a terminal state", joined)
+            three = MAP.replace("INCONCLUSIVE | `protocol.md#h1` |\n", "INCONCLUSIVE | `protocol.md#h1` |\n" + rows.split("| H5")[0])
+            (root / "RESEARCH.map").write_text(three, encoding="utf-8")
+            self.assertEqual(run_all(root)["map"].status, "PASS", run_all(root)["map"].lines)
+
+    def test_brief_reference_names_the_decision_that_fixed_it(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp))
+            (root / "problem-brief.md").write_text(BRIEF.replace("fixed in D-1,", "fixed beforehand,"), encoding="utf-8")
+            self.assertIn("Reference names no decision", " ".join(run_all(root)["map"].lines))
+            (root / "problem-brief.md").write_text(BRIEF.replace("D-1", "D-9"), encoding="utf-8")
+            self.assertIn("D-9, not a block", " ".join(run_all(root)["map"].lines))
 
     def test_problem_statement_fields_are_required_at_the_question_pointer(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -274,6 +317,22 @@ class NumbersTests(unittest.TestCase):
     def test_identifiers_are_not_numbers(self):
         self.assertNotIn("37", self.flagged("\nSee D-37 and H-21 and F10.\n"))
 
+    def test_legal_instruments_are_identifiers(self):
+        flagged = self.flagged("\nDecreto nº 11.936 and Directive 2016/679 and the Act 1.234 apply; 3.333 is a count.\n")
+        self.assertNotIn("14.628", flagged)   # fixture line: Lei 14.628/2023
+        self.assertNotIn("1.111", flagged)    # Portaria GM nº 1.111
+        self.assertNotIn("11.936", flagged)
+        self.assertNotIn("1.234", flagged)
+        self.assertIn("3.333", flagged)
+
+    def test_ignore_marker_needs_a_reason(self):
+        flagged = self.flagged("\nThe sample had 7,777 units. <!-- rm:ignore -->\nAlso 6,666 units. <!-- rm:ignore: quoted from the funder's call -->\n")
+        self.assertIn("rm:ignore without a reason", flagged)
+        self.assertNotIn("6,666", flagged)
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp))
+            self.assertIn("1 rm:ignore marker(s)", run_all(root)["numbers"].summary)
+
     def test_url_skips_only_its_span(self):
         flagged = self.flagged()
         self.assertIn("4,618", flagged)         # on the doi line, still checked, absent → flagged
@@ -297,7 +356,7 @@ class DecisionsTests(unittest.TestCase):
             build(root := Path(tmp))
             decisions = run_all(root)["decisions"]
             self.assertEqual(decisions.status, "PASS", decisions.lines)
-            self.assertIn("2 decision(s)", decisions.summary)
+            self.assertIn("2 decision block(s)", decisions.summary)
 
     def test_duplicate_and_missing_revision(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -310,6 +369,48 @@ class DecisionsTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             build(root := Path(tmp), decisions="# Decisions\n\nnothing yet\n")
             self.assertEqual(run_all(root)["decisions"].status, "NOT_VERIFIED")
+
+    def test_table_rows_are_counted_not_passed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp), decisions=DECISIONS_OK + "\n| Id | Decision |\n|---|---|\n| D-3 | radius |\n| **D-4** | pool |\n")
+            decisions = run_all(root)["decisions"]
+            self.assertEqual(decisions.status, "NOT_VERIFIED")
+            self.assertIn("2 decision id(s) live in table rows", decisions.summary)
+
+    def test_empty_revision_and_unknown_supersedes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp), decisions=DECISIONS_OK + "\n### D-3 · 2026-09-04 · pool definition\nSupersedes: D-7\nRationale: none.\nRevision condition: —\n")
+            joined = " ".join(run_all(root)["decisions"].lines)
+            self.assertIn("empty `Revision condition:`", joined)
+            self.assertIn("supersedes D-7, which is not an earlier block", joined)
+            build2 = DECISIONS_OK + "\n### D-3 · 2026-09-04 · pool definition\nSupersedes: D-2\nRationale: drift re-measured.\nRevision condition: drift changes again.\n"
+            (root / "decisions.md").write_text(build2, encoding="utf-8")
+            self.assertEqual(run_all(root)["decisions"].status, "PASS", run_all(root)["decisions"].lines)
+
+
+class DisclosureTests(unittest.TestCase):
+    def test_small_cells_under_documents_fail(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp))
+            (root / "paper" / "data").mkdir()
+            (root / "paper" / "data" / "linkage.md").write_text(
+                "| status | 2024 | 2025 |\n|---|---|---|\n| matched | 5913 | 6000 |\n| conflict | 3 | 0 |\n| rank | 1 | 2 | <!-- rm:ignore: ranks, not counts -->\n", encoding="utf-8")
+            (root / "paper" / "data" / "cells.csv").write_text("group,n\na,12\nb,4\n", encoding="utf-8")
+            disclosure = run_all(root)["disclosure"]
+            self.assertEqual(disclosure.status, "FAIL")
+            joined = " ".join(disclosure.lines)
+            self.assertIn("linkage.md:4  cell 3", joined)
+            self.assertIn("cells.csv:3  cell 4", joined)
+            self.assertNotIn("rank", joined)
+            self.assertNotIn("cell 0", joined)
+
+    def test_no_floor_is_not_verified(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build(root := Path(tmp))
+            (root / "RESEARCH.map").write_text(MAP.replace("- floor: 5\n", ""), encoding="utf-8")
+            self.assertEqual(run_all(root)["disclosure"].status, "NOT_VERIFIED")
+            (root / "RESEARCH.map").write_text(MAP.replace("- floor: 5\n", "- floor: five\n"), encoding="utf-8")
+            self.assertIn("floor must be one integer", " ".join(run_all(root)["map"].lines))
 
 
 class CitationsTests(unittest.TestCase):
@@ -343,7 +444,7 @@ class NotebooksAndCliTests(unittest.TestCase):
     def test_cli_exit_codes(self):
         with tempfile.TemporaryDirectory() as tmp:
             build(root := Path(tmp), bib="@article{ok, doi={10.1/x}}\n")
-            (root / "paper" / "results.md").write_text("# Results\n\nWe found 5,913 kitchens.\n", encoding="utf-8")
+            (root / "paper" / "results.md").write_text("# Results\n\nWe found 5,913 kitchens.\n\n| a | b |\n|---|---|\n| x | 12 |\n", encoding="utf-8")
             self.assertEqual(rm.main([str(root / "RESEARCH.map"), "--offline"]), 0)
             self.assertEqual(rm.main([str(root / "RESEARCH.map"), "--offline", "--strict"]), 1)
 
