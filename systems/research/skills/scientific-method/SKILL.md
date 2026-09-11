@@ -4,7 +4,7 @@ description: Run an empirical research project as a lifecycle with gates — pro
 when_to_use: Triggers include "vou ajustar/rodar o modelo", "let me fit", "vou citar", "escrever os resultados", "deu/não deu efeito", "no effect", "qual o intervalo", "definir a amostra/população", "o raio de 500 m", "os dois resultados discordam", "pré-registro", "protocolo", "hipótese", "revisar o manuscrito", "submeter o artigo", "a gente devia testar também", "apareceu um método novo", "abrir mais uma frente", "qual é a pergunta", "definir o problema", "estimando", "para quem isso importa", "o problema é óbvio", "mostrar que o problema existe", "qual o tamanho do problema", "isso já não está resolvido?".
 license: CC-BY-NC-4.0
 metadata:
-  version: 0.5.0
+  version: 0.6.0
 argument-hint: '<start | phase | review <manuscript> | what you are about to do>'
 ---
 
@@ -25,11 +25,14 @@ designs may use the invariants; the phase references are written for this scope.
 - anything else → match it against the phase table below; if it matches no trigger, say so
   and ask which phase is meant.
 
-Every response ends with one report line, always this shape:
+Every response ends with one report line. When a phase acted:
 
 ```text
 Phase <n> <name> · Gate: PASS | FAIL — <unmet criterion> · states changed: <H1 → INCONCLUSIVE, …> · decisions: <D-n, …> · next: <one concrete step>
 ```
+
+When no phase trigger fired (a question answered, a file tidied, a search run), the line is
+`Phase: none · no gate touched · next: <one concrete step>` — never a repeated gate line.
 
 ## Ownership
 
@@ -38,6 +41,12 @@ and deposit. Does **not** own domain judgement (which question matters, which in
 to call, what a field term means in practice), authorship, ethics approval, or the choice
 of venue. Those belong to humans and are never invented; when one is missing the state is
 `BLOCKED`, named, with who unblocks it.
+
+Does **not** own software engineering. The topology of a research is the map's `Layout`:
+protocol, decisions, aggregates, documents, notebooks, references. "Structure this
+research" means making those six keys true — `research-map init` — and nothing more.
+Packages, test suites, build systems, CI, hooks and code architecture are the analyst's
+engineering, not this method; when asked for them, say so in one line and stop.
 
 ## Invariants
 
@@ -55,12 +64,16 @@ of venue. Those belong to humans and are never invented; when one is missing the
 6. **Bounds for any "no effect" claim are fixed before the test.**
 7. **Every analytic choice that could reasonably have gone another way is a
    specification-curve dimension**, not a footnote.
-8. **Every linkage step reports match rates and errors. Every aggregate that leaves the
-   analysis environment respects the disclosure floor** the repository sets.
+8. **Every linkage step reports match rates and errors. Every table that leaves the
+   analysis environment respects the disclosure floor** the map's `Layout` sets — and
+   "leaves" is a place, not an intent: anything written under `documents`, by anyone,
+   including a table this method itself produces.
 9. **Every citation is verified at its DOI record or landing page before it is written**;
    a finding read only from an excerpt is marked as such.
 10. **Every methodological decision is logged** with date, rationale and revision
-    condition; the log is append-only.
+    condition. Methodological means: a reviewer, or the supplementary material, would need
+    it to judge the results. Anything else — tooling, file layout, wording — is a commit
+    message. The log is append-only from the commit onward.
 11. **Terminal states are named**: `CONFIRMED`, `REFUTED`, `INCONCLUSIVE`, `BLOCKED`
     (missing human decision or data), `NOT_VERIFIED` (a check could not run). Silence is
     not a state.
@@ -116,7 +129,7 @@ fired and apply its requirements **before** doing the thing.
 
 | # | Phase | Trigger (what the conversation shows) | Exit gate | Read |
 |---|---|---|---|---|
-| 1A | Problem — formulate | a research starts, restarts or gains a hypothesis; the question is stated in one sentence and someone wants to start analysing | exploration budget logged before exploring; problem statement complete (claim, unit, estimand, refutation, objection, who cares, non-goals); lineages not adopted in `## Deferred` | `reference/01-problem.md`, `reference/problem-statement.md` |
+| 1A | Problem — formulate | a research starts, restarts or gains a hypothesis; the question is stated in one sentence and someone wants to start analysing; an existing research is put under the method | exploration budget logged before exploring and `explorer` invoked on it; problem statement complete (claim, unit, estimand, refutation, objection, who cares, non-goals); lineages not adopted in `## Deferred`; the gate's evidence is the budget decision, pointed to from the map | `reference/01-problem.md`, `reference/problem-statement.md` |
 | 1B | Problem — demonstrate | the statement exists; "the problem is obvious"; anyone reaches for a solution or a model before the problem is shown | problem brief complete (construct validated, population, measure, reference fixed before magnitude, magnitude from executed code, falsification attempted, verdict); `Problem: SHOWN` in the map, or the research reformulates or closes | `reference/problem-brief.md` |
 | 2 | Literature | a citation is about to be typed; a claim about the state of knowledge | verification log complete (each source at DOI, or `NOT_VERIFIED` and not in the text); gap in one paragraph | `reference/02-literature.md` |
 | 3 | Protocol | hypotheses, tests, populations or thresholds set or changed; a round-number threshold or radius proposed; "no effect" planned; "we should also test X" after the freeze | protocol frozen; registration text derived; assumption tables, bounds and dimensions listed; anything admitted after the freeze has its trade logged | `reference/03-protocol.md` |
@@ -129,7 +142,9 @@ fired and apply its requirements **before** doing the thing.
 Phases are ordered by dependency, not ceremony. A later phase may send work back to an
 earlier one (a review finding that changes a number reopens phase 6; a new hypothesis
 reopens phases 1 and 3). Skipping a phase is a logged decision with a revision condition,
-never silence.
+never silence. A gate is `reached` by the artifact it produces, pointed to from the map's
+`Gates`; a research that already exists when the method arrives starts with every gate
+`pending` and earns each one by its artifact — history is disclosed, not certified.
 
 ## Delegation
 
@@ -143,28 +158,35 @@ never silence.
   "Required brief" section lists it, checklist included. It does not edit and does not
   inherit your reasoning.
 
-If a delegate is not installed, do not simulate it: mark the step `NOT_VERIFIED` and name
-what is missing.
+Delegating is invoking: the Skill tool for a skill, the Agent tool for the agent. Reading a
+skill's file is not invoking it — its variables stay unresolved and its work undone. If a
+delegate is not installed or cannot be invoked, do not simulate it: mark the step
+`NOT_VERIFIED`, name what is missing, and leave the gate that depends on it `pending`.
 
 ## Decision log entry
 
-Every methodological decision, appended to the repository's decision log, in this shape
-(the map's `validate` requires the heading and the revision condition):
+A methodological decision (invariant 10: a reviewer would need it) goes to the repository's
+decision log in this shape; the map's `validate` requires the heading and a non-empty
+revision condition:
 
 ```text
-### D-<n> · <YYYY-MM-DD>
-Decision: <what was decided>
+### D-<n> · <YYYY-MM-DD> · <title, five words>
+<what was decided, one or two sentences>
 Rationale: <why; evidence or source>
-Revision condition: <what observation would reopen this>
+Revision condition: <the observation that would reopen this; or "not revisable: <why>">
 ```
+
+Before its commit a block is a draft and may be rewritten; after, only a new block with
+`Supersedes: D-<k>` changes it. A decision that refines an uncommitted one is edited into
+it, not appended.
 
 ## Human gates
 
 Stop and ask only when the missing answer belongs to a human authority (domain judgement,
 authorship, ethics, venue, a scoping decision on unobtainable data). Ask the smallest
 decision-changing question, with the consequence stated in plain language and a
-recommended default; record the answer as a decision. Everything else is inspected,
-computed or degraded explicitly — never asked.
+recommended default — always the option that changes the least; record the answer as a
+decision. Everything else is inspected, computed or degraded explicitly — never asked.
 
 ## Completion
 

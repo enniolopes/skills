@@ -10,7 +10,11 @@ registration text, slides, e-mail summarising results.
 - **Argument before prose.** Write the claims, the reasons and the evidence for each as a
   list; then write paragraphs. One finding per paragraph.
 - **Every number with an interval and a source table.** The manuscript renders from
-  committed aggregates only; a number typed by hand is a claim, not a result.
+  committed aggregates only; a number typed by hand is a claim, not a result. A number the
+  map's `validate` reports has three exits: its aggregate is committed, or the line is
+  marked `<!-- rm:ignore: <reason> -->` because it is not a result (a law's number, a
+  funder's figure), or it leaves the text — and leaving changes what the document claims,
+  so it is said in the report line, never done quietly to pass the check.
 - **Every variable defined as its source defines it**, with the common misreading named
   (a variable labelled "without X" that is in fact a counterfactual simulation on the same
   units, not a different population, will be read as the population unless you say so).

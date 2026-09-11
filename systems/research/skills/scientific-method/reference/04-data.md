@@ -18,9 +18,11 @@ population is defined, or an aggregate leaves the analysis environment.
   (a pool that silently includes withdrawn units is the classic error).
 - **Construct validation** for any modelled or proxy measure adopted from outside, with a
   switch rule: what result would make you drop it.
-- **Disclosure floor.** Any aggregate that leaves the analysis environment respects the
-  minimum cell size the repository sets; PII is dropped at the first step, and no
-  identifiable row exists outside the cache.
+- **Disclosure floor.** "Outside the analysis environment" is a place: anything under the
+  map's `documents`, whoever writes it — a manuscript table, a linkage report a notebook
+  saves next to the paper, a file this method produces. Every such table respects the
+  `floor` the map's `Layout` sets (`validate` reads the cells); PII is dropped at the first
+  step, and no identifiable row exists outside the cache.
 - **Datasheet** for any dataset the research publishes: motivation, composition,
   collection, preprocessing, uses, distribution, maintenance.
 
