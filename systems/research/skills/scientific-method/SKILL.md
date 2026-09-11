@@ -22,17 +22,16 @@ designs may use the invariants; the phase references are written for this scope.
 - `start <question>` → phase 1, then onward.
 - `phase` → report the current phase and gate from the research map, nothing else.
 - `review <path>` → phase 7 on that manuscript.
-- anything else → match it against the phase table below; if it matches no trigger, say so
-  and ask which phase is meant.
+- anything else → match it against the phase table below; a match fires that phase; no
+  match is answered as asked, without a phase.
 
-Every response ends with one report line. When a phase acted:
+Every response ends with one report line. If a phase trigger fired this turn:
 
 ```text
 Phase <n> <name> · Gate: PASS | FAIL — <unmet criterion> · states changed: <H1 → INCONCLUSIVE, …> · decisions: <D-n, …> · next: <one concrete step>
 ```
 
-When no phase trigger fired (a question answered, a file tidied, a search run), the line is
-`Phase: none · no gate touched · next: <one concrete step>` — never a repeated gate line.
+Otherwise: `Phase: none · no gate touched · next: <one concrete step>`.
 
 ## Ownership
 
@@ -64,10 +63,8 @@ engineering, not this method; when asked for them, say so in one line and stop.
 6. **Bounds for any "no effect" claim are fixed before the test.**
 7. **Every analytic choice that could reasonably have gone another way is a
    specification-curve dimension**, not a footnote.
-8. **Every linkage step reports match rates and errors. Every table that leaves the
-   analysis environment respects the disclosure floor** the map's `Layout` sets — and
-   "leaves" is a place, not an intent: anything written under `documents`, by anyone,
-   including a table this method itself produces.
+8. **Every linkage step reports match rates and errors. Every table written under the
+   map's `documents` respects its `floor`** — whoever writes it, this method included.
 9. **Every citation is verified at its DOI record or landing page before it is written**;
    a finding read only from an excerpt is marked as such.
 10. **Every methodological decision is logged** with date, rationale and revision
@@ -86,8 +83,8 @@ engineering, not this method; when asked for them, say so in one line and stop.
 `validate`. Gate 1A: the **problem statement** (`reference/problem-statement.md`) —
 what is claimed, for whom, with what estimand, what would refute it. Gate 1B: the **problem
 brief** (`reference/problem-brief.md`) — a descriptive study that shows the problem exists,
-how large against a reference fixed beforehand, for whom, how it is handled today, and
-what was tried to make it disappear. Its verdict lives in the map: `Problem: SHOWN |
+how large against a reference set by a logged decision, for whom, how it is handled today,
+and what was tried to make it disappear. Its verdict lives in the map: `Problem: SHOWN |
 NOT_SHOWN | INCONCLUSIVE`. The protocol does not freeze before `SHOWN`; `NOT_SHOWN` ends or
 reformulates the research and is the cheapest good result a research can have. Every later
 gate re-reads both; a change is a logged decision, never a silent rewrite. The error this
@@ -117,8 +114,8 @@ growth is seen, not felt.
 
 `research:research-map` owns it. Run its `resume` before the first action of a session,
 its `validate` before any commit, and its `update` after any gate change, terminal-state
-change or corrected number — not "at the end", which nothing signals. If the skill is not
-listed, run its script directly; never narrate a resume or update you did not perform.
+change or corrected number — not "at the end", which nothing signals. Never narrate a
+resume, update or validate you did not perform.
 
 ## Phases
 
@@ -129,11 +126,11 @@ fired and apply its requirements **before** doing the thing.
 
 | # | Phase | Trigger (what the conversation shows) | Exit gate | Read |
 |---|---|---|---|---|
-| 1A | Problem — formulate | a research starts, restarts or gains a hypothesis; the question is stated in one sentence and someone wants to start analysing; an existing research is put under the method | exploration budget logged before exploring and `explorer` invoked on it; problem statement complete (claim, unit, estimand, refutation, objection, who cares, non-goals); lineages not adopted in `## Deferred`; the gate's evidence is the budget decision, pointed to from the map | `reference/01-problem.md`, `reference/problem-statement.md` |
-| 1B | Problem — demonstrate | the statement exists; "the problem is obvious"; anyone reaches for a solution or a model before the problem is shown | problem brief complete (construct validated, population, measure, reference fixed before magnitude, magnitude from executed code, falsification attempted, verdict); `Problem: SHOWN` in the map, or the research reformulates or closes | `reference/problem-brief.md` |
+| 1A | Problem — formulate | a research starts, restarts, gains a hypothesis or comes under the method; the question is stated in one sentence and someone wants to start analysing | exploration budget logged, then `explorer` invoked on it; problem statement complete (claim, unit, estimand, refutation, objection, who cares, non-goals); lineages not adopted in `## Deferred` | `reference/01-problem.md`, `reference/problem-statement.md` |
+| 1B | Problem — demonstrate | the statement exists; "the problem is obvious"; anyone reaches for a solution or a model before the problem is shown | problem brief complete (construct validated, population, measure, reference named by its decision, magnitude from executed code, falsification attempted, verdict); `Problem: SHOWN` in the map, or the research reformulates or closes | `reference/problem-brief.md` |
 | 2 | Literature | a citation is about to be typed; a claim about the state of knowledge | verification log complete (each source at DOI, or `NOT_VERIFIED` and not in the text); gap in one paragraph | `reference/02-literature.md` |
 | 3 | Protocol | hypotheses, tests, populations or thresholds set or changed; a round-number threshold or radius proposed; "no effect" planned; "we should also test X" after the freeze | protocol frozen; registration text derived; assumption tables, bounds and dimensions listed; anything admitted after the freeze has its trade logged | `reference/03-protocol.md` |
-| 4 | Data | an input enters; sources are joined; a population or pool is named for the first time; an aggregate leaves | linkage report per join; provenance per input; no identifiable row outside the cache | `reference/04-data.md` |
+| 4 | Data | an input enters; sources are joined; a population or pool is named for the first time; a table is written under `documents` | linkage report per join; provenance per input; no identifiable row outside the cache; no cell under `documents` below `floor` | `reference/04-data.md` |
 | 5 | Analysis | "vou ajustar / rodar o modelo", "let me fit"; an interval or statistic about to be reported; two results disagree | assumptions → check → fallback listed before fitting; dependence structure asked; `DRY_RUN` status confirmed; every pre-specified check has a result; terminal state per hypothesis; discordance reported and the primary test decides | `reference/05-analysis.md` |
 | 6 | Writing | a number is about to be written into prose; any prose that will leave the repository | every number exists in a committed aggregate with interval and source table; figure provenance; definitions with misreadings | `reference/06-writing.md` |
 | 7 | Review | before submission; after any confirmatory run on demand; `review <path>` | reviewer verdict `PASS`, or every `FAIL` has a logged response and re-run checks | `reference/07-review.md` |
@@ -142,9 +139,10 @@ fired and apply its requirements **before** doing the thing.
 Phases are ordered by dependency, not ceremony. A later phase may send work back to an
 earlier one (a review finding that changes a number reopens phase 6; a new hypothesis
 reopens phases 1 and 3). Skipping a phase is a logged decision with a revision condition,
-never silence. A gate is `reached` by the artifact it produces, pointed to from the map's
-`Gates`; a research that already exists when the method arrives starts with every gate
-`pending` and earns each one by its artifact — history is disclosed, not certified.
+never silence. A gate is `reached` when the artifact it produces exists and the map's
+`Gates` row points to it; until then it is `pending`, whatever the history says. This is
+also how a research that already exists comes under the method: every gate `pending`, each
+earned by its artifact.
 
 ## Delegation
 
@@ -153,15 +151,14 @@ never silence. A gate is `reached` by the artifact it produces, pointed to from 
   lineage's discriminating test becomes the primary test; its failure condition becomes
   the refutation clause.
 - **`research:research-map`** (skill) — memory across sessions, above. Its `validate` is
-  the mechanical half of invariants 2, 9 and 10.
+  the mechanical half of invariants 2, 8, 9 and 10.
 - **`research:reviewer-2`** (agent) — phase 7 and on demand. Supply the brief exactly as its
   "Required brief" section lists it, checklist included. It does not edit and does not
   inherit your reasoning.
 
 Delegating is invoking: the Skill tool for a skill, the Agent tool for the agent. Reading a
-skill's file is not invoking it — its variables stay unresolved and its work undone. If a
-delegate is not installed or cannot be invoked, do not simulate it: mark the step
-`NOT_VERIFIED`, name what is missing, and leave the gate that depends on it `pending`.
+skill's file with `cat` is not invoking it. A delegate that is not installed or cannot be
+invoked is not simulated: the step is `NOT_VERIFIED` with what is missing named.
 
 ## Decision log entry
 
@@ -176,9 +173,8 @@ Rationale: <why; evidence or source>
 Revision condition: <the observation that would reopen this; or "not revisable: <why>">
 ```
 
-Before its commit a block is a draft and may be rewritten; after, only a new block with
-`Supersedes: D-<k>` changes it. A decision that refines an uncommitted one is edited into
-it, not appended.
+Before its commit a block is a draft and is rewritten in place; after, only a new block with
+`Supersedes: D-<k>` changes it.
 
 ## Human gates
 

@@ -46,19 +46,17 @@ Backticks in the map are reserved for pointers: repository-relative paths, optio
 Build the map from an existing protocol and decision log. Read them; fill every section
 from what they say, never from memory. Write `Layout` first — everything else depends on
 it, and it is the whole answer to "how should this research be organised": six paths and a
-floor, nothing about packages, tests or build systems. Every gate starts `pending`; a gate
-becomes `reached` only when its evidence artifact exists and is pointed to — a research
-that already has a protocol has the protocol, not a certified past. Leave optional
-sections out rather than copying what the README already says; leave `Facts that were once
-wrong` empty rather than inventing history. Finish by running `validate`.
+floor. Every gate starts `pending`; a gate is `reached` only when its evidence artifact
+exists and the row points to it. Leave optional sections out rather than copying what the
+README already says. Finish by running `validate`.
 
 ### `resume` — before the first action of a session
 
 Read the map. Restate the state in one screen, in this order: the next action; gates and
 their states; the problem's state (`SHOWN` or not, and why); registration status;
 hypotheses with terminal states, and the count without one (more than three is a scope
-finding); open decisions and who unblocks each; deferred items, as a count and the one
-whose entry condition is closest; what changed last session. The reader cannot hold "step
+finding); who unblocks each `blocked` gate; deferred items, as a count and the one whose
+entry condition is closest; what changed last session. The reader cannot hold "step
 3 of 5" between messages — the agent is that reader. Then run `validate` and report its
 result before any other work; a `FAIL` is the first item of the session.
 
@@ -70,8 +68,8 @@ happened, a commit is about to be made. On each: add a dated line to `Last sessi
 rewrite its `Next:`; make `Gates` (state and evidence), `Hypotheses` and `Registration`
 match what the protocol and decision log now say; add any corrected number to `Facts that
 were once wrong` with the notebook that now produces it. Run `validate`; a `FAIL` that
-cannot be fixed now is recorded under `Open decisions`. A `resume` that finds `Last
-session` older than the last commit reports the missed `update` as its first finding.
+cannot be fixed now becomes the `Next:` line. A `resume` that finds `Last session` older
+than the last commit reports the missed `update` as its first finding.
 
 ### `validate` — mechanical, before any commit
 
@@ -80,10 +78,10 @@ python3 "${CLAUDE_SKILL_DIR}/scripts/validate.py" RESEARCH.map --offline
 ```
 
 The script lives with this capability and runs from where it is installed; the consuming
-repository carries no copy. `${CLAUDE_SKILL_DIR}` resolves when the skill is invoked; if
-the path is not resolved, the skill was read, not invoked — invoke it. A repository that
-wants a pre-commit hook points the hook at that installed path; the hook is the
-repository's business, `validate` before every commit is this skill's.
+repository carries no copy. `${CLAUDE_SKILL_DIR}` is this skill's directory when invoked
+through the Skill tool; if it is not resolved, the installed path is
+`~/.claude/plugins/cache/<marketplace>/research/<version>/skills/research-map` — use it,
+never copy the script. A pre-commit hook, if the repository wants one, calls that same path.
 
 Six checks, each `PASS`, `FAIL` or `NOT_VERIFIED` with the offending lines; the rules are
 in `reference/map-schema.md`: `map` (structure, pointers, gates with evidence, the
@@ -99,9 +97,8 @@ is non-zero on any `FAIL`; `--strict` also fails on `NOT_VERIFIED`.
 
 A number the checker cannot find is reported, not silently accepted. A line that
 legitimately carries a number with no aggregate is marked `<!-- rm:ignore: <reason> -->`
-on the same line; the reason is required, the summary counts the markers, and the marker
-is visible in the diff. Deleting the number instead is a change to what the document
-claims, and is said in the report line.
+on the same line; the reason is required and the summary counts the markers. Deleting the
+number to pass is a change to what the document claims, not a fix.
 
 ## What this is not
 
