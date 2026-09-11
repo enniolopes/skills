@@ -1,12 +1,20 @@
 {
   "name": "research",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Scientific research system: method with gates (scientific-method), memory across sessions (research-map) and adversarial review (reviewer-2).",
   "author": {
     "name": "Ennio Politi Lopes"
   },
   "repository": "https://github.com/enniolopes/skills",
   "license": "CC-BY-NC-4.0",
-  "keywords": ["research", "scientific-method", "reproducibility", "pre-registration", "review"],
-  "dependencies": ["explorer"]
+  "keywords": [
+    "research",
+    "scientific-method",
+    "reproducibility",
+    "pre-registration",
+    "review"
+  ],
+  "dependencies": [
+    "explorer"
+  ]
 }

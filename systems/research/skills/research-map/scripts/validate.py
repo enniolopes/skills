@@ -3,17 +3,26 @@
 
     python validate.py [RESEARCH.map] [--root DIR] [--offline] [--strict] [--min-int 20] [--only map,numbers,...]
 
+Run it from where the capability is installed; the consuming repository carries no copy.
+
 Checks (each PASS / FAIL / NOT_VERIFIED, with the offending lines):
-  map        sections present and ordered; pointers resolve; all eight gates with valid states;
+  map        required sections present, all sections ordered; pointers resolve; all eight gates with
+             valid states, every `reached` gate naming its evidence (a pointer or a DOI/URL);
+             at most three hypotheses without a terminal state;
              Registration line present; the Question pointer leads to a problem statement with its
              seven fields; the Problem line carries a state and, unless PENDING, a problem brief with
-             its seven fields and a matching Verdict; no phase >= 3 is reached before Problem is SHOWN;
+             its seven fields, a matching Verdict and a Reference that names the decision (D-<n>) that
+             fixed it; no phase >= 3 is reached before Problem is SHOWN;
              every fact-once-wrong names a producing notebook;
              every Deferred item is dated and names its entry condition;
              Last session has a dated line and a Next line
   numbers    every number quoted in the documents and in the problem brief is present in some
-             committed aggregate at the quoted precision (presence, not provenance)
-  decisions  every D-<n> block has a revision condition; ids unique and increasing
+             committed aggregate at the quoted precision (presence, not provenance); every
+             `rm:ignore` marker carries a reason
+  decisions  every D-<n> block has a non-empty revision condition; ids unique and increasing;
+             `Supersedes: D-<k>` names an earlier block; decision ids that live in table rows are
+             counted and reported as not checked
+  disclosure no table cell under `documents` holds a count below the Layout `floor`
   citations  every reference resolves (Crossref, then doi.org; NOT_VERIFIED with --offline or when
              the network refuses the check)
   notebooks  no committed notebook carries outputs or execution counts
@@ -33,16 +42,24 @@ import urllib.request
 from dataclasses import dataclass, field
 from pathlib import Path
 
+# Section order. The six required ones are the state no other file holds; the four optional ones
+# are validated when present and hold only what no file in Layout already says.
 SECTIONS = [
     "Layout", "Question", "Hypotheses", "Gates", "Facts that were once wrong",
     "Provenance", "Verification", "Open decisions", "Deferred", "Last session",
 ]
+REQUIRED_SECTIONS = ["Layout", "Question", "Hypotheses", "Gates", "Deferred", "Last session"]
 LAYOUT_KEYS = ["protocol", "decisions", "aggregates", "documents", "notebooks", "references"]
+LAYOUT_OPTIONAL = {"floor"}  # minimum cell size for anything under `documents`; an integer
 PHASES = ["1", "2", "3", "4", "5", "6", "7", "8"]
 GATE_STATES = {"reached", "pending", "blocked"}
 HYPOTHESIS_STATES = {"CONFIRMED", "REFUTED", "INCONCLUSIVE", "BLOCKED", "NOT_VERIFIED", "—", "-"}
-IGNORE_MARK = "<!-- rm:ignore -->"
+OPEN_HYPOTHESES = {"—", "-"}
+OPEN_HYPOTHESES_CAP = 3
+# `<!-- rm:ignore: <reason> -->` exempts a line from the numbers check; the reason is required.
+IGNORE_MARK = re.compile(r"<!--\s*rm:ignore(?::\s*(\S[^>]*?))?\s*-->")
 DOC_SUFFIXES = {".md", ".qmd", ".rmd", ".tex", ".txt"}
+TABLE_SUFFIXES = {".md", ".qmd", ".rmd", ".csv", ".tsv"}
 AGGREGATE_SUFFIXES = {".csv", ".tsv", ".json"}
 POINTER_SUFFIXES = (".md", ".qmd", ".ipynb", ".csv", ".tsv", ".json", ".bib", ".py", ".R", ".txt", ".yaml", ".yml")
 
@@ -53,10 +70,18 @@ URL_OR_DOI = re.compile(r"https?://\S+|\b10\.\d{4,9}/\S+", re.I)
 # Not results: a p-value or alpha threshold, and labels of sections, tables, figures, pages.
 THRESHOLD_BEFORE = re.compile(r"(?:\bp|\balpha|α)\s*[<>≤≥=]\s*$", re.I)
 LABEL_BEFORE = re.compile(r"(?:\bsections?|\bsec\.|§|\bse[çc][aã]o|\btables?|\btabelas?|\bfig(?:ures?|\.)?|\bfiguras?|\beq\.|\bp\.|\bpp\.)\s*$", re.I)
+# A legal instrument's number is an identifier: `Lei 14.628`, `Portaria GM nº 12`, `Directive 2016/679`.
+LEGAL_BEFORE = re.compile(
+    r"\b(?:Lei|Decreto(?:-Lei)?|Portaria|Resolu[çc][ãa]o|Instru[çc][ãa]o Normativa|Medida Provis[óo]ria|"
+    r"Emenda Constitucional|Law|Act|Directive|Regulation|Ordinance|Bill)\b[^\d\n.;:]{0,24}$", re.I)
 CONFIDENCE_AFTER = re.compile(r"\s?%\s?(?:CI|IC)\b")
 DOI = re.compile(r"\b(10\.\d{4,9}/[^\s\"'<>{}]+)")
 DECISION_START = re.compile(r"^(?:#{1,6}\s+|[-*]\s+\*\*|\*\*)D-(\d+)\b", re.M)
-REVISION = re.compile(r"^\s*(?:[-*]\s*)?(?:\*\*)?(?:Revision condition|Revise when)(?:\*\*)?\s*:", re.I | re.M)
+DECISION_ROW = re.compile(r"^\s*\|\s*\**D-(\d+)\b", re.M)  # a decision written as a table row: not a block
+REVISION = re.compile(r"^\s*(?:[-*]\s*)?(?:\*\*)?(?:Revision condition|Revise when)(?:\*\*)?\s*:\**\s*(.*)$", re.I | re.M)
+EMPTY_VALUES = {"", "—", "-", "–", "none", "n/a", "na", "tbd", "?"}
+SUPERSEDES = re.compile(r"^\s*(?:[-*]\s*)?\**Supersedes\**\s*:\**\s*D-(\d+)", re.I | re.M)
+DECISION_REF = re.compile(r"\bD-(\d+)\b")
 REGISTRATION = re.compile(r"^\s*(?:[-*]\s*)?\**Registration\**\s*:\s*(\S.*)$", re.I | re.M)
 # The problem statement the Question pointer leads to must carry these labelled fields
 # (scientific-method, reference/problem-statement.md).
@@ -165,7 +190,33 @@ def labelled_field_gaps(body: str, fields: list[str]) -> list[str]:
     ]
 
 
-def check_problem_brief(result: Result, root: Path, question_lines: list[str]) -> str | None:
+def decision_ids(root: Path, layout: dict[str, list[str]]) -> set[int] | None:
+    """Ids of every decision block in the log; None when no log file exists (Layout reports that)."""
+    files = iter_files(root, layout.get("decisions", []), DOC_SUFFIXES)
+    if not files:
+        return None
+    ids: set[int] = set()
+    for file in files:
+        ids.update(int(m.group(1)) for m in DECISION_START.finditer(file.read_text(encoding="utf-8", errors="replace")))
+    return ids
+
+
+def labelled_field(body: str, label: str) -> str:
+    """The text of one labelled field, continuation lines included, up to the next labelled field."""
+    lines = body.splitlines()
+    start = next((i for i, l in enumerate(lines)
+                  if re.match(r"^\s*(?:[-*]\s*)?(?:★\s*)?\**" + re.escape(label) + r"\**\s*:", l, re.I)), None)
+    if start is None:
+        return ""
+    out = [lines[start]]
+    for line in lines[start + 1:]:
+        if re.match(r"^\s*(?:[-*]\s*)?(?:★\s*)?\**[A-Z][\w ]{1,30}\**\s*:", line):
+            break
+        out.append(line)
+    return "\n".join(out)
+
+
+def check_problem_brief(result: Result, root: Path, question_lines: list[str], layout: dict[str, list[str]]) -> str | None:
     """Gate 1B in the map: the Problem line, and the brief it points to. Returns the brief path when there is one."""
     match = PROBLEM_LINE.search("\n".join(question_lines))
     if not match:
@@ -191,6 +242,14 @@ def check_problem_brief(result: Result, root: Path, question_lines: list[str]) -
     verdict = VERDICT.search(body)
     if verdict and verdict.group(1).upper() != state:
         result.fail(f"Question: Problem is {state} in the map but the brief's Verdict is {verdict.group(1).upper()}")
+    # The Reference names the decision that fixed it, so "fixed beforehand" can be read against a date.
+    if "Reference" not in missing:
+        refs = {int(m) for m in DECISION_REF.findall(labelled_field(body, "Reference"))}
+        known = decision_ids(root, layout)
+        if not refs:
+            result.fail(f"Question: problem brief `{path}` Reference names no decision (D-<n>) that fixed it — a reference is dated by its decision, not by the sentence")
+        elif known is not None and not refs & known:
+            result.fail(f"Question: problem brief `{path}` Reference cites {', '.join(f'D-{r}' for r in sorted(refs))}, not a block in the decision log")
     return path
 
 
@@ -212,11 +271,11 @@ def check_map(text: str, root: Path) -> tuple[Result, dict[str, list[str]]]:
     result = Result("map")
     sections, order = parse_sections(text)
     present = [s for s in order if s in SECTIONS]
-    for name in SECTIONS:
+    for name in REQUIRED_SECTIONS:
         if name not in sections:
             result.fail(f"missing section '## {name}'")
     if present != [s for s in SECTIONS if s in sections]:
-        result.fail("sections out of order; required order: " + " → ".join(SECTIONS))
+        result.fail("sections out of order; order: " + " → ".join(SECTIONS))
 
     layout = parse_layout(sections.get("Layout", []))
     for key in LAYOUT_KEYS:
@@ -226,6 +285,8 @@ def check_map(text: str, root: Path) -> tuple[Result, dict[str, list[str]]]:
             for path in layout[key]:
                 if not (root / path).exists():
                     result.fail(f"Layout: {key} → {path} does not exist")
+    if "floor" in layout and not (len(layout["floor"]) == 1 and layout["floor"][0].isdigit() and int(layout["floor"][0]) > 1):
+        result.fail(f"Layout: floor must be one integer above 1 (the minimum cell size), not {', '.join(layout['floor'])!r}")
 
     pointer_count = 0
     for name, lines in sections.items():
@@ -249,7 +310,7 @@ def check_map(text: str, root: Path) -> tuple[Result, dict[str, list[str]]]:
             continue
         for gap in problem_statement_gaps(root, pointer):
             result.fail(f"Question: problem statement at `{pointer}` {gap}")
-    brief_path = check_problem_brief(result, root, question_lines)
+    brief_path = check_problem_brief(result, root, question_lines, layout)
     if brief_path:
         layout["_brief"] = [brief_path]
 
@@ -264,6 +325,10 @@ def check_map(text: str, root: Path) -> tuple[Result, dict[str, list[str]]]:
             result.fail(f"Gates: '{row[0]}' has state '{row[1]}' (valid: {sorted(GATE_STATES)})")
         elif state == "blocked" and (len(row) < 3 or not row[2]):
             result.fail(f"Gates: '{row[0]}' is blocked but names nobody in 'Blocked by'")
+        elif state == "reached":
+            evidence = row[3] if len(row) > 3 else ""
+            if not (pointers_in([evidence]) or URL_OR_DOI.search(evidence)):
+                result.fail(f"Gates: '{row[0]}' is reached but names no evidence — the fourth column points at the artifact the gate produces (or its DOI/URL); a gate is reached by its artifact, not by the word")
     missing_phases = [p for p in PHASES if p not in seen_phases]
     if "Gates" in sections and missing_phases:
         result.fail(f"Gates: one row per phase; missing phase(s) {', '.join(missing_phases)}")
@@ -272,9 +337,13 @@ def check_map(text: str, root: Path) -> tuple[Result, dict[str, list[str]]]:
             result.fail(f"Gates: '{row[0]}' is reached but Problem is {problem_state or 'missing'}; the protocol does not freeze before the problem is SHOWN")
             break
 
-    for row in table_rows(sections.get("Hypotheses", [])):
+    hypotheses = table_rows(sections.get("Hypotheses", []))
+    for row in hypotheses:
         if len(row) >= 4 and row[3] not in HYPOTHESIS_STATES:
             result.fail(f"Hypotheses: '{row[0]}' has state '{row[3]}' (valid: {sorted(HYPOTHESIS_STATES - {'-'})})")
+    open_count = sum(1 for row in hypotheses if len(row) >= 4 and row[3] in OPEN_HYPOTHESES)
+    if open_count > OPEN_HYPOTHESES_CAP:
+        result.fail(f"Hypotheses: {open_count} without a terminal state; the cap is {OPEN_HYPOTHESES_CAP} — a fourth enters only by a logged decision (D-<n>) that names what leaves, and what leaves goes to ## Deferred")
 
     for row in table_rows(sections.get("Facts that were once wrong", [])):
         if len(row) < 3 or not pointers_in([row[2]]):
@@ -401,13 +470,20 @@ def check_numbers(root: Path, layout: dict[str, list[str]], min_int: int) -> Res
         return result
     matcher = Matcher(aggregate_values(aggregates))
     checked = 0
+    markers = 0
     for doc in documents:
         fenced = False
         for lineno, raw in enumerate(doc.read_text(encoding="utf-8", errors="replace").splitlines(), 1):
             if re.match(r"\s*(```|~~~)", raw):
                 fenced = not fenced
                 continue
-            if fenced or IGNORE_MARK in raw or raw.lstrip().startswith("#"):
+            if fenced or raw.lstrip().startswith("#"):
+                continue
+            marker = IGNORE_MARK.search(raw)
+            if marker:
+                markers += 1
+                if not marker.group(1):
+                    result.fail(f"{doc.relative_to(root)}:{lineno}  rm:ignore without a reason — write `<!-- rm:ignore: <why this number has no aggregate> -->`")
                 continue
             line = URL_OR_DOI.sub(" ", raw)
             for match in NUMBER.finditer(line):
@@ -418,7 +494,7 @@ def check_numbers(root: Path, layout: dict[str, list[str]], min_int: int) -> Res
                 readings = interpretations(token)
                 if all(d == 0 and (v < min_int or (len(token) == 4 and 1900 <= v <= 2100)) for v, d in readings):
                     continue
-                if THRESHOLD_BEFORE.search(before.rstrip("-−") if before.endswith(("-", "−")) else before) or LABEL_BEFORE.search(before):
+                if THRESHOLD_BEFORE.search(before.rstrip("-−") if before.endswith(("-", "−")) else before) or LABEL_BEFORE.search(before) or LEGAL_BEFORE.search(before):
                     continue
                 if CONFIDENCE_AFTER.match(line[match.end():]):
                     continue
@@ -428,7 +504,46 @@ def check_numbers(root: Path, layout: dict[str, list[str]], min_int: int) -> Res
                 if any(matcher.has(sign * v, d) or (percent and matcher.has(sign * v / 100, d + 2)) for v, d in readings):
                     continue
                 result.fail(f"{doc.relative_to(root)}:{lineno}  {token}")
-    result.summary = f"{checked} numbers in {len(documents)} document(s) against {len(aggregates)} aggregate file(s)"
+    result.summary = (f"{checked} numbers in {len(documents)} document(s) against {len(aggregates)} aggregate file(s); "
+                      f"{markers} rm:ignore marker(s)")
+    return result
+
+
+# --- disclosure --------------------------------------------------------------------------
+def check_disclosure(root: Path, layout: dict[str, list[str]]) -> Result:
+    """Anything under `documents` is outside the analysis environment: no count cell below the floor."""
+    result = Result("disclosure")
+    floor = layout.get("floor", [""])[0]
+    if not floor.isdigit():
+        result.unverified("no `floor: <n>` in Layout — the disclosure floor is not checked")
+        return result
+    floor_value = int(floor)
+    files = iter_files(root, layout.get("documents", []), TABLE_SUFFIXES)
+    if not files:
+        result.unverified("nothing to check: no tables under documents")
+        return result
+    cells = 0
+    for file in files:
+        delimited = file.suffix.lower() in {".csv", ".tsv"}
+        fenced = False
+        for lineno, raw in enumerate(file.read_text(encoding="utf-8", errors="replace").splitlines(), 1):
+            if not delimited:
+                if re.match(r"\s*(```|~~~)", raw):
+                    fenced = not fenced
+                    continue
+                if fenced or not raw.lstrip().startswith("|") or IGNORE_MARK.search(raw):
+                    continue
+                row = [c.strip() for c in raw.strip().strip("|").split("|")]
+            else:
+                if IGNORE_MARK.search(raw):
+                    continue
+                row = [c.strip().strip('"\'') for c in re.split(r"[,;\t]", raw)]
+            for cell in row[1:]:  # the first column labels the row
+                if re.fullmatch(r"\d+", cell):
+                    cells += 1
+                    if 0 < int(cell) < floor_value:
+                        result.fail(f"{file.relative_to(root)}:{lineno}  cell {cell} is below the floor of {floor_value}")
+    result.summary = f"{cells} integer cell(s) in {len(files)} file(s) against floor {floor_value}"
     return result
 
 
@@ -440,8 +555,10 @@ def check_decisions(root: Path, layout: dict[str, list[str]]) -> Result:
         result.unverified("nothing to check: no decisions file in Layout")
         return result
     total = 0
+    rows = 0
     for file in files:
         text = file.read_text(encoding="utf-8", errors="replace")
+        rows += len(DECISION_ROW.findall(text))
         starts = list(DECISION_START.finditer(text))
         previous = 0
         seen: set[int] = set()
@@ -457,12 +574,21 @@ def check_decisions(root: Path, layout: dict[str, list[str]]) -> Result:
                 result.fail(f"{label} is out of order (after D-{previous}); the log is append-only")
             seen.add(number)
             previous = max(previous, number)
-            if not REVISION.search(block):
+            revision = REVISION.search(block)
+            if not revision:
                 result.fail(f"{label} has no `Revision condition:`")
+            elif revision.group(1).strip().strip("*").lower() in EMPTY_VALUES:
+                result.fail(f"{label} has an empty `Revision condition:` — name the observation that would reopen it, or the decision is not revisable and says so")
+            superseded = SUPERSEDES.search(block)
+            if superseded and int(superseded.group(1)) not in seen - {number}:
+                result.fail(f"{label} supersedes D-{superseded.group(1)}, which is not an earlier block in the log")
     if total == 0:
-        result.unverified(f"nothing to check: no `### D-<n>` blocks in {len(files)} file(s)")
+        result.unverified(f"nothing to check: no `### D-<n>` blocks in {len(files)} file(s)"
+                          + (f"; {rows} decision id(s) live in table rows and were not checked" if rows else ""))
         return result
-    result.summary = f"{total} decision(s) in {len(files)} file(s)"
+    result.summary = f"{total} decision block(s) in {len(files)} file(s)"
+    if rows:
+        result.unverified(f"{result.summary}; {rows} decision id(s) live in table rows, where a revision condition cannot be checked")
     return result
 
 
@@ -589,6 +715,7 @@ def run(map_path: Path, root: Path, offline: bool, min_int: int, only: set[str] 
     checks = {
         "numbers": lambda: check_numbers(root, layout, min_int),
         "decisions": lambda: check_decisions(root, layout),
+        "disclosure": lambda: check_disclosure(root, layout),
         "citations": lambda: check_citations(root, layout, offline),
         "notebooks": lambda: check_notebooks(root, layout),
     }
@@ -607,7 +734,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--offline", action="store_true", help="do not resolve citations; report NOT_VERIFIED")
     parser.add_argument("--strict", action="store_true", help="exit 1 on NOT_VERIFIED too")
     parser.add_argument("--min-int", type=int, default=20, help="integers below this are not checked (default 20)")
-    parser.add_argument("--only", help="comma-separated subset: map,numbers,decisions,citations,notebooks")
+    parser.add_argument("--only", help="comma-separated subset: map,numbers,decisions,disclosure,citations,notebooks")
     args = parser.parse_args(argv)
 
     map_path = Path(args.map).resolve()

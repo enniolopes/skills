@@ -19,8 +19,10 @@ product is one file (`problem-brief.md`, pointed to from the map's `## Question`
   the reason none was possible, stated as NOT_VERIFIED>
 ★ Population: <who, where, when — anchored in time>
 ★ Measure: <occurrence or summary — prevalence, rate, index, difference — and its unit>
-★ Reference: <what makes the number a deficit or excess, fixed before looking: threshold,
-  comparison group, trend, or the counterfactual "if nothing is done">
+★ Reference: <what makes the number a deficit or excess: threshold, comparison group,
+  trend, or the counterfactual "if nothing is done">; fixed in D-<n> <before the magnitude
+  was computed — or, when it was derived from the data: "data-informed: <how, from what>";
+  a reference is dated by its decision, never by this sentence>
 ★ Magnitude: <the number, with interval, from `<aggregate file>`; the gap against the Reference>
   Distribution: <who and where it concentrates; the groups where it does not>
   Trend: <direction over the anchored window, with the source table>
@@ -46,8 +48,9 @@ this is a result, and cheaper than any other way of learning it. `INCONCLUSIVE` 
 data cannot decide; the brief says what data would, and the protocol does not freeze.
 
 **Exit gate.** All ★ fields present; every number present in a committed aggregate; the
-Reference was written before the Magnitude; `Verdict` is one of the three states; the map's
-`Problem:` line carries the same state.
+Reference names the decision that fixed it, and that decision's date precedes the
+magnitude's notebook or the field says `data-informed`; `Verdict` is one of the three
+states; the map's `Problem:` line carries the same state and its 1B row points here.
 
 **Sources.** Lesko, Fox & Edwards 2022 (a descriptive question names population, outcome
 and measure; descriptive studies need design and pre-registration). Fox et al. 2022

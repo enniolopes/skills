@@ -7,6 +7,7 @@
 - documents: <path/to/paper/>
 - notebooks: <path/to/notebooks/>
 - references: <path/to/references.bib>
+- floor: <minimum cell size for anything under documents, e.g. 5>
 
 ## Question
 <one line> → `<path/to/protocol.md#question>`   (that section carries the problem statement fields)
@@ -19,33 +20,17 @@ Registration: none
 | H1 | <prediction> | <what refutes it> | — | `<path/to/protocol.md#h1>` |
 
 ## Gates
-| Phase | State | Blocked by |
-|---|---|---|
-| 1A Problem — formulate | pending | |
-| 1B Problem — demonstrate | pending | |
-| 2 Literature | pending | |
-| 3 Protocol | pending | |
-| 4 Data | pending | |
-| 5 Analysis | pending | |
-| 6 Writing | pending | |
-| 7 Review | pending | |
-| 8 Publication | pending | |
-
-## Facts that were once wrong
-| Was | Is | Produced by |
-|---|---|---|
-
-## Provenance
-| Input | Location | Read by |
-|---|---|---|
-
-## Verification
-```bash
-# commands that re-run notebooks in order, render the paper, run hooks, verify citations
-```
-
-## Open decisions
-- D-?: <what> — unblocked by: <who>
+| Phase | State | Blocked by | Evidence |
+|---|---|---|---|
+| 1A Problem — formulate | pending | | <when reached: pointer to the budget decision, e.g. `decisions.md#d-1`> |
+| 1B Problem — demonstrate | pending | | <when reached: pointer to the problem brief> |
+| 2 Literature | pending | | <when reached: pointer to the verification log or references> |
+| 3 Protocol | pending | | <when reached: pointer to the frozen protocol section> |
+| 4 Data | pending | | <when reached: pointer to the linkage report> |
+| 5 Analysis | pending | | <when reached: pointer to the results aggregate> |
+| 6 Writing | pending | | <when reached: pointer to the manuscript> |
+| 7 Review | pending | | <when reached: pointer to the review verdict> |
+| 8 Publication | pending | | <when reached: the DOI> |
 
 ## Deferred
 - <YYYY-MM-DD>: <idea, method or front that appeared after the freeze> — enters when: <what would have to be true>

@@ -6,16 +6,21 @@ separately.
 
 ## Status
 
-**Built, acceptance pending** (plugin 0.6.0, pieces 0.5.0, 2026-09-10). All three pieces
-exist and pass the repository's structural checks and unit tests. Two things are not yet
-done, and the pieces say so themselves:
+**First real session absorbed** (plugin 0.7.0, pieces 0.6.0, 2026-09-11). All three pieces
+exist and pass the repository's structural checks and unit tests. Version 0.7.0 is the
+response to the first session of the plugin on a real research (roadmap step 8): every
+rule that was violated there while stated only in prose became an artifact `validate`
+reads — a `reached` gate names its evidence, a brief's reference names its decision, a
+decision has a title and a non-empty revision condition, an `rm:ignore` has a reason, a
+table under `documents` respects the floor — and the map lost the four sections that only
+copied other files. Still open, and the pieces say so themselves:
 
 - the method sources behind `reference/` were *located* (publisher landing page or DOI
   found with matching metadata) but not *read* at source, because the build environment
   blocked scholarly domains; `development/research/design/sources-verified.md` records the
   level per source and is the first thing to upgrade in a session with network access;
-- no behavioural run has been recorded against `development/research/evals/`; acceptance
-  is by retro-test on the origin case (roadmap step 7).
+- no adjudicated behavioural run has been recorded against `development/research/evals/`;
+  the four `session-*` scenarios there are the first to re-run against 0.7.0.
 
 The consolidated design, the references it draws on, the origin case and the roadmap live
 in `development/research/design/`.
@@ -73,25 +78,32 @@ can fail; every hypothesis ends in a named state: `CONFIRMED`, `REFUTED`, `INCON
 
 ### Every session
 
-`research-map` keeps one `RESEARCH.map` per research: question and registration status,
-hypotheses, state per gate, **facts that were once wrong** with the notebook that now
-produces them, provenance of every input, verification commands, open decisions and who
-unblocks each.
+`research-map` keeps one `RESEARCH.map` per research: where things are and the disclosure
+floor, question and registration status, hypotheses (at most three open), state per gate
+**with the artifact that proves it**, deferred ideas, and what to do next. Facts that were
+once wrong, provenance, verification commands and open decisions are optional sections,
+present only when no other file already says it.
 
 ```text
 /research:research-map resume     # before the first action: restate the state in one screen
 /research:research-map update     # after any gate, state or number changes, and before a commit
-/research:research-map validate   # before any commit; also runnable as a pre-commit hook
+/research:research-map validate   # before any commit, from the installed skill; a hook may call the same path
 ```
 
 `validate` is mechanical: a number quoted in a document that no committed aggregate
-contains is reported (presence, not provenance — the source table is still required),
-every decision has a revision condition, every citation resolves, no committed notebook
-has outputs, every pointer in the map resolves, registration status is declared. A check
+contains is reported (presence, not provenance — the source table is still required), and
+an `rm:ignore` marker needs a reason; a `reached` gate needs its evidence; a decision has a
+title and a non-empty revision condition, and decision ids that live in table rows are
+counted, not passed; a table under `documents` has no count below the floor; every citation
+resolves; no committed notebook has outputs; every pointer in the map resolves. A check
 with nothing to examine says `NOT_VERIFIED`, never `PASS`.
 
 `/research:research-map init` builds the map once from an existing protocol and decision
-log and copies the validator into the repository for pre-commit.
+log. Every gate starts `pending` and is earned by its artifact; the validator stays with the
+plugin and is never copied into the research repository. `Layout` is also the whole answer
+to "how should this research be organised": six paths and a floor. The method does not do
+software engineering — packages, test suites, build systems, CI are the analyst's, and the
+skill says so and stops when asked for them.
 
 ### The moment before a mistake
 
@@ -171,10 +183,15 @@ decision degrades to `BLOCKED` or `NOT_VERIFIED`, never to a guess.
 6. Inconclusive is a legitimate terminal state and has a name.
 7. Acceptance is by retro-test: a skill is ready when, applied to the origin case as it
    stood before the audit, it produces the audit's findings before a human does.
+8. A rule stated only in prose is a hope. What a session violated becomes an artifact the
+   model must produce and a check that reads it, or a definition that removes the
+   ambiguity, or it is dropped — never a second sentence saying the same thing louder.
 
 ## Origin
 
 Designed during the `delbem-research/cozsolidarias-research` project (September 2026),
 where a method audit found ten defects in an already-careful pipeline and a session
 boundary let wrong numbers survive. Both are recorded in
-`development/research/design/origin-case.md` as the first evaluation scenarios.
+`development/research/design/origin-case.md` as the first evaluation scenarios. The first
+real session of the plugin (2026-09-10) is the second source: its findings are roadmap
+step 8 and the `session-*` scenarios.
