@@ -1,7 +1,7 @@
 {
-  "version": "2.1",
+  "version": "2.2",
   "skill": "landing-page",
-  "purpose": "Natural-language regression cases for continuity, pivot discipline, creative freedom, evidence fit and resistance to both generic defaults and anti-template over-control. Criteria describe outcomes, not skill vocabulary.",
+  "purpose": "Natural-language regression cases for continuity, pivot discipline, creative freedom, evidence fit, basis-form decision behavior and resistance to both generic defaults and anti-template over-control. Criteria describe outcomes, not skill vocabulary.",
   "cases": [
     {
       "id": "local-mobile-fix",
@@ -233,6 +233,58 @@
       "must_not": [
         "Animate every element merely to signal polish or delight.",
         "Ban motion entirely because gratuitous motion is a risk."
+      ]
+    },
+    {
+      "id": "creative-language-is-not-evidence-status",
+      "prompt": "Quero usar a frase ‘a ferramenta que finalmente pensa com você’. Podemos usar?",
+      "setup": "The phrase is intended as expressive positioning. The product has AI-assisted collaboration, but there is no objective evidence that it literally thinks, understands, or replaces human judgment.",
+      "must": [
+        "Treat expressive positioning separately from factual evidence status and inspect whether the wording creates a misleading objective implication.",
+        "Allow creative language when it is clearly subjective and does not overstate product truth; qualify or replace it if the factual implication becomes material."
+      ],
+      "must_not": [
+        "Treat ‘creative’ as evidence that exempts a factual implication from truth discipline.",
+        "Reject all expressive language merely because it is not a factual claim with external proof."
+      ]
+    },
+    {
+      "id": "existing-page-needs-create-depth",
+      "prompt": "A página existe, mas o produto, público e oferta mudaram completamente. Aproveite o que ainda fizer sentido e refaça o necessário.",
+      "setup": "The current implementation is technically usable, but its page job, proposition, proof model and governing idea no longer serve the new product motion.",
+      "must": [
+        "Use CREATE-depth reasoning because no useful strategic/creative solution basis remains, even though an implementation exists.",
+        "Reuse isolated technical or craft decisions only when they still serve the new outcome."
+      ],
+      "must_not": [
+        "Choose a shallow refinement merely because a page already exists.",
+        "Preserve obsolete intent or direction as if existing code made it authoritative."
+      ]
+    },
+    {
+      "id": "inactive-medium-does-not-need-a-plan-field",
+      "prompt": "Precisamos definir motion no plano criativo mesmo se essa direção editorial funciona melhor estática?",
+      "setup": "The governing idea depends on typography, photography, sequencing and precise static composition. No interaction or narrative job benefits materially from custom motion.",
+      "must": [
+        "Allow motion to remain minimal or absent because it is not an active medium for this direction.",
+        "Preserve the governing idea, signature, intended effect and falsifier without filling irrelevant design-plan fields."
+      ],
+      "must_not": [
+        "Invent motion solely to complete a fixed art-direction schema.",
+        "Treat absence of a medium as an incomplete creative direction when the relevant decisions are resolved."
+      ]
+    },
+    {
+      "id": "research-value-has-ended",
+      "prompt": "Continua pesquisando mais referências e concorrentes.",
+      "setup": "Product truth, audience, offer, proof, category grammar, creative direction and technical feasibility are already sufficiently grounded. Several additional sources repeat known patterns and have not changed a material decision.",
+      "must": [
+        "Stop or sharply narrow research when additional information is unlikely to change a material decision.",
+        "Move into making/testing the unresolved artifact questions instead of collecting references for appearance of thoroughness."
+      ],
+      "must_not": [
+        "Continue broad research with no decision it could materially change.",
+        "Treat research volume as evidence of quality."
       ]
     }
   ]
