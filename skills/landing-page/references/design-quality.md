@@ -184,6 +184,27 @@ Bad: `modern, premium, dark, gradients`.
 
 Useful: `The page behaves like a forensic instrument: sparse editorial typography frames live evidence from the product, while one controlled network visualization turns complexity into visible order.`
 
+## Negative control — prune counterfeit quality, not aesthetic territory
+
+Negative constraints should remove **bad reasoning**, not ban legitimate forms. When a familiar device appears, ask what property it is supposed to produce and whether that property is actually present.
+
+Use these four high-coverage anti-substitutions:
+
+1. **Polish is not resolution.** Do not use finish, effects, detail or visual confidence to make an unresolved proposition, hierarchy, composition or interaction feel complete. Resolve the underlying decision first; then polish it.
+2. **Style signals are not specificity or premium quality.** Minimalism, maximalism, serif display type, dark fields, gradients, editorial layouts, tactile imagery or any other aesthetic may be excellent, but none proves fit. Establish specificity through causal dependence on the product, audience, evidence, brand and domain; keep the style when the brief independently earns it.
+3. **Novelty or complexity is not sophistication.** Unusual navigation, 3D, dense interfaces, motion systems, shaders, asymmetric layouts or technical ambition do not establish creativity by themselves. Sophistication comes from meaning, control, appropriateness and resolution. Complexity is valid when it materially enables the governing idea or experience job.
+4. **Repetition is not coherence; components are not composition.** Identical cards, containers, grids or geometry can create uniformity while weakening hierarchy and rhythm. Establish coherence through shared relationships and logic with enough variation to serve meaning. Repeat a component when the information or interaction relationship is genuinely repeated.
+
+Do not grow these into a blacklist of fashionable symptoms. Add a new negative principle only if it describes a distinct causal failure that the existing principles cannot explain.
+
+### Challenge the contextual attractor
+
+Before committing a major new direction, identify mentally the **most available competent-but-generic solution** for this specific brief or category. This may be a familiar composition, material language, type/color cluster, interaction trope or proof pattern.
+
+If the proposed direction resembles that attractor, ask: **what in this brief actually earns this choice?** Keep it when the answer is specific and strong. If the only explanation is category familiarity, trend recognition, ease of implementation or an attempt to look premium/creative, explore a materially different route.
+
+Do not invert the attractor mechanically. Avoiding a default is not a creative thesis. The goal is brief-dependence, not anti-convention.
+
 ## Divergence and selection
 
 Do not code the first plausible concept merely because it is polished. For a new or major redesign where no direction clearly dominates, explore 2–3 **structurally different** directions: change the governing idea, not only palette or radius. Example territories: editorial authority; product-as-instrument; cinematic transformation; data-as-proof; tactile object/material world.
@@ -291,7 +312,7 @@ If novelty has no answer to (1), remove it.
 
 ## Anti-slop signals
 
-These are not banned styles. They are warnings that the model may be composing from defaults instead of the brief:
+Concrete recurring patterns are **warning signals, not rules**. They matter because they can reveal one of the false substitutions above or a choice with weak causal dependence on the brief:
 
 - generic SaaS hero with centered headline, two CTAs, floating dashboard and decorative glow;
 - repetitive icon-card grids;
@@ -306,7 +327,7 @@ These are not banned styles. They are warnings that the model may be composing f
 - visual complexity added to hide weak hierarchy;
 - every section attempting to be the signature.
 
-When one appears, ask whether the brief truly calls for it. Keep it if yes; replace it if it is merely a learned default.
+When one appears, diagnose the underlying reason rather than banning the surface form. Keep it if the brief genuinely earns it; replace it if it is merely a learned default. Do not expand this list as a substitute for causal judgment.
 
 ## Premium does not mean one aesthetic
 
