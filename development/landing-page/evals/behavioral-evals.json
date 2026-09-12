@@ -1,0 +1,229 @@
+{
+  "version": "1.0",
+  "skill": "landing-page",
+  "purpose": "Regression cases for continuity of intent, creative freedom, correct pivot depth, rendered-evidence response, anti-generic behavior, and resistance to over-rigid process.",
+  "cases": [
+    {
+      "id": "continuity-direction-survives-local-work",
+      "prompt": "Continue a implementação desta landing page.",
+      "setup": "FOUNDATION and INTENT are stable. The chosen direction is product-as-instrument: real product evidence should feel inspectable and controlled. Several local sections and components have already been implemented since the direction was chosen.",
+      "must": [
+        "Preserve the governing direction across local implementation decisions.",
+        "Judge new sections against the page-level thesis rather than treating each section independently.",
+        "Allow local composition to change when a stronger expression of the same direction is available."
+      ],
+      "must_not": [
+        "Fall back to generic unrelated SaaS section patterns merely because they are easy to implement.",
+        "Freeze the exact first composition as if it were the direction itself."
+      ]
+    },
+    {
+      "id": "execution-defect-does-not-reopen-direction",
+      "prompt": "No mobile o headline quebra mal e o CTA ficou apertado. Corrija.",
+      "setup": "Desktop and mobile otherwise preserve a strong, specific direction and proposition.",
+      "must": [
+        "Classify the problem at EXECUTION or local COMPOSITION level.",
+        "Fix the defect and rerender/recheck the affected viewport.",
+        "Preserve valid upstream intent and direction."
+      ],
+      "must_not": [
+        "Launch a new art direction or restructure the entire page without evidence that the concept is wrong."
+      ]
+    },
+    {
+      "id": "system-failure-recompose-not-rebrand",
+      "prompt": "A página ficou repetitiva no meio.",
+      "setup": "The hero direction is strong, but sections 3–5 repeat the same three-column card geometry and flatten the page rhythm.",
+      "must": [
+        "Classify the failure as SYSTEM / COMPOSITION.",
+        "Change narrative/compositional expression while preserving the valid governing idea.",
+        "Use the strongest medium for each message rather than repeating cards."
+      ],
+      "must_not": [
+        "Abandon a valid direction solely because downstream composition is weak.",
+        "Add decorative effects on top of the repetitive structure."
+      ]
+    },
+    {
+      "id": "direction-falsified-red diverge",
+      "prompt": "O hero está bonito, mas parece um produto de vigilância e não uma ferramenta de coordenação.",
+      "setup": "The current creative thesis is a control-room metaphor. Real rendered output consistently produces the wrong category meaning even though execution quality is high.",
+      "must": [
+        "Treat the rendered meaning failure as a DIRECTION finding.",
+        "Preserve still-valid product truth, audience, proposition and primary action.",
+        "Re-diverge into materially different governing ideas rather than polishing the control-room metaphor."
+      ],
+      "must_not": [
+        "Attempt to solve the category misread only with spacing, colors or microcopy.",
+        "Discard valid FOUNDATION/INTENT and restart discovery without cause."
+      ]
+    },
+    {
+      "id": "intent-change-revalidates-downstream",
+      "prompt": "Mudança importante: essa campanha agora deve levar para demo enterprise, não trial self-service.",
+      "setup": "The page was composed around low-friction self-serve conversion. Product truth is unchanged, but the primary business action and sales context changed.",
+      "must": [
+        "Classify this as an INTENT change.",
+        "Reconsider proposition/friction/proof/CTA consequences and revalidate the current direction downstream.",
+        "Preserve unaffected product truth and reusable solved work where still coherent."
+      ],
+      "must_not": [
+        "Treat the request as a button-label-only edit.",
+        "Automatically throw away every previous design decision."
+      ]
+    },
+    {
+      "id": "foundation-correction-propagates",
+      "prompt": "Descobrimos que essa integração ainda não existe.",
+      "setup": "The landing page currently uses the integration as a core proof device and mentions it in the hero and feature narrative.",
+      "must": [
+        "Correct FOUNDATION truth immediately.",
+        "Remove or reformulate unsupported claims.",
+        "Revalidate affected proposition, proof strategy, direction and composition rather than only deleting one logo."
+      ],
+      "must_not": [
+        "Keep the integration implied because the design depends on it.",
+        "Invent a roadmap commitment."
+      ]
+    },
+    {
+      "id": "late-better-idea-can-reopen-direction",
+      "prompt": "Durante a implementação surgiu uma ideia muito melhor: usar o próprio histórico de decisões do produto como a narrativa central.",
+      "setup": "The current direction is coherent and partly implemented, but the new idea is more causally tied to the product, uses stronger real evidence and could materially improve distinction.",
+      "must": [
+        "Evaluate the new idea against stable FOUNDATION and INTENT rather than sunk implementation cost.",
+        "Allow deliberate reopening of DIRECTION if the new idea is materially stronger.",
+        "Preserve downstream work that remains compatible instead of restarting reflexively."
+      ],
+      "must_not": [
+        "Reject the idea only because implementation has already begun.",
+        "Smuggle a second competing signature into the current page without choosing."
+      ]
+    },
+    {
+      "id": "novelty-alone-does-not-trigger-pivot",
+      "prompt": "E se a gente fizer tudo em 3D? Parece mais premiável.",
+      "setup": "The current direction is specific, communicates strongly and passes rendered review. No communication problem requires 3D.",
+      "must": [
+        "Keep the current direction unless 3D materially improves the experience job.",
+        "Treat technical novelty as a possible experiment rather than automatic progress.",
+        "Prefer the smallest mechanism capable of delivering the signature."
+      ],
+      "must_not": [
+        "Reopen a strong direction merely because a newer-looking technique is available.",
+        "Equate technical complexity with premium quality."
+      ]
+    },
+    {
+      "id": "wildcard-exploration-is-allowed",
+      "prompt": "Explore uma direção menos óbvia antes de decidir.",
+      "setup": "Truth and intent are sufficiently grounded. The category is saturated with similar dashboard-led sites.",
+      "must": [
+        "Allow at least one non-obvious or non-adjacent organizing idea to be explored before full justification exists.",
+        "Test whether the wildcard can serve intent, specificity and communication before commitment.",
+        "Keep exploration separate from factual claims and committed direction."
+      ],
+      "must_not": [
+        "Reject speculative creative ideas merely because their rationale is incomplete before exploration.",
+        "Commit a wildcard only because it is unusual."
+      ]
+    },
+    {
+      "id": "creative-debt-not-false-certainty",
+      "prompt": "Ainda não sei se o produto entra no hero como UI completa ou detalhe ampliado.",
+      "setup": "Both approaches are plausible and the correct choice depends on real rendered scale/crop. No business truth is blocked.",
+      "must": [
+        "Allow the question to remain explicit creative debt until the first-viewport render provides useful evidence.",
+        "Prototype/render rather than asking the user to choose a design preference prematurely.",
+        "Resolve the debt before it can materially weaken completion."
+      ],
+      "must_not": [
+        "Invent certainty before relevant visual evidence exists.",
+        "Treat an unresolved reversible design choice as a blocking user question."
+      ]
+    },
+    {
+      "id": "genericity-can-falsify-direction",
+      "prompt": "Está bonito, mas parece que poderia ser de qualquer SaaS.",
+      "setup": "Craft is high and implementation is correct. The hero and major regions survive a logo swap with unrelated products because the governing idea is category-generic.",
+      "must": [
+        "Treat genericity as a possible DIRECTION failure, not only a decoration problem.",
+        "Return to product/domain evidence and re-diverge if the governing idea itself lacks specificity.",
+        "Preserve valid intent and real proof."
+      ],
+      "must_not": [
+        "Add more gradients, illustrations, noise or animation to disguise generic structure.",
+        "Confuse surface novelty with product specificity."
+      ]
+    },
+    {
+      "id": "anti-rigidity-no-schema-aesthetic",
+      "prompt": "Crie a página para uma marca de moda experimental.",
+      "setup": "The task is visually expressive and does not resemble SaaS. Truth and conversion goal are clear.",
+      "must": [
+        "Use the control model to preserve purpose while allowing a domain-appropriate visual grammar.",
+        "Permit unusual composition, typography and narrative pacing when they serve the brief.",
+        "Keep control concepts semantic rather than making the visible page resemble an internal schema."
+      ],
+      "must_not": [
+        "Force product-dashboard, forensic-instrument, card-grid or other recurrent house aesthetics from previous cases.",
+        "Treat control-state fields as a page template."
+      ]
+    },
+    {
+      "id": "strong-solution-resists-unnecessary-churn",
+      "prompt": "Deixa mais premium.",
+      "setup": "Rendered page is already specific, coherent, accessible and materially resolved. No concrete defect or new evidence is supplied.",
+      "must": [
+        "Diagnose before changing and preserve solved decisions.",
+        "Interpret premium as higher resolution of existing intent, not automatic conceptual replacement.",
+        "Make only meaningful improvements that survive comparison."
+      ],
+      "must_not": [
+        "Re-diverge merely to demonstrate creativity.",
+        "Add fashionable visual devices without causal value."
+      ]
+    },
+    {
+      "id": "mobile-can-transform-expression-without-losing-intent",
+      "prompt": "A assinatura principal não cabe no mobile.",
+      "setup": "The desktop signature is a large spatial comparison. Its purpose is to make transformation instantly understandable; the exact geometry cannot survive small screens.",
+      "must": [
+        "Preserve the semantic job of the signature while allowing a materially different mobile expression.",
+        "Recompose sequence/crop/interaction for mobile rather than shrinking the desktop scene.",
+        "Reopen DIRECTION only if no mobile expression can preserve the intended effect without material loss."
+      ],
+      "must_not": [
+        "Require identical form across viewports.",
+        "Silently drop the signature and leave mobile as an inferior edition."
+      ]
+    },
+    {
+      "id": "render-evidence-outranks-source-intent",
+      "prompt": "O código segue o plano, então acho que terminou.",
+      "setup": "Source implementation matches the planned direction, but the browser render reveals poor hierarchy and the signature is barely perceptible.",
+      "must": [
+        "Treat rendered experience as stronger evidence than source-code fidelity.",
+        "Classify whether the failure is composition/execution or direction before fixing it.",
+        "Continue refinement until no MATERIAL finding remains or a real blocker is reached."
+      ],
+      "must_not": [
+        "Declare completion because implementation matches the written plan."
+      ]
+    },
+    {
+      "id": "control-plane-does-not-replace-art-judgment",
+      "prompt": "Qual dessas duas direções é mais forte?",
+      "setup": "Both directions satisfy truth and conversion constraints. The difference is primarily conceptual strength, emotional fit, composition potential and distinctiveness; no deterministic metric can decide it.",
+      "must": [
+        "Use professional qualitative judgment to select/recommend the stronger direction.",
+        "Use explicit criteria without manufacturing precise numerical objectivity.",
+        "Keep deterministic validation separate from aesthetic/conceptual judgment."
+      ],
+      "must_not": [
+        "Choose by schema completeness or arbitrary numeric score alone.",
+        "Outsource the decision to the non-expert user merely because both are valid."
+      ]
+    }
+  ]
+}
