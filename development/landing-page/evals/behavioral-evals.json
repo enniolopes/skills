@@ -1,0 +1,181 @@
+{
+  "version": "2.3",
+  "skill": "landing-page",
+  "purpose": "Minimal durable regression set for truth, continuity, pivot discipline, evidence fit, creative freedom, decision depth and resistance to counterfeit quality. Cases describe observable behavior, not skill vocabulary.",
+  "cases": [
+    {
+      "id": "local-mobile-fix",
+      "prompt": "No mobile o headline quebra mal e o CTA ficou apertado. Corrija.",
+      "setup": "The page is otherwise strong, specific and coherent across desktop and mobile.",
+      "must": [
+        "Fix the mobile defect and recheck the affected viewport.",
+        "Keep the valid proposition and visual idea intact unless the fix reveals a broader problem."
+      ],
+      "must_not": [
+        "Use a local mobile defect as a reason to redesign the whole page."
+      ]
+    },
+    {
+      "id": "wrong-category-meaning",
+      "prompt": "O hero está bonito, mas parece um produto de vigilância e não uma ferramenta de coordenação.",
+      "setup": "The rendered page consistently creates the wrong category meaning even though typography, spacing and motion are polished.",
+      "must": [
+        "Change the governing idea rather than merely polishing the same metaphor.",
+        "Keep still-valid product facts, audience understanding and conversion goal."
+      ],
+      "must_not": [
+        "Try to solve the category misread only with colors, spacing or microcopy."
+      ]
+    },
+    {
+      "id": "conversion-model-changes",
+      "prompt": "Mudança importante: essa campanha agora deve levar para demo enterprise, não trial self-service.",
+      "setup": "The current page was designed around low-friction self-serve conversion.",
+      "must": [
+        "Reconsider CTA, friction, proof and proposition consequences rather than only renaming the button.",
+        "Preserve factual product truth and solved design work that still serves the new sales motion."
+      ],
+      "must_not": [
+        "Treat the change as copy-only.",
+        "Throw away every existing design decision reflexively."
+      ]
+    },
+    {
+      "id": "claim-becomes-false",
+      "prompt": "Descobrimos que essa integração ainda não existe.",
+      "setup": "The integration appears in the hero and is used as an important proof point later in the page.",
+      "must": [
+        "Remove the unsupported implication everywhere it matters.",
+        "Reconsider any promise or proof strategy that depended on the integration while keeping unaffected work."
+      ],
+      "must_not": [
+        "Leave the integration implied because removing it weakens the current design.",
+        "Invent a roadmap commitment."
+      ]
+    },
+    {
+      "id": "late-better-idea",
+      "prompt": "Durante a implementação surgiu uma ideia muito melhor: usar o próprio histórico de decisões do produto como a narrativa central.",
+      "setup": "The current direction is coherent and partly implemented. The new idea uses stronger real product evidence and appears substantially more specific.",
+      "must": [
+        "Compare the new idea on meaning, specificity and evidence rather than sunk implementation effort.",
+        "Switch direction if it is materially stronger while preserving compatible solved work."
+      ],
+      "must_not": [
+        "Reject the idea solely because implementation has begun.",
+        "Keep both as competing signatures without choosing."
+      ]
+    },
+    {
+      "id": "too-many-local-exceptions",
+      "prompt": "Cada seção está precisando de um truque diferente para a ideia continuar funcionando.",
+      "setup": "Several local fixes have accumulated; each is individually plausible, but the page is becoming brittle and visually inconsistent.",
+      "must": [
+        "Question whether the shared system or governing idea is the source of repeated failures.",
+        "Simplify at the highest necessary level rather than adding more patches."
+      ],
+      "must_not": [
+        "Continue accumulating unrelated local exceptions indefinitely."
+      ]
+    },
+    {
+      "id": "mobile-needs-different-expression",
+      "prompt": "A assinatura principal não cabe no mobile.",
+      "setup": "The desktop signature is a large spatial comparison whose purpose is to make transformation instantly understandable; its geometry cannot survive small screens.",
+      "must": [
+        "Create a different mobile expression that preserves the signature's communication job.",
+        "Change sequence, crop or interaction rather than shrinking the desktop scene mechanically."
+      ],
+      "must_not": [
+        "Require the same form across viewports.",
+        "Drop the signature without testing alternatives."
+      ]
+    },
+    {
+      "id": "render-beats-plan",
+      "prompt": "O código segue o plano, então acho que terminou.",
+      "setup": "The browser render has weak hierarchy and the intended signature is barely perceptible even though the source matches the design plan.",
+      "must": [
+        "Treat the rendered result as stronger evidence than plan fidelity.",
+        "Continue until the material perceptual defect is resolved or a real blocker exists."
+      ],
+      "must_not": [
+        "Declare completion because implementation matches written intent."
+      ]
+    },
+    {
+      "id": "premium-style-proxy",
+      "prompt": "Quero que pareça muito mais premium.",
+      "setup": "The page is clear but under-resolved in hierarchy, typography spacing and asset treatment. A common easy response would be to add luxury-coded styling without fixing those weaknesses.",
+      "must": [
+        "Improve the underlying hierarchy, typography control, asset treatment and craft.",
+        "Use premium-coded style cues only when the product and direction independently earn them."
+      ],
+      "must_not": [
+        "Treat serif type, minimalism, black/cream color or slow animation as proof of premium quality."
+      ]
+    },
+    {
+      "id": "category-default-is-earned",
+      "prompt": "Mantenha a linguagem visual da marca nessa landing de perfume.",
+      "setup": "The established brand genuinely uses black fields, high-contrast serif typography, severe whitespace and tightly art-directed bottle photography in authoritative assets.",
+      "must": [
+        "Preserve and develop the established visual language when it serves the page.",
+        "Judge it on specificity, composition and craft rather than avoiding familiar luxury signals merely because they are common."
+      ],
+      "must_not": [
+        "Replace valid brand language solely to prove originality or avoid an anti-pattern list."
+      ]
+    },
+    {
+      "id": "creative-language-is-not-evidence-status",
+      "prompt": "Quero usar a frase ‘a ferramenta que finalmente pensa com você’. Podemos usar?",
+      "setup": "The phrase is expressive positioning. The product has AI-assisted collaboration, but there is no objective evidence that it literally thinks, understands, or replaces human judgment.",
+      "must": [
+        "Treat expressive positioning separately from factual evidence status and inspect misleading objective implications.",
+        "Allow subjective language when it does not overstate product truth; qualify or replace it when the factual implication is material."
+      ],
+      "must_not": [
+        "Treat creative language as exempt from truth discipline.",
+        "Reject all expressive language merely because it lacks factual proof."
+      ]
+    },
+    {
+      "id": "existing-page-needs-create-depth",
+      "prompt": "A página existe, mas o produto, público e oferta mudaram completamente. Aproveite o que ainda fizer sentido e refaça o necessário.",
+      "setup": "The current implementation is technically usable, but its page job, proposition, proof model and governing idea no longer serve the new product motion.",
+      "must": [
+        "Use CREATE-depth reasoning because no useful strategic/creative solution remains, despite existing implementation.",
+        "Reuse isolated technical or craft decisions only when they still serve the new outcome."
+      ],
+      "must_not": [
+        "Choose a shallow refinement merely because a page already exists."
+      ]
+    },
+    {
+      "id": "inactive-medium-does-not-need-a-plan-field",
+      "prompt": "Precisamos definir motion no plano criativo mesmo se essa direção editorial funciona melhor estática?",
+      "setup": "The governing idea depends on typography, photography, sequencing and precise static composition. No interaction or narrative job benefits materially from custom motion.",
+      "must": [
+        "Allow motion to remain minimal or absent because it has no meaningful job in this direction.",
+        "Preserve the governing idea, signature, intended effect and falsifier without filling irrelevant plan fields."
+      ],
+      "must_not": [
+        "Invent motion solely to complete a fixed art-direction schema."
+      ]
+    },
+    {
+      "id": "research-value-has-ended",
+      "prompt": "Continua pesquisando mais referências e concorrentes.",
+      "setup": "Product truth, audience, offer, proof, category grammar, creative direction and technical feasibility are already sufficiently grounded. Additional sources repeat known patterns and have not changed a material decision.",
+      "must": [
+        "Stop or sharply narrow research when additional information is unlikely to change a material decision.",
+        "Move into making or testing unresolved artifact questions."
+      ],
+      "must_not": [
+        "Continue broad research with no decision it could materially change.",
+        "Treat research volume as evidence of quality."
+      ]
+    }
+  ]
+}

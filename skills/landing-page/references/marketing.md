@@ -1,25 +1,31 @@
 # Marketing Semantics for Landing Pages
 
-Load this reference when the page's proposition, narrative, proof, CTA, or structure is being created or materially changed.
+Load this reference when the page's intent, proposition, narrative, proof, CTA, or structure is being created or materially changed.
 
-## The page model
+## Page intent
+
+Use this model across discovery, composition, and downstream verification. Do not create a parallel brief model elsewhere.
+
+Resolve eight decisions:
+
+1. **Page job** — the decision or transition this page exists to enable.
+2. **Audience** — the person or buying role whose decision matters.
+3. **Arrival context** — what they likely know, want, fear, or expect when they arrive.
+4. **Offer** — what is actually being offered and on what relevant terms.
+5. **Proposition** — the most compelling truthful connection between the offer and the visitor's desired outcome.
+6. **Proof** — what makes the proposition and important claims believable.
+7. **Friction** — what still makes acting costly, risky, unclear or premature.
+8. **Action** — the primary conversion event the page should make reasonable and easy.
+
+Resolve only as much of each decision as materially changes the page. Do not invent a complete strategy when the user has provided only a design task.
+
+## Visitor-state model
 
 A landing page is a controlled transition:
 
 `visitor context → attention → relevance → understanding → belief → reduced friction → action`
 
-The page is not required to follow this sequence literally. It must, however, account for the states that materially separate arrival from the desired action.
-
-Work from six objects:
-
-1. **Audience** — the person or buying role whose decision matters.
-2. **Arrival context** — what they likely know, want, fear, or expect when they arrive.
-3. **Offer** — what is actually being offered and on what relevant terms.
-4. **Proposition** — the most compelling truthful connection between the offer and the visitor's desired outcome.
-5. **Proof / friction** — reasons to believe and reasons not to act yet.
-6. **Action** — the primary conversion event this page should make reasonable and easy.
-
-Do not invent a complete strategy when the user has provided only a design task. Resolve only what is necessary to produce the page responsibly.
+The page is not required to follow this sequence literally. It must account for the states that materially separate arrival from the desired action. Evidence is not a separate visitor state; it is a means of producing belief or reducing friction.
 
 ## Proposition quality
 
@@ -41,7 +47,7 @@ Do not force this verbal formula when a different expression is better. The prin
 
 ## Page narrative
 
-Derive major regions from unresolved visitor needs. Examples of visitor questions include:
+Derive major regions from unresolved visitor needs rather than conventional section names. Typical questions include:
 
 - Is this for someone like me?
 - What exactly changes if I use it?
@@ -51,18 +57,18 @@ Derive major regions from unresolved visitor needs. Examples of visitor question
 - What will it cost me in money, time, risk, or switching effort?
 - What happens after I click?
 
-A region exists because answering one of these questions materially advances the decision.
+These are decoding examples, not a required sequence. A region exists only when resolving a visitor state materially advances the page job.
 
 ### Region contract
 
 For each major region, know:
 
 - `job` — why it exists;
-- `incoming_state` — what the visitor has/has not resolved before it;
+- `incoming_state` — what remains unresolved before it;
 - `desired_state` — what changes after it;
 - `message` — the dominant takeaway;
 - `evidence` — what makes it believable;
-- `medium` — copy, product UI, image, data, comparison, demo, animation, diagram, testimony, etc.;
+- `medium` — the form best suited to communicate it;
 - `transition` — why the next region now makes sense.
 
 Do not expose this schema to the user unless it improves collaboration.
@@ -70,36 +76,27 @@ Do not expose this schema to the user unless it improves collaboration.
 Consequences of the contract:
 
 - remove regions that perform no distinct communication job;
-- choose the strongest medium for each message — real product UI, image, demonstration, diagram, comparison, animation, data, or concise prose — rather than translating every idea into `icon + heading + paragraph + rounded card`;
+- choose the strongest medium for each message rather than translating every idea into `icon + heading + paragraph + rounded card`;
 - treat the first viewport as a thesis, not a header template: identity, relevance, hierarchy, product signal and primary action, quickly;
 - plan full-page rhythm before obsessing over the hero; a brilliant hero followed by generic sections is a failed high-end page.
 
 ## Proof
 
-Prefer proof closest to reality:
+Prefer proof closest to reality. Strong forms include real product behavior/UI, concrete demonstrations, externally verifiable facts, supplied customer evidence, meaningful quantitative evidence with provenance, precise mechanism explanations, and legitimate social/qualitative cues.
 
-- real product behavior or product UI;
-- concrete examples/demonstrations;
-- externally verifiable facts;
-- real customer evidence supplied by the user/project;
-- meaningful quantitative evidence with provenance;
-- precise mechanism explanations;
-- lower-strength social or qualitative cues only when legitimate.
-
-Do not manufacture social proof to fill a conventional section.
+Do not manufacture proof to fill a conventional section.
 
 ### Claim discipline
 
-Treat claims as one of:
+For any factual or objectively testable claim, use exactly one evidence status:
 
 - `SUPPORTED` — explicit evidence allows the claim as written;
-- `QUALIFIED` — evidence supports a narrower/weaker formulation;
-- `UNSUPPORTED` — do not state as fact;
-- `CREATIVE` — subjective positioning or expressive language that is not masquerading as objective proof.
+- `QUALIFIED` — evidence supports only a narrower/weaker formulation;
+- `UNSUPPORTED` — do not state as fact.
 
-Strength of wording must not exceed strength of evidence.
+Creative positioning is not a fourth claim status. Subjective or expressive language is allowed when it is not masquerading as objective proof; any factual implication inside it still receives one of the three statuses above.
 
-Forbidden without evidence includes numerical improvements, superlatives presented as fact, customer counts, market leadership, security certifications, awards, customer logos, testimonials, integrations, and guarantees.
+Strength of wording must not exceed strength of evidence. Numerical improvements, market leadership, customer counts, certifications, awards, logos, testimonials, integrations, guarantees and similar claims are examples of statements that require adequate evidence; the list is illustrative, not exhaustive.
 
 ## Copy
 
@@ -133,7 +130,7 @@ The CTA label should make the consequence of acting reasonably clear. Ensure the
 
 ## Landing-page structure is conditional
 
-Do not require conventional blocks. Use them only when the visitor state calls for them.
+Do not require conventional blocks. Structure follows the visitor states that remain unresolved for this page intent.
 
 Examples:
 
@@ -142,13 +139,13 @@ Examples:
 - A technical developer product may need `outcome → live demo/code → integration model → technical proof → action`.
 - A luxury or emotional product may communicate much of the proposition through art direction and imagery before rational detail.
 
-The structure is successful when each transition is necessary and the full page accumulates conviction without repetition.
+These are examples, not templates. The structure is successful when each transition is necessary and the full page accumulates conviction without repetition.
 
 ## Autonomous resolution for weak briefs
 
 A non-expert user does not need to arrive with a positioning framework, information architecture, CTA system, or persuasion sequence.
 
-When these are missing:
+When page intent is incomplete:
 
 1. inspect product/category evidence;
 2. infer the smallest truthful audience/arrival model that changes the page;

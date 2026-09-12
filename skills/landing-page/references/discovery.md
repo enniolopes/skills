@@ -12,55 +12,26 @@ Always prefer:
 
 A good run should usually reduce the number of questions the user has to answer.
 
-## What belongs to the agent vs. the user
+## Decision authority
 
-### Agent-owned by default
+Route authority by the kind of decision:
 
-Decide these without asking a non-expert user unless they explicitly want to collaborate:
+- **Professional + reversible** → the agent decides. This includes design, narrative form, typography, palette, imagery, motion, responsive composition, visual signature and implementation when no external authority owns the choice.
+- **Factual / authoritative / committed** → evidence or the owning authority decides. This includes product capability, pricing/terms, legal/security/compliance claims, customer proof, quantitative outcomes, business commitments and explicitly governed brand/positioning departures.
 
-- visual direction;
-- typography character and pairing;
-- palette and color hierarchy;
-- page composition and section architecture;
-- imagery direction;
-- interaction/motion language;
-- responsive adaptation;
-- layout density;
-- visual signature;
-- technical mechanism and frontend implementation;
-- how to translate existing brand/product material into the page.
+A creative choice may have factual implications; those implications still require evidence or authority. Never turn missing business truth into invented creative confidence.
 
-### User/external-authority owned
-
-Do not invent:
-
-- product capabilities;
-- pricing/terms not found in evidence;
-- legal/compliance/security claims;
-- customer identities or testimonials;
-- performance/outcome metrics;
-- business commitments;
-- whether a material brand/positioning departure is authorized when current constraints explicitly forbid it.
-
-When one of these is blocking, ask in consequences, not design jargon.
+When authority is blocking, ask in consequences rather than design jargon.
 
 Bad: `Do you prefer an editorial or cinematic direction?`
 
 Better: `The current product is sold through enterprise demos, while the new campaign brief points toward self-serve trial. I can optimize the page for one primary action; I recommend enterprise demo because that is the current live sales path. Should this campaign instead prioritize trial?`
 
-## Research trigger
+## Research value and stopping rule
 
-Research when it can materially change one of:
+Research only while the expected information can materially change a decision. Typical decision classes include proposition, audience/arrival model, proof, category grammar, distinction opportunity, creative direction and implementation feasibility.
 
-- proposition;
-- audience model;
-- proof strategy;
-- category conventions;
-- distinction opportunity;
-- creative direction;
-- implementation feasibility.
-
-Do not research because research is available.
+Stop a lane when more information is unlikely to change the decision it was opened to resolve. Do not research because research is available, and do not keep collecting references after the page is sufficiently grounded merely to appear thorough.
 
 ### CREATE
 
@@ -255,18 +226,7 @@ Do not write `make it look like [reference]` as the design strategy.
 
 If image search, screenshots, a design canvas, or image generation is available, it can be useful to externalize the visual world. The artifact is optional; the synthesis is mandatory.
 
-A useful visual-world synthesis contains:
-
-- 2–3 emotional anchors;
-- material/texture vocabulary;
-- typography character, not necessarily exact font yet;
-- composition/density principles;
-- imagery/crop/lighting behavior;
-- color relationships;
-- motion/interaction character;
-- one or more domain-specific motifs;
-- anti-references/clichés to avoid;
-- signature territory worth exploring.
+A useful visual-world synthesis contains enough information to guide relevant media without freezing them: emotional anchors; material/texture vocabulary; typography character; composition/density principles; imagery/crop/lighting behavior; color relationships; motion/interaction character when relevant; domain-specific motifs; anti-references; and signature territory worth exploring.
 
 Do not let a moodboard become a contract to copy. Its job is to establish a **world of possibilities**.
 
@@ -283,10 +243,10 @@ The test is not whether the work is unprecedented. It is whether the solution wa
 
 ## Synthesis object
 
-Compress research into this minimal basis:
+Use the page-intent model in `marketing.md` rather than inventing a parallel brief schema:
 
 ```yaml
-working_brief:
+page_intent:
   page_job:
   audience:
   arrival_context:
@@ -294,6 +254,7 @@ working_brief:
   proposition:
   proof:
   friction:
+  action:
 
 market:
   conventions_to_preserve:
@@ -313,30 +274,19 @@ constraints:
   truth_or_authority_gaps:
 ```
 
-This is an internal decision object, not a mandatory user-facing document. Its job is to make the agent decisive; expose it only when it helps collaboration.
+This is an internal decision object, not a mandatory user-facing document. Populate only what changes decisions; do not turn optional fields into ceremony.
 
-## Evidence classification
+## Evidence status
 
-Tag every item of the brief internally:
+For any **truth-bearing** item, use exactly one epistemic status:
 
 - `KNOWN` — supported by user input or inspected evidence;
 - `INFERRED` — reasonable, reversible interpretation that creates no false fact;
-- `CREATIVE` — concept, expression, metaphor, art direction;
-- `UNKNOWN` — must not be represented as fact.
+- `UNKNOWN` — not established and must not be represented as fact.
 
-Resolve `KNOWN`, `INFERRED` and `CREATIVE` yourself. Only an `UNKNOWN` that blocks truth, authority, or a material irreversible fork may become a question (see the question protocol). If a reversible default exists, take it and continue.
+Creative choices are not a fourth evidence status. They are professional decisions and may be explored freely; any factual implication they introduce must still be `KNOWN`, safely `INFERRED`, or remain `UNKNOWN`.
 
-## Research stopping rule
-
-Stop when additional research is no longer likely to change:
-
-- the working proposition;
-- a material proof decision;
-- the category/anti-reference map;
-- the creative thesis;
-- the technical feasibility choice.
-
-Do not collect references after the direction is already sufficiently grounded merely to appear thorough.
+Resolve discoverable facts, safe reversible inferences and professional creative decisions yourself. Only an `UNKNOWN` that blocks truth, authority, or a material irreversible fork may become a question. If a reversible default exists, take it and continue.
 
 ## Question protocol
 

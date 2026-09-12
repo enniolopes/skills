@@ -4,9 +4,9 @@ Load this reference for CREATE, major REFINE, art direction, or any task where t
 
 High-end design is not a style. It is controlled intention under constraints.
 
-## Quality basis
+## Design quality
 
-### 1. Specificity
+### Specificity
 
 A high-quality page looks causally related to its subject.
 
@@ -24,7 +24,7 @@ Use these as generative material rather than decorating a generic SaaS compositi
 
 **Swap test:** if replacing the name/logo with an unrelated company leaves the concept intact, specificity is weak.
 
-### 2. Legibility / hierarchy
+### Hierarchy
 
 Visual hierarchy is the perceptual representation of importance.
 
@@ -44,7 +44,7 @@ One element or relationship should dominate each major composition. If everythin
 
 Use familiar interaction grammar for actions people must understand quickly. Spend novelty on expression, not on making ordinary controls indecipherable.
 
-### 3. Coherence
+### Coherence
 
 The page needs a grammar rather than a collection of attractive decisions.
 
@@ -62,7 +62,7 @@ Look for stable relationships across:
 
 Coherence does not mean uniformity. Variation is desirable when it behaves like variation inside one composition.
 
-### 4. Appropriate expression
+### Expression
 
 Decide the emotion intentionally. Expression can be quiet or loud.
 
@@ -78,7 +78,7 @@ Do not equate:
 - creative with unconventional navigation;
 - delight with decoration.
 
-### 5. Distinction
+### Distinction
 
 Balance familiarity and novelty.
 
@@ -88,7 +88,7 @@ Create one **signature**: a visual/interactive/narrative expression the page can
 
 Spend boldness in one dominant place. Supporting regions should give the signature enough contrast to matter.
 
-### 6. Craft
+### Craft
 
 Craft is what remains after the concept is already correct.
 
@@ -109,7 +109,7 @@ Inspect:
 
 The design should improve under closer inspection rather than reveal approximation.
 
-### 7. Real-world integrity
+### Reality
 
 A screenshot is not the product.
 
@@ -164,25 +164,46 @@ High-end work requires integrity at all three scales.
 
 ## Art direction protocol
 
-A compact design plan should specify:
+`control.md` owns the direction contract: governing idea, signature/dominant expression, intended effect, and an observable falsifier. Do not create a parallel mandatory design-plan schema here.
 
-- `thesis` — the conceptual visual idea;
-- `emotional_target` — 2–3 desired qualities;
-- `signature` — one memorable expression;
-- `type` — display/body/utility roles and their character;
-- `palette` — functional color relationships, not merely swatches;
-- `composition` — mass, grid, density, whitespace, dominant relationships;
-- `imagery` — what kind of image/product evidence belongs and how it is treated;
-- `motion` — what moves and why;
-- `restraint` — what conventional decorative choices are intentionally excluded.
+For art direction, add an emotional target when it changes decisions, then express the direction through only the media that materially participate in the experience:
 
-Review the plan before coding. Identify any decision that could have been made for an unrelated page and make it more specific or remove it.
+- typography;
+- palette/color relationships;
+- composition, mass, density and whitespace;
+- imagery/product representation;
+- motion/interaction;
+- content emphasis;
+- technical expression for ambitious work.
 
-Also fix a `content thesis` (what dominates the first viewport and why) and an `interaction thesis` (what motion/interaction contributes, if anything). For technically ambitious work, the technical thesis in `technical-excellence.md` belongs to the same plan: technology is never the signature by itself; the experience it enables is.
+For each active medium, decide its role, relationship to the governing idea, and restraint. A medium with no meaningful job does not need a field filled in merely to complete a plan.
+
+Before coding, identify any material decision that could have been made for an unrelated page and make it more specific or remove it.
 
 Bad: `modern, premium, dark, gradients`.
 
 Useful: `The page behaves like a forensic instrument: sparse editorial typography frames live evidence from the product, while one controlled network visualization turns complexity into visible order.`
+
+## Negative control — prune counterfeit quality, not aesthetic territory
+
+Negative constraints should remove **bad reasoning**, not ban legitimate forms. When a familiar device appears, ask what property it is supposed to produce and whether that property is actually present.
+
+Use these four high-coverage anti-substitutions:
+
+1. **Polish is not resolution.** Do not use finish, effects, detail or visual confidence to make an unresolved proposition, hierarchy, composition or interaction feel complete. Resolve the underlying decision first; then polish it.
+2. **Style signals are not specificity or premium quality.** Minimalism, maximalism, serif display type, dark fields, gradients, editorial layouts, tactile imagery or any other aesthetic may be excellent, but none proves fit. Establish specificity through causal dependence on the product, audience, evidence, brand and domain; keep the style when the brief independently earns it.
+3. **Novelty or complexity is not sophistication.** Unusual navigation, 3D, dense interfaces, motion systems, shaders, asymmetric layouts or technical ambition do not establish creativity by themselves. Sophistication comes from meaning, control, appropriateness and resolution. Complexity is valid when it materially enables the governing idea or experience job.
+4. **Repetition is not coherence; components are not composition.** Identical cards, containers, grids or geometry can create uniformity while weakening hierarchy and rhythm. Establish coherence through shared relationships and logic with enough variation to serve meaning. Repeat a component when the information or interaction relationship is genuinely repeated.
+
+Do not grow these into a blacklist of fashionable symptoms. Add a new negative principle only if it describes a distinct causal failure that the existing principles cannot explain.
+
+### Challenge the contextual attractor
+
+Before committing a major new direction, identify mentally the **most available competent-but-generic solution** for this specific brief or category. This may be a familiar composition, material language, type/color cluster, interaction trope or proof pattern.
+
+If the proposed direction resembles that attractor, ask: **what in this brief actually earns this choice?** Keep it when the answer is specific and strong. If the only explanation is category familiarity, trend recognition, ease of implementation or an attempt to look premium/creative, explore a materially different route.
+
+Do not invert the attractor mechanically. Avoiding a default is not a creative thesis. The goal is brief-dependence, not anti-convention.
 
 ## Divergence and selection
 
@@ -291,7 +312,7 @@ If novelty has no answer to (1), remove it.
 
 ## Anti-slop signals
 
-These are not banned styles. They are warnings that the model may be composing from defaults instead of the brief:
+Concrete recurring patterns are **warning signals, not rules**. They matter because they can reveal one of the false substitutions above or a choice with weak causal dependence on the brief:
 
 - generic SaaS hero with centered headline, two CTAs, floating dashboard and decorative glow;
 - repetitive icon-card grids;
@@ -306,7 +327,7 @@ These are not banned styles. They are warnings that the model may be composing f
 - visual complexity added to hide weak hierarchy;
 - every section attempting to be the signature.
 
-When one appears, ask whether the brief truly calls for it. Keep it if yes; replace it if it is merely a learned default.
+When one appears, diagnose the underlying reason rather than banning the surface form. Keep it if the brief genuinely earns it; replace it if it is merely a learned default. Do not expand this list as a substitute for causal judgment.
 
 ## Premium does not mean one aesthetic
 
