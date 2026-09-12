@@ -4,9 +4,7 @@ Load this reference for CREATE, major REFINE, art direction, or any task where t
 
 High-end design is not a style. It is controlled intention under constraints.
 
-## Design projection of the quality basis
-
-`SKILL.md` owns the canonical quality basis. This file projects the dimensions most affected by visual/design judgment; it does not define a second quality model.
+## Design quality
 
 ### Specificity
 
@@ -168,7 +166,7 @@ High-end work requires integrity at all three scales.
 
 `control.md` owns the direction contract: governing idea, signature/dominant expression, intended effect, and an observable falsifier. Do not create a parallel mandatory design-plan schema here.
 
-For art direction, add an emotional target when it changes decisions, then project the direction through only the media that materially participate in the experience:
+For art direction, add an emotional target when it changes decisions, then express the direction through only the media that materially participate in the experience:
 
 - typography;
 - palette/color relationships;
