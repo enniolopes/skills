@@ -16,7 +16,7 @@ A version should not merge merely because it passes L0–L2.
 
 ## Evaluation rule
 
-Judge the **rendered/resulting page and the trajectory**, not prose that repeats the skill vocabulary. The evaluator should not require terms such as TRUTH, INTENT, DIRECTION or RE-DIVERGE to appear. Credit the behavior, not the taxonomy.
+Judge the **rendered/resulting page and the trajectory**, not prose that repeats the skill vocabulary. The evaluator should not require terms such as TRUTH, INTENT, DIRECTION, RE-DIVERGE or counterfeit quality to appear. Credit the behavior, not the taxonomy.
 
 Do not collapse the dimensions into one fake-precision score. Prefer dimension-level judgments and blind pairwise comparison.
 
@@ -25,6 +25,10 @@ Do not collapse the dimensions into one fake-precision score. Prefer dimension-l
 ### Truth and authority
 
 Pass when factual claims, proof and business commitments stay within available evidence/authority. Fail on invented customers, metrics, capabilities, integrations, guarantees or strategy.
+
+### Evidence fit
+
+Pass when the agent uses the kind of evidence capable of settling the material question: product evidence for facts, professional judgment for design, rendered/browser evidence for artifact behavior, and real behavioral evidence or experiments for causal market outcomes. Fail when one evidence type masquerades as another.
 
 ### Continuity of purpose
 
@@ -70,6 +74,12 @@ Does the full page control hierarchy, mass, density, contrast, transitions and q
 
 Do typography, imagery, color, motion and spatial behavior fit the brief's cultural/domain needs rather than a house aesthetic?
 
+### Resolution vs. counterfeit quality
+
+Pass when premium, sophistication, creativity, coherence and delight are materially present in the artifact rather than merely signaled by familiar style cues, surface polish, novelty, complexity, repetition or component uniformity.
+
+Do **not** penalize a familiar device merely because it is familiar. A serif, dark field, gradient, centered hero, cards, 3D, unusual navigation or any other mechanism may be excellent when the brief independently earns it. Fail when the mechanism substitutes for the underlying quality; also fail when the experiment develops a reflexive anti-default aesthetic.
+
 ### Inventiveness under constraint
 
 Does the agent discover non-obvious but relevant solutions when useful? Can it explore a wildcard without confusing unusualness with quality?
@@ -87,6 +97,8 @@ At macro, meso and micro scale, does the work improve under inspection? Are type
 Fail the experimental version if control improvements cause any of the following:
 
 - unrelated outputs converge on one recurring aesthetic;
+- anti-generic rules create a recurring "anti-AI" aesthetic just as rigid as the defaults they were meant to prevent;
+- valid category or brand conventions are rejected merely because they are common;
 - internal state/control concepts become visible page templates;
 - every idea must be fully rationalized before it can be tried;
 - the first committed direction becomes immutable;
@@ -103,8 +115,9 @@ Run the briefs in `creative-benchmark.json` as a batch. A blind reviewer should 
 2. Do composition, type, imagery and motion derive from each domain rather than one skill-induced visual lineage?
 3. Are recurring structures explained by usability needs or by fallback habit?
 4. Could several outputs become variants of one template after swapping logo/copy/palette?
+5. Did attempts to avoid common AI/web defaults themselves converge on one repeated anti-default language?
 
-Individually polished but repetitively authored outputs fail creative generalization.
+Individually polished but repetitively authored outputs fail creative generalization, whether the repeated style is conventional or deliberately unconventional.
 
 ## E. Blind comparison protocol
 
@@ -127,9 +140,10 @@ Before trusting a benchmark, inspect the benchmark itself:
 - criteria should describe observable outcomes, not quote the new skill's taxonomy;
 - a criterion that both versions trivially pass adds little evidence;
 - a scenario written directly from a new instruction can overfit the experiment;
+- negative-control cases must test both rejection of an unjustified proxy and preservation of the same mechanism when the brief legitimately supports it;
 - subjective design quality should be judged qualitatively/blind, not converted into pseudo-objective assertions;
 - long-horizon continuity requires actual multi-step execution when a runner is available; a setup paragraph is only a proxy.
 
 The success condition is not “more compliant.” It is:
 
-**more coherent across long execution, more capable of productive change, and at least as surprising, specific and art-directed as the strongest baseline run.**
+**more coherent across long execution, more capable of productive change, less likely to mistake familiar signals for quality, and at least as surprising, specific and art-directed as the strongest baseline run.**
