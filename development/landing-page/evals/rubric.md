@@ -7,7 +7,7 @@ Use this rubric to compare the current experiment against v3.1 or another baseli
 Do not overclaim what a test establishes.
 
 - **L0 — structural:** repository/CI checks, file contracts, token budgets, JSON validity.
-- **L1 — instruction audit:** whether the runtime actually encodes a behavior without contradiction or excessive duplication.
+- **L1 — instruction audit:** whether the runtime actually encodes a behavior without contradiction, unnecessary duplication or missing decision coverage.
 - **L2 — proxy execution:** one model/session simulates or grades behavior. Useful for finding obvious flaws, but not independent evidence of model improvement.
 - **L3 — independent A/B:** separate model runs on identical briefs, version identity hidden from the reviewer. Required before claiming the new skill is behaviorally better.
 - **L4 — real project:** repeated performance on actual landing-page work with rendered/browser evidence.
@@ -16,7 +16,7 @@ A version should not merge merely because it passes L0–L2.
 
 ## Evaluation rule
 
-Judge the **rendered/resulting page and the trajectory**, not prose that repeats the skill vocabulary. The evaluator should not require terms such as TRUTH, INTENT, DIRECTION, RE-DIVERGE or counterfeit quality to appear. Credit the behavior, not the taxonomy.
+Judge the **rendered/resulting page and the trajectory**, not prose that repeats the skill vocabulary. The evaluator should not require terms such as TRUTH, INTENT, DIRECTION, RE-DIVERGE, counterfeit quality or basis-form to appear. Credit the behavior, not the taxonomy.
 
 Do not collapse the dimensions into one fake-precision score. Prefer dimension-level judgments and blind pairwise comparison.
 
@@ -29,6 +29,12 @@ Pass when factual claims, proof and business commitments stay within available e
 ### Evidence fit
 
 Pass when the agent uses the kind of evidence capable of settling the material question: product evidence for facts, professional judgment for design, rendered/browser evidence for artifact behavior, and real behavioral evidence or experiments for causal market outcomes. Fail when one evidence type masquerades as another.
+
+### Decision-basis integrity
+
+Pass when the agent generalizes from compact decision rules to novel cases without treating examples or checklists as exhaustive specifications. It should not force irrelevant media/fields, conflate creative choice with evidence status, choose workflow depth solely from artifact existence, or keep researching when additional information cannot materially change a decision.
+
+Fail when abstraction removes necessary nuance or when case-lists continue to act as parallel sources of truth. A compact instruction is not better if the resulting behavior becomes ambiguous, incomplete or less creative.
 
 ### Continuity of purpose
 
@@ -94,11 +100,13 @@ At macro, meso and micro scale, does the work improve under inspection? Are type
 
 ## C. Anti-rigidity / creative freedom
 
-Fail the experimental version if control improvements cause any of the following:
+Fail the experimental version if control or compression improvements cause any of the following:
 
 - unrelated outputs converge on one recurring aesthetic;
 - anti-generic rules create a recurring "anti-AI" aesthetic just as rigid as the defaults they were meant to prevent;
 - valid category or brand conventions are rejected merely because they are common;
+- a compact basis becomes so abstract that the model loses useful domain detail;
+- optional expressive media become mandatory schema fields or, conversely, relevant media are ignored because they are not named centrally;
 - internal state/control concepts become visible page templates;
 - every idea must be fully rationalized before it can be tried;
 - the first committed direction becomes immutable;
@@ -131,7 +139,7 @@ For a real v3.1 vs experimental comparison:
 - name the largest advantage and largest regression of each output;
 - repeat enough cases to detect variance rather than trusting a single win.
 
-Prefer the experiment only when control improves **without material loss of specificity, conceptual strength, expressive range or craft**.
+Prefer the experiment only when control/compressibility improve **without material loss of specificity, conceptual strength, expressive range, completeness or craft**.
 
 ## F. Eval-quality checks
 
@@ -141,9 +149,10 @@ Before trusting a benchmark, inspect the benchmark itself:
 - a criterion that both versions trivially pass adds little evidence;
 - a scenario written directly from a new instruction can overfit the experiment;
 - negative-control cases must test both rejection of an unjustified proxy and preservation of the same mechanism when the brief legitimately supports it;
+- basis-form cases must test novel/boundary behavior, not reward repetition of the abstract rule;
 - subjective design quality should be judged qualitatively/blind, not converted into pseudo-objective assertions;
 - long-horizon continuity requires actual multi-step execution when a runner is available; a setup paragraph is only a proxy.
 
-The success condition is not “more compliant.” It is:
+The success condition is not “shorter” or “more compliant.” It is:
 
-**more coherent across long execution, more capable of productive change, less likely to mistake familiar signals for quality, and at least as surprising, specific and art-directed as the strongest baseline run.**
+**more coherent across long execution, more capable of productive change, less likely to mistake familiar signals for quality, more decisions derivable from fewer non-overlapping rules, and at least as surprising, specific and art-directed as the strongest baseline run.**
