@@ -6,15 +6,16 @@ Load this reference when the page's intent, proposition, narrative, proof, CTA, 
 
 This file owns the page-intent basis used by discovery, composition and downstream verification. Do not create a parallel brief model elsewhere.
 
-Work from seven decision axes:
+Work from eight decision axes:
 
 1. **Page job** — the decision or transition this page exists to enable.
 2. **Audience** — the person or buying role whose decision matters.
 3. **Arrival context** — what they likely know, want, fear, or expect when they arrive.
 4. **Offer** — what is actually being offered and on what relevant terms.
 5. **Proposition** — the most compelling truthful connection between the offer and the visitor's desired outcome.
-6. **Proof and friction** — reasons to believe, and reasons not to act yet.
-7. **Action** — the primary conversion event the page should make reasonable and easy.
+6. **Proof** — what makes the proposition and important claims believable.
+7. **Friction** — what still makes acting costly, risky, unclear or premature.
+8. **Action** — the primary conversion event the page should make reasonable and easy.
 
 Resolve only as much of each axis as materially changes the page. Do not invent a complete strategy when the user has provided only a design task.
 
