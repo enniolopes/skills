@@ -10,24 +10,25 @@ For award-caliber, animation-heavy, WebGL/3D/canvas, or technically ambitious wo
 
 A build can pass while the page is visually poor. A screenshot can look excellent while interaction is broken. Verify both.
 
-## Build a QA inventory
+## Verification basis
 
-Before final handoff, list internally the claims you intend to make about completion and map each to evidence.
+`SKILL.md` owns the canonical quality basis. Verification does not redefine quality; it projects each applicable quality claim into:
+
+`quality claim → plausible falsifier → cheapest valid oracle/evidence → finding severity`
 
 Examples:
 
-| Claim | Evidence |
-|---|---|
-| page renders | browser load / server response |
-| primary CTA works | actual click + resulting navigation/state |
-| no horizontal overflow | browser inspection at target viewports |
-| mobile composition works | rendered mobile viewport screenshot/inspection |
-| build is valid | repository build/typecheck/lint command actually run |
-| visual direction is coherent | perceptual review of full page and screenshots |
-| WCAG contrast checked | actual accessibility/audit/manual contrast evidence |
-| performance is good | measured evidence, not code inspection |
+| Claim | Falsifier | Valid evidence |
+|---|---|---|
+| page renders | load/runtime failure | browser load / server response |
+| primary CTA works | click does not produce intended result | actual interaction + resulting navigation/state |
+| mobile composition works | hierarchy/crop/action fails at mobile | rendered mobile viewport inspection |
+| build is valid | repository check fails | declared build/typecheck/lint command actually run |
+| visual direction is coherent | rendered relationships contradict the grammar | perceptual review of full page/screenshots |
+| accessibility property passes | the relevant criterion fails | actual accessibility tooling/manual evidence appropriate to the claim |
+| performance is good | measured behavior misses the claimed standard | measured evidence, not code inspection |
 
-Never claim evidence that was not collected.
+Never claim evidence that was not collected. If no valid oracle is available, report the gap rather than upgrading judgment into proof.
 
 ## Deterministic QA
 
@@ -58,12 +59,7 @@ Do not invent ad-hoc destructive commands. Respect repository conventions.
 
 ## Viewport QA
 
-At minimum for material pages, inspect:
-
-- a representative desktop viewport;
-- a representative mobile viewport.
-
-Add tablet/intermediate widths when layout transitions are complex or when defects appear between the extremes.
+At minimum for material pages, inspect a representative desktop viewport and a representative mobile viewport. Add tablet/intermediate widths when layout transitions are complex or when defects appear between the extremes.
 
 Do not test mobile only by narrowing until the page technically fits. Look for intended recomposition:
 
@@ -77,11 +73,11 @@ Do not test mobile only by narrowing until the page technically fits. Look for i
 
 ## Perceptual QA
 
-Review the rendered page as a hostile design critic rather than its author.
+Review the rendered page as a hostile design critic rather than its author. The checks below are falsifier-finding lenses, not alternate definitions of quality.
 
-### First-viewport test
+### First viewport
 
-Without scrolling, ask:
+Ask:
 
 - What receives attention first?
 - Can I identify the product/page job quickly?
@@ -90,7 +86,7 @@ Without scrolling, ask:
 - Is there one dominant visual idea?
 - Is any element competing with the thesis?
 
-### Full-page test
+### Full page
 
 Scroll at normal reading speed. Ask:
 
@@ -104,19 +100,7 @@ Scroll at normal reading speed. Ask:
 
 ### Craft sweep
 
-Inspect high-risk details:
-
-- headline line breaks;
-- paragraph measures;
-- image crops;
-- icon consistency;
-- optical alignment;
-- buttons/controls typography;
-- hover/focus/pressed states;
-- section edges/transitions;
-- sticky content;
-- forms and error/empty states when present;
-- mobile spacing and wrapping.
+Inspect high-risk details such as headline line breaks, paragraph measures, image crops, icon consistency, optical alignment, control typography/states, section transitions, sticky content, forms/error states, and mobile spacing/wrapping. These examples decode `craft`; they are not an exhaustive specification.
 
 ### Anti-generic / counterfeit-quality test
 
@@ -141,22 +125,20 @@ When a visual concept/reference was accepted before implementation:
 
 1. capture the concept/reference and current implementation in the same QA pass;
 2. compare composition, typography, scale, crop, palette, spacing, imagery, containers, and motion intent;
-3. list the largest mismatches;
-4. fix mismatches in descending perceptual impact;
+3. identify the largest material mismatches;
+4. fix them in descending perceptual impact;
 5. re-render after each meaningful correction set.
 
-Do not silently reinterpret the accepted design into a generic component system.
-
-A reference is not permission to ship screenshot-as-UI. Keep real UI, text, controls, and interactions code-native where appropriate.
+Do not silently reinterpret the accepted design into a generic component system. A reference is not permission to ship screenshot-as-UI; keep real UI, text, controls, and interactions code-native where appropriate.
 
 ## Build in visual slices
 
 For material CREATE work, do not write the whole page blindly and review only at the end:
 
-1. implement the first viewport and the system foundation;
+1. implement the first viewport and system foundation;
 2. render and correct large drift;
 3. implement the next narrative slice;
-4. render and check section continuity;
+4. render and check continuity;
 5. continue until complete;
 6. run full-page rhythm and responsive passes.
 
@@ -167,16 +149,15 @@ This preserves a coherent direction while reducing late-stage visual debt.
 The first successful render begins QA. When browser/render tools exist:
 
 1. run the app using repository-declared commands;
-2. inspect the first viewport before scrolling;
-3. inspect the complete narrative at normal reading speed;
-4. exercise primary interactions and conversion actions;
-5. inspect representative desktop and mobile; add intermediate/short-height viewports when the layout warrants it;
-6. capture screenshots when possible;
-7. run the deterministic checks available in the environment;
-8. run the perceptual critiques and the multi-lens review below, as separate passes;
-9. identify the largest remaining defect;
-10. make a targeted correction and render again;
-11. repeat until no material defect remains or a concrete blocker prevents improvement.
+2. inspect the first viewport and complete narrative;
+3. exercise primary interactions and conversion actions;
+4. inspect representative desktop/mobile and any additional warranted viewports;
+5. capture screenshots when useful;
+6. run deterministic checks available in the environment;
+7. use perceptual/multi-lens review to find the largest remaining falsifier;
+8. identify the lowest causal layer that explains it;
+9. make a targeted correction and render again;
+10. repeat until no material falsifier remains or a concrete blocker prevents improvement.
 
 ## Refinement strategy
 
@@ -244,28 +225,9 @@ Do not sign off while any applicable defect remains:
 
 If the environment prevents verification, state exactly what remains unverified.
 
-## Final internal questions
-
-Before handoff:
-
-- **Truth:** Did I introduce any unsupported factual claim?
-- **Meaning:** Can the intended visitor identify proposition and action?
-- **Specificity:** Could this plausibly belong to an unrelated product?
-- **Hierarchy:** Is attention ordered rather than contested?
-- **Coherence:** Does everything speak one visual language without collapsing into mechanical uniformity?
-- **Signature:** What will be remembered?
-- **Counterfeit quality:** Is any major quality being implied mainly by polish, style cues, novelty, complexity or repetition instead of being materially present?
-- **Craft:** Where is the weakest-looking 10%? Did I fix it?
-- **Responsive:** Was mobile composed intentionally?
-- **Function:** Did I actually exercise the important actions?
-- **Evidence:** Which checks did I truly run?
-- **Resolution:** Is any visible part merely acceptable rather than resolved?
-
-A material page is ready when the last question is `no`, or when further improvement is blocked by a concrete external constraint that is explicitly reported.
-
 ## Multi-lens review for premium work
 
-Do not collapse all critique into one aesthetic impression. Run separate passes because each lens catches different failures.
+The lenses below search for different classes of falsifier; they do not each define a new quality model.
 
 ### Lens 1 — first-time visitor
 
@@ -300,14 +262,7 @@ Inspect the weakest 10%, not the strongest 10%:
 
 ### Lens 4 — creative developer / technical jury
 
-For ambitious work inspect:
-
-- loading and perceived performance;
-- responsive/device behavior;
-- markup/document structure;
-- semantics/discoverability/metadata;
-- motion/frame behavior;
-- accessibility and graceful degradation.
+For ambitious work inspect loading/perceived performance, responsive/device behavior, document structure/semantics, motion/frame behavior, accessibility and graceful degradation.
 
 A technically impressive page that fails one of these materially is not award-caliber.
 
@@ -321,12 +276,14 @@ Classify findings internally:
 
 Do not hand off with known BLOCKER or MATERIAL findings that are fixable in the current environment.
 
-## Diminishing-returns stop rule
+## Final basis pass and stop rule
 
-Premium work requires iteration but not endless churn. Stop refinement when:
+Before handoff, walk every **applicable** canonical quality dimension from `SKILL.md`. For each, ask what remaining observation could still falsify the claim that it is resolved and whether the valid oracle available in this environment has been applied. Do not create a second checklist of quality definitions here.
+
+Stop refinement when:
 
 1. all applicable hard gates pass;
-2. no BLOCKER/MATERIAL finding remains;
+2. no BLOCKER/MATERIAL falsifier remains;
 3. the weakest important region is still professional and coherent with the whole;
 4. another change would be preference-level, conflict with a constraint, or risk destabilizing a stronger solved decision.
 
