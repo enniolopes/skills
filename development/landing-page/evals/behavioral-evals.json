@@ -1,7 +1,7 @@
 {
-  "version": "2.0",
+  "version": "2.1",
   "skill": "landing-page",
-  "purpose": "Natural-language regression cases for continuity, pivot discipline, creative freedom and resistance to over-control. Criteria describe outcomes, not skill vocabulary.",
+  "purpose": "Natural-language regression cases for continuity, pivot discipline, creative freedom, evidence fit and resistance to both generic defaults and anti-template over-control. Criteria describe outcomes, not skill vocabulary.",
   "cases": [
     {
       "id": "local-mobile-fix",
@@ -181,6 +181,58 @@
       ],
       "must_not": [
         "Declare completion because the implementation matches written intent."
+      ]
+    },
+    {
+      "id": "premium-style-proxy",
+      "prompt": "Quero que pareça muito mais premium.",
+      "setup": "The page is clear but under-resolved in hierarchy, typography spacing and asset treatment. A common easy response would be to add a high-contrast serif, more whitespace, black/cream colors and slower motion without fixing those weaknesses.",
+      "must": [
+        "Improve the underlying hierarchy, typography control, asset treatment and craft that actually make the page feel resolved.",
+        "Use any premium-coded style cue only when it fits the product and chosen direction independently."
+      ],
+      "must_not": [
+        "Treat serif type, minimalism, black/cream color or slow animation as proof of premium quality.",
+        "Reject those devices categorically when the brief genuinely supports them."
+      ]
+    },
+    {
+      "id": "category-default-is-earned",
+      "prompt": "Mantenha a linguagem visual da marca nessa landing de perfume.",
+      "setup": "The established brand genuinely uses black fields, high-contrast serif typography, severe whitespace and tightly art-directed bottle photography. Those choices are present in authoritative brand assets and product packaging, not inferred from category fashion.",
+      "must": [
+        "Preserve and develop the established visual language when it serves the page.",
+        "Judge the execution on specificity, composition and craft rather than avoiding familiar luxury signals merely because they are common in the category."
+      ],
+      "must_not": [
+        "Replace the valid brand language solely to prove originality or avoid an anti-pattern list.",
+        "Assume a familiar aesthetic is generic when the brief causally earns it."
+      ]
+    },
+    {
+      "id": "component-uniformity-is-not-coherence",
+      "prompt": "Deixei todas as seções com os mesmos cards e ficou mais consistente, mas a página perdeu força.",
+      "setup": "The content types and communication jobs differ substantially across the page; identical containers were introduced mainly to make implementation and styling uniform.",
+      "must": [
+        "Restore composition and hierarchy appropriate to each message while preserving shared visual relationships across the system.",
+        "Keep repeated components only where the information or interaction relationship truly repeats."
+      ],
+      "must_not": [
+        "Treat identical geometry as sufficient evidence of coherence.",
+        "Remove all cards reflexively when some are semantically appropriate."
+      ]
+    },
+    {
+      "id": "motion-is-not-delight",
+      "prompt": "Coloca mais animação em tudo para a página ficar mais delightful.",
+      "setup": "The page is usable and its main weakness is a flat interaction feel, but most sections have no narrative or state relationship that benefits from entrance animation.",
+      "must": [
+        "Improve delight through responsive feedback, meaningful transitions, pacing or one intentional motion moment where movement has a real job.",
+        "Use animation where it adds orientation, demonstration, feedback, atmosphere or identity."
+      ],
+      "must_not": [
+        "Animate every element merely to signal polish or delight.",
+        "Ban motion entirely because gratuitous motion is a risk."
       ]
     }
   ]
