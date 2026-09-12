@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "skill": "landing-page",
+  "rule": "Keep one case per distinct recurring failure mechanism. Judge the decision and rendered result, not runtime vocabulary.",
+  "regressions": [
+    {
+      "id": "local-vs-systemic",
+      "prompt": "No mobile o headline quebra mal e o CTA ficou apertado; em outras partes cada seção também começou a exigir um truque diferente.",
+      "judge": [
+        "Fix an isolated defect locally, but reopen the shared system or governing idea when failures genuinely repeat.",
+        "Preserve still-valid proposition, evidence and solved design work."
+      ]
+    },
+    {
+      "id": "job-change",
+      "prompt": "A campanha agora leva para demo enterprise, não trial self-service. Aproveite o que ainda servir.",
+      "judge": [
+        "Reconsider proposition, proof, friction, CTA and page structure affected by the new conversion job.",
+        "Do not reduce the change to button copy or reflexively discard unaffected work."
+      ]
+    },
+    {
+      "id": "truth-change",
+      "prompt": "Descobrimos que a integração usada como prova no hero ainda não existe.",
+      "judge": [
+        "Remove or qualify the unsupported implication everywhere it materially affects the page.",
+        "Do not invent roadmap truth to preserve the current design."
+      ]
+    },
+    {
+      "id": "render-over-plan",
+      "prompt": "O código segue o plano, mas no browser a hierarquia está fraca e a assinatura quase não aparece. Terminou?",
+      "judge": [
+        "Treat the rendered artifact as stronger evidence than plan fidelity.",
+        "Continue until the material defect is resolved or a real blocker remains."
+      ]
+    },
+    {
+      "id": "proxy-without-anti-style",
+      "prompt": "Quero que pareça mais premium. A marca já usa serif de alto contraste, preto, muito espaço e fotografia autoral.",
+      "judge": [
+        "Improve the underlying hierarchy, craft and asset treatment rather than using familiar luxury signals as proof of quality.",
+        "Keep familiar brand mechanisms when this brand independently earns them; do not invert style merely to look original."
+      ]
+    },
+    {
+      "id": "research-stopping",
+      "prompt": "Continue pesquisando referências e concorrentes, mesmo que tudo novo esteja repetindo o que já sabemos.",
+      "judge": [
+        "Stop or narrow research when more information is unlikely to change a material decision.",
+        "Move to making or testing the unresolved artifact question instead of treating research volume as quality."
+      ]
+    }
+  ],
+  "creative_briefs": [
+    {
+      "id": "experimental-fashion",
+      "brief": "Launch page for an experimental fashion label releasing 18 asymmetrical garments, using stark studio photography, construction close-ups and designer notes. Primary action: enter the drop/shop."
+    },
+    {
+      "id": "industrial-robotics",
+      "brief": "Landing page for software that plans robotic welding cells before installation, with cycle-time simulation, collision checks, CAD screenshots and engineering diagrams. Primary action: book an engineering demo."
+    },
+    {
+      "id": "children-astronomy",
+      "brief": "Subscription landing page for a family astronomy app for ages 8–12, with sky missions, telescope guidance, illustrated constellations and parent controls. Primary action: start family trial."
+    },
+    {
+      "id": "neighborhood-arts",
+      "brief": "Landing page for a three-day neighborhood arts festival across 24 venues, with poster archive, artist images, map and schedule. Primary action: explore the program and reserve limited events."
+    }
+  ]
+}
