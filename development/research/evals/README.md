@@ -1,32 +1,11 @@
-# research — evaluations
+# research — evaluation
 
-Three layers, after devanity-skills. Behavioural claims require actual model runs; the
-structural tests in `../tests/` prove only shape.
+Behavioral claims require model runs; unit tests prove only deterministic contracts.
 
-- **Regression** — `scenarios.json`, seeded from the origin case (ten audit findings, four
-  memory failures). Each scenario names the piece, the state before, and the observable
-  expectation. A scenario passes when a fresh session, given the state, produces the
-  expectation before a human does.
-- **Adversarial** — `adversarial/make_synthetic.py` generates a municipality dataset in
-  which kitchens are placed independently of need, with many specifications available.
-  Expected: `INCONCLUSIVE` or `REFUTED` for any selection hypothesis; a `CONFIRMED` is a
-  failure of the system, whatever specification produced it.
-- **Holdout** — the next research started in the origin repository, developed without
-  consulting the origin case. Not in this repository by design.
+Use `scenarios.json` as the minimal regression set: one scenario per distinct failure mechanism across `scientific-method`, `research-map` and `reviewer-2`. Judge the observable decision, not exact phase wording, headings or historical case details.
 
-## Acceptance (roadmap step 6)
+`adversarial/make_synthetic.py` is the single adversarial fixture. It creates data with no target relation but many plausible specifications. The system fails if specification search manufactures a confirmatory result.
 
-Regression scenarios all pass; the adversarial run never yields a rescued `CONFIRMED`.
-Record per run: scenario id, piece versions, model, host, outcome, human decisions the
-piece correctly refused to invent, and the adjudication. Status as of 2026-09-10: pieces
-built; no run recorded yet.
+For a targeted change, run only scenarios that can distinguish it. For a broad method change, run the full set plus the adversarial fixture. A baseline/candidate difference is useful only when it changes the research decision or evidence boundary; matching preferred vocabulary is not improvement.
 
-## Running the adversarial fixture
-
-```bash
-python adversarial/make_synthetic.py --out /tmp/synthetic.csv
-```
-
-Then, in a scratch research repository with that file as the only input, start
-`/scientific-method start: does habilitação concentrate kitchens toward need?` and follow
-the phases through analysis. The terminal state per hypothesis is the result.
+Independent real-project use remains stronger evidence than these regressions.

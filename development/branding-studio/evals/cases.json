@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "skill": "branding-studio",
+  "rule": "Test decisions and artifacts, not runtime vocabulary. Keep a case only when it represents a distinct recurring failure mechanism.",
+  "regressions": [
+    {
+      "id": "truth-and-autonomy",
+      "prompt": "Crie a marca deste produto.",
+      "setup": "Product/site evidence is available, but private future strategy is not.",
+      "judge": [
+        "Inspect available reality before asking questions or inventing facts.",
+        "Ask only for missing truth or authority that can materially change the work."
+      ]
+    },
+    {
+      "id": "equity-and-change",
+      "prompt": "Formalize nossa marca atual e modernize o que precisar.",
+      "setup": "The identity has years of coherent use but no canonical spec; no material failure is established.",
+      "judge": [
+        "Reconstruct and preserve useful equity before changing it.",
+        "Treat missing documentation as a documentation gap, not a redesign trigger."
+      ]
+    },
+    {
+      "id": "divergence-and-commitment",
+      "prompt": "Explore direções para a identidade e recomende uma.",
+      "setup": "Strategy is established; the category has an obvious competent default.",
+      "judge": [
+        "Explore materially different governing ideas rather than cosmetic variants.",
+        "Commit through brief-specific fit and generative potential, neither category autocomplete nor reflexive opposition."
+      ]
+    },
+    {
+      "id": "system-in-use",
+      "prompt": "Finalize a identidade.",
+      "setup": "The chosen direction looks strong in presentation but repeated legitimate applications need exceptions and lose specificity.",
+      "judge": [
+        "Treat repeated use failure as evidence about the system or direction, not a reason to keep patching artifacts.",
+        "Correct the lowest layer that explains the defect and re-test."
+      ]
+    },
+    {
+      "id": "evidence-and-proxies",
+      "prompt": "O spec validou e os mockups estão ótimos; confirme que a marca é memorável e está pronta.",
+      "setup": "Structural checks pass; no audience study exists and real applications remain under-resolved.",
+      "judge": [
+        "Reject structural completeness and polish as proof of creative or market outcomes.",
+        "Use the evidence class capable of answering each material question and leave unavailable external claims unresolved."
+      ]
+    },
+    {
+      "id": "production-honesty",
+      "prompt": "Finalize o logo expressivo.",
+      "setup": "Only a polished raster concept can be produced and inspected; no trustworthy vector master path exists.",
+      "judge": [
+        "Preserve the creative concept while reporting the actual production state.",
+        "Do not promote appearance or file validity into production proof."
+      ]
+    },
+    {
+      "id": "verbal-generativity",
+      "prompt": "Crie o sistema verbal para um software de manutenção predial que reduz perda de contexto entre turnos. Demonstre homepage, onboarding, aviso de inspeção atrasada e email executivo. Não há evidência de liderança, superioridade ou confiança medida.",
+      "judge": [
+        "Keep proposition and claims bounded by truth/proof while adapting message and expression to each context.",
+        "Judge the actual copy: principles should generate specific new language, not merely generic voice adjectives or repeated slogans."
+      ]
+    }
+  ],
+  "creative_briefs": [
+    {
+      "id": "industrial-safety-platform",
+      "brief": "Brand a B2B platform used by heavy-industry maintenance teams to prevent equipment failures. It combines sensor history, inspection records and maintenance workflows and must work in dense dashboards, field documentation, executive sales material and safety-critical training."
+    },
+    {
+      "id": "neighborhood-food-brand",
+      "brief": "Evolve a 40-year neighborhood bakery into a small chain and packaged pantry line. Preserve useful local equity while avoiding faux-vintage nostalgia across storefronts, bags, jars, menus and ecommerce."
+    },
+    {
+      "id": "contemporary-arts-institution",
+      "brief": "Create a public contemporary-arts identity for exhibitions, education, archives and late-night events. It must support bilingual long-form text, wayfinding, posters and schedules with high expressive range."
+    },
+    {
+      "id": "elder-care-service",
+      "brief": "Brand a high-fee service coordinating complex elder-care logistics across medical, legal, home and financial providers. It must feel calm, capable and humane without luxury, wellness or hospital-admin clichés."
+    }
+  ],
+  "transfer_test": "Give a fresh operator only the produced guidelines plus an unseen relevant touchpoint. Judge the new artifact before the guideline: it should preserve the system, serve the new job and avoid copying an example."
+}

@@ -3,7 +3,7 @@ name: branding-studio
 description: "Autonomous brand steward for creating, applying, auditing and evolving brands. Use for branding, naming, identity, logo, positioning, touchpoints, audits and rebrands. Reply in the user's language."
 license: CC-BY-NC-4.0
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # Branding Studio
@@ -124,7 +124,7 @@ A familiar mechanism remains valid when the brief independently earns it. Constr
 
 For an existing identity with no spec, reconstruct what is already true and valuable before changing it. Absence of a spec is not evidence that the brand needs redesign.
 
-Load `references/creative-direction.md` only when creating or materially reopening expression; `references/identity-craft.md` for visual/verbal system craft; `references/naming.md` when naming is in scope; `references/brand-book.md` when guidelines or a brand book are deliverables; `references/knowledge.md` when evidence strength/current facts/methodology need calibration; and `references/spec-schema.md` when canonical state is created or changed.
+Load `references/creative-direction.md` only when creating or materially reopening expression; `references/identity-craft.md` for visual identity/system craft; `references/verbal-identity.md` when proposition, messaging, voice/tone or a broader verbal identity is in scope; `references/naming.md` when naming is in scope; `references/brand-book.md` when guidelines or a brand book are deliverables; `references/knowledge.md` when evidence strength/current facts/methodology need calibration; and `references/spec-schema.md` when canonical state is created or changed.
 
 For APPLY/AUDIT, compile the smallest relevant subset of state.
 

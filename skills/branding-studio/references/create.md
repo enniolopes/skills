@@ -54,7 +54,7 @@ The selected thesis is still a working hypothesis. It earns continued investment
 
 ## 5. Build the smallest generative system
 
-Load `identity-craft.md`.
+Load `identity-craft.md`. Load `verbal-identity.md` only when proposition, messaging, voice/tone or a broader verbal system is materially in scope.
 
 Define only what declared touchpoints need. Depending on the brand, this may include:
 - naming and signature/mark/wordmark;
