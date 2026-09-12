@@ -3,7 +3,7 @@ name: landing-page
 description: Research, design, build, redesign, or refine high-end marketing landing pages and homepages where conversion, creative direction, visual distinction, and production-grade web craft matter.
 license: CC-BY-NC-4.0
 metadata:
-  version: 3.5.0
+  version: 3.5.1
 ---
 
 # Landing Page
@@ -16,7 +16,7 @@ The goal is a marketing experience that feels inevitable for this product and un
 
 ## Operating standard
 
-Quality is multiplicative. This is the canonical quality basis for the skill; references project these dimensions into their own domains rather than redefining them:
+Quality is multiplicative:
 
 `quality = truth × meaning × specificity × hierarchy × coherence × expression × distinction × craft × technical mastery × reality`
 
@@ -58,11 +58,11 @@ Establish each quality through the decisions that actually produce it, then use 
 ## Load references progressively
 
 - `references/discovery.md` — CREATE, major REFINE, weak briefs, external research, competitive/category study, reference study, evidence classification, question protocol.
-- `references/marketing.md` — creating or materially changing page intent, proposition, narrative, proof, CTA, or structure; owns the canonical page-intent and visitor-state models.
-- `references/design-quality.md` — CREATE, major REFINE, art direction, divergence and selection, visual grammar, any premium/award-caliber request; projects the canonical quality basis into design.
+- `references/marketing.md` — creating or materially changing page intent, proposition, narrative, proof, CTA, or structure; defines the page-intent and visitor-state models used throughout the skill.
+- `references/design-quality.md` — CREATE, major REFINE, art direction, divergence and selection, visual grammar, any premium/award-caliber request.
 - `references/control.md` — read at DIRECT for CREATE/major REFINE and again only when material new evidence or a possible pivot appears: unequal decision inertia, bidirectional learning, refine vs re-diverge, anti-rigidity.
 - `references/technical-excellence.md` — award-caliber, animation-heavy, 3D/WebGL/canvas, cinematic, or creative-development work.
-- `references/verification.md` — before completing any material CREATE/REFINE when browser/rendering tools are available: projects quality claims into falsifiers/oracles, build-render loop, QA, critique lenses, severity, stop rule.
+- `references/verification.md` — before completing any material CREATE/REFINE when browser/rendering tools are available: falsifiers/oracles, build-render loop, QA, critique lenses, severity, stop rule.
 
 ## Creative control
 
@@ -82,7 +82,7 @@ Classify by how much of the current solution remains valid for the requested out
 
 - **REPAIR** — truth, intent, and governing direction remain valid; a bounded downstream defect can be fixed without reopening them.
 - **REFINE** — meaningful existing decisions remain worth preserving, but one or more material layers need revision.
-- **CREATE** — no useful solution basis exists for the requested outcome, whether the page is new or the existing concept must effectively be replaced. Run the full method.
+- **CREATE** — no useful solution remains for the requested outcome, whether the page is new or the existing concept must effectively be replaced. Run the full method.
 
 Escalate depth only when evidence shows the problem is broader than first observed.
 
@@ -114,17 +114,17 @@ Each phase names its output; the procedure lives in the reference that owns it.
 
 0. **ORIENT** — classify the mode; inspect the repo/page and declared project commands; identify framework, primitives, tokens, assets, fonts, routing, existing patterns; identify available web/search, browser, screenshot, image-generation/design-canvas, accessibility and performance tools; establish whether a design/brand system exists and is authoritative. Preserve project architecture unless the outcome truly requires changing it.
 1. **DISCOVER** (`discovery.md`) — for CREATE and major REFINE, reconstruct the brief from internal evidence, then use only research lanes or reference pools whose expected information can materially change a decision. When a page decision depends on the adjacent journey, inspect only enough of the incoming source/promise and immediate post-action destination/expectation to make that decision correctly; do not expand into full-funnel analysis by default.
-2. **SYNTHESIZE** (`discovery.md`, `marketing.md`) — compress evidence into the canonical page-intent basis plus only the market/creative constraints that change decisions. Classify truth-bearing items as `KNOWN`, `INFERRED` or `UNKNOWN`; creative choices are a separate axis, not an evidence status. Resolve discoverable facts, safe reversible inferences and professional creative decisions yourself; ask only about an `UNKNOWN` that blocks truth, authority or an irreversible fork. When behavioral data exists, separate observation from explanation: use behavior to prioritize hypotheses, not as automatic proof of cause.
-3. **DIRECT** (`design-quality.md`, `control.md`) — establish the compact direction contract owned by `control.md`, then project it through only the expressive media relevant to this brief. Treat direction as a revisable hypothesis, not a schema. Under material creative uncertainty, diverge into structurally different directions and select the strongest yourself. Exploration may begin intuitively; commitment must become defensible. Prototype the uncertain thing when making will teach more than additional rationale. Before committing a major new direction, challenge the most available competent-but-generic solution for this brief; if the chosen route resembles it, require a specific reason from the brief rather than novelty or avoidance for its own sake.
-4. **COMPOSE** (`marketing.md`) — use the canonical visitor-state model there to derive regions from unresolved visitor needs rather than section names. Every region has one distinct communication job, a meaningful state transition, its strongest message/evidence/medium, and a reason the next region follows. The first viewport is a thesis; the whole page has rhythm.
+2. **SYNTHESIZE** (`discovery.md`, `marketing.md`) — compress evidence into the page-intent model plus only the market/creative constraints that change decisions. Classify truth-bearing items as `KNOWN`, `INFERRED` or `UNKNOWN`; creative choices are a separate concern, not an evidence status. Resolve discoverable facts, safe reversible inferences and professional creative decisions yourself; ask only about an `UNKNOWN` that blocks truth, authority or an irreversible fork. When behavioral data exists, separate observation from explanation: use behavior to prioritize hypotheses, not as automatic proof of cause.
+3. **DIRECT** (`design-quality.md`, `control.md`) — establish the compact direction contract owned by `control.md`, then express it through only the media relevant to this brief. Treat direction as a revisable hypothesis, not a schema. Under material creative uncertainty, diverge into structurally different directions and select the strongest yourself. Exploration may begin intuitively; commitment must become defensible. Prototype the uncertain thing when making will teach more than additional rationale. Before committing a major new direction, challenge the most available competent-but-generic solution for this brief; if the chosen route resembles it, require a specific reason from the brief rather than novelty or avoidance for its own sake.
+4. **COMPOSE** (`marketing.md`) — use the visitor-state model there to derive regions from unresolved visitor needs rather than section names. Every region has one distinct communication job, a meaningful state transition, its strongest message/evidence/medium, and a reason the next region follows. The first viewport is a thesis; the whole page has rhythm.
 5. **SYSTEMIZE** (`design-quality.md`) — stabilize the visual grammar as roles and relationships, extending an existing system deliberately rather than creating a second language. Systemize strongly enough for coherence, not so rigidly that composition becomes template execution.
 6. **REALIZE** — build production-oriented code in the existing environment: semantic HTML and native browser behavior; the project's framework, routing, component and dependency conventions unless change is justified; primitives reused where they fit, never forced onto a composition that needs another model; dependencies only for meaningful capability; understandable component ownership; real supplied assets, and central assets created or obtained through available tools rather than rough placeholders; visible text code-native unless it intrinsically belongs inside an image; primary actions real when destinations exist. Build in visual slices (`verification.md`), rendering between slices. Type, imagery, motion and responsive recomposition follow `design-quality.md`; animation-heavy or 3D work follows `technical-excellence.md`.
-7. **REFINE** (`verification.md`, `control.md`) — the first successful render begins QA. Project each material quality claim into a falsifier and valid evidence source; run deterministic checks, viewport QA and perceptual QA; find the largest remaining defect and identify the lowest level that explains it. Correct expression/execution failures without gratuitous restart. If repeated local exceptions accumulate, question the next upstream decision rather than stacking patches. When behavioral evidence points to a material problem, form plausible causes and seek the cheapest discriminating evidence before changing the page; do not claim causal uplift from design judgment alone. When rendered evidence materially falsifies the governing direction, re-diverge from still-valid truth and intent. Render again.
+7. **REFINE** (`verification.md`, `control.md`) — the first successful render begins QA. For each material quality claim, identify a falsifier and valid evidence source; run deterministic checks, viewport QA and perceptual QA; find the largest remaining defect and identify the lowest level that explains it. Correct expression/execution failures without gratuitous restart. If repeated local exceptions accumulate, question the next upstream decision rather than stacking patches. When behavioral evidence points to a material problem, form plausible causes and seek the cheapest discriminating evidence before changing the page; do not claim causal uplift from design judgment alone. When rendered evidence materially falsifies the governing direction, re-diverge from still-valid truth and intent. Render again.
 8. **CRITIQUE** (`verification.md`, `control.md`) — for premium work, run separate lenses because each exposes different falsifiers: first-time visitor, creative director, craft reviewer, creative developer/technical jury. Findings should identify severity and causal level, not merely aesthetic preference. Treat counterfeit quality as a material defect when a proxy is hiding an unresolved underlying decision. Fix every `BLOCKER` and `MATERIAL` finding before completion; polish until further change no longer produces meaningful improvement.
 
 # Quality gates
 
-A material CREATE/REFINE result is exceptional only when every applicable dimension of the canonical quality basis passes:
+A material CREATE/REFINE result is exceptional only when every applicable quality dimension passes:
 
 - **Truth** — no unsupported claim or fabricated credibility device appears as real.
 - **Meaning** — a relevant visitor understands what this is, why it matters, and the primary next action without reconstructing intent.
