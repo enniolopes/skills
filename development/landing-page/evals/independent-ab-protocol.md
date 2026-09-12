@@ -1,13 +1,13 @@
-# Independent A/B protocol — landing-page v3.1 vs v3.3
+# Independent A/B protocol — landing-page v3.1 vs v3.4
 
-Purpose: test whether v3.3 improves long-horizon coherence and productive pivot behavior without reducing creative strength.
+Purpose: test whether v3.4 improves long-horizon coherence, productive pivot behavior, evidence fit and resistance to counterfeit quality without reducing creative strength or producing a new anti-default house style.
 
 This protocol requires genuinely separate executor contexts and a blind reviewer. Do not use one conversation to role-play all three roles and call that independent evidence.
 
 ## Fixed versions
 
 - **Baseline A:** repository `enniolopes/skills` at commit `d3b73f3911246ac7dfe7704e7abb5b86cda0eea0` (`main`, landing-page v3.1.0).
-- **Candidate B:** repository `enniolopes/skills` at commit `819ebc61a78044750c1ee5273e4ecebec9b759db` (`landing-page-v3.2-control-plane`, landing-page v3.3.0 experimental).
+- **Candidate B:** repository `enniolopes/skills` at commit `67375954742ed3137451dfb2ee93b611380e445b` (`landing-page-v3.2-control-plane`, landing-page v3.4.0 experimental runtime).
 
 Pin the commits. Do not let either executor see the other version or this comparison rationale.
 
@@ -34,20 +34,20 @@ Judge the actual result and observable trajectory evidence. For rendered tasks, 
 
 For every pair report:
 - preferred result: X / Y / tie;
-- reliability: truth, continuity, correct scope of change, convergence;
-- creative performance: specificity, governing idea, distinction, composition/rhythm, appropriate expression, inventiveness, adaptability, craft;
+- reliability: truth, evidence fit, continuity, correct scope of change, convergence;
+- creative performance: specificity, governing idea, distinction, composition/rhythm, appropriate expression, resolution vs superficial quality signals, inventiveness, adaptability, craft;
 - largest advantage of X;
 - largest weakness of X;
 - largest advantage of Y;
 - largest weakness of Y;
-- whether either result feels templated or like a recurring house style;
+- whether either result feels templated, like a recurring house style, or like a recurring anti-default style;
 - confidence: low / medium / high.
 
-Do not reward use of internal vocabulary such as `TRUTH`, `DIRECTION`, `RE-DIVERGE`, etc. Reward outcomes only.
+Do not reward use of internal vocabulary such as `TRUTH`, `DIRECTION`, `RE-DIVERGE`, `counterfeit quality`, etc. Reward outcomes only.
 
 ## Battery A — behavioral continuation / pivot
 
-Use the natural-language cases in `behavioral-evals.json`. Prioritize these six high-signal cases first:
+Use the natural-language cases in `behavioral-evals.json`. Prioritize these six continuity/control cases first:
 
 1. `wrong-category-meaning`
 2. `conversion-model-changes`
@@ -63,6 +63,23 @@ Primary questions:
 - Did it avoid changing more than evidence justified?
 - Did it preserve valid solved work?
 - Could it discover a better upstream hypothesis without inventing truth?
+
+## Battery A2 — targeted negative-control regressions
+
+Run these four cases after the continuity/control battery:
+
+1. `premium-style-proxy`
+2. `category-default-is-earned`
+3. `component-uniformity-is-not-coherence`
+4. `motion-is-not-delight`
+
+These are targeted regression cases written close to the v3.4 hypothesis, so treat them as **guardrails**, not standalone evidence that v3.4 is broadly superior.
+
+Check both directions:
+- does the candidate reject a superficial proxy when it is substituting for the underlying quality?
+- does it preserve the same mechanism when authoritative brand/product context genuinely earns it?
+
+Fail the negative-control hypothesis if the candidate merely swaps common defaults for a repeated anti-default aesthetic, bans legitimate mechanisms, or becomes more process-heavy than the design problem warrants.
 
 ## Battery B — full creative builds
 
@@ -88,24 +105,27 @@ Ask:
 - Are typography, imagery, motion and density repeatedly falling into one house style?
 - Could three or more pages become each other through logo/copy/color replacement?
 - Are recurring structures justified by usability/evidence, or are they defaults?
+- Did attempts to avoid familiar AI/web patterns themselves converge on a repeated anti-default language?
 
-A candidate fails this dimension if reliability improves but unrelated pages visibly converge.
+A candidate fails this dimension if reliability improves but unrelated pages visibly converge, regardless of whether that recurring style is conventional or deliberately unconventional.
 
 ## Decision rule
 
-Do not merge v3.3 because it wins process/compliance metrics alone.
+Do not merge v3.4 because it wins process/compliance metrics or targeted negative-control cases alone.
 
-Prefer v3.3 only when all are true:
-1. it wins or ties the majority of high-signal behavioral cases;
-2. it shows no material truth/authority regression;
-3. blind creative preference is at least non-inferior overall;
-4. no material mode-collapse regression appears across the eight creative briefs;
-5. any added time/token/runtime cost is proportionate to the quality gain.
+Prefer v3.4 only when all are true:
+1. it wins or ties the majority of the six continuity/control cases;
+2. it shows no material truth/authority/evidence-fit regression;
+3. the targeted negative-control battery shows no systematic proxy substitution or anti-template regression;
+4. blind creative preference is at least non-inferior overall;
+5. no material mode-collapse regression appears across the eight creative briefs;
+6. any added time/token/runtime cost is proportionate to the quality gain.
 
 A useful minimum bar before merge is:
-- behavioral: candidate wins >= 4 of 6 high-signal cases, with no severe regression;
+- continuity/control: candidate wins >= 4 of 6 high-signal cases, with no severe regression;
+- targeted negative-control: no severe failure and at least 3 of 4 cases satisfy the intended behavior, including `category-default-is-earned`;
 - creative builds: candidate wins more pairs than it loses, ties allowed;
-- diversity: no reviewer-detected house-style regression;
+- diversity: no reviewer-detected house-style or anti-house-style regression;
 - mobile: no systemic regression;
 - CI/runtime validation passes.
 
@@ -113,11 +133,11 @@ These thresholds are experiment policy, not claims of statistical significance.
 
 ## Iteration rule
 
-When v3.3 loses a case:
-1. identify whether the failure is missing guidance, excessive guidance, salience/context competition, or a flawed eval;
+When v3.4 loses a case:
+1. identify whether the failure is missing guidance, excessive guidance, salience/context competition, a false proxy, anti-template overcorrection, or a flawed eval;
 2. change the smallest relevant skill surface;
 3. rerun the losing case plus two neighboring regression cases;
-4. after local recovery, rerun the full six-case behavioral battery;
+4. after local recovery, rerun the full six-case continuity/control battery and the relevant negative-control guardrail;
 5. after any change touching creative direction/composition, rerun at least four diverse creative briefs;
 6. before merge, rerun the full eight-brief blind set.
 
