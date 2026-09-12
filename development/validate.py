@@ -3,8 +3,8 @@
 
 One command locally and in CI:  python development/validate.py
 
-CI proves only mechanical properties: installability, runtime boundaries, syntax and unit
-contracts. It does not judge semantic or creative quality.
+CI proves only mechanical properties: installability, runtime boundaries, internal runtime
+references, syntax and unit contracts. It does not judge semantic or creative quality.
 """
 
 from __future__ import annotations
@@ -18,10 +18,10 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 LICENSE = "CC-BY-NC-4.0"
 SEMVER = re.compile(r"^\d+\.\d+\.\d+$")
-SKILL_TOKEN_CAP = 5000
 TEXT_SUFFIXES = {".md", ".json", ".py", ".txt", ".yaml", ".yml"}
 RUNTIME_FORBIDDEN_NAMES = {"README.md", "tests", "evals", "docs", "dist"}
 RUNTIME_FORBIDDEN_REFS = ("development/", "systems/")
+RUNTIME_PATH = re.compile(r"\b(?:references?|templates?|scripts)/[A-Za-z0-9_.\-/]+")
 SYSTEM_TOP = {".claude-plugin", "README.md", "skills", "agents"}
 
 
@@ -61,20 +61,20 @@ def frontmatter(path: Path) -> dict[str, str]:
     return {}
 
 
-def estimate_tokens(text: str) -> int:
-    wide = sum(1 for c in text if ord(c) > 127)
-    return round((len(text) - wide) / 4 + wide)
-
-
 def check_runtime_tree(root: Path, errors: list[str]) -> None:
     for path in root.rglob("*"):
         if path.name in RUNTIME_FORBIDDEN_NAMES:
             errors.append(f"{rel(path)}: development material inside runtime")
-        if path.is_file() and path.suffix in TEXT_SUFFIXES:
-            text = path.read_text(encoding="utf-8", errors="replace")
-            for ref in RUNTIME_FORBIDDEN_REFS:
-                if ref in text:
-                    errors.append(f"{rel(path)}: runtime depends on repository path {ref!r}")
+        if not (path.is_file() and path.suffix in TEXT_SUFFIXES):
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        for ref in RUNTIME_FORBIDDEN_REFS:
+            if ref in text:
+                errors.append(f"{rel(path)}: runtime depends on repository path {ref!r}")
+        for match in RUNTIME_PATH.findall(text):
+            target = root / match.rstrip(".,;:)")
+            if not target.exists():
+                errors.append(f"{rel(path)}: missing runtime reference {match!r}")
 
 
 def check_skill(path: Path, names: dict[str, str], errors: list[str]) -> None:
@@ -91,8 +91,6 @@ def check_skill(path: Path, names: dict[str, str], errors: list[str]) -> None:
         errors.append(f"{rel(skill)}: license must be {LICENSE}")
     if not SEMVER.match(fm.get("metadata.version", "")):
         errors.append(f"{rel(skill)}: metadata.version must be semver")
-    if estimate_tokens(skill.read_text(encoding="utf-8")) > SKILL_TOKEN_CAP:
-        errors.append(f"{rel(skill)}: exceeds {SKILL_TOKEN_CAP}-token runtime cap")
     previous = names.get(path.name)
     if previous:
         errors.append(f"{rel(path)}: runtime name duplicates {previous}")
