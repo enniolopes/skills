@@ -95,7 +95,7 @@ The same command runs in blocking CI. It is intentionally narrow: CI checks mech
 
 Behavior-changing revisions use the smallest relevant eval set under `development/<name>/evals/`. A targeted change should run cases capable of distinguishing that change; broad method or creative-system changes warrant broader representative evaluation. A passing structure check is never evidence that model behavior improved.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the human contribution workflow and [AGENTS.md](AGENTS.md) for the repository operating guide used in future AI-assisted creation, maintenance, and review sessions.
+For all future AI-assisted creation, maintenance, review, and evolution work, follow [AGENTS.md](AGENTS.md). It is the repository-wide operating contract.
 
 ## Releases
 
