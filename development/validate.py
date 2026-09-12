@@ -3,8 +3,9 @@
 
 One command locally and in CI:  python development/validate.py
 
-CI proves only mechanical properties: installability, runtime boundaries, direct SKILL
-references, syntax and unit contracts. It does not judge semantic or creative quality.
+CI proves only mechanical properties: installability, stable Agent Skills metadata,
+runtime boundaries, direct SKILL references, dependency/version projections, syntax and
+unit contracts. It does not judge semantic or creative quality.
 """
 
 from __future__ import annotations
@@ -18,6 +19,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 LICENSE = "CC-BY-NC-4.0"
 SEMVER = re.compile(r"^\d+\.\d+\.\d+$")
+SKILL_NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 TEXT_SUFFIXES = {".md", ".json", ".py", ".txt", ".yaml", ".yml"}
 RUNTIME_FORBIDDEN_NAMES = {"README.md", "tests", "evals", "docs", "dist"}
 RUNTIME_FORBIDDEN_REFS = ("development/", "systems/")
@@ -42,6 +44,7 @@ def load_json(path: Path, errors: list[str]) -> dict | None:
 
 
 def frontmatter(path: Path) -> dict[str, str]:
+    """Read the repository's intentionally small one-line YAML metadata subset."""
     lines = path.read_text(encoding="utf-8").splitlines()
     if not lines or lines[0].strip() != "---":
         return {}
@@ -73,28 +76,41 @@ def check_runtime_tree(root: Path, errors: list[str]) -> None:
                 errors.append(f"{rel(path)}: runtime depends on repository path {ref!r}")
 
 
-def check_skill(path: Path, names: dict[str, str], errors: list[str]) -> None:
+def check_skill(path: Path, names: dict[str, str], errors: list[str]) -> str:
     skill = path / "SKILL.md"
     if not skill.is_file():
         errors.append(f"{rel(path)}: missing SKILL.md")
-        return
+        return ""
+
     fm = frontmatter(skill)
-    if fm.get("name") != path.name:
+    name = fm.get("name", "")
+    description = fm.get("description", "")
+    compatibility = fm.get("compatibility")
+    version = fm.get("metadata.version", "")
+
+    if name != path.name:
         errors.append(f"{rel(skill)}: name must match directory")
-    if not fm.get("description"):
-        errors.append(f"{rel(skill)}: missing description")
+    if not (1 <= len(name) <= 64) or not SKILL_NAME.fullmatch(name):
+        errors.append(f"{rel(skill)}: name violates Agent Skills naming constraints")
+    if not (1 <= len(description) <= 1024):
+        errors.append(f"{rel(skill)}: description must be 1..1024 characters")
+    if compatibility is not None and not (1 <= len(compatibility) <= 500):
+        errors.append(f"{rel(skill)}: compatibility must be 1..500 characters")
     if fm.get("license") != LICENSE:
         errors.append(f"{rel(skill)}: license must be {LICENSE}")
-    if not SEMVER.match(fm.get("metadata.version", "")):
+    if not SEMVER.match(version):
         errors.append(f"{rel(skill)}: metadata.version must be semver")
+
     for match in RUNTIME_PATH.findall(skill.read_text(encoding="utf-8")):
         if not (path / match.rstrip(".,;:)")).exists():
             errors.append(f"{rel(skill)}: missing direct runtime reference {match!r}")
+
     previous = names.get(path.name)
     if previous:
         errors.append(f"{rel(path)}: runtime name duplicates {previous}")
     names[path.name] = rel(path)
     check_runtime_tree(path, errors)
+    return version
 
 
 def check_agent(path: Path, names: dict[str, str], errors: list[str]) -> None:
@@ -111,19 +127,21 @@ def check_agent(path: Path, names: dict[str, str], errors: list[str]) -> None:
             errors.append(f"{rel(path)}: runtime depends on repository path {ref!r}")
 
 
-def discover_runtime(errors: list[str], plugins: dict[str, dict]) -> tuple[set[str], dict[str, tuple[str, str]]]:
+def discover_runtime(
+    errors: list[str], plugins: dict[str, dict]
+) -> tuple[set[str], dict[str, tuple[str, str, str]]]:
     names: dict[str, str] = {}
     units: set[str] = set()
-    expected_plugins: dict[str, tuple[str, str]] = {}
+    expected_plugins: dict[str, tuple[str, str, str]] = {}
 
     skills = REPO_ROOT / "skills"
     if not skills.is_dir():
         errors.append("skills/: missing")
     else:
         for path in sorted(p for p in skills.iterdir() if p.is_dir()):
-            check_skill(path, names, errors)
+            version = check_skill(path, names, errors)
             units.add(path.name)
-            expected_plugins[path.name] = (f"./skills/{path.name}", "skill")
+            expected_plugins[path.name] = (f"./skills/{path.name}", "skill", version)
 
     agents = REPO_ROOT / "agents"
     if agents.is_dir():
@@ -135,19 +153,21 @@ def discover_runtime(errors: list[str], plugins: dict[str, dict]) -> tuple[set[s
     if systems.is_dir():
         for system in sorted(p for p in systems.iterdir() if p.is_dir()):
             units.add(system.name)
-            expected_plugins[system.name] = (f"./systems/{system.name}", "system")
             unexpected = [p.name for p in system.iterdir() if p.name not in SYSTEM_TOP]
             if unexpected:
                 errors.append(f"{rel(system)}: unexpected runtime entries: {', '.join(sorted(unexpected))}")
+
             manifest = system / ".claude-plugin" / "plugin.json"
             data = load_json(manifest, errors) if manifest.is_file() else None
+            version = ""
             if data is None:
                 if not manifest.is_file():
                     errors.append(f"{rel(system)}: missing plugin.json")
             else:
+                version = str(data.get("version", ""))
                 if data.get("name") != system.name:
                     errors.append(f"{rel(manifest)}: name must match system directory")
-                if not SEMVER.match(str(data.get("version", ""))):
+                if not SEMVER.match(version):
                     errors.append(f"{rel(manifest)}: version must be semver")
                 if data.get("license") != LICENSE:
                     errors.append(f"{rel(manifest)}: license must be {LICENSE}")
@@ -155,6 +175,9 @@ def discover_runtime(errors: list[str], plugins: dict[str, dict]) -> tuple[set[s
                     dep_name = dep if isinstance(dep, str) else dep.get("name")
                     if dep_name not in plugins:
                         errors.append(f"{rel(manifest)}: unknown plugin dependency {dep_name!r}")
+
+            expected_plugins[system.name] = (f"./systems/{system.name}", "system", version)
+
             nested_skills = system / "skills"
             if nested_skills.is_dir():
                 for path in sorted(p for p in nested_skills.iterdir() if p.is_dir()):
@@ -163,6 +186,7 @@ def discover_runtime(errors: list[str], plugins: dict[str, dict]) -> tuple[set[s
             if nested_agents.is_dir():
                 for path in sorted(nested_agents.glob("*.md")):
                     check_agent(path, names, errors)
+
     return units, expected_plugins
 
 
@@ -185,14 +209,20 @@ def marketplace(errors: list[str]) -> dict[str, dict]:
     return out
 
 
-def check_marketplace(plugins: dict[str, dict], expected: dict[str, tuple[str, str]], errors: list[str]) -> None:
+def check_marketplace(
+    plugins: dict[str, dict],
+    expected: dict[str, tuple[str, str, str]],
+    errors: list[str],
+) -> None:
     if set(plugins) != set(expected):
         errors.append(".claude-plugin/marketplace.json: entries must match installable units")
         return
-    for name, (source, kind) in expected.items():
+    for name, (source, kind, version) in expected.items():
         item = plugins[name]
         if item.get("source") != source or not item.get("description"):
             errors.append(f"marketplace {name!r}: wrong source or missing description")
+        if item.get("version") != version:
+            errors.append(f"marketplace {name!r}: version must match canonical runtime")
         if kind == "skill" and item.get("strict") is not False:
             errors.append(f"marketplace {name!r}: standalone skill needs strict=false")
         if kind == "system" and "strict" in item:
