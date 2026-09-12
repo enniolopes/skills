@@ -1,128 +1,125 @@
 # skills
 
-Portable Agent Skills, agents, and systems by Ennio Politi Lopes.
+Portable capabilities for AI assistants.
 
-The repository is **Agent-Skills-first**: capability behavior lives in one canonical runtime, while host-specific installation and packaging stay thin and disposable. A skill should not need a ChatGPT, Claude, Gemini, or DeepSeek fork.
+Pick a capability, install it in your AI, and describe the job you want done. Standalone skills follow the open [Agent Skills](https://agentskills.io) format so the same capability can work across compatible hosts.
 
-## Use
+## Quick start
+
+1. **Choose a capability** below.
+2. **Install it** using the shortest path for your AI.
+3. **Ask for the outcome you want.** You usually do not need special commands.
+
+For example:
+
+> Use Branding Studio to audit this existing brand, preserve valid equity, and recommend what should change.
+
+## Choose a capability
+
+| Capability | Type | Use it for |
+|---|---|---|
+| [**Branding Studio**](skills/branding-studio/) | Skill | Create, audit, apply, and evolve brands, identity systems, naming, positioning, and brand books. |
+| [**Landing Page**](skills/landing-page/) | Skill | Research, design, build, redesign, and refine high-end marketing landing pages and homepages. |
+| [**Explorer**](skills/explorer/) | Skill | Find non-obvious, defensible connections, hypotheses, analogies, and alternatives before deciding. |
+| [**Research**](systems/research/) | System | Run rigorous scientific research with method, persistent research state, exploration, and independent review. |
+
+### Example prompts
+
+**Branding Studio**
+> Create a professional brand system for this company from the material I provided. Inspect what is already true before asking me questions.
+
+**Landing Page**
+> Design and build a landing page for this product from the existing repo, product context, and business goals.
+
+**Explorer**
+> Explore non-obvious connections between X and Y. Give me the strongest defensible hypotheses and the test that would distinguish each one.
+
+**Research**
+> Start a research project on whether X affects Y. Help me formulate the question, define what would refute it, and proceed rigorously.
+
+## Install
 
 ### ChatGPT
 
-Where Skills are enabled, upload a released skill archive from **Plugins → Skills → Create → Upload from your computer**.
+For a standalone Skill, where Skills are available on your account:
 
-Workspace admins can import `https://github.com/enniolopes/skills` as a plugin marketplace from **Workspace settings → Plugins → Add → Import marketplace**. ChatGPT currently accepts Claude-compatible `.claude-plugin/marketplace.json` manifests and can keep them synced from the repository.
+1. Open **Plugins** in the sidebar.
+2. Open the **Skills** tab.
+3. Select **Create → Upload from your computer**.
+4. Upload the released ZIP for the skill from [GitHub Releases](https://github.com/enniolopes/skills/releases).
+
+Workspace admins can also import this repository as a plugin marketplace from **Workspace settings → Plugins → Add → Import marketplace** using:
+
+```text
+https://github.com/enniolopes/skills
+```
 
 ### Claude Code
 
-Add the marketplace once, then install the unit you need:
+Add the marketplace once:
 
 ```text
 /plugin marketplace add enniolopes/skills
-/plugin install <name>@enniolopes
 ```
 
-A standalone skill can also be installed directly with an Agent Skills client such as:
+Then install what you want:
 
-```bash
-npx skills add enniolopes/skills --skill <name> --agent claude-code
+```text
+/plugin install branding-studio@enniolopes
+/plugin install landing-page@enniolopes
+/plugin install explorer@enniolopes
+/plugin install research@enniolopes
 ```
 
 ### Gemini CLI
 
-Gemini CLI supports the Agent Skills standard directly and can install a skill from this repository:
+Standalone Skills can be installed directly from this repository:
 
 ```bash
 gemini skills install https://github.com/enniolopes/skills.git --path skills/<name>
 ```
 
-### Deep Code and other Agent Skills hosts
-
-Install or copy `skills/<name>/` into the host's Agent Skills location. Deep Code, for example, discovers user skills under `~/.agents/skills/<name>/` and project skills under `.deepcode/skills/<name>/`.
-
-For hosts that accept uploaded skills, use the GitHub Release archive for the skill. The archive is only a transport form of the same canonical runtime.
-
-## Repository model
-
-Four concepts cover the repository.
-
-- **Skill** — reusable on-demand expertise or workflow. Runtime lives in `skills/<name>/` and follows the Agent Skills `SKILL.md` contract.
-- **Agent** — a role with a real independent context, tool, authority, or evidence boundary. Standalone agents live in `agents/` when such a role actually exists.
-- **System** — a composition of skills/agents that only makes sense as one installed or operated unit. Runtime lives in `systems/<name>/`; exclusive pieces stay inside the system and reusable pieces remain standalone dependencies.
-- **Development** — tests, evals, fixtures, design evidence, packaging/release support, and other material that must never ship. It lives in `development/<name>/`.
-
-The physical rule is simple:
-
-```text
-skills/<name>/                     canonical standalone skill runtime
-agents/<name>.md                   standalone agent, only when independently justified
-systems/<name>/                    composed runtime unit
-development/<name>/                tests, evals and development evidence
-.claude-plugin/marketplace.json    distribution projection for installable units
-.github/workflows/                 repository validation and release automation
-```
-
-A unit should normally occupy one runtime region and, when needed, one `development/<name>/` companion region. Deleting a capability should delete a coherent part of the tree rather than leave copies across platform folders.
-
-## Architectural rules
-
-1. **One behavioral source of truth.** Never maintain platform-specific copies of a skill.
-2. **Runtime is repository-independent.** Installed runtime cannot depend on `development/` or other repository-only paths.
-3. **Topology follows ownership.** Add a new directory axis only when a real irreducible responsibility has appeared; do not pre-build abstractions for hypothetical consumers.
-4. **Distribution is a projection.** Marketplace manifests, upload archives, and host paths distribute runtime; they do not own its semantics.
-5. **Use host capabilities, not host vocabulary.** Runtime instructions describe operations such as inspect, search, render, generate, or execute and degrade honestly when a host lacks them.
-6. **Mechanize only decidable properties.** CI proves installability and deterministic contracts; evals and field evidence judge behavior and quality.
-7. **Generated artifacts leave Git.** Release archives are produced from reviewed source and published as artifacts/releases; automation never commits them back to `main`.
-
-These rules keep maintenance closer to `skills + platforms` rather than `skills × platforms`: adding a host should not require editing every capability, and adding a capability should not require four host-specific implementations.
-
-## Systems
-
-Systems exist for composition, not because a workflow is large. Create one when several pieces need to be installed and operated as a single unit.
-
-A system keeps pieces that are exclusive to it under its own `skills/` and `agents/`. If a piece becomes useful independently, promote it to the top-level catalog and make the system depend on it instead of copying it.
-
-The current `research` system uses a Claude-compatible plugin manifest. That format is also consumable by ChatGPT marketplace import today. We do not invent a universal system manifest until another concrete composition surface makes that abstraction necessary.
-
-## Development
-
-Run the repository's deterministic contract locally with:
+For example:
 
 ```bash
-python development/validate.py
+gemini skills install https://github.com/enniolopes/skills.git --path skills/branding-studio
 ```
 
-The same command runs in blocking CI. It is intentionally narrow: CI checks mechanically provable runtime integrity, manifests, syntax, and unit contracts. It does not grade prompt wording, creative quality, research quality, or architecture by proxy.
+### Deep Code
 
-Behavior-changing revisions use the smallest relevant eval set under `development/<name>/evals/`. A targeted change should run cases capable of distinguishing that change; broad method or creative-system changes warrant broader representative evaluation. A passing structure check is never evidence that model behavior improved.
-
-For all future AI-assisted creation, maintenance, review, and evolution work, follow [AGENTS.md](AGENTS.md). It is the repository-wide operating contract.
-
-## Releases
-
-Stable downloadable bundles are created from canonical standalone skill directories with the **release skill** GitHub Action.
-
-The workflow:
+Standalone Skills are discovered from Agent Skills directories. Install the chosen `skills/<name>/` directory at either:
 
 ```text
-reviewed skills/<name>/
-        ↓
-repository validation
-        ↓
-archive the directory as-is
-        ↓
-GitHub Release: <name>-v<version>
+~/.agents/skills/<name>/        # user-level
+.deepcode/skills/<name>/        # project-level
 ```
 
-It does not create a second manifest of runtime files and does not push generated output back to the repository.
+### Other Agent Skills hosts
 
-## Evolving platform support
+Install the chosen `skills/<name>/` directory using the host's normal Agent Skills flow.
 
-Agent Skills is the portability boundary for skills. Platform surfaces are expected to change faster than capability semantics.
+> **Note:** standalone Skills are the most portable unit. A **System** composes multiple pieces, so installation support can vary by host. `research` currently installs as a plugin through the repository marketplace in supported plugin hosts.
 
-When a host changes, first determine whether the canonical Agent Skill still works. If the change is only discovery, installation, manifest, or packaging, keep the fix at that edge. Introduce a new platform-specific surface only after a real incompatibility demonstrates that the existing standard cannot express what is required.
+## Skill, Agent, or System?
 
-Volatile external compatibility checks should not block normal PRs. Add periodic compatibility automation only when an official or sufficiently stable check gives useful signal; otherwise rely on native host validation and field evidence.
+You do not need to know the repository architecture to use these. The distinction is simple:
+
+- **Skill** — a reusable capability that gives your AI specialized expertise or a workflow. Example: Branding Studio.
+- **Agent** — an independent specialist role, usually used when separate context, tools, authority, or review matter.
+- **System** — several Skills and/or Agents that are meant to work together as one product. Example: Research.
+
+Choose by the outcome you need; the type mainly tells you how the capability is packaged.
+
+## Using a capability
+
+After installation, describe the task normally. On hosts that support automatic Skill activation, the AI can select the relevant Skill when your request matches it. You can also name the capability explicitly when you want to make the intent unambiguous.
+
+Give it the real material whenever possible: files, repositories, existing documents, source data, current designs, or business context. These capabilities are designed to inspect available reality instead of making you restate everything manually.
+
+## Repository development
+
+This README is for users and consumers. AI sessions that create or maintain repository capabilities should follow [AGENTS.md](AGENTS.md).
 
 ## License
 
-[CC BY-NC 4.0](LICENCE). Runtime units repeat the license in their own metadata where the host contract supports it.
+[CC BY-NC 4.0](LICENCE).
