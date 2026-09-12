@@ -46,6 +46,18 @@ Score each case as:
 
 Do not reward the agent for printing runtime terminology. Evaluate behavior, not labels.
 
+## Corpus-promotion gate
+
+For changes derived from the branding corpus, run the targeted cases in `corpus-promotion-evals.json` before treating a new rule or reference as earned.
+
+Use the file to test four distinct claims:
+- failure-mode-aware test selection improves the information value of representative applications;
+- that improvement does not inflate testing beyond the requested scope;
+- specialized craft knowledge changes diagnosis or verification where the baseline is genuinely weak;
+- verbal-system and brand-book knowledge improves downstream artifacts, not merely process vocabulary or document completeness.
+
+A targeted case can justify promotion only for the decision it distinguishes. If baseline and candidate behave materially the same, do not promote the extra instruction merely because it is well supported by the literature.
+
 ## Creative benchmark
 
 Use `creative-benchmark.json` for major changes to CREATE/creative-direction/identity-craft/brand-book behavior.
