@@ -1,107 +1,128 @@
 # skills
 
-Agent skills, agents and the systems that compose them, by Ennio Politi Lopes. Built for
-Claude Code following the [Agent Skills](https://agentskills.io) standard. The repository
-is also a Claude Code plugin marketplace: every unit is one install.
+Portable Agent Skills, agents, and systems by Ennio Politi Lopes.
+
+The repository is **Agent-Skills-first**: capability behavior lives in one canonical runtime, while host-specific installation and packaging stay thin and disposable. A skill should not need a ChatGPT, Claude, Gemini, or DeepSeek fork.
+
+## Use
+
+### ChatGPT
+
+Where Skills are enabled, upload a released skill archive from **Plugins → Skills → Create → Upload from your computer**.
+
+Workspace admins can import this repository as a plugin marketplace from GitHub. ChatGPT currently accepts Claude-compatible `.claude-plugin/marketplace.json` manifests and can keep them synced from the repository.
+
+### Claude Code
+
+Add the marketplace once, then install the unit you need:
 
 ```text
 /plugin marketplace add enniolopes/skills
 /plugin install <name>@enniolopes
 ```
 
-A standalone skill can also be installed on its own, without the marketplace:
+A standalone skill can also be installed directly with an Agent Skills client such as:
 
 ```bash
 npx skills add enniolopes/skills --skill <name> --agent claude-code
 ```
 
-Hosts that take a directory: copy `skills/<name>/`. Hosts that take a `.skill` or ZIP
-upload: build it from `development/<name>/` when a packager exists there.
+### Gemini CLI
 
-## Quick start
+Gemini CLI supports the Agent Skills standard directly and can install a skill from this repository:
 
-```text
-/plugin marketplace add enniolopes/skills          # once per machine
-/plugin install research@enniolopes                 # a system: skills + agent + dependencies
-/plugin install branding-studio@enniolopes          # a standalone skill, when needed
+```bash
+gemini skills install https://github.com/enniolopes/skills.git --path skills/<name>
 ```
 
-Then, inside a research repository: `/research:research-map init` builds the map from the
-protocol and decision log, and `/research:scientific-method start: <question>` begins at
-phase 1. Each unit's README says how it is used; the research one is
-[`systems/research/README.md`](systems/research/README.md).
+### Deep Code and other Agent Skills hosts
 
-## Catalog
+Install or copy `skills/<name>/` into the host's Agent Skills location. Deep Code, for example, discovers user skills under `~/.agents/skills/<name>/` and project skills under `.deepcode/skills/<name>/`.
 
-| Unit | Kind | Status | Docs |
-|---|---|---|---|
-| [branding-studio](skills/branding-studio/) | skill | shipped | [README](development/branding-studio/README.md) |
-| [landing-page](skills/landing-page/) | skill | shipped | [README](development/landing-page/README.md) |
-| [explorer](skills/explorer/) | skill | shipped | — |
-| [research](systems/research/) | system | 0.7.0 · first real session absorbed | [README](systems/research/README.md) · [design](development/research/design/) |
+For hosts that accept uploaded skills, use the GitHub Release archive for the skill. The archive is only a transport form of the same canonical runtime.
 
-CI checks this table and `.claude-plugin/marketplace.json` against the filesystem: both
-list exactly the units that exist.
+## Repository model
 
-## Model
+Four concepts cover the repository.
 
-Three concepts, one rule each.
+- **Skill** — reusable on-demand expertise or workflow. Runtime lives in `skills/<name>/` and follows the Agent Skills `SKILL.md` contract.
+- **Agent** — a role with a real independent context, tool, authority, or evidence boundary. Standalone agents live in `agents/` when such a role actually exists.
+- **System** — a composition of skills/agents that only makes sense as one installed or operated unit. Runtime lives in `systems/<name>/`; exclusive pieces stay inside the system and reusable pieces remain standalone dependencies.
+- **Development** — tests, evals, fixtures, design evidence, packaging/release support, and other material that must never ship. It lives in `development/<name>/`.
 
-- **Unit** — a skill, an agent or a system. It has a name, a version, an owner and a reason
-  to change that is its own. Names are unique across the repository.
-- **Runtime** — what a unit ships. `skills/<name>/` (with `SKILL.md` at the root) and
-  `agents/<name>.md`, the locations installers copy wholesale. Runtime carries exactly
-  what the agent needs while operating, no more, and never refers back to this repository;
-  it must work installed alone.
-- **System** — several skills and agents that only make sense together, installed as one
-  unit. A system is a Claude Code plugin: `systems/<name>/` holds its manifest, its README
-  (how to install, how to use) and the pieces exclusive to it under `skills/` and
-  `agents/`. A piece that is also useful alone is a standalone unit the system declares in
-  `dependencies`; the host installs it transitively.
-
-Everything a unit needs that is not runtime — tests, evals, packaging, source policy,
-design records, its human README — lives in one place, `development/<name>/`, so a unit
-occupies at most two regions of the tree and deleting it means deleting two directories.
+The physical rule is simple:
 
 ```text
-skills/<name>/                     standalone runtime skill; also a single-skill plugin
-agents/<name>.md                   standalone runtime agent
-systems/<name>/                    a plugin: .claude-plugin/plugin.json, README.md, skills/, agents/
-development/<name>/                everything else about the unit — never shipped
-.claude-plugin/marketplace.json    the catalog as the host reads it: one plugin per unit
-development/validate.py            the model above as executable checks
+skills/<name>/                     canonical standalone skill runtime
+agents/<name>.md                   standalone agent, only when independently justified
+systems/<name>/                    composed runtime unit
+development/<name>/                tests, evals and development evidence
+.claude-plugin/marketplace.json    distribution projection for installable units
+.github/workflows/                 repository validation and release automation
 ```
 
-Design decisions and their rationale:
+A unit should normally occupy one runtime region and, when needed, one `development/<name>/` companion region. Deleting a capability should delete a coherent part of the tree rather than leave copies across platform folders.
 
-| Decision | Because | Revise when |
-|---|---|---|
-| Top level is the *role* (runtime, composition, development), unit name second | the runtime path is dictated by installers; given that, the only choice is where the rest goes, and one companion directory per unit keeps change local | an installer accepts a nested runtime directory, which would allow unit-first layout |
-| Runtime contains no README, tests or evals | installers and packagers copy the directory as-is; every file becomes context or payload | never — this is the contract with the host |
-| A system is a plugin, its exclusive pieces live inside it | the host's install unit is the plugin, and a plugin cannot reference files outside its own directory; "install one thing" is the requirement | a host installs a multi-piece unit from a manifest that may point anywhere in the repository — then pieces return to the flat catalog and the system becomes a manifest again (the layout this superseded) |
-| Standalone skills are single-skill plugins with `strict: false` | a `SKILL.md` at the plugin root is a plugin; `strict: false` keeps the manifest in the marketplace entry, so nothing non-runtime enters `skills/<name>/` | — |
-| One validator, one workflow, discovery by convention | adding a unit must not require touching CI; `development/<name>/tests/` is found and run | a unit needs a toolchain other than Python |
-| Version and license in each `SKILL.md` frontmatter and each `plugin.json` | the installed artifact is the whole unit; identity and terms travel with it | — |
-| `SKILL.md` under 5,000 estimated tokens | Claude Code's auto-compaction re-attaches only that much of an invoked skill; depth beyond it goes to `references/` | the platform changes the mechanic |
+## Architectural rules
 
-New top-level directories and new roles are architecture decisions: the validator lists
-the allowed set and fails on anything else, so the change and the rule land together.
+1. **One behavioral source of truth.** Never maintain platform-specific copies of a skill.
+2. **Runtime is repository-independent.** Installed runtime cannot depend on `development/` or other repository-only paths.
+3. **Topology follows ownership.** Add a new directory axis only when a real irreducible responsibility has appeared; do not pre-build abstractions for hypothetical consumers.
+4. **Distribution is a projection.** Marketplace manifests, upload archives, and host paths distribute runtime; they do not own its semantics.
+5. **Use host capabilities, not host vocabulary.** Runtime instructions describe operations such as inspect, search, render, generate, or execute and degrade honestly when a host lacks them.
+6. **Mechanize only decidable properties.** CI proves installability and deterministic contracts; evals and field evidence judge behavior and quality.
+7. **Generated artifacts leave Git.** Release archives are produced from reviewed source and published as artifacts/releases; automation never commits them back to `main`.
+
+These rules keep maintenance closer to `skills + platforms` rather than `skills × platforms`: adding a host should not require editing every capability, and adding a capability should not require four host-specific implementations.
+
+## Systems
+
+Systems exist for composition, not because a workflow is large. Create one when several pieces need to be installed and operated as a single unit.
+
+A system keeps pieces that are exclusive to it under its own `skills/` and `agents/`. If a piece becomes useful independently, promote it to the top-level catalog and make the system depend on it instead of copying it.
+
+The current `research` system uses a Claude-compatible plugin manifest. That format is also consumable by ChatGPT marketplace import today. We do not invent a universal system manifest until another concrete composition surface makes that abstraction necessary.
 
 ## Development
+
+Run the repository's deterministic contract locally with:
 
 ```bash
 python development/validate.py
 ```
 
-That is also what CI runs on every pull request. It checks the topology, each runtime
-piece's frontmatter contract and token budget (standalone or inside a system), each
-system's `plugin.json` and its dependencies, the marketplace and the catalog above against
-the filesystem, relative links, then compiles the Python, runs `claude plugin validate`
-when the CLI is present, and runs every `development/<name>/tests/`.
+The same command runs in blocking CI. It is intentionally narrow: CI checks mechanically provable runtime integrity, manifests, syntax, and unit contracts. It does not grade prompt wording, creative quality, research quality, or architecture by proxy.
 
-Per-unit tooling lives with the unit, e.g. `python development/branding-studio/package_skill.py`
-builds `dist/branding-studio.zip`.
+Behavior-changing revisions use the smallest relevant eval set under `development/<name>/evals/`. A targeted change should run cases capable of distinguishing that change; broad method or creative-system changes warrant broader representative evaluation. A passing structure check is never evidence that model behavior improved.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the working model and change rules.
+
+## Releases
+
+Stable downloadable bundles are created from canonical standalone skill directories with the **release skill** GitHub Action.
+
+The workflow:
+
+```text
+reviewed skills/<name>/
+        ↓
+repository validation
+        ↓
+archive the directory as-is
+        ↓
+GitHub Release: <name>-v<version>
+```
+
+It does not create a second manifest of runtime files and does not push generated output back to the repository.
+
+## Evolving platform support
+
+Agent Skills is the portability boundary for skills. Platform surfaces are expected to change faster than capability semantics.
+
+When a host changes, first determine whether the canonical Agent Skill still works. If the change is only discovery, installation, manifest, or packaging, keep the fix at that edge. Introduce a new platform-specific surface only after a real incompatibility demonstrates that the existing standard cannot express what is required.
+
+Volatile external compatibility checks should not block normal PRs. Add periodic compatibility automation only when an official or sufficiently stable check gives useful signal; otherwise rely on native host validation and field evidence.
 
 ## License
 
-[CC BY-NC 4.0](LICENCE). Each runtime unit repeats the license in its frontmatter.
+[CC BY-NC 4.0](LICENCE). Runtime units repeat the license in their own metadata where the host contract supports it.
