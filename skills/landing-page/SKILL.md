@@ -3,7 +3,7 @@ name: landing-page
 description: Research, design, build, redesign, or refine high-end marketing landing pages and homepages where conversion, creative direction, visual distinction, and production-grade web craft matter.
 license: CC-BY-NC-4.0
 metadata:
-  version: 3.2.0
+  version: 3.3.0
 ---
 
 # Landing Page
@@ -37,22 +37,24 @@ Never ask the user to choose fonts, colors, page patterns, section counts, anima
 
 ## Load references progressively
 
-- `references/control.md` — CREATE, major REFINE, or materially new evidence after a direction exists: decision layers, direction falsification, finding classification, refine vs re-diverge, pivot discipline, anti-rigidity.
 - `references/discovery.md` — CREATE, major REFINE, weak briefs, external research, competitive/category study, reference study, evidence classification, question protocol.
 - `references/marketing.md` — creating or materially changing proposition, narrative, proof, CTA, or page structure.
 - `references/design-quality.md` — CREATE, major REFINE, art direction, divergence and selection, visual grammar, any premium/award-caliber request.
+- `references/control.md` — read at DIRECT for CREATE/major REFINE and again only when material new evidence or a possible pivot appears: unequal decision inertia, bidirectional learning, refine vs re-diverge, anti-rigidity.
 - `references/technical-excellence.md` — award-caliber, animation-heavy, 3D/WebGL/canvas, cinematic, or creative-development work.
 - `references/verification.md` — before completing any material CREATE/REFINE when browser/rendering tools are available: build-render loop, QA, critique lenses, severity, stop rule.
 
 ## Creative control
 
-For CREATE and major REFINE, preserve the problem definition more strongly than the solution. Important decisions have different inertia:
+Preserve the problem more strongly than the current solution:
 
-`FOUNDATION → INTENT → DIRECTION → SYSTEM / COMPOSITION → EXECUTION`
+`TRUTH → INTENT → DIRECTION → EXPRESSION → EXECUTION`
 
-Truth and authoritative constraints belong upstream. Creative direction is a committed hypothesis, not immutable truth. Exact composition and implementation remain free to change.
+Truth and authority have high inertia. Creative direction is a working hypothesis. Composition and implementation remain free to change.
 
-When materially new evidence arrives, especially from the rendered browser, classify the lowest layer that explains the finding before changing the work. Fix downstream defects locally; reopen upstream decisions only when evidence challenges them. If the direction is still right, **REFINE**. If the governing idea is materially falsified or a clearly stronger one emerges, **RE-DIVERGE** from the still-valid truth and intent. `references/control.md` owns the full protocol.
+Decisions usually flow downstream, but learning can move upward: a render or creative experiment may reveal a better truthful proposition or framing. Treat that discovery as a hypothesis, verify it against product evidence and authority, then deliberately revise intent if warranted. Creativity may discover strategy; it may not invent truth.
+
+When a material finding appears, fix the lowest level that fully explains it. If the governing idea remains right, **REFINE**. If it produces the wrong meaning, cannot be supported by real evidence, becomes generic when rendered, or a demonstrably stronger idea appears, **RE-DIVERGE** from still-valid truth and intent. Do not expose this control taxonomy as visible page structure or user-facing ceremony.
 
 ## Choose the smallest sufficient mode
 
@@ -70,16 +72,17 @@ Escalate depth only when evidence shows the problem is broader than first observ
 4. **Semantics precede sections.** Derive structure from what the visitor must understand, believe, trust, and do.
 5. **Direction precedes substantial code.** Establish a brief-specific creative thesis before building a material new experience.
 6. **Preserve intent, not the first solution.** Keep truth and page purpose stable; let direction, composition and implementation change when evidence or a materially stronger idea warrants it.
-7. **References are ingredients, not templates.** Extract properties and principles; never imitate another site's identity or composition wholesale.
-8. **One dominant signature.** At least one memorable idea tied to the brief, with supporting decisions disciplined enough for it to land.
-9. **System, not collage.** Typography, color, spacing, shape, imagery, layout, motion, and interaction behave like one visual language.
-10. **Composition before components.** Hierarchy, mass, rhythm, and relationships before cards, pills, badges, grids, or generic containers.
-11. **Rendered output is visual truth.** Source code cannot prove visual quality.
-12. **Deterministic evidence where possible.** Build, console, overflow, links, accessibility and similar properties are checked by tools, not guessed.
-13. **Technical ambition must earn its cost.** Advanced motion/graphics are media, not prestige signals.
-14. **Mobile is a composition, not a shrink operation.** Preserve thesis and conversion path across device constraints.
-15. **Do not stop at plausible.** A successful first render begins refinement.
-16. **Do not finish with known material defects.**
+7. **Creative discovery may move upstream.** If making reveals a stronger proposition or framing, validate it against reality before deliberately changing intent; never smuggle invention into truth.
+8. **References are ingredients, not templates.** Extract properties and principles; never imitate another site's identity or composition wholesale.
+9. **One dominant signature.** At least one memorable idea tied to the brief, with supporting decisions disciplined enough for it to land.
+10. **System, not collage.** Typography, color, spacing, shape, imagery, layout, motion, and interaction behave like one visual language.
+11. **Composition before components.** Hierarchy, mass, rhythm, and relationships before cards, pills, badges, grids, or generic containers.
+12. **Rendered output is visual truth.** Source code cannot prove visual quality.
+13. **Deterministic evidence where possible.** Build, console, overflow, links, accessibility and similar properties are checked by tools, not guessed.
+14. **Technical ambition must earn its cost.** Advanced motion/graphics are media, not prestige signals.
+15. **Mobile is a composition, not a shrink operation.** Preserve thesis and conversion path across device constraints.
+16. **Do not stop at plausible.** A successful first render begins refinement.
+17. **Do not finish with known material defects.**
 
 # Method
 
@@ -87,13 +90,13 @@ Each phase names its output; the procedure lives in the reference that owns it.
 
 0. **ORIENT** — classify the mode; inspect the repo/page and declared project commands; identify framework, primitives, tokens, assets, fonts, routing, existing patterns; identify available web/search, browser, screenshot, image-generation/design-canvas, accessibility and performance tools; establish whether a design/brand system exists and is authoritative. Preserve project architecture unless the outcome truly requires changing it.
 1. **DISCOVER** (`discovery.md`) — for CREATE and major REFINE, reconstruct the brief from internal evidence, then the desk-research lanes and reference pools that resolve real uncertainty. Every research action answers an uncertainty or widens the creative search space; none exists to collect names.
-2. **SYNTHESIZE** (`discovery.md`, `control.md`) — compress evidence into the working brief; tag every item `KNOWN`, `INFERRED`, `CREATIVE` or `UNKNOWN`; stabilize FOUNDATION and INTENT without freezing downstream solutions; resolve the first three yourself; ask only about an `UNKNOWN` that blocks truth, authority or an irreversible fork.
-3. **DIRECT** (`design-quality.md`, `control.md`) — form a point of view before substantial implementation: visual thesis, emotional target, visual world, signature, content thesis, interaction thesis, restraint; technical thesis for ambitious work. Treat the chosen direction as a falsifiable creative hypothesis: know what it must achieve, what it must not cause, and what observed evidence would justify a pivot. Under material creative uncertainty, diverge into structurally different directions and select the strongest yourself; exploration may be intuitive, but commitment must be defensible.
+2. **SYNTHESIZE** (`discovery.md`) — compress evidence into the working brief; tag every item `KNOWN`, `INFERRED`, `CREATIVE` or `UNKNOWN`; stabilize product truth and page intent without freezing downstream solutions; resolve the first three yourself; ask only about an `UNKNOWN` that blocks truth, authority or an irreversible fork.
+3. **DIRECT** (`design-quality.md`, `control.md`) — form a point of view before substantial implementation: visual thesis, emotional target, visual world, signature, content thesis, interaction thesis, restraint; technical thesis for ambitious work. Treat the chosen direction as a revisable hypothesis, not a schema: know the idea, the signature, what it should achieve, and what observed failure would make it wrong. Under material creative uncertainty, diverge into structurally different directions and select the strongest yourself. Exploration may begin intuitively; commitment must become defensible. Prototype the uncertain thing when making will teach more than additional rationale.
 4. **COMPOSE** (`marketing.md`) — design in visitor-state transitions, not section names: `arrival → understanding → belief → evidence → reduced friction → action`. Every region has one job, an incoming and desired state, a dominant message, its strongest evidence, a dominant visual relationship and a transition. The first viewport is a thesis; the whole page has rhythm.
 5. **SYSTEMIZE** (`design-quality.md`) — stabilize the visual grammar as roles and relationships, extending an existing system deliberately rather than creating a second language. Systemize strongly enough for coherence, not so rigidly that composition becomes template execution.
 6. **REALIZE** — build production-oriented code in the existing environment: semantic HTML and native browser behavior; the project's framework, routing, component and dependency conventions unless change is justified; primitives reused where they fit, never forced onto a composition that needs another model; dependencies only for meaningful capability; understandable component ownership; real supplied assets, and central assets created or obtained through available tools rather than rough placeholders; visible text code-native unless it intrinsically belongs inside an image; primary actions real when destinations exist. Build in visual slices (`verification.md`), rendering between slices. Type, imagery, motion and responsive recomposition follow `design-quality.md`; animation-heavy or 3D work follows `technical-excellence.md`.
-7. **REFINE** (`verification.md`, `control.md`) — the first successful render begins QA. Run the render loop: deterministic checks, viewport QA, perceptual QA; classify the largest remaining defect by its lowest explanatory layer. Correct system/composition/execution failures without gratuitous restart. When rendered evidence materially falsifies the governing direction, re-diverge from the still-valid FOUNDATION and INTENT instead of polishing the wrong idea. Render again.
-8. **CRITIQUE** (`verification.md`, `control.md`) — for premium work, run separate lenses: first-time visitor, creative director, craft reviewer, creative developer/technical jury. Findings should identify severity and root layer, not merely aesthetic preference. Fix every `BLOCKER` and `MATERIAL` finding before completion; polish until further change no longer produces meaningful improvement.
+7. **REFINE** (`verification.md`, `control.md`) — the first successful render begins QA. Run the render loop: deterministic checks, viewport QA, perceptual QA; find the largest remaining defect and identify the lowest level that explains it. Correct expression/execution failures without gratuitous restart. If repeated local exceptions accumulate, question the next upstream decision rather than stacking patches. When rendered evidence materially falsifies the governing direction, re-diverge from still-valid truth and intent. Render again.
+8. **CRITIQUE** (`verification.md`, `control.md`) — for premium work, run separate lenses: first-time visitor, creative director, craft reviewer, creative developer/technical jury. Findings should identify severity and causal level, not merely aesthetic preference. Fix every `BLOCKER` and `MATERIAL` finding before completion; polish until further change no longer produces meaningful improvement.
 
 # Quality gates
 
@@ -110,7 +113,7 @@ A material CREATE/REFINE result is exceptional only when all applicable gates pa
 - **Technical mastery** — meaningful semantics, disciplined runtime behavior, intentional responsive adaptation, purposeful motion, accessible interaction, graceful degradation.
 - **Reality** — functional, free of material rendering/runtime defects, strong outside the ideal screenshot.
 
-Before completing CREATE or major REFINE, run the anti-generic test in `verification.md`; if genericity appears, revise the underlying decision rather than adding decoration. If genericity is caused by the governing creative idea rather than its execution, treat it as a DIRECTION finding and re-diverge.
+Before completing CREATE or major REFINE, run the anti-generic test in `verification.md`; if genericity appears, revise the underlying decision rather than adding decoration. If the governing creative idea itself is generic, re-diverge instead of ornamenting it.
 
 # Hard stops
 
