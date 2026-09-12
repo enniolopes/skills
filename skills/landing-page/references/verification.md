@@ -118,21 +118,22 @@ Inspect high-risk details:
 - forms and error/empty states when present;
 - mobile spacing and wrapping.
 
-### Anti-generic test
+### Anti-generic / counterfeit-quality test
 
 Ask:
 
 - Could most of this design survive an unrelated product/logo swap?
-- Did I choose a pattern because it is right here or because it was readily available?
-- Is the hero a thesis or a familiar arrangement?
-- Is imagery doing narrative/evidentiary work?
-- Are structural devices encoding information or decorating it?
-- Are sections mechanically rhyming?
-- Is there one memorable idea or many weak attempts at interest?
+- Which important decision is merely **signaling** premium, creativity, sophistication or technical authority instead of producing the underlying quality?
+- Did surface polish make an unresolved proposition, hierarchy, composition or interaction look finished?
+- Which visual decision has weak causal dependence on this brief and is present mainly because it is a familiar category or trend default?
+- Did component convenience replace composition, or did repeated geometry replace coherent variation?
+- Is novelty or technical complexity adding cognitive/runtime cost without adding meaning, identity, proof or a useful experience job?
+- Is imagery doing narrative/evidentiary work rather than acting as decoration?
+- Are structural devices encoding information rather than simulating sophistication?
 - Did reference research broaden the solution or make it imitate the category?
-- Is any “premium” signal merely a current trend with no causal connection to the brief?
+- Is there one memorable idea or many weak attempts at interest?
 
-If genericity appears, revise the underlying decision rather than adding decoration.
+When a false proxy appears, repair the **underlying quality** rather than banning the surface form or adding another decorative layer. Keep any form that the brief genuinely earns. If genericity is conceptual, revise the governing decision rather than ornamenting it.
 
 ## Concept fidelity
 
@@ -251,8 +252,9 @@ Before handoff:
 - **Meaning:** Can the intended visitor identify proposition and action?
 - **Specificity:** Could this plausibly belong to an unrelated product?
 - **Hierarchy:** Is attention ordered rather than contested?
-- **Coherence:** Does everything speak one visual language?
+- **Coherence:** Does everything speak one visual language without collapsing into mechanical uniformity?
 - **Signature:** What will be remembered?
+- **Counterfeit quality:** Is any major quality being implied mainly by polish, style cues, novelty, complexity or repetition instead of being materially present?
 - **Craft:** Where is the weakest-looking 10%? Did I fix it?
 - **Responsive:** Was mobile composed intentionally?
 - **Function:** Did I actually exercise the important actions?
@@ -282,8 +284,9 @@ Inspect concept strength:
 
 - Is the governing idea defensible and brief-specific?
 - What makes the page memorable after the browser is closed?
-- Which section feels derivative of current web trends?
+- Which section feels derivative of current web trends or category autocomplete?
 - Does the signature express the product or merely demonstrate technique?
+- Is any familiar premium/creative signal standing in for a weaker underlying idea?
 - Is there enough contrast between quiet/supporting regions and the dominant moment?
 
 ### Lens 3 — craft reviewer
@@ -313,7 +316,7 @@ A technically impressive page that fails one of these materially is not award-ca
 Classify findings internally:
 
 - `BLOCKER` — breaks truth, primary function, accessibility/safety, core rendering, or makes the experience materially unusable/misleading;
-- `MATERIAL` — clearly prevents premium/agency-signoff quality, including generic composition, weak section, broken responsive hierarchy, significant fidelity drift, or visible jank;
+- `MATERIAL` — clearly prevents premium/agency-signoff quality, including generic composition, counterfeit quality masking an unresolved decision, weak section, broken responsive hierarchy, significant fidelity drift, or visible jank;
 - `POLISH` — real improvement whose absence does not undermine the page's concept or professional integrity.
 
 Do not hand off with known BLOCKER or MATERIAL findings that are fixable in the current environment.
