@@ -1,8 +1,10 @@
-# Landing Page Skill v3.5 experimental
+# Landing Page Skill v3.5.1 experimental
 
 A high-autonomy Claude Skill for researching, directing, designing, implementing, and refining premium marketing landing pages and marketing homepages.
 
-v3.5 is an experimental evolution over v3.1. The core hypothesis remains that premium landing-page work fails less from missing design knowledge than from **drift between global truth/intent/direction and many locally plausible decisions**. Later iterations added evidence-fit routing and causal negative control. v3.5 consolidates those behaviors into a more basis-form runtime: fewer parallel sources of truth, more novel decisions derivable from compact non-overlapping rules, without removing domain detail that helps the model decode quality.
+v3.5.1 is an experimental evolution over v3.1. The core hypothesis remains that premium landing-page work fails less from missing design knowledge than from **drift between global truth/intent/direction and many locally plausible decisions**. Later iterations added evidence-fit routing and causal negative control. v3.5 consolidates overlapping decision models and removes parallel sources of truth while preserving concrete domain detail that helps the model act well.
+
+The consolidation was informed by basis-form's case→rule discipline, but the runtime does **not** claim its quality dimensions are a mathematically orthogonal basis. Judge the change by behavior, coverage, context cost and resistance to drift — not by architecture vocabulary.
 
 ## Stable v3 foundation
 
@@ -49,40 +51,40 @@ The runtime therefore constrains false inference rather than aesthetic territory
 
 Any mechanism remains valid when the brief independently earns it. The skill challenges the contextual competent-but-generic attractor before commitment and falsifies concrete proxy failures after render. Cross-run mode collapse remains an evaluation concern rather than a runtime self-awareness requirement.
 
-## v3.5 — basis-form consolidation
+## v3.5 — decision-model consolidation
 
-v3.5 does not add a new framework. It removes overlapping specifications and makes ownership explicit:
+v3.5 does not add a framework. It removes overlapping specifications and makes decision ownership clearer:
 
-- `SKILL.md` now owns one **canonical quality basis**: truth, meaning, specificity, hierarchy, coherence, expression, distinction, craft, technical mastery and reality. References project it rather than redefining quality.
-- `marketing.md` owns one **canonical page-intent basis** (`page job`, audience, arrival context, offer, proposition, proof, friction, action) and one visitor-state model. Discovery fills the same basis; composition consumes it.
-- epistemic status is now orthogonal to creative choice: truth-bearing items are `KNOWN`, `INFERRED` or `UNKNOWN`; factual claims are `SUPPORTED`, `QUALIFIED` or `UNSUPPORTED`; creativity is not an evidence status.
+- `SKILL.md` keeps one quality model: truth, meaning, specificity, hierarchy, coherence, expression, distinction, craft, technical mastery and reality. References use those dimensions without redefining them.
+- `marketing.md` keeps one page-intent model (`page job`, audience, arrival context, offer, proposition, proof, friction, action) and one visitor-state model. Discovery fills the same model; composition consumes it.
+- epistemic status is separate from creative choice: truth-bearing items are `KNOWN`, `INFERRED` or `UNKNOWN`; factual claims are `SUPPORTED`, `QUALIFIED` or `UNSUPPORTED`; creativity is not an evidence status.
 - research has one rule in both directions: continue only while expected information can materially change a decision; stop when it is unlikely to do so.
-- workflow mode is classified by how much valid solution basis remains, not merely by whether a page file already exists.
-- `control.md` remains the owner of the compact direction contract. `design-quality.md` projects that contract through only the expressive media relevant to the brief instead of requiring a field for typography, color, imagery, motion, etc. when a medium has no job.
-- `verification.md` derives QA from `quality claim → falsifier → valid evidence → severity`, while viewport/craft/multi-lens checks remain decoding/falsifier-finding aids rather than parallel definitions of quality.
+- workflow mode is classified by how much valid solution remains, not merely by whether a page file already exists.
+- `control.md` keeps the compact direction contract. `design-quality.md` applies it only through expressive media that have a real job instead of requiring typography, color, imagery, motion, etc. as mandatory fields.
+- `verification.md` uses `quality claim → falsifier → valid evidence → severity`, while viewport/craft/multi-lens checks remain ways to find failures rather than parallel definitions of quality.
 
-The consolidation deliberately preserves concrete typography, imagery, motion, accessibility, performance and craft guidance where examples improve decodability. Basis-form is not textual minimalism.
+The consolidation deliberately preserves concrete typography, imagery, motion, accessibility, performance and craft guidance where examples improve decodability. Compression is not textual minimalism.
 
 ## Runtime files
 
 Runtime lives in `skills/landing-page/`:
 
-- `SKILL.md` — canonical quality basis, autonomy, evidence fit, negative control, modes, invariants, method, gates and hard stops.
-- `references/control.md` — canonical creative direction/continuity contract and pivot model.
+- `SKILL.md` — quality model, autonomy, evidence fit, negative control, modes, invariants, method, gates and hard stops.
+- `references/control.md` — creative direction/continuity contract and pivot model.
 - `references/discovery.md` — decision authority, research value, reference study, synthesis and evidence status.
-- `references/marketing.md` — canonical page intent, visitor-state model, proposition, proof, narrative and conversion.
-- `references/design-quality.md` — design projection of quality, art direction, causal negative control, visual grammar and craft.
+- `references/marketing.md` — page intent, visitor-state model, proposition, proof, narrative and conversion.
+- `references/design-quality.md` — art direction, causal negative control, visual grammar and craft.
 - `references/technical-excellence.md` — performance, responsive behavior, semantics, motion, accessibility and graceful degradation.
-- `references/verification.md` — quality-to-falsifier verification basis, browser/render loop, deterministic/perceptual QA, critique lenses and completion.
+- `references/verification.md` — quality-to-falsifier verification, browser/render loop, deterministic/perceptual QA, critique lenses and completion.
 
 ## Evaluation assets
 
 Development assets live in `development/landing-page/evals/` and never ship:
 
-- `behavioral-evals.json` — natural-language regressions. v2.2 adds basis-form boundary cases for creative-vs-evidence separation, CREATE-depth on an existing obsolete page, inactive expressive media, and research stopping.
+- `behavioral-evals.json` — natural-language regressions. v2.2 adds boundary cases for creative-vs-evidence separation, CREATE-depth on an existing obsolete page, inactive expressive media, and research stopping.
 - `creative-benchmark.json` — eight unrelated domain briefs for blind creative-diversity/mode-collapse testing.
-- `rubric.md` — reliability, evidence fit, decision-basis integrity, creative performance, anti-rigidity, blind comparison and evidence-level rules.
-- `independent-ab-protocol.md` — pinned v3.1-vs-v3.5 blind protocol across continuity, negative control, basis-form guardrails and full rendered builds.
+- `rubric.md` — reliability, evidence fit, decision-rule integrity, creative performance, anti-rigidity, blind comparison and evidence-level rules.
+- `independent-ab-protocol.md` — pinned v3.1-vs-v3.5 blind protocol across continuity, negative control, decision-model guardrails and full rendered builds.
 - `proxy-audit-2026-09-11.md` — historical record of the earlier v3.2/v3.3 audit; it is intentionally not rewritten to imply later versions were independently tested there.
 
 ## Current test status
@@ -101,7 +103,7 @@ Therefore:
 
 Do not accept v3.5 merely because the runtime is shorter, cleaner or more theoretically elegant.
 
-Basis-form is an improvement only if it reduces contradiction/context cost and improves generalization **without losing decodability, specificity, conceptual strength, composition, expressive range, inventiveness, technical rigor or craft**. A compact rule that causes omitted relevant work is a regression. A concrete list that merely decodes a real axis may be worth keeping.
+The consolidation is an improvement only if it reduces contradiction/context cost and improves generalization **without losing decodability, specificity, conceptual strength, composition, expressive range, inventiveness, technical rigor or craft**. A compact rule that causes omitted relevant work is a regression. A concrete list that improves reliable decoding may be worth keeping.
 
 Unrelated briefs must also remain visually diverse: either a recurring conventional house aesthetic or a recurring anti-default aesthetic is a failure.
 
