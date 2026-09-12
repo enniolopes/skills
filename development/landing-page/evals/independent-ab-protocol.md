@@ -7,7 +7,7 @@ This protocol requires genuinely separate executor contexts and a blind reviewer
 ## Fixed versions
 
 - **Baseline A:** repository `enniolopes/skills` at commit `d3b73f3911246ac7dfe7704e7abb5b86cda0eea0` (`main`, landing-page v3.1.0).
-- **Candidate B:** repository `enniolopes/skills` at commit `a4aeb08d6d13d2c60e82988a2787b60b95dec975` (`landing-page-v3.2-control-plane`, landing-page v3.5.0 experimental runtime).
+- **Candidate B:** repository `enniolopes/skills` at commit `c49ebbf90cd7b23eb731be5417a0791f8a50c1b9` (`landing-page-v3.2-control-plane`, landing-page v3.5.0 experimental runtime).
 
 Pin the commits. Do not let either executor see the other version or this comparison rationale.
 
