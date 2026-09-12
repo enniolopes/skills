@@ -81,7 +81,7 @@ Systems exist for composition, not because a workflow is large. Create one when 
 
 A system keeps pieces that are exclusive to it under its own `skills/` and `agents/`. If a piece becomes useful independently, promote it to the top-level catalog and make the system depend on it instead of copying it.
 
-The current `research` system uses a Claude-compatible plugin manifest. ChatGPT can import that marketplace format today, but host support for every component type is treated as evidence to verify rather than assumed portability. We do not invent a universal system manifest until another concrete composition surface makes that abstraction necessary.
+The current `research` system uses a Claude-compatible plugin manifest. That format is also consumable by ChatGPT marketplace import today. We do not invent a universal system manifest until another concrete composition surface makes that abstraction necessary.
 
 ## Development
 
@@ -95,7 +95,7 @@ The same command runs in blocking CI. It is intentionally narrow: CI checks mech
 
 Behavior-changing revisions use the smallest relevant eval set under `development/<name>/evals/`. A targeted change should run cases capable of distinguishing that change; broad method or creative-system changes warrant broader representative evaluation. A passing structure check is never evidence that model behavior improved.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the working model and change rules.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the human contribution workflow and [AGENTS.md](AGENTS.md) for the repository operating guide used in future AI-assisted creation, maintenance, and review sessions.
 
 ## Releases
 
