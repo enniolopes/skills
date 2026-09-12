@@ -1,5 +1,8 @@
 # skills
 
+[![validate](https://github.com/enniolopes/skills/actions/workflows/validate.yml/badge.svg)](https://github.com/enniolopes/skills/actions/workflows/validate.yml)
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](LICENCE)
+
 Portable capabilities for AI assistants.
 
 Pick a capability, install it in your AI, and describe the job you want done. Standalone skills follow the open [Agent Skills](https://agentskills.io) format so the same capability can work across compatible hosts.
@@ -46,7 +49,7 @@ For a standalone Skill, where Skills are available on your account:
 1. Open **Plugins** in the sidebar.
 2. Open the **Skills** tab.
 3. Select **Create → Upload from your computer**.
-4. Upload the released ZIP for the skill from [GitHub Releases](https://github.com/enniolopes/skills/releases).
+4. Upload the skill ZIP from [GitHub Releases](https://github.com/enniolopes/skills/releases).
 
 Workspace admins can also import this repository as a plugin marketplace from **Workspace settings → Plugins → Add → Import marketplace** using:
 
@@ -115,11 +118,3 @@ Choose by the outcome you need; the type mainly tells you how the capability is 
 After installation, describe the task normally. On hosts that support automatic Skill activation, the AI can select the relevant Skill when your request matches it. You can also name the capability explicitly when you want to make the intent unambiguous.
 
 Give it the real material whenever possible: files, repositories, existing documents, source data, current designs, or business context. These capabilities are designed to inspect available reality instead of making you restate everything manually.
-
-## Repository development
-
-This README is for users and consumers. AI sessions that create or maintain repository capabilities should follow [AGENTS.md](AGENTS.md).
-
-## License
-
-[CC BY-NC 4.0](LICENCE).
