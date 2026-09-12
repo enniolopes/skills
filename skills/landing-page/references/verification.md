@@ -10,9 +10,9 @@ For award-caliber, animation-heavy, WebGL/3D/canvas, or technically ambitious wo
 
 A build can pass while the page is visually poor. A screenshot can look excellent while interaction is broken. Verify both.
 
-## Verification basis
+## Verification rule
 
-`SKILL.md` owns the canonical quality basis. Verification does not redefine quality; it projects each applicable quality claim into:
+For each applicable quality claim, use:
 
 `quality claim → plausible falsifier → cheapest valid oracle/evidence → finding severity`
 
@@ -73,7 +73,7 @@ Do not test mobile only by narrowing until the page technically fits. Look for i
 
 ## Perceptual QA
 
-Review the rendered page as a hostile design critic rather than its author. The checks below are falsifier-finding lenses, not alternate definitions of quality.
+Review the rendered page as a hostile design critic rather than its author. The checks below are different ways to find material failure, not separate definitions of quality.
 
 ### First viewport
 
@@ -100,7 +100,7 @@ Scroll at normal reading speed. Ask:
 
 ### Craft sweep
 
-Inspect high-risk details such as headline line breaks, paragraph measures, image crops, icon consistency, optical alignment, control typography/states, section transitions, sticky content, forms/error states, and mobile spacing/wrapping. These examples decode `craft`; they are not an exhaustive specification.
+Inspect high-risk details such as headline line breaks, paragraph measures, image crops, icon consistency, optical alignment, control typography/states, section transitions, sticky content, forms/error states, and mobile spacing/wrapping. These examples are not exhaustive.
 
 ### Anti-generic / counterfeit-quality test
 
@@ -227,7 +227,7 @@ If the environment prevents verification, state exactly what remains unverified.
 
 ## Multi-lens review for premium work
 
-The lenses below search for different classes of falsifier; they do not each define a new quality model.
+Use separate lenses because they expose different classes of failure.
 
 ### Lens 1 — first-time visitor
 
@@ -276,9 +276,9 @@ Classify findings internally:
 
 Do not hand off with known BLOCKER or MATERIAL findings that are fixable in the current environment.
 
-## Final basis pass and stop rule
+## Final pass and stop rule
 
-Before handoff, walk every **applicable** canonical quality dimension from `SKILL.md`. For each, ask what remaining observation could still falsify the claim that it is resolved and whether the valid oracle available in this environment has been applied. Do not create a second checklist of quality definitions here.
+Before handoff, walk every **applicable** quality dimension from `SKILL.md`. For each, ask what remaining observation could still falsify the claim that it is resolved and whether the valid oracle available in this environment has been applied. Do not create a second checklist of quality definitions here.
 
 Stop refinement when:
 
