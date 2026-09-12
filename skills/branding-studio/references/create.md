@@ -54,7 +54,7 @@ The selected thesis is still a working hypothesis. It earns continued investment
 
 ## 5. Build the smallest generative system
 
-Load `identity-craft.md`.
+Load `identity-craft.md`. Load `verbal-identity.md` only when proposition, messaging, voice/tone or a broader verbal system is materially in scope. Load `naming.md` when naming is in scope.
 
 Define only what declared touchpoints need. Depending on the brand, this may include:
 - naming and signature/mark/wordmark;
@@ -71,15 +71,18 @@ Do not complete media because a template contains them. The goal is a grammar th
 
 ## 6. Test the system in representative use
 
-Choose a small set of applications that expose materially different stresses: small/large, dense/expressive, institutional/promotional, screen/print, static/motion, internal/external, or other tensions relevant to the actual brand.
+Start from the material properties or system claims that could plausibly fail. Choose the smallest set of applications and conditions capable of exposing those failure modes; do not use a fixed test matrix or add cases that cannot change a decision.
+
+Useful contrasts may include small/large, dense/expressive, institutional/promotional, screen/print, static/motion, internal/external or other tensions earned by the actual brand. They are prompts for test selection, not required coverage.
 
 For each trial:
-1. state the artifact job;
-2. apply the same brand logic without copying layout;
-3. make/render/inspect it in representative context;
-4. identify failures;
-5. fix the lowest layer that explains them;
-6. re-test when the correction is systemic.
+1. state the artifact job and the property at risk;
+2. choose a condition capable of revealing whether that property fails;
+3. apply the same brand logic without copying layout;
+4. make/render/inspect it in representative context;
+5. identify observed failures without promoting hypothetical risks into facts;
+6. fix the lowest layer that explains them;
+7. re-test when the correction is systemic.
 
 A strong system should produce variation that still feels unmistakably related. If every application needs the same layout/logo placement to look on-brand, the grammar is under-resolved.
 
