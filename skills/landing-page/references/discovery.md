@@ -252,7 +252,8 @@ page_intent:
   arrival_context:
   offer:
   proposition:
-  proof_and_friction:
+  proof:
+  friction:
   action:
 
 market:
