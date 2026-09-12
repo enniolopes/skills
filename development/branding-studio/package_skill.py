@@ -20,6 +20,7 @@ RUNTIME_FILES = (
     "references/knowledge.md",
     "references/naming.md",
     "references/spec-schema.md",
+    "references/verbal-identity.md",
     "templates/brand-spec.template.json",
     "templates/portfolio.template.json",
     "scripts/asset_checks.py",
