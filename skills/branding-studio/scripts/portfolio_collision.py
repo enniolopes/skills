@@ -11,7 +11,6 @@ from __future__ import annotations
 
 import difflib
 import json
-import math
 import re
 import sys
 import unicodedata
@@ -63,6 +62,11 @@ def jaccard_similarity(a, b):
         return None
     union = a | b
     return len(a & b) / len(union) if union else None
+
+
+def _rounded_jaccard(a, b):
+    value = jaccard_similarity(a, b)
+    return None if value is None else round(value, 3)
 
 
 def name_signals(a, b):
@@ -159,19 +163,9 @@ def compare(candidate_summary, sister_summary, policy=None):
             "architecture_context": policy.get("name"),
         },
         "morphology": {
-            "tag_jaccard": (
-                None
-                if jaccard_similarity(
-                    candidate_summary.get("logo_morphology"),
-                    sister_summary.get("logo_morphology"),
-                ) is None
-                else round(
-                    jaccard_similarity(
-                        candidate_summary.get("logo_morphology"),
-                        sister_summary.get("logo_morphology"),
-                    ),
-                    3,
-                )
+            "tag_jaccard": _rounded_jaccard(
+                candidate_summary.get("logo_morphology"),
+                sister_summary.get("logo_morphology"),
             ),
             "architecture_context": policy.get("morphology"),
         },
@@ -183,19 +177,9 @@ def compare(candidate_summary, sister_summary, policy=None):
             "architecture_context": policy.get("color"),
         },
         "creative_territory": {
-            "tag_jaccard": (
-                None
-                if jaccard_similarity(
-                    candidate_summary.get("creative_territory"),
-                    sister_summary.get("creative_territory"),
-                ) is None
-                else round(
-                    jaccard_similarity(
-                        candidate_summary.get("creative_territory"),
-                        sister_summary.get("creative_territory"),
-                    ),
-                    3,
-                )
+            "tag_jaccard": _rounded_jaccard(
+                candidate_summary.get("creative_territory"),
+                sister_summary.get("creative_territory"),
             ),
             "architecture_context": policy.get("creative_territory"),
         },

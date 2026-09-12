@@ -4,17 +4,31 @@ Use `brand-spec.json` as the sparse durable operating contract for future brand 
 
 Canonical template: `templates/brand-spec.template.json`.
 
+## Version fields
+
+Keep schema compatibility separate from brand evolution:
+- `meta.schema_version` — structural schema version. Current canonical schema is `4`.
+- `meta.version` — this brand contract's semantic version, starting independently from the schema (for example `1.0.0`).
+
+Increment `meta.version` when durable brand meaning/rules change. Do not change `meta.schema_version` for ordinary brand evolution.
+
+Legacy specs without `meta.schema_version` remain operable and are interpreted using their historical `meta.version` shape until a meaningful migration occurs.
+
 ## Core contract
 
-A v4 contract keeps a small always-useful core:
-- `meta` — brand identity, spec version, maturity and declared touchpoints;
+A schema-v4 contract keeps only the always-useful decision core:
+- `meta` — schema version, brand-contract version, brand identity, maturity and declared touchpoints;
 - `strategy` — brand job, audience, offer truth, alternatives, position, right to win and desired meaning;
-- `creative_direction` — thesis, principles, signature and meaningful exclusions;
-- `verbal` — only active verbal rules;
-- `visual` — only active visual/production rules;
-- `evidence` — only consequential evidence references that future judgment still needs.
+- `creative_direction` — thesis, principles and signature.
 
-Add optional blocks such as `naming`, `architecture`, `portfolio_summary`, `motion` or machine tokens only when the brand actually uses them.
+Add expression/evidence/domain blocks only when they are materially active:
+- `verbal`;
+- `visual`;
+- `evidence`;
+- `naming`;
+- `architecture`;
+- `portfolio_summary`;
+- other medium-specific rules that future operators genuinely need.
 
 Absence means “not material to this contract,” not “forgot to complete the template.”
 
@@ -38,7 +52,7 @@ Persist a rationale only when future operators would otherwise be likely to chan
 The business/organizational transition the brand must help produce. This is not a mission statement.
 
 ### `audience`
-Who the system primarily needs to serve and, when materially useful, who it is not for.
+Who the system primarily needs to serve. Add a not-for boundary only when it materially improves future judgment.
 
 ### `offer_truth`
 The relevant truth about the product, service or organization that expression must not contradict.
@@ -50,24 +64,25 @@ The meaningful alternatives/category context against which the brand must be und
 The intended place/meaning the brand should establish relative to those alternatives. Do not store a slogan here unless the slogan itself is the durable strategic decision.
 
 ### `right_to_win`
-The credible basis that makes the position defensible. Reference evidence when future work needs provenance.
+The credible basis that makes the position defensible. Reference evidence only when future work needs provenance.
 
 ### `desired_meaning`
-What the audience should be able to understand or associate from the designed system. Treat actual achieved perception as external evidence, not as a property the spec can declare true.
+What the designed system intends to make understandable/associable. Actual achieved perception remains an external claim.
 
 ## Creative direction fields
 
 Keep the durable direction compact:
 - `thesis` — governing expressive idea;
 - `principles` — only behavioral rules that materially change choices;
-- `signature` — characteristic behavior/cue that helps the system cohere;
-- `excludes` — false routes/collisions that future work is likely to fall into.
+- `signature` — characteristic behavior/cue that helps the system cohere.
+
+Add `excludes` only when likely false routes/collisions need to be prevented in future work.
 
 Do not persist an exploration history. A future operator needs the selected grammar, not all discarded candidates.
 
 ## Evidence
 
-Use `evidence` only for consequential factual/observational/hypothesis records that remain relevant to future decisions.
+Add `evidence` only for consequential factual/observational/hypothesis records that remain relevant to future decisions.
 
 Recommended shape:
 
@@ -87,6 +102,8 @@ Rules:
 - challenge or supersede evidence before changing dependent contract decisions;
 - do not use confidence labels when they do not change action;
 - do not store ordinary research simply to prove that research happened.
+
+When a core decision materially depends on a stored record, add `evidence_refs` to that decision object. Do not add empty `evidence_refs` arrays everywhere.
 
 ## Verbal and visual blocks
 
@@ -127,11 +144,11 @@ When declared:
 
 Machine validation establishes only those structural/technical properties.
 
-## Versioning and migration
+## Migration
 
-Increment the spec version when durable contract meaning changes. The project/version-control environment should carry detailed history; do not duplicate a long changelog inside the contract.
-
-Legacy v3 specs remain operable. On the next meaningful CREATE/EVOLVE operation, migrate by **compressing** valid state into the v4 contract:
+Legacy v3/pre-v3 specs remain operable. On the next meaningful CREATE/EVOLVE operation, migrate by **compressing** valid state into schema v4:
+- set `meta.schema_version` to `4`;
+- start/continue a separate brand-contract `meta.version` deliberately rather than treating schema number as brand history;
 - preserve valid strategy, equity and production rules;
 - carry forward only evidence still needed for judgment;
 - remove exploration history and ceremonial fields;

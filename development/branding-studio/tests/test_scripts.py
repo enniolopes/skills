@@ -111,7 +111,14 @@ class ValidateStructureTests(unittest.TestCase):
     def test_v4_sparse_contract_is_valid(self):
         report = validate_structure.validate(valid_spec())
         self.assertEqual(report["verdict"], "STRUCTURALLY_VALID")
-        self.assertTrue(any("sparse contract major version" in x for x in report["passed"]))
+        self.assertTrue(any("brand-spec schema version detected: 4" in x for x in report["passed"]))
+
+    def test_schema_version_is_separate_from_brand_contract_version(self):
+        spec = valid_spec()
+        spec["meta"]["version"] = "2.3.0"
+        report = validate_structure.validate(spec)
+        self.assertEqual(report["verdict"], "STRUCTURALLY_VALID")
+        self.assertEqual(spec["meta"]["schema_version"], 4)
 
     def test_v4_does_not_require_rationale_fields(self):
         spec = valid_spec()

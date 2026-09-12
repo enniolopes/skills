@@ -1,41 +1,33 @@
 {
   "meta": {
+    "schema_version": 4,
+    "version": "1.0.0",
     "brand_name": "",
-    "version": "4.0.0",
     "tier": "provisional | full",
     "touchpoints": []
   },
   "strategy": {
     "brand_job": {
-      "statement": "",
-      "evidence_refs": []
+      "statement": ""
     },
     "audience": {
-      "primary": "",
-      "not_for": ""
+      "primary": ""
     },
     "offer_truth": {
-      "statement": "",
-      "evidence_refs": []
+      "statement": ""
     },
     "alternatives": [],
     "position": {
-      "statement": "",
-      "evidence_refs": []
+      "statement": ""
     },
     "right_to_win": {
-      "statement": "",
-      "evidence_refs": []
+      "statement": ""
     },
     "desired_meaning": ""
   },
   "creative_direction": {
     "thesis": "",
     "principles": [],
-    "signature": "",
-    "excludes": []
-  },
-  "verbal": {},
-  "visual": {},
-  "evidence": []
+    "signature": ""
+  }
 }

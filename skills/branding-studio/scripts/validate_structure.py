@@ -4,8 +4,8 @@
 The validator proves only structural/technical properties that can be decided from the
 file itself. It does not score strategy, creativity, meaning, distinctiveness or craft.
 
-v4 is the sparse canonical contract. Legacy v3/pre-v3 specs remain operable and are
-validated only for compatible machine-checkable properties.
+Schema v4 is the sparse canonical contract. Legacy v3/pre-v3 specs remain operable and
+are validated only for compatible machine-checkable properties.
 """
 
 from __future__ import annotations
@@ -20,6 +20,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from color_tools import check_pair  # noqa: E402
 
 
+SCHEMA_VERSION = 4
 VALID_TIERS = {"provisional", "full"}
 VALID_EVIDENCE_KINDS = {"fact", "observation", "hypothesis"}
 VALID_EVIDENCE_STATES = {"active", "challenged", "superseded"}
@@ -53,6 +54,15 @@ def _nonempty_list(value):
 def _major(value):
     match = re.match(r"^\s*(\d+)", str(value or ""))
     return int(match.group(1)) if match else 0
+
+
+def _schema_version(spec):
+    value = _get(spec, "meta.schema_version")
+    if isinstance(value, int):
+        return value
+    if isinstance(value, str) and value.strip().isdigit():
+        return int(value.strip())
+    return None
 
 
 def resolve_token(spec, ref):
@@ -119,7 +129,7 @@ def _validate_modular_scale(hierarchy, failures, passed):
         passed.append("declared modular typography math is internally consistent")
 
 
-def _validate_evidence(spec, findings, require_ids, failures, warnings, passed):
+def _validate_evidence(findings, require_ids, failures, warnings, passed):
     if findings is None:
         return set()
     if not isinstance(findings, list):
@@ -127,7 +137,7 @@ def _validate_evidence(spec, findings, require_ids, failures, warnings, passed):
         return set()
 
     ids = set()
-    valid = 0
+    checked = 0
     for i, item in enumerate(findings):
         if not isinstance(item, dict):
             failures.append(f"evidence[{i}] must be an object")
@@ -160,10 +170,10 @@ def _validate_evidence(spec, findings, require_ids, failures, warnings, passed):
                 failures.append(f"{prefix}.id is duplicate: {evidence_id}")
             ids.add(evidence_id)
 
-        valid += 1
+        checked += 1
 
-    if valid:
-        passed.append(f"evidence records structurally checked: {valid}")
+    if checked:
+        passed.append(f"evidence records structurally checked: {checked}")
     elif findings:
         warnings.append("evidence list exists but has no usable records")
     return ids
@@ -348,7 +358,7 @@ def _validate_v4(spec, failures, warnings, passed):
         failures.append("creative_direction.principles must contain at least one operating principle")
 
     findings = _get(spec, "evidence", [])
-    ids = _validate_evidence(spec, findings, True, failures, warnings, passed)
+    ids = _validate_evidence(findings, True, failures, warnings, passed)
     _validate_evidence_refs(spec, ids, failures)
     _validate_tokens_and_contrast(spec, failures, warnings, passed)
     _validate_typography(spec, failures, passed)
@@ -359,7 +369,7 @@ def _validate_v4(spec, failures, warnings, passed):
 
 def _validate_legacy(spec, major, failures, warnings, passed):
     warnings.append(
-        f"legacy v{major or 'pre-versioned'} contract accepted; compress to sparse v4 on the next meaningful CREATE/EVOLVE operation"
+        f"legacy v{major or 'pre-versioned'} contract accepted; compress to sparse schema v4 on the next meaningful CREATE/EVOLVE operation"
     )
 
     tier = str(_get(spec, "meta.tier", "")).strip().lower()
@@ -368,7 +378,7 @@ def _validate_legacy(spec, major, failures, warnings, passed):
 
     findings = _get(spec, "research.findings")
     require_ids = major >= 3
-    _validate_evidence(spec, findings, require_ids, failures, warnings, passed)
+    _validate_evidence(findings, require_ids, failures, warnings, passed)
     _validate_tokens_and_contrast(spec, failures, warnings, passed)
     _validate_typography(spec, failures, passed)
     _validate_logo(spec, tier, failures, warnings, passed)
@@ -387,16 +397,22 @@ def validate(spec):
             "passed": [],
         }
 
-    version = str(_get(spec, "meta.version", "")).strip()
-    if version and not SEMVER.fullmatch(version):
+    brand_version = str(_get(spec, "meta.version", "")).strip()
+    if brand_version and not SEMVER.fullmatch(brand_version):
         failures.append("meta.version must be semantic version x.y.z")
-    major = _major(version)
 
-    if major >= 4:
-        passed.append(f"sparse contract major version detected: {major}")
-        _validate_v4(spec, failures, warnings, passed)
+    schema_version = _schema_version(spec)
+    if schema_version is not None:
+        if schema_version != SCHEMA_VERSION:
+            failures.append(
+                f"meta.schema_version={schema_version} is unsupported by this validator; expected {SCHEMA_VERSION}"
+            )
+        else:
+            passed.append(f"brand-spec schema version detected: {schema_version}")
+            _validate_v4(spec, failures, warnings, passed)
     else:
-        _validate_legacy(spec, major, failures, warnings, passed)
+        legacy_major = _major(brand_version)
+        _validate_legacy(spec, legacy_major, failures, warnings, passed)
 
     return {
         "verdict": "STRUCTURALLY_INVALID" if failures else "STRUCTURALLY_VALID",
