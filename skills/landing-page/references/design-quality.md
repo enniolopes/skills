@@ -4,9 +4,11 @@ Load this reference for CREATE, major REFINE, art direction, or any task where t
 
 High-end design is not a style. It is controlled intention under constraints.
 
-## Quality basis
+## Design projection of the quality basis
 
-### 1. Specificity
+`SKILL.md` owns the canonical quality basis. This file projects the dimensions most affected by visual/design judgment; it does not define a second quality model.
+
+### Specificity
 
 A high-quality page looks causally related to its subject.
 
@@ -24,7 +26,7 @@ Use these as generative material rather than decorating a generic SaaS compositi
 
 **Swap test:** if replacing the name/logo with an unrelated company leaves the concept intact, specificity is weak.
 
-### 2. Legibility / hierarchy
+### Hierarchy
 
 Visual hierarchy is the perceptual representation of importance.
 
@@ -44,7 +46,7 @@ One element or relationship should dominate each major composition. If everythin
 
 Use familiar interaction grammar for actions people must understand quickly. Spend novelty on expression, not on making ordinary controls indecipherable.
 
-### 3. Coherence
+### Coherence
 
 The page needs a grammar rather than a collection of attractive decisions.
 
@@ -62,7 +64,7 @@ Look for stable relationships across:
 
 Coherence does not mean uniformity. Variation is desirable when it behaves like variation inside one composition.
 
-### 4. Appropriate expression
+### Expression
 
 Decide the emotion intentionally. Expression can be quiet or loud.
 
@@ -78,7 +80,7 @@ Do not equate:
 - creative with unconventional navigation;
 - delight with decoration.
 
-### 5. Distinction
+### Distinction
 
 Balance familiarity and novelty.
 
@@ -88,7 +90,7 @@ Create one **signature**: a visual/interactive/narrative expression the page can
 
 Spend boldness in one dominant place. Supporting regions should give the signature enough contrast to matter.
 
-### 6. Craft
+### Craft
 
 Craft is what remains after the concept is already correct.
 
@@ -109,7 +111,7 @@ Inspect:
 
 The design should improve under closer inspection rather than reveal approximation.
 
-### 7. Real-world integrity
+### Reality
 
 A screenshot is not the product.
 
@@ -164,21 +166,21 @@ High-end work requires integrity at all three scales.
 
 ## Art direction protocol
 
-A compact design plan should specify:
+`control.md` owns the direction contract: governing idea, signature/dominant expression, intended effect, and an observable falsifier. Do not create a parallel mandatory design-plan schema here.
 
-- `thesis` — the conceptual visual idea;
-- `emotional_target` — 2–3 desired qualities;
-- `signature` — one memorable expression;
-- `type` — display/body/utility roles and their character;
-- `palette` — functional color relationships, not merely swatches;
-- `composition` — mass, grid, density, whitespace, dominant relationships;
-- `imagery` — what kind of image/product evidence belongs and how it is treated;
-- `motion` — what moves and why;
-- `restraint` — what conventional decorative choices are intentionally excluded.
+For art direction, add an emotional target when it changes decisions, then project the direction through only the media that materially participate in the experience:
 
-Review the plan before coding. Identify any decision that could have been made for an unrelated page and make it more specific or remove it.
+- typography;
+- palette/color relationships;
+- composition, mass, density and whitespace;
+- imagery/product representation;
+- motion/interaction;
+- content emphasis;
+- technical expression for ambitious work.
 
-Also fix a `content thesis` (what dominates the first viewport and why) and an `interaction thesis` (what motion/interaction contributes, if anything). For technically ambitious work, the technical thesis in `technical-excellence.md` belongs to the same plan: technology is never the signature by itself; the experience it enables is.
+For each active medium, decide its role, relationship to the governing idea, and restraint. A medium with no meaningful job does not need a field filled in merely to complete a plan.
+
+Before coding, identify any material decision that could have been made for an unrelated page and make it more specific or remove it.
 
 Bad: `modern, premium, dark, gradients`.
 
