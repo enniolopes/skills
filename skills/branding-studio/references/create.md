@@ -1,131 +1,106 @@
-# CREATE — establish a brand system
+# CREATE — establish or reconstruct a brand system
 
-Use CREATE for a new brand or an existing identity with no canonical spec. Commit the smallest defensible system that can govern the venture's real touchpoints.
+Use CREATE for a genuinely new brand, a material re-foundation, or an existing identity that needs a canonical operating contract. Absence of a spec does not imply absence of brand equity.
 
-## Choose investment tier
+## 1. Determine what already deserves to survive
 
-### PROVISIONAL
-Use when thesis, market or offering may still pivot.
+Inspect current reality before generating anything. Recover, when available:
+- business/product/service truth;
+- existing name, assets, language and recognizable equity;
+- audience/stakeholders and buying/use context;
+- category and direct/indirect alternatives;
+- touchpoints and production constraints;
+- parent/portfolio relationships;
+- evidence of what is working, failing or still unknown.
 
-Minimum committed state:
-- customer / not-customer;
-- competitive alternatives;
-- right to win;
-- differentiation/theme;
-- preliminary naming triage when naming is in scope;
-- concise verbal principles + negatives;
-- creative direction;
-- identity grammar sufficient for declared MVP touchpoints;
-- at least one representative trial application;
-- explicit V4/legal/craft pendencies.
+For an existing identity, classify important elements as **preserve, refine, replace, retire or add**. Do not redesign merely to make the work feel new or to populate a new schema.
 
-Keep provisional work promotable without discarding valid reasoning.
+## 2. Frame the brand job
 
-### FULL
-Use for durable ventures, existing organizations or commitments that justify production-grade depth.
+Write the smallest useful strategic frame:
+- **brand job** — the transition the brand must help produce;
+- primary audience/stakeholders and relevant not-for boundary;
+- offer/product/service truth;
+- alternatives/category context;
+- position / desired meaning;
+- right to win or credible basis;
+- existing equity and constraints.
 
-Require deeper evidence, production decisions, semantic review, current legal/market triage where relevant, and representative trials across materially different touchpoint stresses. Do not choose FULL merely because more work can be generated.
+A framework belongs only when it changes a material decision. Do not manufacture archetypes, manifestos, onliness statements, category-entry-point maps or purpose language by default.
 
-## 1. Inspect reality before asking
+When a factual claim matters, preserve its source or evidence reference. When the truth is private, future or legitimately owned by leadership, use the smallest human gate that can resolve it.
 
-Recover from available sources:
-- what the organization/product does;
-- existing name, assets and equity;
-- direct/indirect alternatives and category context;
-- public audience/category evidence;
-- current geographic/language context;
-- portfolio/parent relationship;
-- touchpoints and production constraints.
+## 3. Explore materially different directions
 
-Do not ask the user to repeat inspectable facts. Use the Truth/Authority/Reality gates from `SKILL.md` only when inspection cannot resolve a material dependency.
+Load `creative-direction.md`.
 
-## 2. Record material evidence
+Search for different **organizing ideas**, not different palettes or logo shapes around the same idea. Creative exploration may begin from metaphor, tension, product behavior, history, language, material, category inversion, interaction or another relevant source.
 
-Store consequential findings in `research.findings` using `spec-schema.md`.
+Use research and references as stimulus, not templates. Identify the competent category-default answer before committing; a route may use familiar forms, but only when this brand independently earns them.
 
-Preserve provenance and uncertainty:
-- public competitor behavior is evidence about competitors, not customer perception;
-- founder statements can establish intent/internal knowledge, not automatic market truth;
-- unverified perception hypotheses remain hypotheses and carry an explicit V4 gap when consequential.
+Do not target a fixed concept count. Continue while additional exploration creates materially different useful possibilities.
 
-## 3. Build strategy from evidence
+## 4. Commit a working creative thesis
 
-Make explicit choices about:
-- customer and not-customer;
-- competitive alternatives;
-- right to win;
-- differentiation;
-- relevant cultural/category context;
-- theme / organizing idea;
-- category entry points or equivalent demand situations when useful;
-- mission/manifesto only when it changes behavior.
+Choose the direction that best combines:
+- strategic relevance;
+- specificity to this brand;
+- perceptible distinction without arbitrariness;
+- ability to generate verbal/visual behavior;
+- compatibility with real touchpoints and constraints;
+- preservation of valid existing equity where relevant.
 
-Use the Because test as a reasoning aid:
+The selected thesis is still a working hypothesis. It earns continued investment by generating a strong system in use.
 
-`[theme] because [right_to_win/evidence]`
+## 5. Build the smallest generative system
 
-Use an onliness statement only when it clarifies a real difference; never manufacture exclusivity.
+Load `identity-craft.md`.
 
-## 4. Derive expression
-
-Load `creative-direction.md` and translate strategy into a central idea, productive tensions, behavioral principles, reference/anti-reference properties, distinctive-asset hypotheses, art direction and meaningful exclusions.
-
-Explore materially different organizing ideas/grammars, not cosmetic variants or a fixed route count. Stop when additional routes stop producing materially different useful possibilities.
-
-When naming is in scope, use `naming.md`. For visual identity, use `identity-craft.md`.
-
-Define only what declared touchpoints need:
-- signature/mark/wordmark concept and production state;
-- typography roles/hierarchy;
-- color system;
+Define only what declared touchpoints need. Depending on the brand, this may include:
+- naming and signature/mark/wordmark;
+- verbal principles, message behavior and tone by moment;
+- typography;
+- color relationships;
 - imagery/illustration/iconography;
-- composition behavior;
+- composition and spatial behavior;
 - reusable distinctive devices;
-- motion/sound only when relevant;
-- machine-consumable tokens only when useful.
+- motion, sound or sensory behavior when materially relevant;
+- machine-consumable tokens when they improve production.
 
-Treat family count, scale model, geometry/expression, minimalism and route count as contextual decisions, not laws.
+Do not complete media because a template contains them. The goal is a grammar that can generate new work, not a checklist of brand ingredients.
 
-## 5. Prove before full commitment
+## 6. Test the system in representative use
 
-Apply the verification ladder from `SKILL.md` proportionally.
+Choose a small set of applications that expose materially different stresses: small/large, dense/expressive, institutional/promotional, screen/print, static/motion, internal/external, or other tensions relevant to the actual brand.
 
-For V1, run applicable deterministic checks:
+For each trial:
+1. state the artifact job;
+2. apply the same brand logic without copying layout;
+3. make/render/inspect it in representative context;
+4. identify failures;
+5. fix the lowest layer that explains them;
+6. re-test when the correction is systemic.
 
-```bash
-python scripts/validate_structure.py spec.json
-python scripts/portfolio_collision.py portfolio.json spec.json
-python scripts/asset_checks.py path/to/logo.svg   # only when SVG is claimed as a final master
-```
+A strong system should produce variation that still feels unmistakably related. If every application needs the same layout/logo placement to look on-brand, the grammar is under-resolved.
 
-Use `color_tools.py` where exact color/contrast work matters.
+## 7. Refine or re-diverge
 
-For V2, review at minimum:
-- evidence-to-claim fit;
-- usefulness of strategic choices;
-- causal quality of rationales;
-- strategy → creative direction derivation;
-- specificity vs category cliché;
-- coherence of verbal/visual grammar;
-- whether exclusions meaningfully constrain behavior.
+Do not polish a failed premise.
 
-For V3, test representative applications from `meta.touchpoints` before FULL commitment and whenever a system decision has material radius. Choose a small set that exposes different stresses such as tiny/large, dense/expressive, institutional/promotional, screen/print or static/motion.
+Refine when the governing idea is still sound and the defect is craft, execution or an incomplete rule. Re-diverge when applications reveal that the direction is generic, semantically weak, too narrow to generate range, dependent on mockup polish, or causally disconnected from the brand job.
 
-For each trial, state the job, apply the same grammar, identify failures, fix recurring system causes and re-test. One-off failures stay local to the artifact.
+Creative/artifact evidence is sufficient to revise creative/artifact decisions. Do not claim that such revision proves market perception.
 
-Use V4 only when market-level or high-cost decisions depend on external reality. If unavailable, distinguish hypothesis, pending proof and approved risk; do not fabricate closure.
+## 8. Choose maturity and package
 
-## 6. Commit and deliver
+Use **provisional** when the business thesis, offer, market or identity still has material uncertainty and the immediate goal is a coherent, promotable system for current touchpoints.
 
-Converge on the route that best satisfies strategy, evidence strength, creative specificity, contextual performance, production feasibility, portfolio architecture and commitment radius. Do not expose an unranked menu merely because generation was cheap.
+Use **full** only when the work justifies production-grade depth across durable touchpoints. Full does not mean “fill more fields”; it means resolve the material system and production dependencies the organization actually needs.
 
-Before MARKET/HIGH-COST commitment, ensure required authority and evidence are sufficient.
+Package only durable decisions into `brand-spec.json` using `spec-schema.md`. Keep the contract sparse. Exploration history, routine trials and research dumps remain outside canonical state.
 
-Commit only the necessary persistent/output state:
-- `brand-spec.json`;
-- production masters or explicit concept/production-brief status;
-- representative trials;
-- portfolio registry where applicable;
-- touchpoint deliverables actually required.
+When naming is in scope, use `naming.md`. When a brand book/guidelines are required, use `brand-book.md` after the system has survived representative applications.
 
-Deliver the committed result, concise semantic review, applicable verification, and explicit V4/legal/craft pendencies. Do not deliver the internal exploration transcript.
+## Delivery
+
+Deliver the preferred brand system, required production assets or explicit concept/production briefs, representative applications, the sparse canonical contract when needed, and only the unresolved dependencies that can materially change future decisions.

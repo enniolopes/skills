@@ -24,7 +24,7 @@ FORBIDDEN_META_PHRASES = (
     "readme.md",
 )
 
-CONTROL_PLANE = "SEARCH → PROVE → COMMIT → ADAPT"
+WORKFLOW = "GROUND → FRAME → DIVERGE → COMMIT DIRECTION → BUILD SYSTEM → TEST IN USE → REFINE OR RE-DIVERGE → PACKAGE"
 
 
 class RuntimeContextTests(unittest.TestCase):
@@ -38,22 +38,20 @@ class RuntimeContextTests(unittest.TestCase):
         for path in RUNTIME_MARKDOWN:
             text = path.read_text(encoding="utf-8")
             if path == SKILL:
-                # Ignore YAML frontmatter metadata; inspect executable body only.
                 parts = text.split("---", 2)
                 body = parts[2] if len(parts) == 3 else text
             else:
                 body = text
 
-            # Cross-references to the canonical filename are operational, not metadocumentation.
             body = body.replace("`SKILL.md`", "")
             self.assertIsNone(
                 re.search(r"\bskill\b", body, flags=re.IGNORECASE),
                 f"{path}: runtime prose should instruct/define domain behavior, not explain the skill",
             )
 
-    def test_global_control_plane_has_one_canonical_home(self):
+    def test_global_workflow_has_one_canonical_home(self):
         occurrences = {
-            path: path.read_text(encoding="utf-8").count(CONTROL_PLANE)
+            path: path.read_text(encoding="utf-8").count(WORKFLOW)
             for path in RUNTIME_MARKDOWN
         }
         self.assertEqual(occurrences[SKILL], 1)
@@ -61,7 +59,7 @@ class RuntimeContextTests(unittest.TestCase):
             self.assertEqual(
                 occurrences[path],
                 0,
-                f"{path}: global kernel belongs in SKILL.md; references should contain intent/domain deltas",
+                f"{path}: global workflow belongs in SKILL.md; references should contain intent/domain deltas",
             )
 
     def test_runtime_title_is_not_release_or_architecture_documentation(self):
@@ -69,6 +67,9 @@ class RuntimeContextTests(unittest.TestCase):
         first_heading = next(line for line in body.splitlines() if line.startswith("# "))
         self.assertEqual(first_heading, "# Branding Studio")
         self.assertNotRegex(first_heading, r"\bv\d+\b")
+
+    def test_brand_book_runtime_reference_exists(self):
+        self.assertTrue((RUNTIME_ROOT / "references" / "brand-book.md").is_file())
 
 
 if __name__ == "__main__":

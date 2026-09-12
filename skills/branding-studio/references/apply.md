@@ -1,72 +1,62 @@
 # APPLY — produce a branded touchpoint
 
-Use APPLY when a current brand spec exists and a new artifact/touchpoint is needed. Apply the system; do not redesign it by default.
+Use APPLY when the current brand contract is sufficient and a new artifact/touchpoint is needed. Apply the system; do not redesign the brand by default.
 
 ## 1. Compile the smallest sufficient context
 
-Read:
-- the current spec subset that governs this artifact;
-- source content/artifact;
-- relevant existing assets/examples;
-- medium-specific constraints;
-- `identity-craft.md` when visual composition is involved.
+Read only what can materially change this artifact:
+- its audience and communication/action job;
+- relevant strategy / desired meaning;
+- verbal behavior for the moment;
+- identity grammar and distinctive cues;
+- applicable type/color/composition/imagery rules;
+- production, accessibility, legal or medium constraints;
+- relevant source content and native assets.
 
-Typical context packet:
-- relevant audience/strategy goal;
-- voice/tone for the moment;
-- identity grammar and distinctive devices;
-- applicable type/color/composition rules;
-- meaningful exclusions;
-- production/accessibility constraints.
-
-Do not load unrelated brand state when a smaller packet is sufficient.
+Do not reload or restate unrelated naming, portfolio, evidence or historical detail.
 
 ## 2. Resolve the artifact job
 
 Infer from the request and available evidence:
-- audience;
-- desired action/communication outcome;
-- medium/dimensions;
-- required content;
+- what this artifact must accomplish;
+- required content and hierarchy;
+- medium, dimensions and environment;
 - moment/tone;
-- production/accessibility/regulatory constraints.
+- constraints that change execution.
 
-Use a human gate only when a missing fact materially changes the artifact. Do not ask for routine aesthetic preferences.
+Ask only when a missing truth or authority can materially change the artifact. Do not ask the user to choose routine reversible aesthetics.
 
-Compose directly from the grammar for ordinary applications. For consequential or novel touchpoints, explore materially different compositional approaches internally only when that improves the result, then converge before delivery.
+## 3. Compose from grammar, not logo stamping
 
-## 3. Verify the artifact
+Use the current thesis and system principles to make the artifact specific to its job. Preserve recognizable family resemblance without copying another layout.
 
-Apply the ladder from `SKILL.md` at the level justified by the artifact.
+A good application may vary substantially from prior work. It should still share the brand's generative logic.
 
-V1 may include exact tokens/contrast, logo-master integrity, file/code validation, dimensions/variants and machine-checkable accessibility rules.
+For a novel or consequential touchpoint, explore materially different compositional approaches internally when useful, then converge before delivery.
 
-V2 must check:
+## 4. Verify with the resolver appropriate to the claim
+
+Use exact/source inspection for machine-checkable properties; professional judgment for hierarchy, coherence and expression; make/render/inspect for contextual behavior; real external evidence only for claims about actual audience effect.
+
+At minimum check:
 - the artifact accomplishes its job;
-- expression comes from the brand grammar rather than logo-stamping;
-- hierarchy supports communication;
+- expression comes from the brand grammar rather than decoration or logo placement alone;
+- hierarchy supports comprehension/action;
 - tone fits the moment;
-- distinctive devices are coherent rather than decorative;
-- spec rules are not being followed mechanically at the expense of the job.
+- distinctive cues remain meaningful rather than mechanically repeated;
+- real content did not expose a missing or over-rigid rule;
+- production/accessibility constraints are satisfied where applicable.
 
-Use V3 when the artifact can be rendered/inspected in its real or representative environment. Correct visible or interaction failures before delivery.
+## 5. Fix the right level
 
-Use V4 only for claims about actual audience effect or other external outcomes.
+- one-off artifact defect → fix this artifact;
+- recurring guidance ambiguity → propose the smallest system patch;
+- repeated failure across legitimate touchpoints → create an EVOLVE candidate;
+- governing idea failing in this and other valid contexts → reopen direction under EVOLVE;
+- new external evidence → update the affected belief/strategy before changing expression.
 
-## 4. Classify failures at the right level
-
-- **artifact failure** → fix the artifact only;
-- **recurring guidance gap** → small SYSTEM patch when justified;
-- **system failure** → create an EVOLVE candidate;
-- **new external evidence** → update the affected belief before considering contract change.
-
-A one-off application difficulty is not evidence that the brand needs redesign. Persist only recurring/system-relevant outcomes or material new constraints.
+Do not mutate the contract because one execution is weak. Conversely, do not keep patching artifacts when repeated exceptions expose a system cause.
 
 ## Delivery
 
-Deliver:
-- the requested artifact;
-- concise rationale tied to relevant spec rules;
-- applicable verification results;
-- unresolved evidence/craft issues only when material;
-- any proposed system change clearly separated from the artifact.
+Deliver the requested artifact, concise rationale only where it improves future judgment, applicable verification and material unresolved dependencies. Separate any proposed system change from the artifact itself.

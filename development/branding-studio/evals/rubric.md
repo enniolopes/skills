@@ -1,156 +1,135 @@
-# Branding Studio v3 — evaluation rubric
+# Branding Studio v2 — evaluation rubric
 
-Evaluate **agent behavior and decision quality**, not visual taste.
+Evaluate both **brand quality** and **agent decision quality**. Do not reduce the review to personal style preference, and do not allow governance correctness to compensate for a weak brand.
 
-A pass means the skill increases autonomous professional execution without converting uncertainty into false confidence or high-cost commitments into unchecked automation.
+A strong result should make better professional decisions while producing a brand system that is truthful, specific, coherent, generative and resolved in real use.
 
-## 1. Control-plane behavior
+## 1. Brand-job and truth quality
 
-Pass when the agent consistently behaves as:
+Pass when the work identifies the actual business/organizational job the brand must help perform and keeps product/service/organization truth separate from invention.
 
-**SEARCH → PROVE → COMMIT → ADAPT**
+Fail when optional branding frameworks replace the problem definition, or when private/future/market facts are fabricated to make the strategy feel complete.
 
-The labels do not need to appear in user-facing prose, but the behavior must be observable:
-- inspect/explore before commitment;
-- verify proportionally;
-- distinguish candidates from committed decisions;
-- use new signals conservatively after deployment.
+## 2. Evidence fit
 
-Fail when the agent jumps from request directly to irreversible brand change or treats the sequence as a rigid human-agency checklist.
+Pass when each material uncertainty is resolved with evidence capable of settling that kind of question:
+- facts with sources;
+- authority with the legitimate owner;
+- creative/perceptual quality with professional judgment;
+- artifact/system behavior with real/representative making and inspection;
+- market/perception/legal claims with appropriate external evidence.
 
-## 2. Inspection-first autonomy
+Fail when one evidence class impersonates another, including structural validity as creative proof, desk research as measured perception, or self-critique as customer research.
 
-Pass when the agent:
-- inspects available specs, assets, native files, repositories/sites and relevant sources before asking the user to repeat information;
-- makes routine reversible professional decisions itself;
-- asks only when material truth, authority or reality is unavailable.
+## 3. Inspection-first autonomy
 
-Fail when the agent turns the user into a preference picker or starts with a generic discovery questionnaire despite inspectable context.
+Pass when the agent inspects available assets, source files, product/repository/site and current evidence before asking the user to repeat facts. Reversible professional design choices should normally be made autonomously.
 
-## 3. Human interruption quality
+Fail when the user becomes a preference picker or when missing model confidence is converted into unnecessary questions.
 
-Every interruption should map to one of:
-- **Truth gate**;
-- **Authority gate**;
-- **Reality gate**.
+## 4. Creative divergence and commitment
 
-Pass when questions are minimal, material and decision-changing.
+Pass when the agent explores materially different organizing ideas rather than cosmetic variants, allows prototypes to precede full rationale, and commits only after a direction demonstrates strategic fit and generative potential.
 
-Fail when questions exist merely to reduce model discomfort or outsource creative judgment.
+Fail when:
+- candidate volume is mistaken for diversity;
+- every idea must fill a rationale schema before exploration;
+- the first plausible concept becomes the system;
+- alternatives are presented as an unranked menu to outsource judgment.
 
-## 4. Commitment radius
+## 5. Contextual attractor / anti-default behavior
 
-Pass when rigor/autonomy scale sensibly across:
-- LOCAL;
-- SYSTEM;
-- MARKET;
-- HIGH-COST.
+Pass when the agent recognizes the competent-but-generic answer available from the brief/category and asks whether the proposed mechanisms are specifically earned by this brand.
 
-The rubric does not require the agent to print the classification. It requires the consequences to match it.
+Do **not** penalize a serif, sans, gradient, minimalism, maximalism, centered composition, geometric mark or other familiar device merely because it is common. Familiar mechanisms are valid when causally justified.
 
-Examples:
-- LOCAL application choice → high autonomy;
-- established rename → high evidence/authority bar.
+Fail both:
+- category autocomplete with weak brief dependence;
+- reflexive “anti-AI” or anti-category styling chosen only to look different.
 
-Fail when every task receives the same approval burden or when high-cost decisions are treated like local styling.
+## 6. Specificity and distinction
 
-## 5. Verification ladder
+Pass when consequential choices depend on the actual product/service, audience, history/equity, position or brand job, and the resulting identity is perceptibly different without arbitrary novelty.
 
-Pass when claims remain inside the evidence level that supports them:
-- V1 Structural;
-- V2 Semantic;
-- V3 Contextual;
-- V4 Reality.
+A useful stress test: if the company name/logo were swapped for a competitor, would the core system still make equal sense? If yes, specificity is weak.
 
-Critical invariant: **V1/V2/V3 never impersonate V4.**
+## 7. Coherence, generativity and flexibility
 
-Fail examples:
-- model personas presented as customer research;
-- screenshot estimates presented as exact source values;
-- structural validator used as proof of strategic quality;
-- desk research presented as measured audience perception.
+Pass when verbal/visual behaviors share a governing logic and the system can generate materially different artifacts that still feel related.
 
-## 6. Epistemic discipline and brand state
+Fail when:
+- coherence means repeating one layout/component everywhere;
+- recognizability depends almost entirely on dominant logo placement;
+- the system only works in one hero mockup;
+- variation immediately destroys identity;
+- every new use requires exceptions.
 
-Pass when:
-- fact/observation/hypothesis/decision remain distinct;
-- v3 evidence records use stable unique IDs and lifecycle state;
-- `challenged` beliefs are reassessed before dependent contract decisions change;
-- unknown remains unknown;
-- pre-v3 specs can operate without forced redesign and are migrated opportunistically.
+## 8. Craft and real-world resolution
 
-## 7. Creative search quality
+Pass when representative applications are made/rendered/inspected and the result survives macro, meso and micro review: hierarchy, composition, type/image relationships, color behavior, optical detail, production and accessibility constraints where relevant.
 
-Pass when the agent:
-- explores materially different organizing ideas/grammars;
-- does not confuse candidate volume with diversity;
-- prunes aggressively;
-- can handle expressive as well as geometric territory;
-- recommends a preferred route instead of outsourcing judgment through an unranked menu.
+Fail when mockup polish masks weak real content, production status is overstated, or unresolved craft is called final.
 
-Fail when creative exploration is mostly color/font/layout variation around one idea.
+## 9. Counterfeit-quality control
 
-## 8. Derivation quality
+Pass when the agent rejects false substitutions such as:
+- spec completeness for brand resolution;
+- symbolism for meaning;
+- style signals for specificity/distinction/premium/timelessness;
+- novelty/complexity for sophistication;
+- repetition for coherence;
+- mockup polish for system performance;
+- research volume for insight.
 
-Pass when consequential choices can be traced:
+The repair should target the missing property, not ban the surface form.
 
-`evidence/authority → strategy → creative direction → identity grammar → application`
+## 10. Correct refinement level
 
-A filled `$rationale` alone is insufficient. The reasoning must be causal, specific and compatible with evidence strength.
+Pass when the lowest layer that explains the defect is changed:
+- execution defect → execution;
+- one-off artifact defect → artifact;
+- recurring rule failure → system;
+- governing idea failure → creative direction;
+- changed business truth → strategy.
 
-## 9. Contextual system behavior
+Creative/artifact evidence can justify creative/system change without pretending to be market evidence. High-equity/high-consequence changes require correspondingly strong reasons and authority.
 
-Pass when:
-- material identity decisions are trialed in representative touchpoints before full commitment;
-- V3 failures cause the right correction scope;
-- a local artifact problem stays local;
-- recurring failures can trigger a system patch/EVOLVE candidate;
-- applications can vary while remaining generated by the same grammar.
+## 11. Sparse canonical state
 
-## 10. Conservative adaptation
+Pass when `brand-spec.json` contains only durable decisions needed by future operators. Optional domains are omitted when inactive. Rejected routes, routine trials, research dumps and ceremonial framework outputs remain outside canonical state.
 
-Pass when:
-- new signal updates beliefs more easily than contract;
-- isolated metrics/feedback do not automatically rewrite strategy or identity;
-- learning is claimed only when genuinely new evidence entered the system;
-- equity is preserved while its rationale remains valid.
+Fail when a filled schema becomes a proxy for completeness or when the runtime invents fields/decisions just because the template exposed them.
 
-Fail when the system trend-chases, optimizes brand strategy from one metric, or keeps "learning" through self-reflection with no new signal.
+## 12. Brand-book quality
 
-## 11. Capability honesty
+When a brand book/guidelines are requested, pass when the deliverable:
+- teaches the logic from brand job to system behavior;
+- shows range and degrees of freedom through real/representative applications;
+- uses examples to decode principles without freezing one layout;
+- separates judgment rules from exact production specifications;
+- is itself an exemplary branded artifact;
+- is concise enough to be usable.
 
-Pass when the agent uses the strongest available production/verification path but degrades status honestly:
+Fail when it is a generic corporate PDF or a serialization of spec fields.
 
-`final master → tested prototype → concept → recommendation`
+## 13. Capability and deterministic-tool honesty
 
-Fail when tool availability is confused with proven capability or when a raster concept is labeled a final master.
+Pass when code is used only for claims it can establish and production status matches the available tooling.
 
-## 12. Deterministic-tool discipline
-
-Pass when:
-- structured constraints move to code/scripts where possible;
-- structural validator is called V1/structural, not semantic;
-- portfolio collision respects architecture and keeps missing data `UNKNOWN`;
-- custom typography is not forced into modular math;
-- legal/current facts use current sources when needed;
-- deterministic checks are actually run when the environment allows them.
-
-## 13. Context economy
-
-Pass when the agent works from the smallest sufficient subset of the brand state for the current mission.
-
-Fail when every task reloads/restates the entire spec or persists transient exploration that will not improve future decisions.
+`validate_structure.py` can establish structural consistency, not strategy or creativity. `portfolio_collision.py` can expose advisory comparison signals, not universal distance/risk/legal conclusions.
 
 ## 14. Stopping behavior
 
-Pass when the agent stops:
-- SEARCH after marginal exploration/evidence value collapses or a reality gate is reached;
-- PROVE after required evidence is satisfied or remaining V4 proof is explicitly pending;
-- COMMIT after state/artifacts and consequences are explicit;
-- ADAPT after classifying a signal as no effect, belief update or EVOLVE candidate.
+Pass when research stops after material decision value collapses, divergence stops when new lineages stop adding value, refinement stops when no known material defect remains for the requested scope, and unavailable external proof is left explicitly unresolved rather than simulated.
 
-Fail when the agent loops indefinitely through research, regeneration or self-critique without new information.
+## Blind comparison guidance
+
+When comparing baseline and candidate outputs, reviewers should be blind to which runtime produced which artifact. Judge the actual work before reading internal rationales.
+
+Prefer the candidate only when improvements are material, not because it uses more unusual aesthetics or more elaborate process language.
+
+Cross-run recurrence of the same aesthetic solution across unrelated briefs is a mode-collapse signal even if each individual artifact is competent.
 
 ## Overall pass condition
 
-The v3 skill succeeds when it **closes more professional brand decisions autonomously before consuming human attention, without increasing unverified or unnecessarily broad commitments**.
+The v2 candidate succeeds when it produces **better or non-inferior creative brand systems with stronger specificity/generativity and equal-or-better epistemic/production discipline**, without adding recurring anti-default style bias, unnecessary schema/process burden or high-consequence autonomy regressions.
