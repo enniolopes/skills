@@ -77,31 +77,25 @@ Runtime lives in `skills/landing-page/`:
 - `references/technical-excellence.md` — performance, responsive behavior, semantics, motion, accessibility and graceful degradation.
 - `references/verification.md` — quality-to-falsifier verification, browser/render loop, deterministic/perceptual QA, critique lenses and completion.
 
-## Evaluation assets
+## Evaluation
 
-Development assets live in `development/landing-page/evals/` and never ship:
+`development/landing-page/evals/` never ships and contains only three durable assets:
 
-- `behavioral-evals.json` — natural-language regressions. v2.2 adds boundary cases for creative-vs-evidence separation, CREATE-depth on an existing obsolete page, inactive expressive media, and research stopping.
-- `creative-benchmark.json` — eight unrelated domain briefs for blind creative-diversity/mode-collapse testing.
-- `rubric.md` — reliability, evidence fit, decision-rule integrity, creative performance, anti-rigidity, blind comparison and evidence-level rules.
-- `independent-ab-protocol.md` — pinned v3.1-vs-v3.5 blind protocol across continuity, negative control, decision-model guardrails and full rendered builds.
-- `proxy-audit-2026-09-11.md` — historical record of the earlier v3.2/v3.3 audit; it is intentionally not rewritten to imply later versions were independently tested there.
+- `behavioral-evals.json` — 14 high-signal regression cases, one per materially distinct failure mechanism or necessary inverse guardrail.
+- `creative-benchmark.json` — eight unrelated briefs for blind creative-quality and mode-collapse testing.
+- `evaluation.md` — evidence levels, pinned independent A/B procedure, evaluation criteria, acceptance rule and iteration policy.
+
+Historical proxy audits and parallel rubric/protocol documents were removed; Git history is sufficient if that evidence ever needs to be inspected again.
 
 ## Current test status
 
 Repository CI validates structure, contracts, JSON and token budgets. That is structural evidence only.
 
-Therefore:
-
-- structural validation is real when CI passes on the current head;
-- instruction audits and same-context proxy reasoning are L1/L2 evidence only;
-- targeted regression cases protect against obvious architecture mistakes but do not establish broad superiority;
-- separate executor contexts plus blind rendered review remain required before claiming v3.5 is behaviorally/creatively superior to v3.1;
-- real repeated project performance remains the strongest evidence level.
+Independent executor contexts plus blind rendered review remain required before claiming v3.5.1 is behaviorally or creatively superior to v3.1. Targeted regressions protect against known failure mechanisms; they do not establish broad superiority. Real repeated project performance remains the strongest evidence level.
 
 ## Acceptance principle
 
-Do not accept v3.5 merely because the runtime is shorter, cleaner or more theoretically elegant.
+Do not accept v3.5.1 merely because the runtime is shorter, cleaner or more theoretically elegant.
 
 The consolidation is an improvement only if it reduces contradiction/context cost and improves generalization **without losing decodability, specificity, conceptual strength, composition, expressive range, inventiveness, technical rigor or craft**. A compact rule that causes omitted relevant work is a regression. A concrete list that improves reliable decoding may be worth keeping.
 
