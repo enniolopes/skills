@@ -3,7 +3,7 @@ name: landing-page
 description: Research, design, build, redesign, or refine high-end marketing landing pages and homepages where conversion, creative direction, visual distinction, and production-grade web craft matter.
 license: CC-BY-NC-4.0
 metadata:
-  version: 3.3.0
+  version: 3.3.1
 ---
 
 # Landing Page
@@ -34,6 +34,20 @@ Default to ownership, not interrogation. Whenever information is incomplete:
 - **Ask** only when the missing answer belongs to the user's truth/authority or creates a material, non-reversible commercial/brand fork. Then: research first; batch the smallest set of questions; explain the consequence in plain language; recommend a default; continue without another approval round once resolved.
 
 Never ask the user to choose fonts, colors, page patterns, section counts, animation styles, or aesthetic labels because the brief is incomplete. Those are design decisions.
+
+### Resolve material uncertainty with valid evidence
+
+When an uncertainty could materially change truth, intent, direction, or an expensive decision, first ask **what can actually settle it**, then use the cheapest valid resolver available.
+
+- factual or technical claim → inspect or measure authoritative evidence;
+- authority or commercial commitment → authoritative source or user;
+- creative or perceptual quality → expert judgment, preferably against the rendered artifact when visual;
+- artifact/runtime behavior → build, render, exercise, or inspect it;
+- behavioral or causal outcome → observe real behavior or run an appropriate experiment.
+
+These are not interchangeable. A beautiful render does not prove higher conversion; behavioral correlation does not prove cause; code inspection does not prove rendered correctness; user taste does not replace professional design judgment; creative intuition does not establish product truth.
+
+If valid evidence is unavailable and the uncertainty does not block responsible progress, keep it unresolved rather than pretending it is settled. Do not create a formal evidence ledger unless the task demonstrates a real need for one.
 
 ## Load references progressively
 
@@ -69,33 +83,34 @@ Escalate depth only when evidence shows the problem is broader than first observ
 1. **Ground before inventing.** Inspect reality before major decisions.
 2. **Never fabricate truth.** No invented customers, logos, testimonials, metrics, awards, certifications, integrations, rankings, case studies, security claims, or quantitative outcomes.
 3. **Research reduces uncertainty; it does not outsource judgment.** Do not return references and ask the user to design.
-4. **Semantics precede sections.** Derive structure from what the visitor must understand, believe, trust, and do.
-5. **Direction precedes substantial code.** Establish a brief-specific creative thesis before building a material new experience.
-6. **Preserve intent, not the first solution.** Keep truth and page purpose stable; let direction, composition and implementation change when evidence or a materially stronger idea warrants it.
-7. **Creative discovery may move upstream.** If making reveals a stronger proposition or framing, validate it against reality before deliberately changing intent; never smuggle invention into truth.
-8. **References are ingredients, not templates.** Extract properties and principles; never imitate another site's identity or composition wholesale.
-9. **One dominant signature.** At least one memorable idea tied to the brief, with supporting decisions disciplined enough for it to land.
-10. **System, not collage.** Typography, color, spacing, shape, imagery, layout, motion, and interaction behave like one visual language.
-11. **Composition before components.** Hierarchy, mass, rhythm, and relationships before cards, pills, badges, grids, or generic containers.
-12. **Rendered output is visual truth.** Source code cannot prove visual quality.
-13. **Deterministic evidence where possible.** Build, console, overflow, links, accessibility and similar properties are checked by tools, not guessed.
-14. **Technical ambition must earn its cost.** Advanced motion/graphics are media, not prestige signals.
-15. **Mobile is a composition, not a shrink operation.** Preserve thesis and conversion path across device constraints.
-16. **Do not stop at plausible.** A successful first render begins refinement.
-17. **Do not finish with known material defects.**
+4. **Evidence must match the question.** Resolve material uncertainty with the cheapest evidence that can legitimately answer it; do not substitute one evidence type for another.
+5. **Semantics precede sections.** Derive structure from what the visitor must understand, believe, trust, and do.
+6. **Direction precedes substantial code.** Establish a brief-specific creative thesis before building a material new experience.
+7. **Preserve intent, not the first solution.** Keep truth and page purpose stable; let direction, composition and implementation change when evidence or a materially stronger idea warrants it.
+8. **Creative discovery may move upstream.** If making reveals a stronger proposition or framing, validate it against reality before deliberately changing intent; never smuggle invention into truth.
+9. **References are ingredients, not templates.** Extract properties and principles; never imitate another site's identity or composition wholesale.
+10. **One dominant signature.** At least one memorable idea tied to the brief, with supporting decisions disciplined enough for it to land.
+11. **System, not collage.** Typography, color, spacing, shape, imagery, layout, motion, and interaction behave like one visual language.
+12. **Composition before components.** Hierarchy, mass, rhythm, and relationships before cards, pills, badges, grids, or generic containers.
+13. **Rendered output is visual truth.** Source code cannot prove visual quality.
+14. **Deterministic evidence where possible.** Build, console, overflow, links, accessibility and similar properties are checked by tools, not guessed.
+15. **Technical ambition must earn its cost.** Advanced motion/graphics are media, not prestige signals.
+16. **Mobile is a composition, not a shrink operation.** Preserve thesis and conversion path across device constraints.
+17. **Do not stop at plausible.** A successful first render begins refinement.
+18. **Do not finish with known material defects.**
 
 # Method
 
 Each phase names its output; the procedure lives in the reference that owns it.
 
 0. **ORIENT** — classify the mode; inspect the repo/page and declared project commands; identify framework, primitives, tokens, assets, fonts, routing, existing patterns; identify available web/search, browser, screenshot, image-generation/design-canvas, accessibility and performance tools; establish whether a design/brand system exists and is authoritative. Preserve project architecture unless the outcome truly requires changing it.
-1. **DISCOVER** (`discovery.md`) — for CREATE and major REFINE, reconstruct the brief from internal evidence, then the desk-research lanes and reference pools that resolve real uncertainty. Every research action answers an uncertainty or widens the creative search space; none exists to collect names.
-2. **SYNTHESIZE** (`discovery.md`) — compress evidence into the working brief; tag every item `KNOWN`, `INFERRED`, `CREATIVE` or `UNKNOWN`; stabilize product truth and page intent without freezing downstream solutions; resolve the first three yourself; ask only about an `UNKNOWN` that blocks truth, authority or an irreversible fork.
+1. **DISCOVER** (`discovery.md`) — for CREATE and major REFINE, reconstruct the brief from internal evidence, then the desk-research lanes and reference pools that resolve real uncertainty. Every research action answers an uncertainty or widens the creative search space; none exists to collect names. When a page decision materially depends on the adjacent journey, inspect only enough of the incoming source/promise and immediate post-action destination/expectation to make that decision correctly; do not expand into full-funnel analysis by default.
+2. **SYNTHESIZE** (`discovery.md`) — compress evidence into the working brief; tag every item `KNOWN`, `INFERRED`, `CREATIVE` or `UNKNOWN`; stabilize product truth and page intent without freezing downstream solutions; resolve the first three yourself; ask only about an `UNKNOWN` that blocks truth, authority or an irreversible fork. When behavioral data exists, separate the observation from its explanation: use behavior to prioritize hypotheses, not as automatic proof of cause.
 3. **DIRECT** (`design-quality.md`, `control.md`) — form a point of view before substantial implementation: visual thesis, emotional target, visual world, signature, content thesis, interaction thesis, restraint; technical thesis for ambitious work. Treat the chosen direction as a revisable hypothesis, not a schema: know the idea, the signature, what it should achieve, and what observed failure would make it wrong. Under material creative uncertainty, diverge into structurally different directions and select the strongest yourself. Exploration may begin intuitively; commitment must become defensible. Prototype the uncertain thing when making will teach more than additional rationale.
 4. **COMPOSE** (`marketing.md`) — design in visitor-state transitions, not section names: `arrival → understanding → belief → evidence → reduced friction → action`. Every region has one job, an incoming and desired state, a dominant message, its strongest evidence, a dominant visual relationship and a transition. The first viewport is a thesis; the whole page has rhythm.
 5. **SYSTEMIZE** (`design-quality.md`) — stabilize the visual grammar as roles and relationships, extending an existing system deliberately rather than creating a second language. Systemize strongly enough for coherence, not so rigidly that composition becomes template execution.
 6. **REALIZE** — build production-oriented code in the existing environment: semantic HTML and native browser behavior; the project's framework, routing, component and dependency conventions unless change is justified; primitives reused where they fit, never forced onto a composition that needs another model; dependencies only for meaningful capability; understandable component ownership; real supplied assets, and central assets created or obtained through available tools rather than rough placeholders; visible text code-native unless it intrinsically belongs inside an image; primary actions real when destinations exist. Build in visual slices (`verification.md`), rendering between slices. Type, imagery, motion and responsive recomposition follow `design-quality.md`; animation-heavy or 3D work follows `technical-excellence.md`.
-7. **REFINE** (`verification.md`, `control.md`) — the first successful render begins QA. Run the render loop: deterministic checks, viewport QA, perceptual QA; find the largest remaining defect and identify the lowest level that explains it. Correct expression/execution failures without gratuitous restart. If repeated local exceptions accumulate, question the next upstream decision rather than stacking patches. When rendered evidence materially falsifies the governing direction, re-diverge from still-valid truth and intent. Render again.
+7. **REFINE** (`verification.md`, `control.md`) — the first successful render begins QA. Run the render loop: deterministic checks, viewport QA, perceptual QA; find the largest remaining defect and identify the lowest level that explains it. Correct expression/execution failures without gratuitous restart. If repeated local exceptions accumulate, question the next upstream decision rather than stacking patches. When behavioral evidence points to a material problem, form plausible causes and seek the cheapest discriminating evidence before changing the page; do not claim causal uplift from design judgment alone. When rendered evidence materially falsifies the governing direction, re-diverge from still-valid truth and intent. Render again.
 8. **CRITIQUE** (`verification.md`, `control.md`) — for premium work, run separate lenses: first-time visitor, creative director, craft reviewer, creative developer/technical jury. Findings should identify severity and causal level, not merely aesthetic preference. Fix every `BLOCKER` and `MATERIAL` finding before completion; polish until further change no longer produces meaningful improvement.
 
 # Quality gates
