@@ -1,6 +1,10 @@
 name: release skill
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "skills/**"
   workflow_dispatch:
     inputs:
       skill:
@@ -15,11 +19,11 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -33,65 +37,95 @@ jobs:
       - name: Validate repository
         run: python development/validate.py
 
-      - name: Resolve release metadata
-        id: meta
+      - name: Select skills
+        id: select
         env:
-          SKILL: ${{ inputs.skill }}
+          EVENT: ${{ github.event_name }}
+          INPUT_SKILL: ${{ inputs.skill }}
+          BEFORE: ${{ github.event.before }}
         run: |
-          [[ "$SKILL" =~ ^[a-z0-9][a-z0-9-]*$ ]] || {
-            echo "Invalid skill name: $SKILL" >&2
-            exit 1
-          }
-          test -f "skills/$SKILL/SKILL.md" || {
-            echo "Unknown standalone skill: $SKILL" >&2
+          if [ "$EVENT" = "workflow_dispatch" ]; then
+            SKILLS="$INPUT_SKILL"
+          elif [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            SKILLS=$(git ls-tree -r --name-only "$GITHUB_SHA" -- skills \
+              | awk -F/ '$1 == "skills" && NF >= 2 {print $2}' \
+              | sort -u)
+          else
+            SKILLS=$(git diff --name-only "$BEFORE" "$GITHUB_SHA" -- skills \
+              | awk -F/ '$1 == "skills" && NF >= 2 {print $2}' \
+              | sort -u)
+          fi
+
+          test -n "$SKILLS" || {
+            echo "No standalone skill selected or changed" >&2
             exit 1
           }
 
-          VERSION=$(python - <<'PY'
+          printf 'skills<<EOF\n%s\nEOF\n' "$SKILLS" >> "$GITHUB_OUTPUT"
+
+      - name: Preflight releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SKILLS: ${{ steps.select.outputs.skills }}
+        run: |
+          for SKILL in $SKILLS; do
+            [[ "$SKILL" =~ ^[a-z0-9][a-z0-9-]*$ ]] || {
+              echo "Invalid skill name: $SKILL" >&2
+              exit 1
+            }
+            test -f "skills/$SKILL/SKILL.md" || {
+              echo "Unknown standalone skill: $SKILL" >&2
+              exit 1
+            }
+
+            VERSION=$(SKILL="$SKILL" python - <<'PY'
           import os
           from pathlib import Path
           from development.validate import frontmatter
 
           skill = os.environ["SKILL"]
-          metadata = frontmatter(Path("skills") / skill / "SKILL.md")
-          version = metadata.get("metadata.version", "")
+          version = frontmatter(Path("skills") / skill / "SKILL.md").get("metadata.version", "")
           if not version:
               raise SystemExit(f"skills/{skill}/SKILL.md has no metadata.version")
           print(version)
           PY
-          )
+            )
+            TAG="$SKILL-v$VERSION"
 
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "tag=$SKILL-v$VERSION" >> "$GITHUB_OUTPUT"
-          echo "asset=$SKILL-$VERSION.zip" >> "$GITHUB_OUTPUT"
+            if gh release view "$TAG" >/dev/null 2>&1; then
+              echo "Release $TAG already exists. Bump metadata.version before changing runtime." >&2
+              exit 1
+            fi
+          done
 
-      - name: Build canonical archive
-        env:
-          SKILL: ${{ inputs.skill }}
-          ASSET: ${{ steps.meta.outputs.asset }}
-        run: |
-          git archive \
-            --format=zip \
-            --prefix="$SKILL/" \
-            --output="$ASSET" \
-            HEAD:"skills/$SKILL"
-          sha256sum "$ASSET" > "$ASSET.sha256"
-
-      - name: Publish GitHub Release
+      - name: Build and publish releases
         env:
           GH_TOKEN: ${{ github.token }}
-          SKILL: ${{ inputs.skill }}
-          VERSION: ${{ steps.meta.outputs.version }}
-          TAG: ${{ steps.meta.outputs.tag }}
-          ASSET: ${{ steps.meta.outputs.asset }}
+          SKILLS: ${{ steps.select.outputs.skills }}
         run: |
-          if gh release view "$TAG" >/dev/null 2>&1; then
-            echo "Release $TAG already exists" >&2
-            exit 1
-          fi
+          for SKILL in $SKILLS; do
+            VERSION=$(SKILL="$SKILL" python - <<'PY'
+          import os
+          from pathlib import Path
+          from development.validate import frontmatter
 
-          gh release create "$TAG" \
-            "$ASSET" "$ASSET.sha256" \
-            --target "$GITHUB_SHA" \
-            --title "$SKILL v$VERSION" \
-            --notes "Portable Agent Skill archived from \`skills/$SKILL/\` at \`$GITHUB_SHA\`. The archive is a transport artifact; the repository directory remains the source of truth."
+          skill = os.environ["SKILL"]
+          print(frontmatter(Path("skills") / skill / "SKILL.md")["metadata.version"])
+          PY
+            )
+            TAG="$SKILL-v$VERSION"
+            ASSET="$SKILL-$VERSION.zip"
+
+            git archive \
+              --format=zip \
+              --prefix="$SKILL/" \
+              --output="$ASSET" \
+              HEAD:"skills/$SKILL"
+            sha256sum "$ASSET" > "$ASSET.sha256"
+
+            gh release create "$TAG" \
+              "$ASSET" "$ASSET.sha256" \
+              --target "$GITHUB_SHA" \
+              --title "$SKILL v$VERSION" \
+              --notes "Portable Agent Skill archived from \`skills/$SKILL/\` at \`$GITHUB_SHA\`. The repository directory remains the source of truth."
+          done
