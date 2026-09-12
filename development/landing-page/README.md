@@ -1,107 +1,83 @@
-# Landing Page Skill v3.2 experimental
+# Landing Page Skill v3.3 experimental
 
 A high-autonomy Claude Skill for researching, directing, designing, implementing, and refining premium marketing landing pages and marketing homepages.
 
-v3.2 is an experimental control-plane iteration over v3.1. It does **not** replace the creative method with a rigid state machine. Its purpose is narrower: preserve global intent across long local execution while keeping creative direction revisable when real evidence falsifies it or a materially stronger idea emerges.
+v3.3 is an experimental evolution over v3.1. Its hypothesis is narrow: premium landing-page work fails less from missing design knowledge than from **drift between global truth/intent/direction and many locally plausible decisions**. The solution must improve continuity without turning creative work into a state machine.
 
-## v3 foundation
+## Stable v3 foundation
 
-v3 treats the user as the owner of business truth and authority, **not** as the design director. For incomplete briefs, the skill follows:
+For incomplete briefs:
 
 `DISCOVER → INFER SAFELY → DECIDE AS EXPERT → ASK ONLY IF BLOCKING`
 
-The full material workflow remains:
+The material workflow remains:
 
 `ORIENT → DISCOVER → SYNTHESIZE → DIRECT → COMPOSE → SYSTEMIZE → REALIZE → REFINE → CRITIQUE`
 
-It includes:
+The user owns business truth and authority; the agent owns professional design, marketing, art direction, UX, motion and implementation judgment unless a real blocker requires human authority.
 
-- explicit desk research and source hierarchy;
-- product/category/competitor/proof-norm research;
-- reference and visual-world studies using adjacent, peer-class, and non-adjacent sources;
-- anti-imitation rules and anti-reference mapping;
-- compact synthesis before art direction;
-- expert-default decision ownership for visual/UX/implementation choices;
-- blocking-question protocol for truth, authority, and irreversible commercial/brand forks;
-- multi-lens critique: first-time visitor, creative director, craft reviewer, technical jury;
-- convergence rules so the agent repairs the largest remaining defect rather than endlessly regenerating.
+## v3.3 experiment — continuity with bidirectional creative learning
 
-## v3.2 experiment — creative control without creative freezing
+The lightweight control model is:
 
-The hypothesis under test is that the main long-horizon failure is not lack of design knowledge but **drift between a global creative/strategic intent and many locally plausible implementation decisions**.
+`TRUTH → INTENT → DIRECTION → EXPRESSION → EXECUTION`
 
-v3.2 adds a small control model:
+The layers have unequal inertia. Facts and authoritative constraints should not drift. Page intent should change only when a stronger truthful framing is established. Creative direction is a working hypothesis. Composition and implementation stay highly revisable.
 
-`FOUNDATION → INTENT → DIRECTION → SYSTEM / COMPOSITION → EXECUTION`
+The model is **not purely top-down**. Making can teach. A render, prototype or composition experiment may reveal that the original proposition is weak and a stronger truthful framing exists. That discovery becomes an upstream hypothesis to verify against product evidence and authority. Creativity may discover strategy; it may not invent truth.
 
-The layers have different inertia. Product truth and authoritative constraints should change only with evidence; page intent should remain stable until the decision problem changes; creative direction is a committed hypothesis; composition and implementation remain much freer.
+When material evidence appears, fix the lowest level that fully explains it. **REFINE** when the governing idea still works; **RE-DIVERGE** when the idea itself produces wrong meaning, lacks specificity/evidence support, or a demonstrably stronger idea emerges. Repeated local exceptions are evidence that the problem may live one level upstream.
 
-When new evidence arrives, especially from the real browser, the agent should classify the lowest layer that explains the failure before editing. It should **REFINE** when the governing direction remains valid and **RE-DIVERGE** when the direction itself is materially falsified or a clearly stronger governing idea emerges.
-
-This is intentionally not a copy of `branding-studio`'s persistent brand-state architecture. Landing pages are more ephemeral and exploratory. v3.2 therefore does **not** yet add a persistent mission-state schema or runtime control scripts. Those should be considered only if behavioral evals show that prose-level control improves pivot quality but still fails continuity in long sessions.
+This is intentionally not a copy of `branding-studio`'s persistent-state architecture. There is no mission-state schema or creative validator. Those mechanisms should be introduced only if independent tests demonstrate a problem they actually solve.
 
 ## Runtime files
 
-Runtime lives in `skills/landing-page/` and contains only what the skill needs while operating.
+Runtime lives in `skills/landing-page/`:
 
-- `SKILL.md` — operating kernel and routing: standard, autonomy model, creative-control kernel, modes, invariants, method, gates, hard stops, completion. Kept under the 5,000-token budget CI enforces; procedural depth lives in references.
-- `references/control.md` — decision-layer inertia, direction as falsifiable hypothesis, wildcard exploration, finding classification, REFINE vs RE-DIVERGE, late better ideas, creative debt, anti-rigidity.
-- `references/discovery.md` — desk research, reference studies, synthesis, and question policy.
-- `references/marketing.md` — landing-page semantics, proof, claims, narrative, and conversion.
-- `references/design-quality.md` — high-end art direction, hierarchy, coherence, distinction, and craft.
-- `references/technical-excellence.md` — creative-development quality: performance, responsive behavior, semantics, motion, accessibility, and graceful degradation.
-- `references/verification.md` — browser loop, deterministic QA, perceptual QA, critique lenses, and completion.
+- `SKILL.md` — compact operating kernel, autonomy, routing, creative-control principle, modes, invariants, method, gates and hard stops.
+- `references/control.md` — lightweight creative continuity/pivot model; loaded at DIRECT and material pivot points, not as early procedural ceremony.
+- `references/discovery.md` — desk research, reference study, synthesis and question policy.
+- `references/marketing.md` — proposition, proof, narrative and conversion.
+- `references/design-quality.md` — art direction, hierarchy, coherence, distinction and craft.
+- `references/technical-excellence.md` — performance, responsive behavior, semantics, motion, accessibility and graceful degradation.
+- `references/verification.md` — browser/render loop, deterministic/perceptual QA, critique lenses and completion.
 
-## Development files
+## Evaluation assets
 
-Development assets belong in `development/landing-page/` and are never shipped.
+Development assets live in `development/landing-page/evals/` and never ship:
 
-Committed in this experiment:
+- `behavioral-evals.json` — natural-language regression cases; criteria describe outcomes and deliberately avoid requiring internal control vocabulary.
+- `creative-benchmark.json` — eight unrelated domain briefs for blind creative-diversity/mode-collapse testing.
+- `rubric.md` — reliability, creative performance, anti-rigidity, blind comparison and evidence-level rules.
+- `proxy-audit-2026-09-11.md` — what was actually testable in the current environment, findings, limitations and changes caused by the audit.
 
-- `evals/behavioral-evals.json` — regression cases for continuity of intent, root-layer diagnosis, pivot quality, wildcard exploration, genericity, anti-rigidity, mobile transformation and rendered-evidence response.
-- `evals/rubric.md` — separates reliability/control from creative performance, includes anti-rigidity and cross-run creative mode-collapse tests, and defines blind v3.1-vs-v3.2 comparison behavior.
+## Current test status
 
-Still useful future additions after the first experiment:
+The current environment could run repository CI but did not expose an independent Claude/Codex runner or model API credentials. Therefore:
 
-- trigger/near-miss evals if invocation quality needs work;
-- concrete benchmark briefs with reproducible repositories/assets;
-- a lightweight persistent mission-state only if long-run continuity remains a demonstrated failure;
-- deterministic runtime helpers only for properties code can actually prove.
+- structural validation is real;
+- instruction and proxy-behavior audits are useful but not independent performance evidence;
+- creative diversity was stress-tested conceptually across eight domains;
+- a blinded independent v3.1-vs-v3.3 A/B remains required before treating v3.3 as proven or merging solely on quality claims.
 
-## Evaluation principle
+The proxy audit changed the skill in four material ways:
 
-Do not accept v3.2 merely because it follows the process more reliably.
+1. compressed `control.md` and delayed its loading to reduce context/salience pressure;
+2. made learning bidirectional so creative work can reveal a stronger truthful proposition;
+3. rewrote evals that were overfit to the v3.2 taxonomy;
+4. added escalation when many local patches suggest an upstream problem.
 
-The experiment succeeds only if it improves long-horizon coherence and pivot correctness **without a material regression in specificity, conceptual strength, distinction, composition, expressive range or inventiveness**.
+## Acceptance principle
 
-Run unrelated briefs as a batch to detect mode collapse. If pages repeatedly converge on the same visual lineage because of the control model, the experiment is a regression even when each individual result looks polished.
+Do not accept an experimental version merely because it follows process more reliably.
 
-## Installation
-
-### Claude.ai / Claude Skills
-
-Upload a packaged `landing-page.skill` file when the product accepts `.skill` packages. It is a ZIP-format skill bundle containing the runtime skill directory.
-
-### Claude Code
-
-Copy `skills/landing-page/` to either:
-
-- `~/.claude/skills/landing-page/` for personal/global use, or
-- `<project>/.claude/skills/landing-page/` for project-scoped use.
+It must improve continuity and productive pivots **without a material regression in specificity, conceptual strength, composition, expressive range, inventiveness or craft**. Run unrelated briefs together: if the skill creates a recurring house aesthetic, that is a regression even when each page is polished.
 
 ## Tool dependence
 
-The skill owns judgment and method; it cannot create tools that the host does not expose.
+The strongest mode has repository/files and runtime access, web/search when public context matters, browser rendering/screenshots, accessibility/performance tooling when relevant, and image/design generation when central assets or exploration benefit.
 
-Its strongest mode has access to:
-
-- repository/files and shell/runtime;
-- web/search for desk research when public context matters;
-- browser rendering/screenshots;
-- accessibility/performance tooling when appropriate;
-- image/design generation tools when central visual assets or concept exploration benefit from them.
-
-If a capability is missing, the skill must degrade explicitly and must not claim research, rendering, accessibility, performance or other evidence that was not actually collected.
+If a capability is missing, degrade explicitly and never claim evidence that was not collected.
 
 ## North star
 
