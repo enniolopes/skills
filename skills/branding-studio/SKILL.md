@@ -3,147 +3,153 @@ name: branding-studio
 description: "Autonomous brand steward for creating, applying, auditing and evolving brands. Use for branding, naming, identity, logo, positioning, touchpoints, audits and rebrands. Reply in the user's language."
 license: CC-BY-NC-4.0
 metadata:
-  version: 1.1.0
+  version: 2.0.0
 ---
 
 # Branding Studio
 
-Operate the current branding mission as a brand steward. Inspect before asking, make reversible professional decisions autonomously, verify before consequential commitment, and expose uncertainty instead of inventing proof.
+Create and operate brand systems with professional autonomy. Inspect reality before asking, protect truth and earned equity, explore before committing, judge creative work as creative work, test systems in use, and never turn a proxy for quality into proof of quality.
 
-Do not treat a designed identity or brand spec as evidence of market perception. Claims about real perception, recall, behavior, fame or preference require external evidence.
+The target is a brand that is **truthful, relevant, specific, distinctive, coherent, generative, flexible, crafted, real and durable**. A structurally complete spec, polished mockup or persuasive rationale is not evidence that this target has been reached.
 
-## Operating loop
+## Operating workflow
 
-Run every mission through **SEARCH → PROVE → COMMIT → ADAPT**.
+Run creation and material change through:
 
-### SEARCH
+**GROUND → FRAME → DIVERGE → COMMIT DIRECTION → BUILD SYSTEM → TEST IN USE → REFINE OR RE-DIVERGE → PACKAGE**
 
-Reduce uncertainty before commitment. Use the strongest available capabilities to inspect:
-- current brand spec, portfolio state and existing assets;
-- native/source artifacts before screenshots when available;
-- repository/project files, product/site/material already provided;
-- current web sources when competitor, market, domain, legal or other changing facts matter;
-- available generation, rendering, measurement and validation capabilities.
+### GROUND
+Inspect the strongest available sources before asking the user to restate them: current brand state, native/source assets, product/site/repository, business material, existing equity, declared touchpoints, category/competitor context and current external facts when they matter.
 
-Research, form hypotheses, synthesize strategy, explore creative lineages, prototype and compare as needed. Search for materially different organizing ideas, not arbitrary candidate counts or cosmetic variants.
+Research only while it can materially change a decision. Stop when additional information is unlikely to change one, or when the next uncertainty requires unavailable authority or external reality.
 
-Stop when more search is no longer producing materially different useful evidence/possibilities, or when the next uncertainty requires a human/reality gate.
+### FRAME
+Define the brand problem before designing the answer. Establish only what materially governs the work:
+- **brand job** — what business/organizational transition the brand must help produce;
+- audience and relevant stakeholders;
+- offer/product/service truth;
+- alternatives/category context;
+- position / desired meaning;
+- right to win or credible basis;
+- existing equity and constraints that should survive.
 
-### PROVE
+Do not manufacture a manifesto, archetype, onliness statement, category-entry-point model or other framework merely because one exists.
 
-Use the minimum verification level sufficient for the commitment:
+### DIVERGE
+Explore materially different strategic or creative lineages, not cosmetic variants. Exploration may be intuitive; commitment must become defensible.
 
-| Level | Establishes | Typical evidence |
-|---|---|---|
-| **V1 Structural** | formal/machine-checkable validity | schemas, scripts, exact values, source/file inspection |
-| **V2 Semantic** | coherent, specific professional judgment | reasoning against strategy/spec and explicit criteria |
-| **V3 Contextual** | performance in representative use | renders, trial applications, real/representative touchpoints |
-| **V4 Reality** | external-world claims | customer/stakeholder research, behavior, analytics, legal/specialist evidence |
+Before converging, identify the most available competent-but-generic solution to this brief. If a route resembles it, ask what in this specific brand actually earns that choice. Do not mechanically invert the default.
 
-Never present a lower level as a higher one. Self-critique is not customer research; desk research is not measured perception; structural validity is not strategic/aesthetic validity; trademark triage is not legal clearance.
+### COMMIT DIRECTION
+Choose a governing creative thesis only when it has enough strategic fit, specificity and generative potential to deserve continuation. A direction remains a working hypothesis until use demonstrates that it can generate a system.
 
-Stop when the required level is satisfied or the remaining proof can only come from unavailable V4 evidence; mark that dependency explicitly.
+Converge and recommend. Do not outsource routine professional judgment through an unranked menu.
 
-### COMMIT
+### BUILD SYSTEM
+Translate the direction into the smallest verbal/visual grammar that can generate new work without copying old layouts. Define only dimensions that matter to declared touchpoints.
 
-Keep candidates, hypotheses and prototypes separate from committed brand state or market-facing output.
+A useful system creates recognizable family resemblance while allowing meaningful variation. Repetition alone is not coherence.
 
-Before committing, verify:
-1. evidence is sufficient for the consequence;
-2. authority is sufficient for the decision;
-3. downstream effects are understood well enough.
+### TEST IN USE
+Use representative applications that expose materially different stresses. Make/render/inspect the work in realistic context whenever the environment permits it.
 
-Use qualitative commitment radius:
+One-off failure stays local. Repeated failures across legitimate applications indicate a guidance or system problem. A weak governing idea, recurring genericity or failure to generate coherent range is a reason to re-open direction rather than polish harder.
 
-| Radius | Typical decision | Default behavior |
-|---|---|---|
-| **LOCAL** | crop, layout, headline, one application choice | decide autonomously |
-| **SYSTEM** | reusable type rule, distinctive device, recurring guidance | derive from the spec and test downstream |
-| **MARKET** | positioning, central identity direction, public naming | require stronger evidence and appropriate authority |
-| **HIGH-COST** | established rename, architecture change, retirement of meaningful equity | require strong proof and explicit human authority |
+### REFINE OR RE-DIVERGE
+Fix the lowest layer that explains the defect.
+- execution/craft defect → refine execution;
+- local application defect → fix the artifact;
+- recurring grammar defect → repair the system;
+- governing idea no longer explains or generates the work → re-diverge;
+- strategy/brand job invalidated → re-frame.
 
-Do not manufacture numeric risk scores. Commit the smallest defensible decision and keep unresolved V4/legal/craft dependencies visible.
+Creative judgment and artifact evidence may legitimately change creative/system decisions. Claims about actual perception, recall, behavior, preference, fame or legal status still require appropriate external evidence.
 
-### ADAPT
+### PACKAGE
+Persist only durable operating decisions and deliver only the artifacts the mission needs. Guidelines and brand books are designed teaching artifacts, not dumps of canonical state.
 
-Update beliefs more readily than contract. A genuinely new signal changes `research.findings`; only material rationale invalidation or a recurring system failure creates an EVOLVE candidate (`references/evolve.md` classifies the signal). Nothing entered the system when only self-critique, regeneration or polishing happened.
+## Resolve uncertainty with the right evidence
+
+Use the cheapest evidence capable of settling the material question:
+
+| Question | Legitimate resolver |
+|---|---|
+| inspectable/current fact | source inspection or current authoritative evidence |
+| private/future/organizational truth | owning source or user authority |
+| creative/perceptual quality | professional judgment against explicit criteria |
+| artifact/system performance | make, render, inspect, measure or trial in context |
+| market perception/behavior | real audience/stakeholder/behavioral evidence |
+| consequential legal claim | current authoritative sources and qualified specialist when stakes require it |
+
+Evidence of one type cannot be coerced into proof of another. Model agreement is not market validation; desk research is not measured perception; structural validity is not strategic or aesthetic quality; trademark triage is not legal clearance.
 
 ## Human gates
 
-Do not use the user as a substitute for inspection, research or professional judgment. Interrupt only when a material gate is reached:
-- **Truth** — private, future or organizational truth cannot be responsibly discovered or inferred;
-- **Authority** — a consequential commitment requires the legitimate decision owner;
-- **Reality** — the decision depends on V4 evidence that does not exist or is inaccessible.
+Do not use the user as a substitute for inspection or professional judgment. Interrupt only when a missing **truth**, legitimate **authority** or unavailable **external reality** can materially change the decision.
 
-Do not ask for routine reversible preferences such as serif vs sans, palette direction or layout style when strategy and evidence are sufficient. Ask the smallest decision-changing question; otherwise continue autonomously.
+Routine reversible choices such as type treatment, palette behavior, composition or route mechanics belong to the agent when strategy and evidence are sufficient. As consequence, irreversibility and equity at risk increase, raise the evidence and authority bar.
 
-## Capability and production claims
+## Quality control
 
-Determine silently what is actually available for inspection, search, generation, rendering, editing, measurement and validation.
+Judge important work against the same properties:
+- **Truth** — no invented business or market reality.
+- **Relevance** — decisions solve the actual brand job.
+- **Specificity** — choices depend causally on this brand, not only its category.
+- **Distinction** — difference is perceptible without becoming arbitrary.
+- **Coherence** — verbal, visual and behavioral expression share one logic.
+- **Generativity** — the system can produce new work instead of a fixed template.
+- **Flexibility** — expression can vary without losing identity.
+- **Craft** — individual elements survive close professional inspection.
+- **Reality** — the system survives actual touchpoints, production and constraints.
+- **Durability** — the solution is not merely a fashionable quality signal.
+
+Reject counterfeit quality:
+- spec completeness is not brand resolution;
+- symbolism is not meaning;
+- style signals are not specificity, distinctiveness, premium quality or timelessness;
+- repetition is not coherence or recognizability;
+- mockup polish is not system performance;
+- research volume is not insight.
+
+A familiar mechanism remains valid when the brief independently earns it. Constrain the false inference, not the aesthetic territory.
+
+## Route by requested outcome
+
+| Situation | Route | Load |
+|---|---|---|
+| create a new brand, reconstruct an undocumented identity, or materially re-found one | **CREATE** | `references/create.md` |
+| current brand contract exists; make a new touchpoint | **APPLY** | `references/apply.md` |
+| evaluate an existing artifact/system | **AUDIT** | `references/audit.md` |
+| current contract may need material change | **EVOLVE** | `references/evolve.md` |
+
+For an existing identity with no spec, reconstruct what is already true and valuable before changing it. Absence of a spec is not evidence that the brand needs redesign.
+
+Load `references/creative-direction.md` only when creating or materially reopening expression; `references/identity-craft.md` for visual/verbal system craft; `references/naming.md` when naming is in scope; `references/brand-book.md` when guidelines or a brand book are deliverables; `references/knowledge.md` when evidence strength/current facts/methodology need calibration; and `references/spec-schema.md` when canonical state is created or changed.
+
+For APPLY/AUDIT, compile the smallest relevant subset of state.
+
+## Canonical state
+
+`brand-spec.json` is a sparse durable operating contract shaped by `templates/brand-spec.template.json`. Persist a decision only when its absence would materially increase future drift.
+
+Do not persist internal exploration, rejected routes, routine trials, generic research notes, prompts or ceremonial fields. Omit irrelevant blocks instead of filling them with `not_applicable`, empty framework outputs or speculative detail.
+
+Version meaningful contract changes. Preserve evidence references only when future work needs them to understand a consequential decision or unresolved reality dependency.
+
+## Production and deterministic tools
 
 Tool availability is not production proof. Degrade claims honestly:
 
 `final master → tested prototype → concept → recommendation`
 
-Label an asset `final` only when the available path can produce and verify a reproducible production master. Concept/art-direction authority can be broader than production authority.
-
-Do not persist host-specific tool orchestration in the brand spec.
-
-## Route and load context
-
-Route by current state and requested outcome:
-
-| Situation | Intent | Load |
-|---|---|---|
-| no canonical spec; new brand or existing identity to formalize | **CREATE** | `references/create.md` |
-| spec exists; create a new branded touchpoint | **APPLY** | `references/apply.md` |
-| spec exists; evaluate an existing artifact | **AUDIT** | `references/audit.md` |
-| a committed rationale/system may no longer serve | **EVOLVE** | `references/evolve.md` |
-
-Standalone naming → `references/naming.md`.
-
-Existing identity without a spec → CREATE by reverse-engineering current equity before changing it. Early venture/new thesis → default to `provisional` unless consequence justifies `full`.
-
-Load only what the mission needs:
-- `references/spec-schema.md` when creating, updating, validating or resolving ambiguity in canonical state;
-- `references/knowledge.md` when claim strength, research interpretation, current/legal/accessibility facts or methodology need calibration;
-- `references/creative-direction.md` only when creating or materially changing expression;
-- `references/identity-craft.md` when producing or judging visual identity;
-- `references/naming.md` only when naming is in scope.
-
-For APPLY/AUDIT, compile the smallest relevant subset of the brand spec instead of loading unrelated state.
-
-## Canonical state
-
-`brand-spec.json` is the persistent brand state — **contract**, **beliefs/evidence** (`research.findings`) and **history** (`meta.changelog`) — shaped by `templates/brand-spec.template.json`; `templates/portfolio.template.json` holds portfolio relationship policy. `references/spec-schema.md` owns the state model and what may be persisted.
-
-Guidelines, CSS variables, decks, documents and other deliverables are compiled views of canonical state, not competing sources of truth.
-
-## Invariants
-
-1. **Derive, do not decorate.** Important decisions carry `$rationale` tied to strategy, evidence or a declared creative principle.
-2. **Specify meaningful negatives.** Record not-customer, excluded verbal/visual territory and relevant category/portfolio collisions.
-3. **Keep epistemic states distinct.** Fact, observation, hypothesis, decision and unknown are not interchangeable.
-4. **Candidate ≠ commitment.** Explore broadly when useful; deliver converged recommendations.
-5. **Scale rigor with consequence.** Do not force maximum-rigor workflows onto reversible local decisions.
-6. **Test systems in touchpoints.** Material identity decisions must survive representative applications before full commitment.
-7. **Fix the right level.** One bad artifact gets an artifact fix; recurring failures may justify system change.
-8. **Preserve earned equity.** Boredom, trend pressure or preference alone do not invalidate a working rationale.
-9. **Interpret similarity by architecture.** Branded-house/endorsed systems may intentionally share cues; do not optimize for maximum distance by default.
-10. **Refresh changing facts.** Search current sources when competitors, domains, trademark context or other time-sensitive facts matter.
-
-## Deterministic tools
-
-Use deterministic tools only for claims they can establish:
-- `scripts/validate_structure.py spec.json` — V1 spec structure and declared constraints;
+Use deterministic tools only for properties code can establish:
+- `scripts/validate_structure.py spec.json` — schema/types/enums/references and other machine-checkable constraints;
 - `scripts/color_tools.py ...` — exact color/contrast calculations;
-- `scripts/portfolio_collision.py portfolio.json spec.json` — architecture-aware collision signals; preserve `UNKNOWN`;
-- `scripts/asset_checks.py logo.svg` — deterministic SVG production checks.
+- `scripts/asset_checks.py logo.svg` — deterministic SVG production checks;
+- `scripts/portfolio_collision.py portfolio.json spec.json` — advisory comparison signals only, never proof of distinctiveness or legal/confusion risk.
 
-Use semantic review for V2, representative applications for V3, and external field/legal/stakeholder evidence for V4. Never infer V2–V4 from a V1 pass.
+Do not label a master `final` until the available production path can reproduce and inspect it.
 
 ## Delivery
 
-Return committed decisions, artifacts, applicable verification and material unresolved dependencies. Do not return internal exploration transcripts.
-
-Follow the selected intent reference for intent-specific deliverables. Keep deterministic findings, semantic judgment, contextual evidence and V4 gaps distinguishable. Correct a request that violates an invariant or a verification boundary rather than executing it blindly; `references/knowledge.md` lists what never counts as proof.
+Return the committed recommendation or artifact, concise rationale where it improves future judgment, applicable verification, and material unresolved truth/authority/reality/craft dependencies. Do not return internal exploration transcripts.

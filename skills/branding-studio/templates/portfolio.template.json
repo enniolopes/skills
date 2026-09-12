@@ -4,28 +4,28 @@
     "default_architecture": "house-of-brands | endorsed | branded-house | hybrid",
     "relationship_policies": {
       "house-of-brands": {
-        "name": "separate",
-        "morphology": "separate",
-        "color": "prefer_separate",
-        "creative_territory": "separate"
+        "name": "usually_separate",
+        "morphology": "usually_separate",
+        "color": "contextual",
+        "creative_territory": "usually_separate"
       },
       "endorsed": {
-        "name": "separate",
-        "morphology": "separate",
-        "color": "allow",
-        "creative_territory": "separate"
+        "name": "usually_separate",
+        "morphology": "contextual",
+        "color": "may_share_parent_cues",
+        "creative_territory": "contextual"
       },
       "branded-house": {
-        "name": "allow_related",
-        "morphology": "allow_related",
-        "color": "allow_related",
-        "creative_territory": "allow_related"
+        "name": "related_expected",
+        "morphology": "related_expected",
+        "color": "related_expected",
+        "creative_territory": "related_expected"
       },
       "hybrid": {
-        "name": "custom",
-        "morphology": "custom",
-        "color": "custom",
-        "creative_territory": "custom"
+        "name": "custom_policy_required",
+        "morphology": "custom_policy_required",
+        "color": "custom_policy_required",
+        "creative_territory": "custom_policy_required"
       }
     },
     "shared_tokens": {},

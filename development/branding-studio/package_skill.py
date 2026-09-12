@@ -12,6 +12,7 @@ RUNTIME_FILES = (
     "SKILL.md",
     "references/apply.md",
     "references/audit.md",
+    "references/brand-book.md",
     "references/create.md",
     "references/creative-direction.md",
     "references/evolve.md",

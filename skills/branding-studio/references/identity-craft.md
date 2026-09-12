@@ -1,119 +1,112 @@
-# Identity craft — build and judge the expression system
+# Identity craft — turn direction into a generative brand system
 
-Turn creative direction into repeatable expression. Optimize for coherent recognizability across different applications, not uniformity.
+Build expression that remains recognizable across different applications without collapsing into a rigid template. The system should make good future work easier, not merely make current mockups look consistent.
 
-## 1. Identity grammar
+## 1. Build the grammar before the inventory
 
-Define the smallest ruleset that can generate new work without imitating old layouts:
-- dominant forms/counterforms;
+Start from the committed creative thesis and define the smallest relationships that can generate new work:
+- dominant form/counterform behavior;
 - typographic behavior;
 - color relationships;
-- imagery behavior;
-- spacing/density tendencies;
-- composition;
-- recurring devices;
-- interaction/motion when relevant.
+- imagery/illustration behavior;
+- composition and spatial behavior;
+- recurring distinctive cues;
+- interaction/motion/sound only when relevant.
+
+Not every brand needs every dimension. Omit inactive mechanisms instead of filling a checklist.
+
+A system is stronger when different artifacts can vary substantially while still sharing an intelligible logic.
 
 ## 2. Logo, wordmark and signature
 
-Treat the mark as one distinctive asset within the broader system.
+Treat the logo as one asset inside the system, not the explanation for the whole brand.
 
-Evaluate:
-- relationship to the central idea;
-- memorability/simplicity appropriate to use;
-- category/portfolio distinctiveness;
-- optical balance;
-- counterform/silhouette;
-- scalability;
-- monochrome behavior;
-- reproduction constraints;
-- lockups/variants required by touchpoints.
+Evaluate what is actually relevant:
+- relationship to the creative thesis;
+- recognizable silhouette/counterform/word shape;
+- optical balance and letterform quality;
+- distinctiveness in category/portfolio context;
+- scalability and reproduction;
+- monochrome/reduced behavior;
+- lockups/variants demanded by real touchpoints;
+- production feasibility.
 
-### Concept vs production
+Do not reward a mark because its symbolism is clever. Meaning must survive without the design presentation explaining it.
 
-Ideate and art-direct wordmarks, monograms, letterforms, geometric/abstract/organic/illustrative marks as needed, but keep production status explicit:
-- `final`;
-- `concept`;
-- `external_craft_required`.
-
-A raster concept is not a production master. A final SVG master should pass `scripts/asset_checks.py`. Use geometry as a construction aid, not aesthetic authority; apply optical correction where needed.
+Keep production status explicit: `final`, `concept` or `external_craft_required`. A raster concept is not a production master. A final SVG should pass applicable deterministic checks and visual inspection.
 
 ## 3. Typography
 
-Choose typography from meaning/personality, legibility, range, licensing, character set, touchpoints, hierarchy needs and relationship to other distinctive assets.
+Choose typography from meaning, voice, legibility, range, language/character support, licensing, technical constraints and relationship to other distinctive assets.
 
-Do not assume a fixed family count. Define roles only when needed:
-- display;
-- text;
-- interface/data;
-- institutional/office fallback;
-- mono/special-purpose.
+Define roles only when useful. Family count is contextual. Hierarchy may be modular, custom or fluid; do not force mathematical regularity when another relationship better serves the identity.
 
-Hierarchy may be `modular`, `custom` or `fluid`. If modular, declare/validate the scale. If custom/fluid, document explicit relationships instead of forcing a ratio.
+Inspect real words, long/short headings, body copy, numerals, punctuation, multilingual needs and dense information before declaring the system resolved.
 
 ## 4. Color
 
-Derive color from creative direction, category/cultural context, medium, accessibility and production constraints.
+Use color because it supports the creative direction, recognition, information hierarchy, medium and accessibility—not because a universal emotion table assigns it a personality.
 
-Use OKLCH/OKLab for technical manipulation/comparison when useful.
+Technical color spaces such as OKLCH/OKLab can help manipulation and comparison. Contrast calculations can establish specific accessibility properties; they cannot establish identity quality or distinctiveness.
 
-Do not:
-- derive strategy from universal color-emotion tables;
-- assume color alone creates distinctiveness;
-- equate technical accessibility with identity quality.
+Specify actual foreground/background pairs when digital text/UI needs deterministic contrast verification.
 
-For digital/text contexts, declare actual foreground/background pairs requiring contrast verification.
+## 5. Imagery, illustration and iconography
 
-## 5. Imagery and illustration
+Define behavior that materially constrains production: subject, framing, crop, perspective, light, realism/abstraction, materiality, color treatment, relation to typography and meaningful exclusions.
 
-Specify only behavior that constrains production:
-- subject matter;
-- perspective/crop;
-- light;
-- color treatment;
-- realism/abstraction;
-- composition;
-- relationship to typography;
-- explicit exclusions.
+For icons, define semantic clarity, construction logic, stroke/fill behavior, optical size and accessibility. Use a grid only when it improves the system.
 
-When generative image tools are used, keep art direction separate from final rights/production review and do not claim uniqueness without evidence.
+Generated imagery can support exploration or production when rights/process permit it; visual novelty is not evidence of legal uniqueness or brand ownership.
 
-## 6. Iconography
+## 6. Composition and spatial behavior
 
-Define construction logic, stroke/fill behavior, corner logic, optical size, semantic clarity and accessibility. Use a grid only when it improves consistency. Icons need to belong to the same visual language; they do not need to mimic the logo.
+Specify relationships rather than frozen layouts: alignment, margin behavior, density, symmetry/asymmetry, image/type interaction, dominant axes, cropping logic, responsive behavior and recurring spatial devices when relevant.
 
-## 7. Composition and grid
+A component library or repeated card treatment is not composition. Preserve the ability to respond to content and medium.
 
-Specify meaningful relationships such as alignment, margin behavior, density, asymmetry/symmetry, image/type relationship, recurring spatial devices and responsive behavior.
+## 7. Motion, sound and sensory expression
 
-Do not impose a universal 4/8pt system.
+Add only when real touchpoints justify them.
 
-## 8. Motion, sound and sensory expression
+Motion should have a brand job: reveal, orient, emphasize, transform, transition or reinforce a distinctive behavior. Define timing/easing/entry-exit/transformation rules and reduced-motion fallbacks where applicable.
 
-Add only when touchpoints justify them.
+Sound or sensory elements require a functional/recognition role and production constraints. Decoration alone is not a reason to add another brand dimension.
 
-For motion define timing, easing character, entry/exit behavior, transformation rules and reduced-motion fallback. For sound/sensory elements define intended role and production constraints; avoid decorative additions that do not reinforce recognition/experience.
+## 8. Test family resemblance and range
 
-## 9. Trial applications
+Create representative applications with different jobs and stresses. Do not reuse one hero composition as proof of system breadth.
 
-Treat material identity decisions as provisional until they survive representative use. Choose applications that expose different stresses, such as:
-- mark at small scale;
-- dense information hierarchy;
-- imagery variety;
-- contrast-dependent color use;
-- expressive device vs content;
-- voice in institutional/error moments.
+Ask:
+- Can the brand be recognized when the logo is not dominant?
+- Can two very different artifacts still feel related?
+- Does the system support both expressive and information-dense work?
+- Which cues are doing real recognition work?
+- Are repeated devices becoming a crutch?
+- Does real content expose missing rules or overly rigid ones?
 
-Fix recurring system causes, then re-test. Keep one-off failures local.
+Fix recurring causes and re-test. Keep one-off fixes local.
 
-## 10. Craft review
+## 9. Craft review
 
-At V2 ask:
-- Is expression specific to this strategy?
-- Is it recognizable without always showing the logo?
-- Are expressive and functional choices coherent?
-- Is there enough variation without loss of identity?
-- Does it survive declared touchpoints?
-- Are production decisions reproducible?
+Inspect at macro, meso and micro levels.
 
-Treat these as professional judgments, not deterministic validation.
+**Macro:** strategic fit, creative thesis, overall recognizability, range, hierarchy and relationship to touchpoint job.
+
+**Meso:** type/image relationships, composition, rhythm, color behavior, asset hierarchy, component variation and medium-specific decisions.
+
+**Micro:** kerning, optical alignment, curves, joins, line endings, crop edges, icon consistency, spacing, production details and accessible states.
+
+A system is not finished merely because it is internally consistent.
+
+## 10. Adversarial quality review
+
+Before finalizing, look specifically for counterfeit quality:
+- Which decision is only signaling `premium`, `modern`, `innovative`, `timeless` or `creative` rather than producing it?
+- Which important choice has weak causal dependence on this brand?
+- Where did repetition replace coherent variation?
+- Where did mockup polish hide a weak system?
+- Where is novelty adding cost without meaning?
+- Which rule exists because a template expected one rather than because future work needs it?
+
+Repair the underlying property. Do not ban a surface form simply because it is common.

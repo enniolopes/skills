@@ -1,331 +1,283 @@
 {
-  "version": "3.0",
+  "version": "4.0",
   "skill": "branding-studio",
-  "purpose": "Regression cases for autonomous brand stewardship: inspection-first behavior, commitment-aware autonomy, verification ladder discipline, convergence, evidence state and conservative adaptation.",
+  "purpose": "Regression cases for creative brand execution, evidence-fit, sparse state, autonomous professional judgment and conservative high-consequence change.",
   "cases": [
     {
       "id": "create-inspect-before-questioning",
       "prompt": "Crie a marca para este produto.",
-      "setup": "A product site, repository README and pitch deck are available, but no brand spec exists.",
+      "setup": "A product site, repository README and pitch deck are available; no canonical brand spec exists.",
       "must": [
-        "Route to CREATE.",
         "Inspect available product/site/repository evidence before asking the user to restate facts.",
-        "Ask only for material truth/authority still unavailable after inspection."
+        "Frame the brand job and strategic problem from inspectable reality before identity commitment.",
+        "Ask only for material private/future truth or authority still unavailable after inspection."
       ],
       "must_not": [
         "Start with a generic branding questionnaire.",
-        "Invent private future strategy."
+        "Ask for colors, fonts or style preferences before strategy is framed."
       ]
     },
     {
       "id": "create-empty-brief-truth-gate",
       "prompt": "Cria a marca da minha nova startup.",
-      "setup": "No brand spec, business files or public product facts are available.",
+      "setup": "No business files, product facts or public description are available.",
       "must": [
-        "Route to CREATE.",
-        "Use a Truth gate for the minimum non-derivable business truth needed for strategy.",
-        "Delay identity commitment until minimum strategy exists."
+        "Ask for the minimum non-derivable business truth needed to frame the brand job.",
+        "Delay consequential strategy/identity commitment until that truth exists."
       ],
       "must_not": [
-        "Invent the business, audience or right-to-win.",
-        "Ask preference questions about colors or fonts."
+        "Invent the business, audience, offer truth or right to win.",
+        "Substitute aesthetic questions for missing business truth."
       ]
     },
     {
-      "id": "autonomous-local-design-choice",
-      "prompt": "Faça o hero da landing usando nossa brand spec.",
-      "setup": "Spec clearly defines voice, typography, palette, composition principles and audience. The user did not choose a layout/font treatment.",
+      "id": "existing-identity-no-spec-preserve-equity",
+      "prompt": "Formalize nossa marca atual numa brand spec.",
+      "setup": "The organization has years of coherent identity usage but no brand-spec.json.",
       "must": [
-        "Route to APPLY.",
-        "Make LOCAL reversible composition/type decisions autonomously from the spec.",
-        "Deliver a preferred result after self-verification."
+        "Reconstruct current strategy/equity before proposing change.",
+        "Preserve valid recognizable assets and rules when they still serve.",
+        "Treat missing canonical state as a documentation gap, not evidence that a redesign is needed."
       ],
       "must_not": [
-        "Ask the user which font, palette or layout style they prefer."
+        "Launch a rebrand merely because no spec exists."
       ]
     },
     {
-      "id": "authority-gate-future-strategy",
-      "prompt": "Reposicione a marca para enterprise.",
-      "setup": "Public material still targets SMB; only leadership can confirm whether enterprise is an actual committed strategy.",
+      "id": "brand-job-before-frameworks",
+      "prompt": "Crie a estratégia da marca.",
+      "setup": "The business problem is clear; no evidence suggests archetypes, manifesto, category-entry-point mapping or an onliness statement are needed.",
       "must": [
-        "Inspect current evidence first.",
-        "Use an Authority/Truth gate to confirm the strategic commitment before changing the contract.",
-        "Avoid cosmetic enterprise signaling as a substitute for strategy."
-      ]
-    },
-    {
-      "id": "route-apply",
-      "prompt": "Aqui está a brand spec. Crie um deck comercial para o time de vendas.",
-      "setup": "Current spec exists.",
-      "must": [
-        "Route to APPLY.",
-        "Compile the smallest relevant spec subset.",
-        "Create, verify and commit the artifact without mutating the brand contract by default."
-      ]
-    },
-    {
-      "id": "apply-context-compiler-behavior",
-      "prompt": "Crie um e-mail transacional on brand.",
-      "setup": "The full spec is large; only voice, transactional tone, typography/color constraints and accessibility rules are relevant.",
-      "must": [
-        "Use only the relevant context packet.",
-        "Avoid loading or restating unrelated naming/portfolio/creative exploration detail."
-      ]
-    },
-    {
-      "id": "route-audit-native-source",
-      "prompt": "Veja se esse deck está on brand.",
-      "setup": "Brand spec and PPTX are available; a screenshot is also present.",
-      "must": [
-        "Route to AUDIT.",
-        "Prefer the PPTX/native structure for V1 measurable checks.",
-        "Keep V1 deterministic findings separate from V2 semantic judgment."
+        "Define the brand job, audience, offer truth, alternatives, position, right to win and intended meaning.",
+        "Use optional strategy frameworks only if they change a material decision."
       ],
       "must_not": [
-        "Treat screenshot-estimated values as exact."
+        "Generate ceremonial strategy framework outputs just because common brand templates contain them."
       ]
     },
     {
-      "id": "verification-ladder-no-v2-as-v4",
-      "prompt": "Simule clientes e confirme que a nova identidade será mais memorável.",
-      "setup": "No customer research, recognition study or behavioral evidence exists.",
+      "id": "category-default-is-earned",
+      "prompt": "Crie a direção visual para nossa startup de IA B2B.",
+      "setup": "The brief does not prescribe a style; the category is saturated with dark UI, neon gradients, geometric sans and abstract network marks.",
       "must": [
-        "Use model critique only as V2 hypothesis generation/adversarial review.",
-        "Mark real memorability as V4 unknown/pending.",
-        "Suggest the smallest useful external test if the claim matters."
+        "Identify the competent category-default attractor before committing.",
+        "Choose surface mechanisms because this brand's strategy/product earns them, whether familiar or unfamiliar.",
+        "Keep familiar forms available when independently justified."
       ],
       "must_not": [
-        "Claim simulated personas prove customer memorability."
+        "Autopilot into category coding without brief-specific causality.",
+        "Mechanically choose the opposite aesthetic merely to appear non-generic."
       ]
     },
     {
-      "id": "contextual-proof-catches-failure",
-      "prompt": "Finalize esta identidade full.",
-      "setup": "V1/V2 are acceptable, but a mobile trial shows the signature device collapses at small sizes.",
-      "must": [
-        "Treat the failure as V3 evidence.",
-        "Correct the system/device and rerun the representative trial before full commitment.",
-        "Avoid asking the user whether the failure is acceptable when it can be professionally corrected."
-      ]
-    },
-    {
-      "id": "commitment-radius-local",
-      "prompt": "Ajuste a hierarquia desse post.",
-      "setup": "Change affects only one social asset and remains inside the current grammar.",
-      "must": [
-        "Classify effectively as LOCAL.",
-        "Decide and execute autonomously with proportionate V1/V2 checks."
-      ],
-      "must_not": [
-        "Escalate to brand-system approval."
-      ]
-    },
-    {
-      "id": "commitment-radius-market",
-      "prompt": "Troque nosso posicionamento de confiável para provocador.",
-      "setup": "This changes the brand's market promise and downstream verbal/visual system.",
-      "must": [
-        "Treat as MARKET-level commitment.",
-        "Search for strategic evidence and downstream consequences.",
-        "Require appropriate authority and stronger proof before contract mutation."
-      ]
-    },
-    {
-      "id": "high-cost-established-rename",
-      "prompt": "Nosso CEO cansou do nome; invente outro e troque tudo.",
-      "setup": "The current name has years of market use and no legal/strategy failure is shown.",
-      "must": [
-        "Treat as HIGH-COST.",
-        "Preserve equity unless a substantive trigger is established.",
-        "Require explicit authority plus strong evidence before renaming."
-      ],
-      "must_not": [
-        "Launch naming generation simply because the CEO is bored."
-      ]
-    },
-    {
-      "id": "evolve-bored-stakeholder",
-      "prompt": "O novo diretor enjoou do logo e quer modernizar tudo.",
-      "setup": "Current spec exists; no evidence of strategy/audience/context failure.",
-      "must": [
-        "Route to EVOLVE diagnosis.",
-        "Challenge the trigger as insufficient to destroy equity.",
-        "Look for the real business/communication problem before broad change."
-      ],
-      "must_not": [
-        "Automatically launch a full rebrand."
-      ]
-    },
-    {
-      "id": "adapt-signal-not-contract",
-      "prompt": "A nova headline aumentou CTR 18%. Atualize a estratégia da marca para usar esse tom em tudo.",
-      "setup": "Only one campaign metric changed; no evidence about lead quality, trust, long-term perception or other touchpoints.",
-      "must": [
-        "Record the signal as evidence/belief input.",
-        "Refuse to treat one local metric as sufficient to rewrite the contract.",
-        "Propose broader validation if the hypothesis matters."
-      ]
-    },
-    {
-      "id": "adapt-repeated-system-failure",
-      "prompt": "Três touchpoints diferentes quebram porque a regra tipográfica não cobre conteúdo denso.",
-      "setup": "Failures recur across legitimate applications.",
-      "must": [
-        "Classify as a system-level recurring failure.",
-        "Create an EVOLVE/patch candidate for the typography guidance.",
-        "Re-test affected touchpoints after the minimum system change."
-      ]
-    },
-    {
-      "id": "artifact-failure-not-evolve",
-      "prompt": "Este único post ficou ruim; mude nossa identidade.",
-      "setup": "Other applications work and the post violates existing composition guidance.",
-      "must": [
-        "Fix the artifact under APPLY/AUDIT logic.",
-        "Preserve the brand contract because the failure is local."
-      ]
-    },
-    {
-      "id": "creative-search-lineages",
+      "id": "diverge-by-lineage-not-cosmetics",
       "prompt": "Explore direções para a identidade.",
-      "setup": "Strategy is established.",
+      "setup": "Strategy and brand job are established.",
       "must": [
-        "Explore materially different organizing ideas/grammars.",
-        "Prune cosmetic variations that do not represent new lineages.",
-        "Stop when additional exploration no longer adds material decision value."
+        "Explore materially different organizing ideas or generative grammars.",
+        "Treat font/color/logo swaps within one governing idea as variations rather than separate routes.",
+        "Stop when further exploration stops adding materially different decision value."
       ],
       "must_not": [
-        "Equate 50 generated variants with 50 creative routes."
+        "Equate candidate volume with creative diversity."
       ]
     },
     {
-      "id": "converge-not-menu",
-      "prompt": "Me mostra o que você recomenda.",
-      "setup": "Several internal routes were explored and one survives V2/V3 better than the others.",
+      "id": "exploration-can-precede-rationale",
+      "prompt": "Busque uma ideia de marca menos óbvia; não quero só uma explicação estratégica bonita.",
+      "setup": "The strategic frame is sound, but no creative direction has yet earned commitment.",
       "must": [
-        "Recommend the preferred route clearly.",
-        "Expose alternatives only when they add decision value."
+        "Allow sketches/prototypes/metaphors/tensions to emerge before full justification.",
+        "Require a defensible causal rationale only when a direction is being committed.",
+        "Use prototypes to discover whether an idea actually has expressive force."
       ],
       "must_not": [
-        "Outsource judgment through an unranked menu."
+        "Reject promising exploration merely because it cannot yet fill a rationale schema."
       ]
     },
     {
-      "id": "capability-degradation-raster",
-      "prompt": "Finalize o logo expressivo.",
-      "setup": "The host can generate/inspect raster concepts but cannot create a trustworthy vector master.",
+      "id": "rediverge-when-direction-fails-in-use",
+      "prompt": "Finalize a identidade.",
+      "setup": "The chosen thesis looked persuasive on the identity board, but three representative applications require exceptions and all look generic.",
       "must": [
-        "Keep the expressive concept in scope.",
-        "Degrade authority to concept or external_craft_required.",
-        "Produce a useful production brief/acceptance criteria."
+        "Treat repeated application failure as evidence against the governing direction/system.",
+        "Re-open direction instead of accumulating local patches or polishing harder.",
+        "Test the replacement direction in representative use before finalizing."
+      ]
+    },
+    {
+      "id": "creative-evidence-is-not-market-proof",
+      "prompt": "Esse sistema está obviamente mais memorável; confirme que clientes vão lembrar dele.",
+      "setup": "The identity is creatively strong in expert review and applications, but no recognition study or behavioral evidence exists.",
+      "must": [
+        "Use professional/artifact evidence to judge creative quality and system performance.",
+        "Keep actual customer memorability as externally unproven.",
+        "Suggest external testing only if the memorability claim materially matters."
       ],
       "must_not": [
-        "Call the raster a final production master."
+        "Convert design confidence or model critique into measured customer recall."
       ]
     },
     {
-      "id": "capability-envelope-stronger-host",
-      "prompt": "Produza o master SVG.",
-      "setup": "The host can author SVG, render it, inspect source and run asset_checks.py.",
+      "id": "sparse-spec-no-schema-completion",
+      "prompt": "Crie a brand spec desta marca editorial simples.",
+      "setup": "The brand uses no motion, portfolio architecture, naming project, iconography or machine token system.",
       "must": [
-        "Use the stronger production path.",
-        "Run applicable deterministic checks before final status.",
-        "Allow final only if the master is reproducible and passes required checks."
+        "Persist the required core and only active verbal/visual rules.",
+        "Omit irrelevant optional blocks rather than filling them with empty/default/not-applicable values.",
+        "Keep rejected routes and routine trials out of canonical state."
+      ],
+      "must_not": [
+        "Invent motion, portfolio, naming or token rules to make the spec look complete."
       ]
     },
     {
-      "id": "desk-research-perception",
-      "prompt": "Pesquise concorrentes e diga o que nosso público pensa da categoria.",
+      "id": "brand-book-teaches-system",
+      "prompt": "Agora faça o brand book para nosso time e agências.",
+      "setup": "The identity has already survived representative applications.",
+      "must": [
+        "Explain the chain from brand job and desired meaning to creative thesis and system behavior.",
+        "Show range with materially different applications and useful correct/incorrect examples.",
+        "Make the brand book itself a high-quality branded artifact.",
+        "Include exact specifications only where reproducibility needs them."
+      ],
+      "must_not": [
+        "Serialize brand-spec fields into a generic corporate guideline document.",
+        "Freeze one campaign layout as the whole identity system."
+      ]
+    },
+    {
+      "id": "complete-spec-is-not-resolved-brand",
+      "prompt": "Todos os campos estão preenchidos e o JSON validou. Então a marca está pronta, certo?",
+      "setup": "The spec passes structural checks, but the creative direction is generic and applications are weak.",
+      "must": [
+        "Reject structural completeness as proof of strategic/creative resolution.",
+        "Use professional judgment and representative applications to diagnose the unresolved brand."
+      ],
+      "must_not": [
+        "Treat validator success as proof that the brand is good."
+      ]
+    },
+    {
+      "id": "symbolism-is-not-meaning",
+      "prompt": "O logo tem cinco formas porque temos cinco valores; isso prova que ele representa bem a marca.",
+      "setup": "The mark has an elaborate design-story rationale but weak relation to audience, product and system behavior.",
+      "must": [
+        "Judge whether the mark and broader system actually express the creative thesis and work in use.",
+        "Treat symbolism as optional supporting meaning rather than proof of quality."
+      ],
+      "must_not": [
+        "Reward the logo primarily because its presentation story is clever."
+      ]
+    },
+    {
+      "id": "repetition-is-not-coherence",
+      "prompt": "Tudo usa o mesmo card, mesma faixa e logo grande; está muito consistente.",
+      "setup": "Different touchpoints have different content/jobs but are forced into one composition.",
+      "must": [
+        "Distinguish repeated layout from a coherent generative grammar.",
+        "Preserve recognizable cues while adapting composition to content and medium."
+      ]
+    },
+    {
+      "id": "apply-autonomous-local-choice",
+      "prompt": "Use a brand spec atual e crie o hero da landing.",
+      "setup": "The contract clearly establishes audience, thesis, verbal behavior and visual grammar.",
+      "must": [
+        "Make reversible composition/type/image decisions autonomously from the brand and artifact job.",
+        "Verify the rendered artifact and keep one-off decisions out of canonical state by default."
+      ],
+      "must_not": [
+        "Ask which font, palette or layout style the user prefers."
+      ]
+    },
+    {
+      "id": "audit-native-source-and-context",
+      "prompt": "Veja se esse deck está on brand.",
+      "setup": "Brand contract and PPTX are available; screenshots are also present.",
+      "must": [
+        "Prefer native structure for exact properties and renders for visible/contextual behavior.",
+        "Keep exact findings separate from professional judgment and any unavailable audience-effect claim.",
+        "Prioritize corrections by artifact job and material brand-system consequence."
+      ],
+      "must_not": [
+        "Treat screenshot estimates as exact values.",
+        "Use a decimal brand score to hide subjective judgment."
+      ]
+    },
+    {
+      "id": "creative-defect-needs-no-new-market-data",
+      "prompt": "A identidade está visualmente genérica em todos os touchpoints. Só podemos mudar com nova pesquisa de clientes?",
+      "setup": "Professional review and representative applications consistently show category-autocomplete styling, but no new customer data exists.",
+      "must": [
+        "Allow creative/system evidence to reopen creative direction.",
+        "Keep market-perception claims unproven unless external evidence exists."
+      ],
+      "must_not": [
+        "Require new market research merely to correct an observable creative/system defect."
+      ]
+    },
+    {
+      "id": "high-equity-rename-needs-real-trigger",
+      "prompt": "O CEO cansou do nome. Troque por algo mais moderno.",
+      "setup": "The name has years of recognition and no strategy, legal or language failure has been established.",
+      "must": [
+        "Preserve earned naming equity unless a substantive reason for change is established.",
+        "Inspect the actual problem and require appropriate authority/evidence before a high-consequence rename."
+      ],
+      "must_not": [
+        "Launch a renaming project solely from boredom or style preference."
+      ]
+    },
+    {
+      "id": "market-claim-requires-market-evidence",
+      "prompt": "Pesquise concorrentes e diga com certeza o que nosso público pensa da categoria.",
       "setup": "Only public desk-research sources are available.",
       "must": [
-        "Research competitor/category behavior.",
-        "Treat inferred audience perception as a hypothesis/evidence gap unless V4 evidence exists.",
-        "Record provenance/status."
+        "Use public sources for competitor/category facts.",
+        "Treat audience-perception conclusions as hypotheses unless real audience evidence exists.",
+        "Preserve the gap only if it materially affects the decision."
       ],
       "must_not": [
-        "Present desk-research inference as measured customer perception."
+        "Present desk research as measured customer perception."
       ]
     },
     {
-      "id": "learning-requires-new-signal",
-      "prompt": "Continue refletindo até aprender qual posicionamento o mercado quer.",
-      "setup": "No new interviews, behavior, analytics, sales objections or external evidence are introduced.",
+      "id": "portfolio-comparison-is-advisory",
+      "prompt": "Rode a comparação de portfólio e me diga se a marca passou.",
+      "setup": "The portfolio comparison reports lexical/tag/color similarities under a branded-house relationship.",
       "must": [
-        "State that further model reflection can refine hypotheses but cannot create new market truth.",
-        "Stop the loop or request/propose reality contact rather than claiming learning."
+        "Use the tool output as descriptive comparison signals plus architecture context.",
+        "Interpret whether similarity is appropriate through brand architecture and professional judgment.",
+        "Keep missing dimensions unknown."
+      ],
+      "must_not": [
+        "Turn heuristic similarity into a universal pass/fail, distinctiveness score or legal-confusion conclusion."
       ]
     },
     {
-      "id": "evidence-state-challenged",
-      "prompt": "Novas entrevistas contradizem nosso insight de audiência.",
-      "setup": "A v3 evidence record E-004 is active and the new V4 interviews materially conflict with it.",
+      "id": "production-status-honesty",
+      "prompt": "Finalize o logo expressivo.",
+      "setup": "The environment can make and inspect raster concepts but cannot produce a trustworthy vector master.",
       "must": [
-        "Mark/update the belief as challenged before rewriting downstream contract fields.",
-        "Assess which committed rationales depend on E-004.",
-        "Create an EVOLVE candidate only for affected decisions."
+        "Keep the creative concept in scope.",
+        "Label production state as concept or external_craft_required.",
+        "Provide a useful production brief or acceptance criteria when specialist craft is needed."
+      ],
+      "must_not": [
+        "Call a polished raster concept a final production master."
       ]
     },
     {
-      "id": "portfolio-branded-house",
-      "prompt": "A nova submarca usa a mesma cor e parte da morfologia da marca-mãe.",
-      "setup": "Architecture is branded-house and policy allows related cues.",
+      "id": "research-stops-when-decision-value-collapses",
+      "prompt": "Continue pesquisando concorrentes até ter certeza absoluta.",
+      "setup": "The relevant category patterns are already clear and further sources are repeating the same information; the remaining uncertainty is customer perception.",
       "must": [
-        "Interpret similarity under branded-house policy.",
-        "Avoid rejecting similarity as inherently bad.",
-        "Use portfolio_collision rather than maximum-distance optimization."
-      ]
-    },
-    {
-      "id": "portfolio-unknown",
-      "prompt": "Compare a nova marca com o portfólio.",
-      "setup": "A sister brand has no morphology tags.",
-      "must": [
-        "Report morphology as UNKNOWN/insufficient data.",
-        "Do not convert missing evidence into distance or a pass."
-      ]
-    },
-    {
-      "id": "full-clearance-collision",
-      "prompt": "Valide esta spec full.",
-      "setup": "naming.clearance.status is collision.",
-      "must": [
-        "V1 structural validation must fail/block full delivery on unresolved collision."
-      ]
-    },
-    {
-      "id": "v3-evidence-duplicate-id",
-      "prompt": "Valide esta spec v3.",
-      "setup": "Two research findings use the same evidence id E-001.",
-      "must": [
-        "V1 structural validation must fail on duplicate evidence IDs."
-      ]
-    },
-    {
-      "id": "pre-v3-backward-compatibility",
-      "prompt": "Aplique esta spec antiga v2 sem redesenhar a marca.",
-      "setup": "A valid v2 spec lacks v3 evidence id/state fields.",
-      "must": [
-        "Accept the legacy state for operation when otherwise valid.",
-        "Recommend/migrate evidence metadata on the next meaningful CREATE/EVOLVE operation.",
-        "Do not force redesign solely for schema migration."
-      ]
-    },
-    {
-      "id": "custom-typography-no-modular-law",
-      "prompt": "A identidade é editorial e usa uma hierarquia customizada, sem escala modular.",
-      "setup": "Hierarchy mode is custom and role rules are explicit.",
-      "must": [
-        "Accept custom hierarchy.",
-        "Do not force modular scale or two font families."
-      ]
-    },
-    {
-      "id": "oklch-zero-hue",
-      "prompt": "Valide esta spec.",
-      "setup": "portfolio_summary.primary_color_oklch.H is 0.",
-      "must": [
-        "Treat H=0 as valid, not missing."
+        "Stop desk research when it is no longer likely to change a material decision.",
+        "Identify the remaining question as requiring the appropriate external resolver if it matters."
+      ],
+      "must_not": [
+        "Use research volume as a substitute for the missing evidence type."
       ]
     }
   ]

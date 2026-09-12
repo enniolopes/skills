@@ -1,245 +1,33 @@
 {
   "meta": {
+    "schema_version": 4,
+    "version": "1.0.0",
     "brand_name": "",
-    "version": "3.0.0",
-    "date": "",
     "tier": "provisional | full",
-    "briefing_register": "startup | research_institute | other",
-    "touchpoints": [],
-    "architecture": {
-      "model": "house-of-brands | endorsed | branded-house | hybrid",
-      "studio_endorsement": "none | discreet | explicit",
-      "shared_cues": [],
-      "$rationale": "",
-      "collision_policy": {}
-    },
-    "changelog": [
-      {
-        "version": "3.0.0",
-        "date": "",
-        "trigger": "creation",
-        "evidence_refs": [],
-        "changes": "initial spec",
-        "affected_touchpoints": []
-      }
-    ]
-  },
-  "research": {
-    "findings": [
-      {
-        "id": "E-001",
-        "claim": "",
-        "kind": "fact | observation | hypothesis",
-        "source": "",
-        "confidence": "high | medium | low",
-        "validation": "verified | needs_field_research",
-        "state": "active | challenged | superseded"
-      }
-    ],
-    "open_questions": [],
-    "field_research_needed": []
+    "touchpoints": []
   },
   "strategy": {
-    "customer": {
-      "who_it_is": "",
-      "who_it_is_NOT": "",
-      "insight": "",
-      "$rationale": ""
+    "brand_job": {
+      "statement": ""
     },
-    "competitive_alternatives": [],
+    "audience": {
+      "primary": ""
+    },
+    "offer_truth": {
+      "statement": ""
+    },
+    "alternatives": [],
+    "position": {
+      "statement": ""
+    },
     "right_to_win": {
-      "statement": "",
-      "evidence_refs": [],
-      "$rationale": ""
+      "statement": ""
     },
-    "differentiation": {
-      "statement": "",
-      "competitors_analyzed": [
-        {
-          "name": "",
-          "positioning": "",
-          "visual_code": "",
-          "source": ""
-        }
-      ],
-      "category_conventions": [],
-      "conventions_kept": [],
-      "conventions_broken": [],
-      "$rationale": ""
-    },
-    "context": {
-      "chosen_context": "",
-      "evidence_refs": [],
-      "$rationale": ""
-    },
-    "theme": {
-      "statement": "",
-      "because_test": "",
-      "onliness": "",
-      "$rationale": ""
-    },
-    "manifesto_or_mission": "",
-    "category_entry_points": []
+    "desired_meaning": ""
   },
   "creative_direction": {
-    "central_idea": {
-      "statement": "",
-      "$rationale": ""
-    },
-    "productive_tensions": [
-      {
-        "pole_a": "",
-        "pole_b": "",
-        "behavior": ""
-      }
-    ],
-    "principles": [
-      {
-        "name": "",
-        "rule": "",
-        "enables": [],
-        "excludes": [],
-        "$rationale": ""
-      }
-    ],
-    "reference_frame": {
-      "properties_to_seek": [],
-      "anti_references": []
-    },
-    "distinctive_asset_hypotheses": [],
-    "art_direction": {
-      "subjects": "",
-      "framing": "",
-      "light_materiality": "",
-      "realism_abstraction": "",
-      "motion": ""
-    },
-    "$excludes": "",
-    "exploration": [
-      {
-        "route": "",
-        "thesis": "",
-        "signature_expression": "",
-        "strength": "",
-        "failure_mode": "",
-        "status": "explored | preferred | discarded"
-      }
-    ]
-  },
-  "naming": {
-    "in_scope": true,
-    "name": "",
-    "approach": "descriptive | suggestive | abstract",
-    "construct": "real-word | compound | coined | acronym",
-    "$rationale": "",
-    "$excludes": "",
-    "phonosemantics": "",
-    "clearance": {
-      "markets": [],
-      "nice_classes": [],
-      "search_date": "",
-      "status": "not_searched | no_apparent_collision | collision | uncertain | filed | registered | not_applicable",
-      "evidence": [],
-      "domains": {},
-      "handles": {},
-      "language_checks": [],
-      "human_legal_clearance": "PENDING | COMPLETE | NOT_REQUIRED"
-    }
-  },
-  "verbal": {
+    "thesis": "",
     "principles": [],
-    "voice_chart": {},
-    "not_like_this": [
-      {
-        "example": "",
-        "why_not": ""
-      }
-    ],
-    "moments": {},
-    "message_hierarchy": []
-  },
-  "visual": {
-    "$overall_rationale": "",
-    "$excludes": "",
-    "identity_grammar": {
-      "principles": [],
-      "signature_devices": [],
-      "$rationale": ""
-    },
-    "tokens": {},
-    "palette": {
-      "colors": [],
-      "$rationale": "",
-      "$excludes": ""
-    },
-    "contrast_pairs": [],
-    "typography": {
-      "families": [],
-      "roles": [],
-      "hierarchy": {
-        "mode": "modular | custom | fluid",
-        "base_px": null,
-        "ratio": null,
-        "steps": [],
-        "rules": []
-      },
-      "$rationale": "",
-      "$excludes": ""
-    },
-    "logo": {
-      "concept_type": "wordmark | monogram | letterform | geometric-symbol | abstract | organic | illustrative | expressive | other",
-      "concept": "",
-      "construction": {},
-      "clear_space": "",
-      "minimum_size": {},
-      "variants": [],
-      "optical_adjustments": "",
-      "production": {
-        "status": "final | concept | external_craft_required",
-        "master_format": "",
-        "master_path": "",
-        "production_brief": ""
-      },
-      "$rationale": "",
-      "$excludes": ""
-    },
-    "imagery": {
-      "rules": [],
-      "$rationale": ""
-    },
-    "iconography": {
-      "rules": [],
-      "$rationale": ""
-    },
-    "composition": {
-      "rules": [],
-      "grid": {},
-      "$rationale": ""
-    },
-    "motion": {
-      "in_scope": false,
-      "rules": []
-    }
-  },
-  "trial_applications": [
-    {
-      "touchpoint": "",
-      "job": "",
-      "artifact": "",
-      "failures_found": [],
-      "system_changes": [],
-      "status": "planned | tested | approved"
-    }
-  ],
-  "portfolio_summary": {
-    "name": {
-      "name": "",
-      "approach": "",
-      "construct": ""
-    },
-    "primary_color_oklch": null,
-    "logo_morphology": [],
-    "creative_territory": [],
-    "shared_cues": []
+    "signature": ""
   }
 }

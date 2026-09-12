@@ -1,85 +1,83 @@
 # Naming — strategy-led generation and clearance triage
 
-Treat naming as a strategic and legal-risk decision. Establish enough positioning to know what the name must do before generating candidates.
+Treat naming as a strategic, linguistic and legal-risk decision. Establish enough of the brand job and position to know what the name must do before generating candidates.
 
 ## 1. Define the naming job
 
-Specify:
-- what the name must signal or leave open;
+Specify only constraints that materially affect the decision:
+- what the name should help signal or deliberately leave open;
 - geographic/language markets;
-- required category legibility;
+- category legibility required now;
 - future scope/pivot tolerance;
 - architecture/endorsement relationship;
 - verbal/phonetic constraints;
-- likely relevant legal classes;
-- portfolio naming patterns to avoid or deliberately share.
+- relevant legal classes when triage is needed;
+- portfolio patterns to avoid or intentionally share.
 
-## 2. Generate across relevant mechanisms
+Do not turn the naming taxonomy into a checklist.
 
-Classify candidates when useful on two axes:
+## 2. Diverge by naming mechanism
 
-**Approach** — descriptive, suggestive/evocative, abstract.
+Generate materially different naming lineages supported by the job. Useful mechanisms can include:
+- descriptive or functional language;
+- suggestive/evocative language;
+- metaphor;
+- real words;
+- compounds;
+- coined constructions;
+- morphology/etymology;
+- initials/acronyms when context genuinely supports them.
 
-**Construct** — real word, compound, coined, acronym/initialism when appropriate.
+Working labels such as `descriptive`, `suggestive`, `abstract`, `real-word`, `compound` or `coined` can help compare candidates, but they are not quality rankings and every cell does not need a candidate.
 
-These are working categories, not quality rankings.
+## 3. Test language and speech
 
-Generate across mechanisms supported by the naming job, including strategy/theme, metaphors, category/customer language, real words, compounds, coined constructions, morphology/etymology and acronyms where context supports them. Do not force every taxonomy cell.
-
-## 3. Check language and speech
-
-For declared markets, inspect:
+For declared markets, inspect the relevant subset of:
 - pronunciation;
 - spelling;
+- spoken transfer;
 - ambiguity;
 - unintended slang/connotation;
-- phone/spoken transfer;
-- cross-language risk.
+- cross-language risk;
+- similarity to confusing category/portfolio names.
 
-Use model judgment only for triage. Require local/native review when material uncertainty remains.
+Model judgment is triage. Require local/native review when material uncertainty remains.
 
-Treat phonosemantic/sound-symbolism signals as secondary heuristics only; never let them override semantics, strategy, legal risk or language reality.
+Treat phonosemantic/sound-symbolism signals as secondary heuristics only. They do not override meaning, strategy, language reality or legal risk.
 
-## 4. Run current clearance triage
+## 4. Run current clearance triage when consequence requires it
 
-Search current authoritative sources when legal/domain availability matters.
+Use current authoritative sources for procedures and current search systems for relevant marks/domains/handles.
 
-For Brazil:
-- search INPI/e-Marcas in relevant Nice classes;
-- inspect confusingly similar marks, not only exact strings;
-- check domains/handles when operationally relevant.
-
-When quoting procedures, fees, timelines or filing rules, verify them against current official sources.
-
-Report clearance as one of:
+Search confusingly similar marks where feasible, not only exact strings. Report the result as:
 - no apparent collision found in triage;
 - apparent collision/risk found;
 - uncertain / specialist review needed.
 
-Never present triage as definitive legal clearance.
+Never describe model/web triage as definitive legal clearance.
 
-## 5. Converge
+## 5. Converge instead of outsourcing judgment
 
 Evaluate survivors against:
-- strategic fit;
+- fit to the naming job and position;
 - distinctiveness in category/portfolio context;
 - memorability/usability;
 - scope flexibility;
 - language robustness;
 - legal/domain risk;
-- creative potential.
+- creative potential inside the identity system.
 
-Recommend a preferred name. Present alternatives only when they materially improve the decision or the user requests them; do not use an unranked menu to outsource judgment.
+Recommend a preferred name. Present alternatives only when they materially improve the decision or the user requests them.
 
-## 6. Record
+## 6. Persist only durable naming state
 
-Update the naming block with:
+When naming belongs in the canonical contract, store only what future work needs:
 - selected name;
-- approach/construct;
-- rationale;
-- exclusions;
-- language check;
-- dated triage evidence;
-- legal status/pending specialist review.
+- concise naming job/rationale when it prevents drift;
+- meaningful exclusions;
+- markets/languages that materially constrain use;
+- dated clearance/linguistic triage and unresolved specialist dependency.
 
-For a full-tier brand adopting a new/protected name, do not leave clearance as `not_searched`. Resolve detected collisions or escalate them before commitment.
+Do not persist the entire candidate list or internal generation transcript.
+
+For a full, market-facing new name, unresolved material collision or missing high-consequence legal review remains an explicit dependency rather than being hidden by design confidence.
