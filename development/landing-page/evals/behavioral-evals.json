@@ -1,7 +1,7 @@
 {
-  "version": "2.2",
+  "version": "2.3",
   "skill": "landing-page",
-  "purpose": "Natural-language regression cases for continuity, pivot discipline, creative freedom, evidence fit, basis-form decision behavior and resistance to both generic defaults and anti-template over-control. Criteria describe outcomes, not skill vocabulary.",
+  "purpose": "Minimal durable regression set for truth, continuity, pivot discipline, evidence fit, creative freedom, decision depth and resistance to counterfeit quality. Cases describe observable behavior, not skill vocabulary.",
   "cases": [
     {
       "id": "local-mobile-fix",
@@ -21,25 +21,10 @@
       "setup": "The rendered page consistently creates the wrong category meaning even though typography, spacing and motion are polished.",
       "must": [
         "Change the governing idea rather than merely polishing the same metaphor.",
-        "Keep still-valid product facts, audience understanding and conversion goal.",
-        "Explore a materially different way to express coordination."
+        "Keep still-valid product facts, audience understanding and conversion goal."
       ],
       "must_not": [
-        "Try to solve the category misread only with colors, spacing or microcopy.",
-        "Restart research that remains valid without a reason."
-      ]
-    },
-    {
-      "id": "middle-page-repetition",
-      "prompt": "A página ficou repetitiva no meio.",
-      "setup": "The hero is distinctive, but three later regions repeat the same card geometry and reading rhythm.",
-      "must": [
-        "Change the narrative/compositional treatment of the weak regions.",
-        "Keep the page's strong central idea while varying the medium according to each message."
-      ],
-      "must_not": [
-        "Abandon the whole creative idea solely because later sections are generic.",
-        "Mask repetition with more decoration."
+        "Try to solve the category misread only with colors, spacing or microcopy."
       ]
     },
     {
@@ -48,7 +33,7 @@
       "setup": "The current page was designed around low-friction self-serve conversion.",
       "must": [
         "Reconsider CTA, friction, proof and proposition consequences rather than only renaming the button.",
-        "Preserve factual product truth and reuse solved design work that still serves the new sales motion."
+        "Preserve factual product truth and solved design work that still serves the new sales motion."
       ],
       "must_not": [
         "Treat the change as copy-only.",
@@ -61,8 +46,7 @@
       "setup": "The integration appears in the hero and is used as an important proof point later in the page.",
       "must": [
         "Remove the unsupported implication everywhere it matters.",
-        "Reconsider any promise or proof strategy that depended on the integration.",
-        "Keep unaffected evidence and design decisions."
+        "Reconsider any promise or proof strategy that depended on the integration while keeping unaffected work."
       ],
       "must_not": [
         "Leave the integration implied because removing it weakens the current design.",
@@ -74,51 +58,12 @@
       "prompt": "Durante a implementação surgiu uma ideia muito melhor: usar o próprio histórico de decisões do produto como a narrativa central.",
       "setup": "The current direction is coherent and partly implemented. The new idea uses stronger real product evidence and appears substantially more specific.",
       "must": [
-        "Compare the new idea on meaning, specificity and evidence use rather than sunk implementation effort.",
-        "Switch direction if the new idea is materially stronger.",
-        "Keep compatible solved work instead of restarting from zero."
+        "Compare the new idea on meaning, specificity and evidence rather than sunk implementation effort.",
+        "Switch direction if it is materially stronger while preserving compatible solved work."
       ],
       "must_not": [
         "Reject the idea solely because implementation has begun.",
-        "Add it as a second competing signature without choosing."
-      ]
-    },
-    {
-      "id": "novelty-is-not-progress",
-      "prompt": "E se a gente fizer tudo em 3D? Parece mais premiável.",
-      "setup": "The current page already has a specific, effective creative idea. No communication problem requires 3D.",
-      "must": [
-        "Keep the strong existing direction unless 3D improves a real experience job.",
-        "Treat 3D as an experiment, not as automatic premium quality."
-      ],
-      "must_not": [
-        "Replace a resolved concept merely because a more technically elaborate option exists."
-      ]
-    },
-    {
-      "id": "generic-but-polished",
-      "prompt": "Está bonito, mas parece que poderia ser de qualquer SaaS.",
-      "setup": "Craft is high, but the main idea and page structure survive a logo/copy swap with unrelated products.",
-      "must": [
-        "Return to product/domain evidence and find a more specific governing idea when the genericity is conceptual.",
-        "Keep truthful proposition and proof that still work."
-      ],
-      "must_not": [
-        "Add gradients, noise, illustrations or animation merely to disguise a generic concept."
-      ]
-    },
-    {
-      "id": "creative-discovery-improves-proposition",
-      "prompt": "Fazendo o protótipo percebi que o recurso mais forte não é organizar notas; é mostrar de onde cada decisão veio e quem participou.",
-      "setup": "The original proposition emphasized organization. The product repository and demo do support provenance and collaborative decision history, but this framing was not prominent in the initial brief.",
-      "must": [
-        "Treat the new framing as a serious proposition hypothesis and verify it against available product evidence.",
-        "Allow the page strategy to change if the new framing is both truthful and materially stronger.",
-        "Rework downstream narrative/design only to the extent required by the stronger proposition."
-      ],
-      "must_not": [
-        "Reject the insight merely because strategy was synthesized earlier.",
-        "Promote the idea to a factual market claim without evidence."
+        "Keep both as competing signatures without choosing."
       ]
     },
     {
@@ -126,36 +71,11 @@
       "prompt": "Cada seção está precisando de um truque diferente para a ideia continuar funcionando.",
       "setup": "Several local fixes have accumulated; each is individually plausible, but the page is becoming brittle and visually inconsistent.",
       "must": [
-        "Question whether the shared visual/compositional system or governing idea is the actual source of the repeated failures.",
+        "Question whether the shared system or governing idea is the source of repeated failures.",
         "Simplify at the highest necessary level rather than adding more patches."
       ],
       "must_not": [
         "Continue accumulating unrelated local exceptions indefinitely."
-      ]
-    },
-    {
-      "id": "expressive-fashion-brief",
-      "prompt": "Crie a landing de lançamento para uma marca de moda experimental. Quero algo autoral, não com cara de SaaS.",
-      "setup": "The collection has strong editorial photography, irregular garment construction and a single purchase/drop CTA. Product truth is clear.",
-      "must": [
-        "Allow a fashion-appropriate visual world, unusual composition and pacing when they serve the launch.",
-        "Keep the conversion path legible without forcing software conventions onto the page."
-      ],
-      "must_not": [
-        "Default to dashboard imagery, rounded-card grids, forensic-instrument aesthetics or another recurring house style."
-      ]
-    },
-    {
-      "id": "premium-request-on-resolved-page",
-      "prompt": "Deixa mais premium.",
-      "setup": "The rendered page is already specific, coherent, accessible and materially resolved. No new evidence or concrete defect is supplied.",
-      "must": [
-        "Diagnose whether any meaningful improvement remains before changing the concept.",
-        "Prefer higher resolution of existing intent over gratuitous novelty."
-      ],
-      "must_not": [
-        "Redesign solely to demonstrate creativity.",
-        "Add fashionable effects without causal value."
       ]
     },
     {
@@ -168,7 +88,7 @@
       ],
       "must_not": [
         "Require the same form across viewports.",
-        "Drop the signature and leave mobile as an inferior edition without testing alternatives."
+        "Drop the signature without testing alternatives."
       ]
     },
     {
@@ -177,75 +97,47 @@
       "setup": "The browser render has weak hierarchy and the intended signature is barely perceptible even though the source matches the design plan.",
       "must": [
         "Treat the rendered result as stronger evidence than plan fidelity.",
-        "Continue improving the page until the material perceptual defect is resolved or a real blocker exists."
+        "Continue until the material perceptual defect is resolved or a real blocker exists."
       ],
       "must_not": [
-        "Declare completion because the implementation matches written intent."
+        "Declare completion because implementation matches written intent."
       ]
     },
     {
       "id": "premium-style-proxy",
       "prompt": "Quero que pareça muito mais premium.",
-      "setup": "The page is clear but under-resolved in hierarchy, typography spacing and asset treatment. A common easy response would be to add a high-contrast serif, more whitespace, black/cream colors and slower motion without fixing those weaknesses.",
+      "setup": "The page is clear but under-resolved in hierarchy, typography spacing and asset treatment. A common easy response would be to add luxury-coded styling without fixing those weaknesses.",
       "must": [
-        "Improve the underlying hierarchy, typography control, asset treatment and craft that actually make the page feel resolved.",
-        "Use any premium-coded style cue only when it fits the product and chosen direction independently."
+        "Improve the underlying hierarchy, typography control, asset treatment and craft.",
+        "Use premium-coded style cues only when the product and direction independently earn them."
       ],
       "must_not": [
-        "Treat serif type, minimalism, black/cream color or slow animation as proof of premium quality.",
-        "Reject those devices categorically when the brief genuinely supports them."
+        "Treat serif type, minimalism, black/cream color or slow animation as proof of premium quality."
       ]
     },
     {
       "id": "category-default-is-earned",
       "prompt": "Mantenha a linguagem visual da marca nessa landing de perfume.",
-      "setup": "The established brand genuinely uses black fields, high-contrast serif typography, severe whitespace and tightly art-directed bottle photography. Those choices are present in authoritative brand assets and product packaging, not inferred from category fashion.",
+      "setup": "The established brand genuinely uses black fields, high-contrast serif typography, severe whitespace and tightly art-directed bottle photography in authoritative assets.",
       "must": [
         "Preserve and develop the established visual language when it serves the page.",
-        "Judge the execution on specificity, composition and craft rather than avoiding familiar luxury signals merely because they are common in the category."
+        "Judge it on specificity, composition and craft rather than avoiding familiar luxury signals merely because they are common."
       ],
       "must_not": [
-        "Replace the valid brand language solely to prove originality or avoid an anti-pattern list.",
-        "Assume a familiar aesthetic is generic when the brief causally earns it."
-      ]
-    },
-    {
-      "id": "component-uniformity-is-not-coherence",
-      "prompt": "Deixei todas as seções com os mesmos cards e ficou mais consistente, mas a página perdeu força.",
-      "setup": "The content types and communication jobs differ substantially across the page; identical containers were introduced mainly to make implementation and styling uniform.",
-      "must": [
-        "Restore composition and hierarchy appropriate to each message while preserving shared visual relationships across the system.",
-        "Keep repeated components only where the information or interaction relationship truly repeats."
-      ],
-      "must_not": [
-        "Treat identical geometry as sufficient evidence of coherence.",
-        "Remove all cards reflexively when some are semantically appropriate."
-      ]
-    },
-    {
-      "id": "motion-is-not-delight",
-      "prompt": "Coloca mais animação em tudo para a página ficar mais delightful.",
-      "setup": "The page is usable and its main weakness is a flat interaction feel, but most sections have no narrative or state relationship that benefits from entrance animation.",
-      "must": [
-        "Improve delight through responsive feedback, meaningful transitions, pacing or one intentional motion moment where movement has a real job.",
-        "Use animation where it adds orientation, demonstration, feedback, atmosphere or identity."
-      ],
-      "must_not": [
-        "Animate every element merely to signal polish or delight.",
-        "Ban motion entirely because gratuitous motion is a risk."
+        "Replace valid brand language solely to prove originality or avoid an anti-pattern list."
       ]
     },
     {
       "id": "creative-language-is-not-evidence-status",
       "prompt": "Quero usar a frase ‘a ferramenta que finalmente pensa com você’. Podemos usar?",
-      "setup": "The phrase is intended as expressive positioning. The product has AI-assisted collaboration, but there is no objective evidence that it literally thinks, understands, or replaces human judgment.",
+      "setup": "The phrase is expressive positioning. The product has AI-assisted collaboration, but there is no objective evidence that it literally thinks, understands, or replaces human judgment.",
       "must": [
-        "Treat expressive positioning separately from factual evidence status and inspect whether the wording creates a misleading objective implication.",
-        "Allow creative language when it is clearly subjective and does not overstate product truth; qualify or replace it if the factual implication becomes material."
+        "Treat expressive positioning separately from factual evidence status and inspect misleading objective implications.",
+        "Allow subjective language when it does not overstate product truth; qualify or replace it when the factual implication is material."
       ],
       "must_not": [
-        "Treat ‘creative’ as evidence that exempts a factual implication from truth discipline.",
-        "Reject all expressive language merely because it is not a factual claim with external proof."
+        "Treat creative language as exempt from truth discipline.",
+        "Reject all expressive language merely because it lacks factual proof."
       ]
     },
     {
@@ -253,12 +145,11 @@
       "prompt": "A página existe, mas o produto, público e oferta mudaram completamente. Aproveite o que ainda fizer sentido e refaça o necessário.",
       "setup": "The current implementation is technically usable, but its page job, proposition, proof model and governing idea no longer serve the new product motion.",
       "must": [
-        "Use CREATE-depth reasoning because no useful strategic/creative solution basis remains, even though an implementation exists.",
+        "Use CREATE-depth reasoning because no useful strategic/creative solution remains, despite existing implementation.",
         "Reuse isolated technical or craft decisions only when they still serve the new outcome."
       ],
       "must_not": [
-        "Choose a shallow refinement merely because a page already exists.",
-        "Preserve obsolete intent or direction as if existing code made it authoritative."
+        "Choose a shallow refinement merely because a page already exists."
       ]
     },
     {
@@ -266,21 +157,20 @@
       "prompt": "Precisamos definir motion no plano criativo mesmo se essa direção editorial funciona melhor estática?",
       "setup": "The governing idea depends on typography, photography, sequencing and precise static composition. No interaction or narrative job benefits materially from custom motion.",
       "must": [
-        "Allow motion to remain minimal or absent because it is not an active medium for this direction.",
-        "Preserve the governing idea, signature, intended effect and falsifier without filling irrelevant design-plan fields."
+        "Allow motion to remain minimal or absent because it has no meaningful job in this direction.",
+        "Preserve the governing idea, signature, intended effect and falsifier without filling irrelevant plan fields."
       ],
       "must_not": [
-        "Invent motion solely to complete a fixed art-direction schema.",
-        "Treat absence of a medium as an incomplete creative direction when the relevant decisions are resolved."
+        "Invent motion solely to complete a fixed art-direction schema."
       ]
     },
     {
       "id": "research-value-has-ended",
       "prompt": "Continua pesquisando mais referências e concorrentes.",
-      "setup": "Product truth, audience, offer, proof, category grammar, creative direction and technical feasibility are already sufficiently grounded. Several additional sources repeat known patterns and have not changed a material decision.",
+      "setup": "Product truth, audience, offer, proof, category grammar, creative direction and technical feasibility are already sufficiently grounded. Additional sources repeat known patterns and have not changed a material decision.",
       "must": [
         "Stop or sharply narrow research when additional information is unlikely to change a material decision.",
-        "Move into making/testing the unresolved artifact questions instead of collecting references for appearance of thoroughness."
+        "Move into making or testing unresolved artifact questions."
       ],
       "must_not": [
         "Continue broad research with no decision it could materially change.",
