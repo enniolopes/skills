@@ -150,9 +150,15 @@ It no longer treats rationale length, negative examples or the presence of conve
 
 ## Brand books
 
-`references/brand-book.md` is a new runtime module. A brand book is treated as a designed teaching artifact, not a pretty serialization of the spec.
+`references/brand-book.md` is a runtime module for guideline and handoff work. A brand book is treated as a designed teaching artifact, not a pretty serialization of the spec.
 
 It must teach the causal chain from brand job to creative thesis to system behavior, show range through real/representative applications, distinguish principles from exact production specifications and itself demonstrate the identity at a high level of craft.
+
+## Verbal identity
+
+`references/verbal-identity.md` is loaded only when proposition, messaging, voice/tone or a broader verbal system is materially in scope. It keeps proposition, proof, message and expression distinct; converts generic voice adjectives into observable writing behavior; supports contextual modulation; and tests whether the guidance can generate new communication instead of only describing a few examples.
+
+Naming remains separate because semantic, phonetic, linguistic, operational and legal consequences require their own decision logic.
 
 ## Runtime layout
 
@@ -169,7 +175,8 @@ skills/branding-studio/
 │   ├── identity-craft.md
 │   ├── knowledge.md
 │   ├── naming.md
-│   └── spec-schema.md
+│   ├── spec-schema.md
+│   └── verbal-identity.md
 ├── templates/
 └── scripts/
 ```
@@ -193,6 +200,8 @@ The prior suite over-indexed on governance behavior. v2 keeps the highest-value 
 - artifact vs system vs strategy correction scope.
 
 `evals/creative-benchmark.json` contains deliberately different briefs for blind creative comparison and cross-run mode-collapse detection.
+
+`evals/corpus-promotion-evals.json` contains targeted regressions and benchmark oracles for deciding whether corpus-derived knowledge actually changes behavior before it is promoted into runtime.
 
 `evals/rubric.md` evaluates both decision behavior and brand quality. `evals/evaluation-protocol.md` defines same-prompt baseline/candidate runs, blind review and evidence levels.
 
