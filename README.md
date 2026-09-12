@@ -10,7 +10,7 @@ The repository is **Agent-Skills-first**: capability behavior lives in one canon
 
 Where Skills are enabled, upload a released skill archive from **Plugins → Skills → Create → Upload from your computer**.
 
-Workspace admins can import this repository as a plugin marketplace from GitHub. ChatGPT currently accepts Claude-compatible `.claude-plugin/marketplace.json` manifests and can keep them synced from the repository.
+Workspace admins can import `https://github.com/enniolopes/skills` as a plugin marketplace from **Workspace settings → Plugins → Add → Import marketplace**. ChatGPT currently accepts Claude-compatible `.claude-plugin/marketplace.json` manifests and can keep them synced from the repository.
 
 ### Claude Code
 
@@ -81,7 +81,7 @@ Systems exist for composition, not because a workflow is large. Create one when 
 
 A system keeps pieces that are exclusive to it under its own `skills/` and `agents/`. If a piece becomes useful independently, promote it to the top-level catalog and make the system depend on it instead of copying it.
 
-The current `research` system uses a Claude-compatible plugin manifest. That format is also consumable by ChatGPT marketplace import today. We do not invent a universal system manifest until another concrete composition surface makes that abstraction necessary.
+The current `research` system uses a Claude-compatible plugin manifest. ChatGPT can import that marketplace format today, but host support for every component type is treated as evidence to verify rather than assumed portability. We do not invent a universal system manifest until another concrete composition surface makes that abstraction necessary.
 
 ## Development
 
