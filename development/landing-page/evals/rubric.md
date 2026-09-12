@@ -1,120 +1,135 @@
-# Landing Page v3.2 evaluation rubric
+# Landing Page evaluation rubric
 
-Use this rubric to compare runs with and without the control-plane changes. It is intentionally split so process compliance cannot hide weaker creative output.
+Use this rubric to compare the current experiment against v3.1 or another baseline. Keep reliability and creative quality separate so process compliance cannot hide weaker work.
+
+## Evidence levels for the evaluation itself
+
+Do not overclaim what a test establishes.
+
+- **L0 — structural:** repository/CI checks, file contracts, token budgets, JSON validity.
+- **L1 — instruction audit:** whether the runtime actually encodes a behavior without contradiction or excessive duplication.
+- **L2 — proxy execution:** one model/session simulates or grades behavior. Useful for finding obvious flaws, but not independent evidence of model improvement.
+- **L3 — independent A/B:** separate model runs on identical briefs, version identity hidden from the reviewer. Required before claiming the new skill is behaviorally better.
+- **L4 — real project:** repeated performance on actual landing-page work with rendered/browser evidence.
+
+A version should not merge merely because it passes L0–L2.
 
 ## Evaluation rule
 
-Judge the **rendered/resulting page and the agent's trajectory**, not prose that merely claims the right process.
+Judge the **rendered/resulting page and the trajectory**, not prose that repeats the skill vocabulary. The evaluator should not require terms such as TRUTH, INTENT, DIRECTION or RE-DIVERGE to appear. Credit the behavior, not the taxonomy.
 
-A run can fail even when it repeats the vocabulary of the skill. Give credit only when behavior and output show the property.
-
-Do not collapse the dimensions into one arbitrary weighted score unless an experiment explicitly requires ranking. Prefer dimension-level judgments and blind pairwise comparison.
+Do not collapse the dimensions into one fake-precision score. Prefer dimension-level judgments and blind pairwise comparison.
 
 ## A. Reliability / control
 
-### 1. Truth and authority
+### Truth and authority
 
-Pass when factual claims, proof and business commitments remain within available evidence/authority.
+Pass when factual claims, proof and business commitments stay within available evidence/authority. Fail on invented customers, metrics, capabilities, integrations, guarantees or strategy.
 
-Fail when the page invents social proof, metrics, capabilities, customers, integrations, guarantees or strategic commitments.
+### Continuity of purpose
 
-### 2. Continuity of intent
+Pass when local decisions remain governed by the page job, proposition, proof and current creative idea across a long run. Fail when later regions drift into unrelated defaults without a reason.
 
-Pass when local implementation decisions remain governed by the stable page job, proposition, proof and chosen creative idea across a long run.
+### Causal diagnosis
 
-Fail when later sections drift into unrelated defaults despite no evidence-driven pivot.
+Pass when the agent fixes the smallest level that explains a problem. Fail when it redesigns everything for a local defect or keeps polishing execution when the idea itself is wrong.
 
-### 3. Correct root-layer diagnosis
+### Pivot quality
 
-Pass when the agent distinguishes FOUNDATION, INTENT, DIRECTION, SYSTEM/COMPOSITION and EXECUTION failures and acts at the lowest layer that explains the evidence.
+Pass when a material falsifier reopens enough of the solution to solve the real problem while preserving valid work. Fail when sunk cost protects a bad idea or every new possibility causes a restart.
 
-Fail when it redesigns everything for a local defect or polishes execution when the governing idea is wrong.
+### Upstream learning
 
-### 4. Pivot quality
+Pass when making/prototyping can reveal a stronger truthful proposition or framing, which is then checked against evidence before adoption. Fail when earlier synthesis becomes dogma, or when creative intuition silently rewrites factual truth.
 
-Pass when a material falsifier reopens the appropriate upstream layer and downstream decisions are revalidated without gratuitous destruction.
+### Convergence
 
-Fail when sunk cost protects a bad direction, or when every new idea triggers a restart.
-
-### 5. Convergence
-
-Pass when the agent can commit long enough to make the page coherent, refine targeted defects and stop when remaining changes are preference-level.
-
-Fail when it churns endlessly or ships the first plausible render.
+Pass when the agent commits long enough to make the page coherent, resolves material defects and stops when remaining changes are preference-level. Fail on endless churn or first-render shipping.
 
 ## B. Creative performance
 
-Evaluate this independently of A.
+Evaluate independently of A.
 
-### 1. Specificity
+### Specificity
 
 Does the page feel causally related to this product, audience, evidence and domain? Would a logo swap materially break the design logic?
 
-### 2. Governing idea
+### Governing idea
 
-Is there a strong, legible point of view that organizes the experience beyond surface style? Does it generate multiple coherent decisions rather than one decorative hero trick?
+Is there a strong point of view that generates multiple coherent decisions beyond one decorative hero trick?
 
-### 3. Distinction
+### Distinction
 
-Is there a memorable signature for the right reason? Does the page avoid merely recombining current landing-page fashions?
+Is there a memorable signature for the right reason, rather than a recombination of current landing-page fashions?
 
-### 4. Composition and rhythm
+### Composition and rhythm
 
-Does the full page control hierarchy, mass, density, contrast, transitions and quiet/intense moments? Do later regions maintain authorship rather than collapsing into generic component cadence?
+Does the full page control hierarchy, mass, density, contrast, transitions and quiet/intense moments? Do later regions retain authorship?
 
-### 5. Appropriate expression
+### Appropriate expression
 
-Do typography, imagery, color, motion and spatial behavior create the emotion and cultural/domain fit the brief needs, rather than applying a house aesthetic?
+Do typography, imagery, color, motion and spatial behavior fit the brief's cultural/domain needs rather than a house aesthetic?
 
-### 6. Inventiveness under constraint
+### Inventiveness under constraint
 
-Does the agent discover non-obvious but relevant solutions when the brief benefits from them? Can it explore wildcard ideas without confusing novelty with quality?
+Does the agent discover non-obvious but relevant solutions when useful? Can it explore a wildcard without confusing unusualness with quality?
 
-### 7. Creative adaptability
+### Creative adaptability
 
-When a better idea appears or rendered evidence falsifies the current one, can the agent pivot to a stronger concept without losing valid truth/intent?
+Can a better late idea or rendered failure lead to a genuinely stronger concept without losing valid truth and purpose?
 
-### 8. Craft
+### Craft
 
-At macro, meso and micro scale, does the work improve under inspection? Are typography, crops, alignment, states, responsive behavior and section joins resolved rather than approximate?
+At macro, meso and micro scale, does the work improve under inspection? Are type, crops, alignment, states, responsive behavior and section joins resolved rather than approximate?
 
 ## C. Anti-rigidity / creative freedom
 
-A control-plane version should be considered regressive if it improves A while degrading these behaviors.
+Fail the experimental version if control improvements cause any of the following:
 
-Fail the run when the control model causes any of the following:
-
-- visible outputs converge on one recurring aesthetic across unrelated briefs;
-- the agent treats internal state fields as a page template;
-- every direction must be fully rationalized before it may be explored;
-- the first committed direction is treated as immutable;
-- late stronger ideas are rejected solely because work has already begun;
-- qualitative design judgment is replaced by arbitrary numerical scoring;
-- the agent optimizes schema/process compliance while the rendered page becomes less distinctive or expressive.
+- unrelated outputs converge on one recurring aesthetic;
+- internal state/control concepts become visible page templates;
+- every idea must be fully rationalized before it can be tried;
+- the first committed direction becomes immutable;
+- strong late discoveries are rejected because implementation started;
+- qualitative judgment is replaced by arbitrary numerical scoring;
+- process compliance receives more attention than the rendered work;
+- creative exploration is only allowed downstream of a fixed strategy, preventing making from revealing a stronger truthful framing.
 
 ## D. Cross-run mode-collapse test
 
-Evaluate a batch of substantially different briefs together.
+Run the briefs in `creative-benchmark.json` as a batch. A blind reviewer should ask:
 
-Ask a blind reviewer:
+1. Are the governing ideas materially different where the briefs warrant it?
+2. Do composition, type, imagery and motion derive from each domain rather than one skill-induced visual lineage?
+3. Are recurring structures explained by usability needs or by fallback habit?
+4. Could several outputs become variants of one template after swapping logo/copy/palette?
 
-1. Do the pages have materially different governing ideas, composition grammars and expressive worlds when the briefs warrant it?
-2. Are recurring structures caused by common usability needs, or by the agent falling back to a house style?
-3. Could multiple outputs plausibly be variants of the same template after changing logo/copy/colors?
-
-A version that is individually polished but repeatedly produces the same visual lineage has failed creative generalization.
+Individually polished but repetitively authored outputs fail creative generalization.
 
 ## E. Blind comparison protocol
 
-When comparing v3.1 vs v3.2:
+For a real v3.1 vs experimental comparison:
 
-- hide version identity and process transcript when possible;
-- compare the same brief, evidence, tools and capability envelope;
+- snapshot v3.1 and the experimental runtime separately;
+- run the same prompt, files, tools and capability envelope independently;
+- hide version identity and process transcript from the reviewer when possible;
 - inspect desktop and mobile rendered output when available;
-- judge Reliability and Creative Performance separately before stating a preference;
-- require the reviewer to name the largest advantage and largest regression of each result;
-- prefer v3.2 only if control improves without a material loss in creative strength.
+- judge Reliability and Creative Performance before stating a preference;
+- name the largest advantage and largest regression of each output;
+- repeat enough cases to detect variance rather than trusting a single win.
 
-The intended success condition is not “more compliant.” It is:
+Prefer the experiment only when control improves **without material loss of specificity, conceptual strength, expressive range or craft**.
 
-**more coherent over long execution, more capable of correct pivots, and at least as surprising, specific and art-directed as the stronger unconstrained run.**
+## F. Eval-quality checks
+
+Before trusting a benchmark, inspect the benchmark itself:
+
+- criteria should describe observable outcomes, not quote the new skill's taxonomy;
+- a criterion that both versions trivially pass adds little evidence;
+- a scenario written directly from a new instruction can overfit the experiment;
+- subjective design quality should be judged qualitatively/blind, not converted into pseudo-objective assertions;
+- long-horizon continuity requires actual multi-step execution when a runner is available; a setup paragraph is only a proxy.
+
+The success condition is not “more compliant.” It is:
+
+**more coherent across long execution, more capable of productive change, and at least as surprising, specific and art-directed as the strongest baseline run.**
