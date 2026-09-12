@@ -23,7 +23,7 @@ Specialized depth belongs in on-demand references. The v2.1 addition is `referen
 
 Scripts establish only machine-checkable properties. Structural validity, color calculations, SVG checks and portfolio comparison signals never become proof of strategy, creativity, perception or legal status.
 
-`package_skill.py` builds the installable runtime from an explicit manifest and fails when runtime files are missing or unexpected.
+`skills/branding-studio/` is itself the canonical installable runtime. Stable download archives are produced generically by the repository's `release skill` workflow; there is no skill-specific package manifest or second runtime file list to keep in sync.
 
 ## Evaluation
 
