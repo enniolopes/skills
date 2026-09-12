@@ -1,0 +1,97 @@
+name: release skill
+
+on:
+  workflow_dispatch:
+    inputs:
+      skill:
+        description: "Standalone skill directory name under skills/"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Require main
+        run: |
+          test "$GITHUB_REF" = "refs/heads/main" || {
+            echo "Releases must be created from main, got $GITHUB_REF" >&2
+            exit 1
+          }
+
+      - name: Validate repository
+        run: python development/validate.py
+
+      - name: Resolve release metadata
+        id: meta
+        env:
+          SKILL: ${{ inputs.skill }}
+        run: |
+          [[ "$SKILL" =~ ^[a-z0-9][a-z0-9-]*$ ]] || {
+            echo "Invalid skill name: $SKILL" >&2
+            exit 1
+          }
+          test -f "skills/$SKILL/SKILL.md" || {
+            echo "Unknown standalone skill: $SKILL" >&2
+            exit 1
+          }
+
+          VERSION=$(python - <<'PY'
+          import os
+          from pathlib import Path
+          from development.validate import frontmatter
+
+          skill = os.environ["SKILL"]
+          metadata = frontmatter(Path("skills") / skill / "SKILL.md")
+          version = metadata.get("metadata.version", "")
+          if not version:
+              raise SystemExit(f"skills/{skill}/SKILL.md has no metadata.version")
+          print(version)
+          PY
+          )
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=$SKILL-v$VERSION" >> "$GITHUB_OUTPUT"
+          echo "asset=$SKILL-$VERSION.zip" >> "$GITHUB_OUTPUT"
+
+      - name: Build canonical archive
+        env:
+          SKILL: ${{ inputs.skill }}
+          ASSET: ${{ steps.meta.outputs.asset }}
+        run: |
+          git archive \
+            --format=zip \
+            --prefix="$SKILL/" \
+            --output="$ASSET" \
+            HEAD:"skills/$SKILL"
+          sha256sum "$ASSET" > "$ASSET.sha256"
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SKILL: ${{ inputs.skill }}
+          VERSION: ${{ steps.meta.outputs.version }}
+          TAG: ${{ steps.meta.outputs.tag }}
+          ASSET: ${{ steps.meta.outputs.asset }}
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists" >&2
+            exit 1
+          fi
+
+          gh release create "$TAG" \
+            "$ASSET" "$ASSET.sha256" \
+            --target "$GITHUB_SHA" \
+            --title "$SKILL v$VERSION" \
+            --notes "Portable Agent Skill archived from \`skills/$SKILL/\` at \`$GITHUB_SHA\`. The archive is a transport artifact; the repository directory remains the source of truth."

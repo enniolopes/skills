@@ -1,107 +1,125 @@
 # skills
 
-Agent skills, agents and the systems that compose them, by Ennio Politi Lopes. Built for
-Claude Code following the [Agent Skills](https://agentskills.io) standard. The repository
-is also a Claude Code plugin marketplace: every unit is one install.
+Portable capabilities for AI assistants.
 
-```text
-/plugin marketplace add enniolopes/skills
-/plugin install <name>@enniolopes
-```
-
-A standalone skill can also be installed on its own, without the marketplace:
-
-```bash
-npx skills add enniolopes/skills --skill <name> --agent claude-code
-```
-
-Hosts that take a directory: copy `skills/<name>/`. Hosts that take a `.skill` or ZIP
-upload: build it from `development/<name>/` when a packager exists there.
+Pick a capability, install it in your AI, and describe the job you want done. Standalone skills follow the open [Agent Skills](https://agentskills.io) format so the same capability can work across compatible hosts.
 
 ## Quick start
 
-```text
-/plugin marketplace add enniolopes/skills          # once per machine
-/plugin install research@enniolopes                 # a system: skills + agent + dependencies
-/plugin install branding-studio@enniolopes          # a standalone skill, when needed
-```
+1. **Choose a capability** below.
+2. **Install it** using the shortest path for your AI.
+3. **Ask for the outcome you want.** You usually do not need special commands.
 
-Then, inside a research repository: `/research:research-map init` builds the map from the
-protocol and decision log, and `/research:scientific-method start: <question>` begins at
-phase 1. Each unit's README says how it is used; the research one is
-[`systems/research/README.md`](systems/research/README.md).
+For example:
 
-## Catalog
+> Use Branding Studio to audit this existing brand, preserve valid equity, and recommend what should change.
 
-| Unit | Kind | Status | Docs |
-|---|---|---|---|
-| [branding-studio](skills/branding-studio/) | skill | shipped | [README](development/branding-studio/README.md) |
-| [landing-page](skills/landing-page/) | skill | shipped | [README](development/landing-page/README.md) |
-| [explorer](skills/explorer/) | skill | shipped | — |
-| [research](systems/research/) | system | 0.7.0 · first real session absorbed | [README](systems/research/README.md) · [design](development/research/design/) |
+## Choose a capability
 
-CI checks this table and `.claude-plugin/marketplace.json` against the filesystem: both
-list exactly the units that exist.
-
-## Model
-
-Three concepts, one rule each.
-
-- **Unit** — a skill, an agent or a system. It has a name, a version, an owner and a reason
-  to change that is its own. Names are unique across the repository.
-- **Runtime** — what a unit ships. `skills/<name>/` (with `SKILL.md` at the root) and
-  `agents/<name>.md`, the locations installers copy wholesale. Runtime carries exactly
-  what the agent needs while operating, no more, and never refers back to this repository;
-  it must work installed alone.
-- **System** — several skills and agents that only make sense together, installed as one
-  unit. A system is a Claude Code plugin: `systems/<name>/` holds its manifest, its README
-  (how to install, how to use) and the pieces exclusive to it under `skills/` and
-  `agents/`. A piece that is also useful alone is a standalone unit the system declares in
-  `dependencies`; the host installs it transitively.
-
-Everything a unit needs that is not runtime — tests, evals, packaging, source policy,
-design records, its human README — lives in one place, `development/<name>/`, so a unit
-occupies at most two regions of the tree and deleting it means deleting two directories.
-
-```text
-skills/<name>/                     standalone runtime skill; also a single-skill plugin
-agents/<name>.md                   standalone runtime agent
-systems/<name>/                    a plugin: .claude-plugin/plugin.json, README.md, skills/, agents/
-development/<name>/                everything else about the unit — never shipped
-.claude-plugin/marketplace.json    the catalog as the host reads it: one plugin per unit
-development/validate.py            the model above as executable checks
-```
-
-Design decisions and their rationale:
-
-| Decision | Because | Revise when |
+| Capability | Type | Use it for |
 |---|---|---|
-| Top level is the *role* (runtime, composition, development), unit name second | the runtime path is dictated by installers; given that, the only choice is where the rest goes, and one companion directory per unit keeps change local | an installer accepts a nested runtime directory, which would allow unit-first layout |
-| Runtime contains no README, tests or evals | installers and packagers copy the directory as-is; every file becomes context or payload | never — this is the contract with the host |
-| A system is a plugin, its exclusive pieces live inside it | the host's install unit is the plugin, and a plugin cannot reference files outside its own directory; "install one thing" is the requirement | a host installs a multi-piece unit from a manifest that may point anywhere in the repository — then pieces return to the flat catalog and the system becomes a manifest again (the layout this superseded) |
-| Standalone skills are single-skill plugins with `strict: false` | a `SKILL.md` at the plugin root is a plugin; `strict: false` keeps the manifest in the marketplace entry, so nothing non-runtime enters `skills/<name>/` | — |
-| One validator, one workflow, discovery by convention | adding a unit must not require touching CI; `development/<name>/tests/` is found and run | a unit needs a toolchain other than Python |
-| Version and license in each `SKILL.md` frontmatter and each `plugin.json` | the installed artifact is the whole unit; identity and terms travel with it | — |
-| `SKILL.md` under 5,000 estimated tokens | Claude Code's auto-compaction re-attaches only that much of an invoked skill; depth beyond it goes to `references/` | the platform changes the mechanic |
+| [**Branding Studio**](skills/branding-studio/) | Skill | Create, audit, apply, and evolve brands, identity systems, naming, positioning, and brand books. |
+| [**Landing Page**](skills/landing-page/) | Skill | Research, design, build, redesign, and refine high-end marketing landing pages and homepages. |
+| [**Explorer**](skills/explorer/) | Skill | Find non-obvious, defensible connections, hypotheses, analogies, and alternatives before deciding. |
+| [**Research**](systems/research/) | System | Run rigorous scientific research with method, persistent research state, exploration, and independent review. |
 
-New top-level directories and new roles are architecture decisions: the validator lists
-the allowed set and fails on anything else, so the change and the rule land together.
+### Example prompts
 
-## Development
+**Branding Studio**
+> Create a professional brand system for this company from the material I provided. Inspect what is already true before asking me questions.
+
+**Landing Page**
+> Design and build a landing page for this product from the existing repo, product context, and business goals.
+
+**Explorer**
+> Explore non-obvious connections between X and Y. Give me the strongest defensible hypotheses and the test that would distinguish each one.
+
+**Research**
+> Start a research project on whether X affects Y. Help me formulate the question, define what would refute it, and proceed rigorously.
+
+## Install
+
+### ChatGPT
+
+For a standalone Skill, where Skills are available on your account:
+
+1. Open **Plugins** in the sidebar.
+2. Open the **Skills** tab.
+3. Select **Create → Upload from your computer**.
+4. Upload the released ZIP for the skill from [GitHub Releases](https://github.com/enniolopes/skills/releases).
+
+Workspace admins can also import this repository as a plugin marketplace from **Workspace settings → Plugins → Add → Import marketplace** using:
+
+```text
+https://github.com/enniolopes/skills
+```
+
+### Claude Code
+
+Add the marketplace once:
+
+```text
+/plugin marketplace add enniolopes/skills
+```
+
+Then install what you want:
+
+```text
+/plugin install branding-studio@enniolopes
+/plugin install landing-page@enniolopes
+/plugin install explorer@enniolopes
+/plugin install research@enniolopes
+```
+
+### Gemini CLI
+
+Standalone Skills can be installed directly from this repository:
 
 ```bash
-python development/validate.py
+gemini skills install https://github.com/enniolopes/skills.git --path skills/<name>
 ```
 
-That is also what CI runs on every pull request. It checks the topology, each runtime
-piece's frontmatter contract and token budget (standalone or inside a system), each
-system's `plugin.json` and its dependencies, the marketplace and the catalog above against
-the filesystem, relative links, then compiles the Python, runs `claude plugin validate`
-when the CLI is present, and runs every `development/<name>/tests/`.
+For example:
 
-Per-unit tooling lives with the unit, e.g. `python development/branding-studio/package_skill.py`
-builds `dist/branding-studio.zip`.
+```bash
+gemini skills install https://github.com/enniolopes/skills.git --path skills/branding-studio
+```
+
+### Deep Code
+
+Standalone Skills are discovered from Agent Skills directories. Install the chosen `skills/<name>/` directory at either:
+
+```text
+~/.agents/skills/<name>/        # user-level
+.deepcode/skills/<name>/        # project-level
+```
+
+### Other Agent Skills hosts
+
+Install the chosen `skills/<name>/` directory using the host's normal Agent Skills flow.
+
+> **Note:** standalone Skills are the most portable unit. A **System** composes multiple pieces, so installation support can vary by host. `research` currently installs as a plugin through the repository marketplace in supported plugin hosts.
+
+## Skill, Agent, or System?
+
+You do not need to know the repository architecture to use these. The distinction is simple:
+
+- **Skill** — a reusable capability that gives your AI specialized expertise or a workflow. Example: Branding Studio.
+- **Agent** — an independent specialist role, usually used when separate context, tools, authority, or review matter.
+- **System** — several Skills and/or Agents that are meant to work together as one product. Example: Research.
+
+Choose by the outcome you need; the type mainly tells you how the capability is packaged.
+
+## Using a capability
+
+After installation, describe the task normally. On hosts that support automatic Skill activation, the AI can select the relevant Skill when your request matches it. You can also name the capability explicitly when you want to make the intent unambiguous.
+
+Give it the real material whenever possible: files, repositories, existing documents, source data, current designs, or business context. These capabilities are designed to inspect available reality instead of making you restate everything manually.
+
+## Repository development
+
+This README is for users and consumers. AI sessions that create or maintain repository capabilities should follow [AGENTS.md](AGENTS.md).
 
 ## License
 
-[CC BY-NC 4.0](LICENCE). Each runtime unit repeats the license in its frontmatter.
+[CC BY-NC 4.0](LICENCE).
