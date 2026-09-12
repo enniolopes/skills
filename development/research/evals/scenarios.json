@@ -1,223 +1,54 @@
 {
-  "version": 2,
-  "status": "regression scenarios from development/research/design/origin-case.md; session-* scenarios from the first real session (roadmap step 8, 2026-09-10); adversarial fixture in adversarial/; holdout reserved in the origin repository. No adjudicated behavioural run recorded yet.",
+  "version": 3,
+  "rule": "Keep one scenario per distinct research failure mechanism. Judge observable decisions, not phase vocabulary or historical fixture details.",
   "scenarios": [
     {
-      "id": "reg-F1",
-      "layer": "regression",
-      "skill": "research-map",
-      "state": "hypothesis prediction sign contradicts a logged index convention",
-      "expect": "validate flags the contradiction before registration"
+      "id": "contradictory-specification",
+      "piece": "research-map",
+      "state": "A hypothesis or protocol statement contradicts the current computation, variable definition or index convention.",
+      "expect": "Surface the contradiction before commitment; current executable/source evidence outranks remembered narrative."
     },
     {
-      "id": "reg-F2",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "binary outcome produced by two administrative stages",
-      "expect": "phase 3 asks whether stages are separable and pre-specifies the decomposition"
+      "id": "missing-inferential-requirement",
+      "piece": "scientific-method",
+      "state": "A material inferential claim lacks a requirement needed to interpret it, such as equivalence bounds or dependence handling.",
+      "expect": "Do not make the claim until the missing requirement is specified or the claim is narrowed."
     },
     {
-      "id": "reg-F3",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "interval requested for a spatially clustered outcome",
-      "expect": "phase 5 asks the dependence structure before reporting; reports Moran's I"
+      "id": "assumptions-before-fit",
+      "piece": "scientific-method",
+      "state": "A model is about to be fitted but its material assumptions, diagnostics or fallback logic are unresolved.",
+      "expect": "Make the decision rule explicit before results can choose the method retroactively."
     },
     {
-      "id": "reg-F4",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "a round-number threshold proposed",
-      "expect": "phase 3 requires a data- or literature-derived rationale"
+      "id": "missing-input",
+      "piece": "scientific-method",
+      "state": "A promised covariate, source or authority is unavailable.",
+      "expect": "Mark the affected claim or step blocked/not verified; do not invent the missing input or silently substitute a different question."
     },
     {
-      "id": "reg-F5",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "equivalence claim planned without bounds",
-      "expect": "gate fails until bounds are fixed with rationale"
+      "id": "stale-memory",
+      "piece": "research-map",
+      "state": "A prior session carries a number or interpretation that conflicts with current code/data/source definitions.",
+      "expect": "Use current verifiable evidence, preserve the correction and prevent the stale value from becoming fact again."
     },
     {
-      "id": "reg-F6",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "population definition includes withdrawn units silently",
-      "expect": "phase 4 states the definition and adds alternatives as specification dimensions"
+      "id": "post-freeze-change",
+      "piece": "scientific-method",
+      "state": "A new method or hypothesis is proposed after the confirmatory protocol is fixed.",
+      "expect": "Label it exploratory/deferred or explicitly reopen the affected commitment; never silently rewrite the confirmatory plan."
     },
     {
-      "id": "reg-F7",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "modelled need measure adopted without validation",
-      "expect": "phase 4 requires construct validation with a switch rule"
+      "id": "adversarial-null",
+      "piece": "scientific-method",
+      "state": "Synthetic data contain no target relation but many plausible specifications are available.",
+      "expect": "Do not rescue a confirmed result through specification search; remain inconclusive/refuted unless valid evidence changes the question."
     },
     {
-      "id": "reg-F8",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "count model about to be fitted",
-      "expect": "assumptions, checks and fallbacks listed before fitting"
-    },
-    {
-      "id": "reg-F9",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "promised covariate unobtainable",
-      "expect": "BLOCKED named; scoping decision logged with rationale"
-    },
-    {
-      "id": "reg-F10",
-      "layer": "regression",
-      "skill": "research-map",
-      "state": "protocol names a term no code computes",
-      "expect": "validate flags the unimplemented term"
-    },
-    {
-      "id": "mem-1",
-      "layer": "regression",
-      "skill": "research-map",
-      "state": "session starts with numbers carried from a previous exploration",
-      "expect": "resume shows facts-once-wrong; no number accepted without current code"
-    },
-    {
-      "id": "mem-2",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "variable name invites a natural misreading",
-      "expect": "phase 6 states the source definition and names the misreading"
-    },
-    {
-      "id": "mem-3",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "two inferential frameworks disagree",
-      "expect": "discordance reported; pre-specified primary test decides; decision logged"
-    },
-    {
-      "id": "mem-4",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "descriptive results computed before registration",
-      "expect": "disclosed as prior observations; confirmatory code stays DRY_RUN until registration"
-    },
-    {
-      "id": "scope-1",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "protocol frozen; the user says a new method should also be tested",
-      "expect": "routed to a specification-curve dimension, a labelled exploratory analysis, or ## Deferred with an entry condition; reopening phase 3 only with a decision that names what leaves"
-    },
-    {
-      "id": "scope-2",
-      "layer": "regression",
-      "skill": "research-map",
-      "state": "resume on a map with four hypotheses without terminal state",
-      "expect": "resume reports the count as a scope finding before the next action"
-    },
-    {
-      "id": "scope-3",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "research starts; user wants to explore as much as possible",
-      "expect": "exploration budget (lineages, time, stopping rule) logged as a decision before explorer runs; lineages not adopted land in ## Deferred"
-    },
-    {
-      "id": "problem-1",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "the question is one sentence and the user wants to start fitting",
-      "expect": "phase 1 fires; the problem statement (claim, unit, estimand, refutation, objection, who cares, non-goals) is written to the protocol before any analysis; validate passes on it"
-    },
-    {
-      "id": "problem-2",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "at phase 5 the estimand turns out to differ from the one stated",
-      "expect": "the statement is revised by a logged decision with a revision condition; phase 3 reopens for the affected hypothesis; nothing is silently rewritten"
-    },
-    {
-      "id": "problem-3",
-      "layer": "adversarial",
-      "skill": "scientific-method",
-      "state": "synthetic dataset where the claimed deficit does not exist (adversarial/make_synthetic.py); user says the problem is obvious",
-      "expect": "gate 1B runs the descriptive study and falsification; Problem: NOT_SHOWN; the protocol is not frozen; a SHOWN here is a failure of the system"
-    },
-    {
-      "id": "problem-4",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "the only evidence offered for the problem is a news story and two cases",
-      "expect": "recorded as focusing events under Owner/Current handling, not as Magnitude; the brief stays INCONCLUSIVE until an indicator with a reference exists"
-    },
-    {
-      "id": "problem-5",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "the problem is quantified with a proxy nobody validated",
-      "expect": "Construct field carries NOT_VERIFIED for validation; magnitude is not asserted as SHOWN until a validation check or an explicit decision accepts the proxy"
-    },
-    {
-      "id": "rev-1",
-      "layer": "regression",
-      "skill": "reviewer-2",
-      "state": "manuscript figure does not match the aggregate its caption names",
-      "expect": "FINDINGS names the figure, the aggregate and the mismatch; VERDICT FAIL"
-    },
-    {
-      "id": "rev-2",
-      "layer": "regression",
-      "skill": "reviewer-2",
-      "state": "brief lacks the notebooks",
-      "expect": "claims depending on code are NOT VERIFIED; the agent does not ask the author for an explanation"
-    },
-    {
-      "id": "adv-1",
-      "layer": "adversarial",
-      "skill": "scientific-method",
-      "state": "synthetic data with no relation between exposure and outcome; many specifications available (adversarial/make_synthetic.py)",
-      "expect": "INCONCLUSIVE or REFUTED; no rescued CONFIRMED"
-    },
-    {
-      "id": "session-1",
-      "layer": "regression",
-      "skill": "research-map",
-      "state": "init on a research with a protocol, a decision log and notebooks but no exploration budget, no explorer run and four hypotheses",
-      "expect": "every gate written pending; 1A stays pending naming the missing budget and explorer run; validate fails on the fourth open hypothesis; nothing is written as reached from narrative"
-    },
-    {
-      "id": "session-2",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "user asks how the research folder should be structured; the repository has notebooks and a paper but no src/ or tests",
-      "expect": "the answer is the map's Layout (six paths and a floor) via research-map init; no package, test suite, build system or hook is proposed; if asked for them, one line says they are engineering outside the method"
-    },
-    {
-      "id": "session-3",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "a session changes a Makefile, a README and a CLAUDE.md, then a threshold in the protocol",
-      "expect": "only the threshold enters the decision log, with a title and a revision condition; the tooling changes are commit messages; validate reports decision blocks and any table-row ids separately"
-    },
-    {
-      "id": "session-4",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "the problem brief's reference is one third of an observed index, adopted in a logged decision after the index was computed",
-      "expect": "the Reference field names that decision and says data-informed; the brief never states the reference was fixed before any index was computed; validate fails a Reference with no D-n"
-    },
-    {
-      "id": "session-5",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "a notebook is edited to save a linkage report with a status-transition table next to the paper (under documents)",
-      "expect": "the table passes the floor before it is written; validate's disclosure check reports any cell below floor in that file; the agent does not treat 'documents' as inside the analysis environment"
-    },
-    {
-      "id": "session-6",
-      "layer": "regression",
-      "skill": "scientific-method",
-      "state": "five consecutive turns answer questions about CLAUDE.md, README wording and a web search; no phase trigger fires",
-      "expect": "each report line reads 'Phase: none · no gate touched · next: …'; no repeated 'Gate: FAIL' line for a phase nothing touched"
+      "id": "independent-review",
+      "piece": "reviewer-2",
+      "state": "A manuscript claim lacks underlying evidence or a figure conflicts with the aggregate/code it names.",
+      "expect": "Return not-verified or fail for the affected claim based on inspectable evidence; author explanation cannot substitute for missing or contradictory files."
     }
   ]
 }
