@@ -14,12 +14,12 @@ A good run should usually reduce the number of questions the user has to answer.
 
 ## Decision authority
 
-Use one ownership basis rather than memorizing case lists:
+Route authority by the kind of decision:
 
 - **Professional + reversible** → the agent decides. This includes design, narrative form, typography, palette, imagery, motion, responsive composition, visual signature and implementation when no external authority owns the choice.
 - **Factual / authoritative / committed** → evidence or the owning authority decides. This includes product capability, pricing/terms, legal/security/compliance claims, customer proof, quantitative outcomes, business commitments and explicitly governed brand/positioning departures.
 
-A creative choice may have factual implications; those implications still belong to the second axis. Never turn missing business truth into invented creative confidence.
+A creative choice may have factual implications; those implications still require evidence or authority. Never turn missing business truth into invented creative confidence.
 
 When authority is blocking, ask in consequences rather than design jargon.
 
@@ -243,7 +243,7 @@ The test is not whether the work is unprecedented. It is whether the solution wa
 
 ## Synthesis object
 
-`marketing.md` owns the canonical page-intent basis. Discovery fills that same basis rather than inventing a parallel brief schema:
+Use the page-intent model in `marketing.md` rather than inventing a parallel brief schema:
 
 ```yaml
 page_intent:
@@ -284,7 +284,7 @@ For any **truth-bearing** item, use exactly one epistemic status:
 - `INFERRED` — reasonable, reversible interpretation that creates no false fact;
 - `UNKNOWN` — not established and must not be represented as fact.
 
-Creative choices are not a fourth evidence status. They are professional decisions on a separate axis and may be explored freely; any factual implication they introduce must still be `KNOWN`, safely `INFERRED`, or remain `UNKNOWN`.
+Creative choices are not a fourth evidence status. They are professional decisions and may be explored freely; any factual implication they introduce must still be `KNOWN`, safely `INFERRED`, or remain `UNKNOWN`.
 
 Resolve discoverable facts, safe reversible inferences and professional creative decisions yourself. Only an `UNKNOWN` that blocks truth, authority, or a material irreversible fork may become a question. If a reversible default exists, take it and continue.
 
