@@ -51,9 +51,9 @@ Translate the direction into the smallest verbal/visual grammar that can generat
 A useful system creates recognizable family resemblance while allowing meaningful variation. Repetition alone is not coherence.
 
 ### TEST IN USE
-Choose the smallest representative set by asking which material property or system claim could fail, then use applications or conditions capable of exposing that failure. Representative means informative, not merely varied; omit tests that cannot materially change a decision.
+Use representative applications that expose materially different stresses. Make/render/inspect the work in realistic context whenever the environment permits it.
 
-Make/render/inspect the work in realistic context whenever the environment permits it. One-off failure stays local. Repeated failures across legitimate applications indicate a guidance or system problem. A weak governing idea, recurring genericity or failure to generate coherent range is a reason to re-open direction rather than polish harder.
+One-off failure stays local. Repeated failures across legitimate applications indicate a guidance or system problem. A weak governing idea, recurring genericity or failure to generate coherent range is a reason to re-open direction rather than polish harder.
 
 ### REFINE OR RE-DIVERGE
 Fix the lowest layer that explains the defect.
