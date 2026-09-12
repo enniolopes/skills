@@ -54,7 +54,7 @@ Any mechanism remains valid when the brief independently earns it. The skill cha
 v3.5 does not add a new framework. It removes overlapping specifications and makes ownership explicit:
 
 - `SKILL.md` now owns one **canonical quality basis**: truth, meaning, specificity, hierarchy, coherence, expression, distinction, craft, technical mastery and reality. References project it rather than redefining quality.
-- `marketing.md` owns one **canonical page-intent basis** (`page job`, audience, arrival context, offer, proposition, proof/friction, action) and one visitor-state model. Discovery fills the same basis; composition consumes it.
+- `marketing.md` owns one **canonical page-intent basis** (`page job`, audience, arrival context, offer, proposition, proof, friction, action) and one visitor-state model. Discovery fills the same basis; composition consumes it.
 - epistemic status is now orthogonal to creative choice: truth-bearing items are `KNOWN`, `INFERRED` or `UNKNOWN`; factual claims are `SUPPORTED`, `QUALIFIED` or `UNSUPPORTED`; creativity is not an evidence status.
 - research has one rule in both directions: continue only while expected information can materially change a decision; stop when it is unlikely to do so.
 - workflow mode is classified by how much valid solution basis remains, not merely by whether a page file already exists.
