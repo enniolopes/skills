@@ -1,0 +1,113 @@
+{
+  "version": "1.0",
+  "skill": "branding-studio",
+  "purpose": "Targeted evals for corpus-derived promotion candidates. These cases distinguish behavior before runtime promotion is treated as an improvement.",
+  "behavioral_cases": [
+    {
+      "id": "failure-mode-test-selection",
+      "prompt": "Estamos quase finalizando uma identidade. A lógica principal usa um wordmark horizontal largo, tipografia de display bastante condensada e uma relação cromática deliberadamente suave. O sistema ficou muito bom em homepage hero, poster e apresentação institucional. A marca também vai viver em app navigation com pouco espaço, nomes de produto longos em português e alemão, tabelas densas, etiquetas pequenas impressas e fundos fotográficos variáveis. Escolha o menor conjunto de testes que você faria antes de considerar o sistema resolvido e explique o que cada teste precisa conseguir revelar.",
+      "must": [
+        "Select a small set of high-information tests rather than one example of every touchpoint.",
+        "Connect each selected condition to a plausible material failure mode of the current system.",
+        "Distinguish testing whether a property fails from merely presenting how an application looks.",
+        "Keep plausible risks as hypotheses until the artifact is actually tested.",
+        "Allow observed failures to change the lowest responsible layer."
+      ],
+      "must_not": [
+        "Choose applications only for format variety or showcase value.",
+        "Recommend a large generic mockup checklist for certainty.",
+        "Treat the described risks as already-proven defects.",
+        "Use failure-mode terminology without linking tests to properties that could actually fail."
+      ]
+    },
+    {
+      "id": "failure-mode-testing-no-inflation",
+      "prompt": "Crie uma identidade provisória para uma pequena conferência de um único dia. Ela será usada somente em uma landing page, crachá digital e três posts sociais. Não haverá impressão, packaging, internacionalização, sub-brands, produto digital complexo nem uso futuro depois do evento. Temos prazo curto. O sistema já funciona de forma consistente nos três usos previstos. O que ainda precisa ser testado antes da entrega?",
+      "must": [
+        "Test only material risks that remain in the declared digital touchpoints.",
+        "Stop once the requested provisional scope has sufficient evidence.",
+        "Keep test depth proportional to consequence, reversibility and project scope."
+      ],
+      "must_not": [
+        "Invent print, packaging, signage, architecture or multilingual test obligations that are outside scope.",
+        "Turn failure-mode testing into an exhaustive future-proofing checklist."
+      ]
+    },
+    {
+      "id": "craft-typography-real-reading",
+      "prompt": "Escolhi uma família tipográfica que ficou excelente no specimen e nos headlines. Temos Regular, Medium e Bold, todos os caracteres necessários e a licença correta. Então typography está resolvida. A marca terá artigos longos, tabelas de dados, notas técnicas, numerais e nomes compridos. Finalize o sistema tipográfico.",
+      "must": [
+        "Evaluate typography with representative real content rather than inferring resolution from the family/specimen.",
+        "Inspect paragraph reading, measure/leading, hierarchy, numerals/tables, long strings and spacing where relevant.",
+        "Keep exact settings contextual to the actual typeface, medium and content."
+      ],
+      "must_not": [
+        "Treat family availability, weight count or a good specimen as proof that typography is resolved.",
+        "Use a universal numerical recipe for type hierarchy or spacing."
+      ]
+    },
+    {
+      "id": "craft-color-spec-is-not-reproduction",
+      "prompt": "Fechamos as cores. Temos HEX, RGB, CMYK e Pantone, além de contraste AA no site. Isso significa que a identidade cromática está resolvida também para caixas de papel não revestido, sinalização pintada e fotografia?",
+      "must": [
+        "Separate deterministic digital contrast from physical reproduction behavior.",
+        "Treat color values as specifications of intent rather than proof of appearance across substrate, process, lighting and imagery.",
+        "Select representative proofs only for physical uses that are actually in scope."
+      ],
+      "must_not": [
+        "Claim that matching color codes guarantee matching physical appearance.",
+        "Invent a physical reproduction failure before it is observed."
+      ]
+    },
+    {
+      "id": "craft-production-mockup-is-not-proof",
+      "prompt": "O render do package está perfeito. A caixa tem um fechamento incomum, verniz localizado e impressão sobre um substrate mais poroso. Podemos considerar production resolvida porque o dieline está certo e o mockup parece final?",
+      "must": [
+        "Distinguish presentation mockup and technically valid dieline from a representative production proof or prototype.",
+        "Identify the physical behaviors that still need evidence, such as closure/fold behavior, substrate response, print registration or tolerance where material.",
+        "Use specialist or vendor input when the required production knowledge is external to the agent.",
+        "Keep production status below final until the relevant real-world properties are inspected."
+      ],
+      "must_not": [
+        "Treat render polish or file validity as production proof.",
+        "Claim certainty about physical behavior that has not been prototyped or produced."
+      ]
+    }
+  ],
+  "verbal_benchmark": {
+    "id": "generative-verbal-system",
+    "brief": "Uma empresa fornece software para equipes de manutenção predial coordenarem inspeções, ordens de serviço, histórico de falhas e prestadores externos. O produto reduz perda de contexto entre pessoas e turnos; não possui evidência de ser o mais confiável, líder, mais inteligente ou mais eficiente do mercado. Crie o sistema verbal da marca e demonstre-o em: headline da homepage; onboarding após importar ativos; aviso de inspeção atrasada; email executivo resumindo risco operacional. O sistema precisa permanecer reconhecível sem falar do mesmo jeito em todos os contextos.",
+    "review_order": [
+      "Review the four pieces of copy before reading the rationale or voice-principle labels.",
+      "Then review the verbal system and whether it can generate a fifth unseen communication."
+    ],
+    "criteria": [
+      "Truth integrity: no unsupported leadership/trust/efficiency claims.",
+      "Message architecture: each context emphasizes what matters now rather than repeating one proposition.",
+      "Verbal character: the actual writing changes meaningfully, not only the adjective labels.",
+      "Contextual modulation: product, marketing and executive communication differ while retaining family resemblance.",
+      "Generativity: principles support a new communication without copying the supplied examples.",
+      "Specificity: consequential language depends on maintenance continuity, inspection history, handoff or another property of this product rather than generic SaaS language."
+    ],
+    "failure_signature": "The output relies on generic labels such as clear/human/confident and generic lines such as stay on top of what matters or work smarter together, with little causal dependence on the product."
+  },
+  "transfer_benchmark": {
+    "id": "brand-book-decision-transfer",
+    "stage_a": "Give baseline and candidate the same fixed brand system and ask each to produce a concise guideline for an external team that did not participate in the project.",
+    "stage_b": "In separate fresh runs, give a new operator only one produced guideline plus a materially new touchpoint that was not demonstrated in its examples. Ask for a correct new application without copying an existing layout.",
+    "review": [
+      "Judge the downstream artifact before judging the guideline itself.",
+      "Check whether the artifact belongs to the identity, serves the new artifact job, preserves invariants and uses freedoms legitimately.",
+      "Penalize copying an existing layout when the new job requires a different composition.",
+      "Check whether the operator knows when the system is silent and escalation is required.",
+      "Prefer the smaller guideline when downstream decision quality is materially equivalent."
+    ],
+    "control": "Use the same operator/model conditions for baseline and candidate runs, hide labels and randomize order."
+  },
+  "promotion_gate": {
+    "baseline_fail_candidate_pass": "eligible for experimental promotion at the smallest sufficient runtime/reference layer",
+    "baseline_and_candidate_equivalent": "do not promote; treat the candidate as redundant",
+    "candidate_improves_target_but_regresses_elsewhere": "reformulate or reject",
+    "difference_not_observable": "treat as meta-language or development knowledge, not runtime"
+  }
+}
