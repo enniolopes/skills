@@ -3,7 +3,7 @@
 
 One command locally and in CI:  python development/validate.py
 
-CI proves only mechanical properties: installability, runtime boundaries, internal runtime
+CI proves only mechanical properties: installability, runtime boundaries, direct SKILL
 references, syntax and unit contracts. It does not judge semantic or creative quality.
 """
 
@@ -71,10 +71,6 @@ def check_runtime_tree(root: Path, errors: list[str]) -> None:
         for ref in RUNTIME_FORBIDDEN_REFS:
             if ref in text:
                 errors.append(f"{rel(path)}: runtime depends on repository path {ref!r}")
-        for match in RUNTIME_PATH.findall(text):
-            target = root / match.rstrip(".,;:)")
-            if not target.exists():
-                errors.append(f"{rel(path)}: missing runtime reference {match!r}")
 
 
 def check_skill(path: Path, names: dict[str, str], errors: list[str]) -> None:
@@ -91,6 +87,9 @@ def check_skill(path: Path, names: dict[str, str], errors: list[str]) -> None:
         errors.append(f"{rel(skill)}: license must be {LICENSE}")
     if not SEMVER.match(fm.get("metadata.version", "")):
         errors.append(f"{rel(skill)}: metadata.version must be semver")
+    for match in RUNTIME_PATH.findall(skill.read_text(encoding="utf-8")):
+        if not (path / match.rstrip(".,;:)")).exists():
+            errors.append(f"{rel(skill)}: missing direct runtime reference {match!r}")
     previous = names.get(path.name)
     if previous:
         errors.append(f"{rel(path)}: runtime name duplicates {previous}")
