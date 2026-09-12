@@ -1,217 +1,134 @@
 # Creative Control — preserve intent without freezing the solution
 
-Load this for CREATE and major REFINE work, and whenever materially new evidence appears after a direction has been chosen.
+Read this at DIRECT for CREATE/major REFINE, and again only when materially new evidence or a possible pivot appears.
 
-The control problem is not to make execution rigid. It is to keep the whole governing the parts while allowing the current solution to change when evidence makes it weaker than an alternative.
+The purpose is not to make design procedural. It is to keep the page-level purpose governing local decisions while leaving the solution free to change.
 
 ## Core rule
 
-Preserve the problem definition more strongly than the solution.
+Preserve the problem more strongly than the current solution.
 
 Preserve creative intent more strongly than its current expression.
 
-Treat every design direction as a **committed hypothesis**, not immutable truth.
+Treat a chosen direction as a **working hypothesis**, not a contract.
 
-A landing page may pivot radically in composition, typography, imagery, motion or technical mechanism while preserving the same truthful purpose. Conversely, a polished implementation must be abandoned when rendered evidence materially falsifies the governing idea.
+Keep this control model internal. Do not narrate its taxonomy to the user or turn it into visible page structure unless that genuinely helps the work.
 
-## Decision layers and inertia
+## Unequal inertia
 
-Classify important decisions by layer:
+Think in five layers:
 
-1. **FOUNDATION** — product/business truth, supplied facts, authoritative constraints, available proof, hard implementation constraints.
-2. **INTENT** — page job, audience/arrival model, offer, proposition, primary action, proof strategy, material friction.
-3. **DIRECTION** — creative thesis, emotional target, visual world, signature, content thesis, interaction thesis, restraint.
-4. **SYSTEM / COMPOSITION** — visual grammar, narrative structure, hierarchy, layout relationships, imagery treatment, motion grammar, responsive composition.
-5. **EXECUTION** — code, exact styling, assets, crops, timings, breakpoints, component implementation, performance fixes and micro-craft.
-6. **EXPERIMENTS** — disposable explorations, prototypes, wildcard ideas and rejected routes.
+1. **TRUTH** — product/business facts, available proof, authoritative constraints, hard technical constraints.
+2. **INTENT** — page job, audience/arrival context, offer, proposition, primary action, proof/friction model.
+3. **DIRECTION** — governing creative idea, emotional target, signature, content/interaction thesis, restraint.
+4. **EXPRESSION** — narrative/composition, hierarchy, visual grammar, imagery treatment, motion, responsive form.
+5. **EXECUTION** — code, exact styling, assets, crops, timings, breakpoints, performance and micro-craft.
 
-These layers do not have equal inertia.
+They should not move at the same rate.
 
-- FOUNDATION changes only with new truth, authority or hard constraint.
-- INTENT changes when evidence shows the page is solving the wrong visitor/business decision.
-- DIRECTION should be stable enough to create coherence, but must reopen when evidence falsifies the idea.
-- SYSTEM / COMPOSITION should change readily when a stronger expression of the same direction is found.
+- TRUTH changes only with better evidence, authority or a real constraint.
+- INTENT changes when the page is solving the wrong decision or a stronger truthful framing is established.
+- DIRECTION needs enough stability to create coherence, but may be abandoned when it produces the wrong meaning or a materially stronger idea emerges.
+- EXPRESSION should change freely when a better realization of the same idea appears.
 - EXECUTION is cheap to revise.
-- EXPERIMENTS have no commitment and may be discarded freely.
 
-Do not confuse persistence with correctness. A decision does not become more true because work has already been invested in it.
+Explorations are outside this chain: they are disposable and may be strange, incomplete or rejected without consequence.
 
-## Direction as a falsifiable hypothesis
+## Direction without a schema
 
-Before substantial implementation, the chosen direction should be able to answer:
+Before substantial implementation, be able to state compactly:
 
-- `thesis` — what governing creative idea organizes the experience;
-- `must_achieve` — what must become clearer, more credible, more emotionally appropriate or more memorable if the direction works;
-- `must_not_cause` — failure effects that would make the direction wrong even if visually impressive;
-- `signature` — the dominant expression worth remembering;
-- `pivot_if` — observable evidence that would justify reopening the direction;
-- `restraint` — tempting/default mechanisms deliberately excluded because they weaken the idea.
+- the governing idea;
+- the signature or dominant expression;
+- what the direction should make clearer, more credible, more appropriate or more memorable;
+- what observable failure would make the idea wrong.
 
-Keep these semantic. Do not freeze exact colors, fonts, layouts, libraries or effects unless they are intrinsically part of the idea.
+Do not require a fixed form or persisted object. Do not freeze colors, fonts, layouts, libraries or effects unless they are intrinsically part of the idea.
 
-Good:
+A useful direction generates decisions. A weak direction merely describes styling.
 
-```text
-thesis: make invisible orchestration inspectable
-must_achieve: complexity feels controlled; real product behavior remains the proof
-must_not_cause: surveillance feeling; dashboard cliché; technical intimidation
-pivot_if: real UI cannot support the metaphor; mobile reduces the signature to decoration
-```
+## Exploration can be intuitive
 
-Weak:
+A new idea does not need a complete rationale before it may be explored. Use intuition, non-adjacent references and wildcard routes when they may open useful territory.
 
-```text
-thesis: dark premium interface
-must_achieve: use monospace and gradients
-pivot_if: change colors if it looks bad
-```
-
-The first preserves intent while allowing invention. The second merely stores implementation choices.
-
-## Exploration is freer than commitment
-
-Do not require a new idea to be fully justified before it may be explored. Strong creative work can begin as an intuition, strange association or non-adjacent reference.
-
-During divergence, a serious route only needs enough structure to test:
+For a serious route, know only enough to test it:
 
 - governing idea;
-- why it might serve the intent;
-- what new expressive territory it unlocks;
-- likely failure mode;
-- smallest useful prototype/render that could teach something.
+- connection it might have to the page intent;
+- expressive territory it unlocks;
+- likely failure;
+- smallest prototype/render that would teach something.
 
-A **wildcard** route may be deliberately less obvious than the evidence would directly imply. It earns commitment only if it survives semantic and contextual review.
+Prefer making the uncertain thing visible over writing more rationale about it.
 
-Exploration may be intuitive. Commitment must be defensible.
+Exploration may be intuitive. Commitment must become defensible.
 
-Do not preserve every explored route. Once selection is useful, keep the preferred direction and only the lessons from rejected routes that materially improve future decisions. Creative exploration needs permission to disappear.
+Do not keep every explored route in working memory once it stops adding decision value.
 
-## Observe before changing
+## Learning runs both directions
 
-When new evidence arrives — especially a browser render, mobile viewport, real asset, interaction test, user correction, product discovery or implementation constraint — do not immediately patch the nearest visible symptom.
+Decisions usually flow from TRUTH toward EXECUTION, but learning can travel upward.
 
-First classify the root layer.
+A render, composition experiment or real asset may reveal that the current direction is wrong. More importantly, creative work may reveal a **better proposition or page framing** that was not obvious during synthesis.
 
-### FOUNDATION finding
+When downstream work suggests an upstream improvement:
 
-The assumed truth, evidence, authority or hard constraint was wrong/missing.
+1. treat it as a hypothesis, not as permission to rewrite facts;
+2. test it against real product evidence, audience context and business authority;
+3. if it is better and truthful, deliberately update INTENT and revalidate downstream work;
+4. if it is only visually attractive, keep the existing intent.
 
-Examples: a capability does not exist; supplied pricing changed; a required font/license is unavailable.
+Creativity may discover strategy. It may not invent truth.
 
-Response: correct FOUNDATION, then revalidate every affected downstream decision.
+## Observe before patching
 
-### INTENT finding
+When a material problem appears, ask for the lowest level that fully explains it.
 
-The page is solving the wrong decision or using the wrong proposition/proof/action model.
+- **TRUTH** — an assumed capability, claim, proof source or constraint is wrong.
+- **INTENT** — the proposition, action, proof model or visitor decision is wrong.
+- **DIRECTION** — the governing idea produces the wrong meaning, emotion, specificity or category signal.
+- **EXPRESSION** — the idea remains sound, but narrative, hierarchy, rhythm, visual grammar or responsive composition is weak.
+- **EXECUTION** — the design decision is sound; implementation/craft is failing.
 
-Examples: live product is enterprise-demo-led while the page was built around self-serve trial; available evidence does not support the chosen promise.
+Fix the lowest level that explains the evidence. A downstream defect does not justify reopening everything above it. An upstream change requires downstream revalidation, not automatic destruction of solved work.
 
-Response: reopen INTENT and revalidate DIRECTION and everything downstream.
+Repeated downstream exceptions are themselves evidence. If many local fixes are required to keep a direction working, question whether the next upstream layer is actually the problem instead of accumulating patches.
 
-### DIRECTION finding
+## REFINE or RE-DIVERGE
 
-The governing creative idea itself produces the wrong meaning, emotion, specificity or product representation.
+**REFINE** when the current governing idea still serves the truthful intent and the defect belongs to expression or execution.
 
-Examples: the intended “control room” metaphor makes the product feel like surveillance software; the signature cannot be supported by real product evidence; the concept becomes generic once rendered.
+**RE-DIVERGE** when the governing idea itself is materially falsified, has become generic after rendering, cannot be supported by real evidence, or a demonstrably stronger idea appears.
 
-Response: **RE-DIVERGE**. Preserve valid FOUNDATION and INTENT; use the failed direction as evidence; explore materially different governing ideas.
+Do not protect a direction because implementation has already begun. Do not reopen a strong direction merely because novelty is possible.
 
-### SYSTEM / COMPOSITION finding
+For a late better idea, compare it against truth and intent rather than sunk cost. Preserve solved work that remains compatible.
 
-The direction remains sound, but its current narrative, hierarchy, visual grammar or responsive expression is weak.
+## Unresolved creative questions
 
-Examples: repeated card geometry flattens rhythm; the hero expresses the concept but later sections reset into generic SaaS patterns; mobile sequencing loses hierarchy.
+Some decisions are best postponed until the relevant artifact exists. Keep a material uncertainty mentally explicit and resolve it at the earliest useful render/prototype rather than asking the user to choose a reversible design preference.
 
-Response: refine/recompose without discarding the direction.
+Do not turn these uncertainties into a formal register unless the task is long enough that forgetting them is a demonstrated risk.
 
-### EXECUTION finding
+## Anti-rigidity
 
-The design decision is sound; craft or implementation is failing.
+The control model is failing if it causes any of these:
 
-Examples: broken crop, poor line break, jank, clipping, incorrect spacing, weak focus state, missing asset.
+- the first plausible direction becomes sacred;
+- every experiment needs justification before exploration;
+- internal control vocabulary leaks into the visible design;
+- unrelated briefs converge on one house aesthetic;
+- qualitative judgment is replaced by fake numerical precision;
+- a stronger late idea is rejected because work has already begun;
+- local craft defects trigger full redesigns;
+- process/schema completion receives more attention than the rendered page.
 
-Response: fix execution locally and rerender.
+The goal is continuity of purpose, not continuity of form.
 
-## Lowest explanatory layer
+## Compact loop
 
-Repair at the **lowest layer that fully explains the failure**.
+For material work:
 
-Do not reopen strategy because one breakpoint is bad.
+`GROUND → EXPLORE → COMMIT TEMPORARILY → MAKE → OBSERVE → REFINE or RE-DIVERGE`
 
-Do not keep polishing CSS when the direction is producing the wrong meaning.
-
-When a layer changes, reconsider downstream layers only as necessary:
-
-`FOUNDATION → INTENT → DIRECTION → SYSTEM / COMPOSITION → EXECUTION`
-
-A downstream change does not automatically reopen upstream decisions. An upstream change requires downstream revalidation, not automatic destruction of all previous work.
-
-## REFINE versus RE-DIVERGE
-
-After a material render or critique finding:
-
-- **REFINE** when the current direction still explains the desired experience and the defect belongs to system/composition/execution.
-- **RE-DIVERGE** when evidence materially falsifies the current direction or a clearly stronger governing idea becomes available.
-
-Do not protect a direction because it was approved internally or expensive to implement.
-
-Do not reopen a strong direction merely because novelty is possible. Newness alone is not evidence.
-
-## Late better ideas
-
-A committed direction is not a ban on invention after implementation starts.
-
-When a materially stronger idea appears late:
-
-1. compare it against the stable FOUNDATION and INTENT, not against sunk implementation cost;
-2. identify whether it improves meaning, specificity, distinction or evidence use materially rather than cosmetically;
-3. estimate what solved downstream work can be preserved;
-4. if the gain is material and feasible, reopen DIRECTION deliberately rather than smuggling the new idea in as decorative drift.
-
-This protects both convergence and genuine innovation.
-
-## Creative debt
-
-Some questions are best answered by rendering rather than premature discussion. Keep unresolved design questions explicit when they matter, for example:
-
-```text
-creative_debt:
-- question: how real product UI should enter the hero
-  reason: crop/scale can only be judged in rendered composition
-  resolve_by: first-viewport render
-```
-
-Creative debt is permission to postpone a decision, not permission to forget it. Resolve it by the point at which it can materially damage the result.
-
-## Anti-rigidity checks
-
-The control system is failing if it causes any of these:
-
-- treating the first plausible direction as contractual truth;
-- requiring every creative experiment to be justified before exploration;
-- preserving weak composition because it matches an earlier plan;
-- making all pages follow the same state-shaped aesthetic;
-- turning qualitative judgment into fake numerical precision;
-- blocking a strong late idea solely because implementation has begun;
-- reopening the whole project for local craft defects;
-- replacing design judgment with schema completion.
-
-The control plane exists to preserve **continuity of purpose**, not continuity of form.
-
-## Operating loop
-
-For material work, use this control loop across the existing landing-page method:
-
-`GROUND → DIVERGE → COMMIT → REALIZE → OBSERVE → CLASSIFY → REFINE or RE-DIVERGE`
-
-`GROUND` preserves truth and intent.
-
-`DIVERGE` protects possibility.
-
-`COMMIT` gives the page enough temporary stability to become coherent.
-
-`OBSERVE` makes the real browser and real content evidence.
-
-`CLASSIFY` prevents both cosmetic patching and gratuitous restart.
-
-`REFINE or RE-DIVERGE` lets the work converge without becoming trapped by its first idea.
+Ground truth and intent. Explore widely enough to find a point of view. Commit long enough to build coherence. Let real output teach you what the plan could not. Then improve the current idea or deliberately replace it.
