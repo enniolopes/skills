@@ -15,7 +15,7 @@ Resolve eight decisions:
 5. **Proposition** — the most compelling truthful connection between the offer and the visitor's desired outcome.
 6. **Proof** — what makes the proposition and important claims believable.
 7. **Friction** — what still makes acting costly, risky, unclear or premature.
-8. **Action** — the primary conversion event the page should make reasonable and easy.
+8. **Action** — the primary conversion transition the page should make reasonable and easy, including any material context already resolved by the visitor that should survive into the destination or commitment.
 
 Resolve only as much of each decision as materially changes the page. Do not invent a complete strategy when the user has provided only a design task.
 
@@ -125,6 +125,8 @@ Avoid:
 The page should have one clearly dominant conversion goal unless the business context genuinely requires otherwise.
 
 Secondary actions may exist, but they must not create an accidental competing hierarchy.
+
+When the visitor has already resolved material information — for example a product, plan, configuration, query, location or other decision-relevant state — preserve that context through the dominant action when the destination can use it. Do not let a generic CTA reset a more informative conversion path merely because both lead to the same destination.
 
 The CTA label should make the consequence of acting reasonably clear. Ensure the destination or interaction exists when the project supplies it.
 
