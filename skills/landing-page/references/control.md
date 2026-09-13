@@ -38,7 +38,9 @@ Explorations are outside this chain: they are disposable and may be strange, inc
 
 After SYNTHESIZE, keep only the few truth/intent properties whose loss would make downstream work materially wrong or weaker. Treat them as active invariants until better evidence, authority or a deliberate intent change invalidates them.
 
-An active invariant states **what must survive**, not how to implement it. `A resolved product/configuration must remain attached to the conversion path` is an invariant; `use a sticky CTA` is a solution. Do not create a fixed schema or ledger; usually one to three invariants are enough, and none are needed when the page intent already carries everything material without risk of drift.
+An active invariant states **what must survive**, not how to implement it. `A resolved product/configuration must remain attached to the conversion path` is an invariant; `use a sticky CTA` is a solution. When the page has a primary visitor task or transition that downstream design could degrade, preserve **task integrity** as an active invariant: from arrival through the intended transition, the path remains discoverable, understandable, and efficient for the page job. A working CTA is not sufficient if navigation, motion, scroll choreography, responsive adaptation, context loss, or another expressive choice adds avoidable effort. Additional effort is justified only when it materially serves the page job.
+
+Do not create a fixed schema or ledger; usually one to three invariants are enough, and none are needed when the page intent already carries everything material without risk of drift.
 
 At the few transitions where loss is plausible — committing a direction, judging a representative artifact, and final refinement — ask:
 

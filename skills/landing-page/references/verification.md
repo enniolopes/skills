@@ -1,6 +1,6 @@
 # Verification and Refinement
 
-Load this before completion of any material CREATE or REFINE task when browser/rendering tools are available. Use the relevant subset for REPAIR.
+Load this during material CREATE or major REFINE once there is an inspectable browser/render state, and keep it active through completion when those tools are available. Use the relevant subset for REPAIR.
 
 The core rule is:
 
@@ -18,12 +18,15 @@ For each applicable quality claim, use:
 
 Evidence only answers a claim for the state it actually observed. Before judging or capturing a region/state, exercise what makes it real and allow relevant lazy, async, loading, animation or interaction-driven behavior to settle. A screenshot of an unloaded lazy region, a closed menu, or an unexercised sticky/interactive state is not evidence for that state.
 
+For visual claims, choose the smallest useful observation as `state × viewport × scope` — for example, `settled × mobile × first viewport`. Screenshots are strong evidence for appearance, comparison and composition, not for interaction behavior; exercise motion, sticky states, menus and task flows in the browser, then capture the relevant state when a still image helps judgment.
+
 Examples:
 
 | Claim | Falsifier | Valid evidence |
 |---|---|---|
 | page renders | load/runtime failure | browser load / server response |
 | primary CTA works | click does not produce intended result | actual interaction + resulting navigation/state |
+| primary task preserves intent | path becomes materially harder to discover, understand or complete because of downstream design | exercised end-to-end task path in the real browser |
 | mobile composition works | hierarchy/crop/action fails at mobile | rendered mobile viewport inspection |
 | build is valid | repository check fails | declared build/typecheck/lint command actually run |
 | visual direction is coherent | rendered relationships contradict the grammar | perceptual review of full page/screenshots |
@@ -72,6 +75,12 @@ Do not test mobile only by narrowing until the page technically fits. Look for i
 - navigation remains clear;
 - no meaningful interaction relies only on hover;
 - dense desktop compositions simplify or resequence appropriately.
+
+## Primary-task integrity
+
+When the page has a primary visitor task or conversion transition, exercise that path end to end in every relevant representative state instead of validating only the CTA or isolated controls. Judge the task-integrity invariant from `control.md`: the visitor should be able to discover what to do, understand the consequence, and complete the intended transition without avoidable effort introduced by direction, navigation, motion, scroll choreography, responsive adaptation, or context loss.
+
+Do not optimize for the shortest conceivable path when the page job genuinely requires explanation, proof, configuration, or deliberate pacing. The failure is **unearned friction**: effort added by the expression that does not materially serve the visitor decision or page job. If the task is prevented or effectively unusable, classify it as `BLOCKER`; if it still works but a downstream creative/interaction choice materially burdens it, classify it as `MATERIAL`.
 
 ## Perceptual QA
 
@@ -145,14 +154,16 @@ Do not silently reinterpret the accepted design into a generic component system.
 
 ## Build in visual slices
 
-For material CREATE work, do not write the whole page blindly and review only at the end:
+For material CREATE and major REFINE work, when browser/render tools exist, do not accumulate substantial visual implementation without observing it. Render when a composition, interaction, responsive decision, asset integration, or active invariant becomes materially judgeable; do not wait for an arbitrary section count or the completed page.
 
 1. implement the smallest representative slice that tests the highest material uncertainty or active invariant; this is often the first viewport, but not necessarily;
-2. render and correct large drift;
-3. implement the next narrative slice;
-4. render and check continuity;
+2. exercise the real state, render it, and capture a screenshot when a still image will improve comparison or inspection;
+3. correct the largest semantic, compositional or craft drift while the decision is still cheap to change;
+4. implement the next materially judgeable slice and inspect continuity with what already exists;
 5. continue until complete;
 6. run full-page rhythm and responsive passes.
+
+The default loop is `MAKE → RENDER → OBSERVE → CORRECT → CONTINUE`. Captures are working evidence, not process ceremony; generate the states and views that can change a decision rather than building a screenshot archive for its own sake.
 
 This preserves a coherent direction while reducing late-stage visual debt and exposes semantic drift while the solution is still cheap to change.
 
@@ -163,7 +174,7 @@ The first successful render begins QA. When browser/render tools exist:
 1. run the app using repository-declared commands;
 2. exercise the relevant page states and let lazy/async/interaction-driven content settle;
 3. inspect the first viewport and complete narrative;
-4. exercise primary interactions and conversion actions;
+4. exercise the primary task end to end, including the intended destination/state and any decision-relevant context that should survive;
 5. inspect representative desktop/mobile and any additional warranted viewports;
 6. capture screenshots when useful;
 7. run deterministic checks available in the environment;
@@ -224,6 +235,7 @@ Do not sign off while any applicable defect remains:
 - runtime/build failure;
 - blank/partially broken render;
 - primary action broken;
+- primary task technically works but downstream design or interaction materially obscures or burdens it without serving the page job;
 - missing central image/font;
 - clipped primary content;
 - accidental wrapping that damages hierarchy;
@@ -292,7 +304,9 @@ Do not hand off with known BLOCKER or MATERIAL findings that are fixable in the 
 
 ## Final pass and stop rule
 
-Before handoff, walk every **applicable** quality dimension from `SKILL.md`. For each, ask what remaining observation could still falsify the claim that it is resolved and whether the valid oracle has been applied to the relevant exercised state. Re-run the semantic reverse-read when active invariants were material to the work. Do not create a second checklist of quality definitions here.
+After the last material change and before handoff, perform a fresh holistic visual inspection of the complete settled artifact in representative desktop and mobile states. Do not rely on screenshots from an earlier revision or inspect only the region that changed. Re-run the relevant perceptual and multi-lens review against the final page, including full-page rhythm and the weakest 10%; if that pass triggers another material correction, inspect the resulting final state again.
+
+Then walk every **applicable** quality dimension from `SKILL.md`. For each, ask what remaining observation could still falsify the claim that it is resolved and whether the valid oracle has been applied to the relevant exercised state. Re-run the semantic reverse-read when active invariants were material to the work. Do not create a second checklist of quality definitions here.
 
 Stop refinement when:
 
