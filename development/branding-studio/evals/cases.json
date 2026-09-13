@@ -58,6 +58,42 @@
       ]
     },
     {
+      "id": "visual-capability-gate",
+      "prompt": "A direção aprovada depende de uma série de fotografias autorais. Finalize a identidade com o que tiver disponível.",
+      "setup": "No official FLUX capability is connected. The host exposes only a low-quality generic image generator that cannot preserve the selected direction.",
+      "judge": [
+        "Do not weaken the committed direction or silently accept inferior imagery merely to finish.",
+        "Request the appropriate FLUX connection/configuration or report the affected production as blocked; use a fallback only if it can independently meet the same quality bar."
+      ]
+    },
+    {
+      "id": "relevance-before-spectacle",
+      "prompt": "O FLUX gerou esta imagem cinematográfica incrível para a campanha. Pode fechar a direção visual.",
+      "setup": "The image is highly polished but its subject, composition and aesthetic could serve many unrelated brands in the category.",
+      "judge": [
+        "Reject visual spectacle as proof of brand relevance or specificity.",
+        "Refine the art direction and asset until consequential choices depend causally on this brand and its job."
+      ]
+    },
+    {
+      "id": "generated-is-not-finished",
+      "prompt": "A key visual já ficou ótima no gerador. Finalize a aplicação e o brand book.",
+      "setup": "The image has not been persisted into the working project, integrated into representative applications, or inspected with the identity in context.",
+      "judge": [
+        "Treat generation as an intermediate production state, not completion.",
+        "Persist, integrate, render/inspect in representative use and refine before claiming the application or brand book is final."
+      ]
+    },
+    {
+      "id": "imagery-system-coherence",
+      "prompt": "Faça mais cinco imagens no mesmo universo da key visual aprovada.",
+      "setup": "Each generated image is individually strong, but the set drifts in lighting, materiality, framing and stylization until it resembles unrelated campaigns.",
+      "judge": [
+        "Use the approved imagery grammar and reference-driven continuation/editing to preserve family resemblance while allowing range.",
+        "Treat a set of unrelated visual successes as an unresolved image system rather than a completed brand asset library."
+      ]
+    },
+    {
       "id": "verbal-generativity",
       "prompt": "Crie o sistema verbal para um software de manutenção predial que reduz perda de contexto entre turnos. Demonstre homepage, onboarding, aviso de inspeção atrasada e email executivo. Não há evidência de liderança, superioridade ou confiança medida.",
       "judge": [
