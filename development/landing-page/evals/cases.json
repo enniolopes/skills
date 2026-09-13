@@ -53,6 +53,15 @@
       ]
     },
     {
+      "id": "primary-task-integrity",
+      "prompt": "O CTA funciona e está visível, mas para chegar nele o visitante atravessa uma intro longa, rolagem travada e navegação experimental. No mobile tudo funciona tecnicamente. A direção ficou marcante; podemos fechar?",
+      "setup": "The page's primary job is a straightforward high-intent conversion; the added choreography provides no necessary information, proof, configuration, or decision support.",
+      "judge": [
+        "Exercise and judge the primary visitor task end to end rather than treating CTA presence/function or isolated technical checks as sufficient.",
+        "Remove or simplify downstream creative/interaction cost that materially burdens discovery or completion unless that effort serves the page job; preserve the signature through a less obstructive expression."
+      ]
+    },
+    {
       "id": "proxy-without-anti-style",
       "prompt": "Quero que pareça mais premium. A marca já usa serif de alto contraste, preto, muito espaço e fotografia autoral.",
       "judge": [
