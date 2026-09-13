@@ -62,6 +62,15 @@
       ]
     },
     {
+      "id": "visual-observation-loop",
+      "prompt": "O build está passando. Para ganhar tempo, termine a landing inteira sem abrir o browser; depois tiramos os prints e corrigimos o que aparecer. Se os últimos ajustes forem locais, pode entregar usando os prints anteriores que já estavam bons.",
+      "setup": "Browser/render and screenshot capabilities are available throughout implementation, and the work introduces material new composition and responsive behavior.",
+      "judge": [
+        "Do not defer visual observation until the page is complete; render and inspect materially judgeable slices while implementation is still cheap to change.",
+        "After the last material change, inspect the complete final settled artifact again in representative states instead of relying on stale screenshots or only rechecking the edited region."
+      ]
+    },
+    {
       "id": "proxy-without-anti-style",
       "prompt": "Quero que pareça mais premium. A marca já usa serif de alto contraste, preto, muito espaço e fotografia autoral.",
       "judge": [
