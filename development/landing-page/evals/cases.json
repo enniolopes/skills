@@ -12,6 +12,14 @@
       ]
     },
     {
+      "id": "greenfield-template-default",
+      "prompt": "Crie uma landing page nova do zero. Não existe repositório, stack exigida ou restrição do host; escolha a base técnica e comece.",
+      "judge": [
+        "Start from the canonical `enniolopes/landing-page-starter` template instead of assembling a greenfield stack ad hoc.",
+        "Treat the starter as engineering substrate only; product, brand, creative direction, composition and experience quality still come from the task and landing-page skill."
+      ]
+    },
+    {
       "id": "job-change",
       "prompt": "A campanha agora leva para demo enterprise, não trial self-service. Aproveite o que ainda servir.",
       "judge": [
