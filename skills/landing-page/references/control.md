@@ -34,6 +34,20 @@ They should not move at the same rate.
 
 Explorations are outside this chain: they are disposable and may be strange, incomplete or rejected without consequence.
 
+## Preserve material intent across layers
+
+After SYNTHESIZE, keep only the few truth/intent properties whose loss would make downstream work materially wrong or weaker. Treat them as active invariants until better evidence, authority or a deliberate intent change invalidates them.
+
+An active invariant states **what must survive**, not how to implement it. `A resolved product/configuration must remain attached to the conversion path` is an invariant; `use a sticky CTA` is a solution. Do not create a fixed schema or ledger; usually one to three invariants are enough, and none are needed when the page intent already carries everything material without risk of drift.
+
+At the few transitions where loss is plausible — committing a direction, judging a representative artifact, and final refinement — ask:
+
+- what did this layer receive that it is not allowed to lose?
+- does the proposed transformation preserve or strengthen it?
+- what observable result would falsify that preservation?
+
+If an invariant is wrong, revise it at TRUTH/INTENT with valid evidence or authority. Otherwise fix the downstream layer rather than silently weakening the requirement.
+
 ## Direction without a schema
 
 Before substantial implementation, be able to state compactly:
