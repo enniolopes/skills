@@ -3,7 +3,7 @@ name: landing-page
 description: Research, design, build, redesign, or refine high-end marketing landing pages and homepages where conversion, creative direction, visual distinction, and production-grade web craft matter.
 license: CC-BY-NC-4.0
 metadata:
-  version: 3.8.0
+  version: 3.9.0
 ---
 
 # Landing Page
