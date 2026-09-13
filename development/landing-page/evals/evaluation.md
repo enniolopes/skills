@@ -22,7 +22,7 @@ Use five dimensions:
 1. **Truth and intent** — factual claims, page job and conversion logic stay grounded.
 2. **Causal scope** — local defects stay local; upstream failures reopen only what they invalidate.
 3. **Specificity and expression** — the governing idea and composition depend on this product/domain rather than a recurring house style or reflexive anti-default posture.
-4. **Craft and reality** — hierarchy, typography, imagery, motion, responsive behavior and implementation survive rendered inspection where relevant.
+4. **Craft and reality** — hierarchy, typography, imagery, motion, responsive behavior and implementation survive rendered inspection where relevant; for generated imagery, judge art direction, product-specific relevance, asset craft, integration, responsive crop, loading behavior and browser composition rather than generator success in isolation.
 5. **Context efficiency** — extra research, process or rules must materially improve a decision; polish, novelty and completeness are not quality proxies.
 
 Across creative briefs, flag repeated solutions only when they lack brief-specific causality. Familiar mechanisms are valid when earned.
