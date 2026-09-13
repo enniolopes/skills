@@ -24,6 +24,7 @@ Examples:
 |---|---|---|
 | page renders | load/runtime failure | browser load / server response |
 | primary CTA works | click does not produce intended result | actual interaction + resulting navigation/state |
+| primary task preserves intent | path becomes materially harder to discover, understand or complete because of downstream design | exercised end-to-end task path in the real browser |
 | mobile composition works | hierarchy/crop/action fails at mobile | rendered mobile viewport inspection |
 | build is valid | repository check fails | declared build/typecheck/lint command actually run |
 | visual direction is coherent | rendered relationships contradict the grammar | perceptual review of full page/screenshots |
@@ -72,6 +73,12 @@ Do not test mobile only by narrowing until the page technically fits. Look for i
 - navigation remains clear;
 - no meaningful interaction relies only on hover;
 - dense desktop compositions simplify or resequence appropriately.
+
+## Primary-task integrity
+
+When the page has a primary visitor task or conversion transition, exercise that path end to end in every relevant representative state instead of validating only the CTA or isolated controls. Judge the task-integrity invariant from `control.md`: the visitor should be able to discover what to do, understand the consequence, and complete the intended transition without avoidable effort introduced by direction, navigation, motion, scroll choreography, responsive adaptation, or context loss.
+
+Do not optimize for the shortest conceivable path when the page job genuinely requires explanation, proof, configuration, or deliberate pacing. The failure is **unearned friction**: effort added by the expression that does not materially serve the visitor decision or page job. If the task is prevented or effectively unusable, classify it as `BLOCKER`; if it still works but a downstream creative/interaction choice materially burdens it, classify it as `MATERIAL`.
 
 ## Perceptual QA
 
@@ -163,7 +170,7 @@ The first successful render begins QA. When browser/render tools exist:
 1. run the app using repository-declared commands;
 2. exercise the relevant page states and let lazy/async/interaction-driven content settle;
 3. inspect the first viewport and complete narrative;
-4. exercise primary interactions and conversion actions;
+4. exercise the primary task end to end, including the intended destination/state and any decision-relevant context that should survive;
 5. inspect representative desktop/mobile and any additional warranted viewports;
 6. capture screenshots when useful;
 7. run deterministic checks available in the environment;
@@ -224,6 +231,7 @@ Do not sign off while any applicable defect remains:
 - runtime/build failure;
 - blank/partially broken render;
 - primary action broken;
+- primary task technically works but downstream design or interaction materially obscures or burdens it without serving the page job;
 - missing central image/font;
 - clipped primary content;
 - accidental wrapping that damages hierarchy;
