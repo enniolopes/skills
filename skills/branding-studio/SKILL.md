@@ -3,7 +3,7 @@ name: branding-studio
 description: "Autonomous brand steward for creating, applying, auditing and evolving brands. Use for branding, naming, identity, logo, positioning, touchpoints, audits and rebrands. Reply in the user's language."
 license: CC-BY-NC-4.0
 metadata:
-  version: 2.1.0
+  version: 2.2.0
 ---
 
 # Branding Studio
@@ -43,12 +43,16 @@ Before converging, identify the most available competent-but-generic solution to
 ### COMMIT DIRECTION
 Choose a governing creative thesis only when it has enough strategic fit, specificity and generative potential to deserve continuation. A direction remains a working hypothesis until use demonstrates that it can generate a system.
 
+When a preferred direction materially depends on generated imagery, confirm that an adequate production capability can be obtained before treating it as production-ready. Do not choose a weaker direction merely because it is easier for the current host to execute; adapt without quality loss or preserve the direction and expose the blocker.
+
 Converge and recommend. Do not outsource routine professional judgment through an unranked menu.
 
 ### BUILD SYSTEM
 Translate the direction into the smallest verbal/visual grammar that can generate new work without copying old layouts. Define only dimensions that matter to declared touchpoints.
 
 A useful system creates recognizable family resemblance while allowing meaningful variation. Repetition alone is not coherence.
+
+When generated or edited raster imagery is material to the direction, load `references/visual-production.md`. Black Forest Labs FLUX is the preferred production backend for such imagery; relevance, art direction, contextual inspection and the final artifact—not generator success—determine quality.
 
 ### TEST IN USE
 Use representative applications that expose materially different stresses. Make/render/inspect the work in realistic context whenever the environment permits it.
@@ -89,6 +93,8 @@ Do not use the user as a substitute for inspection or professional judgment. Int
 
 Routine reversible choices such as type treatment, palette behavior, composition or route mechanics belong to the agent when strategy and evidence are sufficient. As consequence, irreversibility and equity at risk increase, raise the evidence and authority bar.
 
+Connecting an external production capability, account or paid service is a legitimate authority boundary. Ask for the connection/configuration action when required; never ask the user to paste secrets into chat.
+
 ## Quality control
 
 Judge important work against the same properties:
@@ -109,6 +115,7 @@ Reject counterfeit quality:
 - style signals are not specificity, distinctiveness, premium quality or timelessness;
 - repetition is not coherence or recognizability;
 - mockup polish is not system performance;
+- generated spectacle is not relevance or art direction;
 - research volume is not insight.
 
 A familiar mechanism remains valid when the brief independently earns it. Constrain the false inference, not the aesthetic territory.
@@ -124,7 +131,7 @@ A familiar mechanism remains valid when the brief independently earns it. Constr
 
 For an existing identity with no spec, reconstruct what is already true and valuable before changing it. Absence of a spec is not evidence that the brand needs redesign.
 
-Load `references/creative-direction.md` only when creating or materially reopening expression; `references/identity-craft.md` for visual identity/system craft; `references/verbal-identity.md` when proposition, messaging, voice/tone or a broader verbal identity is in scope; `references/naming.md` when naming is in scope; `references/brand-book.md` when guidelines or a brand book are deliverables; `references/knowledge.md` when evidence strength/current facts/methodology need calibration; and `references/spec-schema.md` when canonical state is created or changed.
+Load `references/creative-direction.md` only when creating or materially reopening expression; `references/identity-craft.md` for visual identity/system craft; `references/visual-production.md` when generated or edited raster imagery is material to the direction or deliverable; `references/verbal-identity.md` when proposition, messaging, voice/tone or a broader verbal identity is in scope; `references/naming.md` when naming is in scope; `references/brand-book.md` when guidelines or a brand book are deliverables; `references/knowledge.md` when evidence strength/current facts/methodology need calibration; and `references/spec-schema.md` when canonical state is created or changed.
 
 For APPLY/AUDIT, compile the smallest relevant subset of state.
 
@@ -138,9 +145,11 @@ Version meaningful contract changes. Preserve evidence references only when futu
 
 ## Production and deterministic tools
 
-Tool availability is not production proof. Degrade claims honestly:
+Tool availability is not production proof. Capability limits may lower the maturity of what can truthfully be delivered, but they do not lower the quality bar for an artifact claimed as final:
 
 `final master → tested prototype → concept → recommendation`
+
+For material generated imagery, use `references/visual-production.md`: prefer official FLUX production, persist accepted assets, integrate them into representative use, inspect them again in context, and iterate. If no available production path can preserve the committed direction at the required quality, stop before false completion and report the capability blocker.
 
 Use deterministic tools only for properties code can establish:
 - `scripts/validate_structure.py spec.json` — schema/types/enums/references and other machine-checkable constraints;
@@ -152,4 +161,4 @@ Do not label a master `final` until the available production path can reproduce 
 
 ## Delivery
 
-Return the committed recommendation or artifact, concise rationale where it improves future judgment, applicable verification, and material unresolved truth/authority/reality/craft dependencies. Do not return internal exploration transcripts.
+Return the committed recommendation or artifact, concise rationale where it improves future judgment, applicable verification, and material unresolved truth/authority/reality/craft/capability dependencies. Do not return internal exploration transcripts.

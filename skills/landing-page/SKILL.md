@@ -3,7 +3,7 @@ name: landing-page
 description: Research, design, build, redesign, or refine high-end marketing landing pages and homepages where conversion, creative direction, visual distinction, and production-grade web craft matter.
 license: CC-BY-NC-4.0
 metadata:
-  version: 3.5.1
+  version: 3.6.0
 ---
 
 # Landing Page
@@ -35,6 +35,8 @@ Default to ownership, not interrogation. Whenever information is incomplete:
 
 Never ask the user to choose fonts, colors, page patterns, section counts, animation styles, or aesthetic labels because the brief is incomplete. Those are design decisions.
 
+Connecting an external production capability, account or paid service is a legitimate authority boundary. Ask for the connection/configuration action when required; never ask the user to paste secrets into chat.
+
 ### Resolve material uncertainty with valid evidence
 
 When an uncertainty could materially change truth, intent, direction, or an expensive decision, first ask **what can actually settle it**, then use the cheapest valid resolver available.
@@ -51,7 +53,7 @@ If valid evidence is unavailable and the uncertainty does not block responsible 
 
 ### Reject counterfeit quality
 
-Do not treat familiar **signals** of quality as proof that the underlying quality exists. Surface polish does not prove resolution; fashionable or category-coded style does not prove specificity or premium quality; novelty or technical complexity does not prove sophistication; repeated components do not prove coherence or composition.
+Do not treat familiar **signals** of quality as proof that the underlying quality exists. Surface polish does not prove resolution; fashionable or category-coded style does not prove specificity or premium quality; novelty or technical complexity does not prove sophistication; repeated components do not prove coherence or composition; generated spectacle does not prove relevance or art direction.
 
 Establish each quality through the decisions that actually produce it, then use any visual or technical mechanism the brief genuinely earns. Constrain the false inference, not the aesthetic territory. `design-quality.md` contains the compact negative-control method; `verification.md` tests the rendered result for counterfeit quality.
 
@@ -60,6 +62,7 @@ Establish each quality through the decisions that actually produce it, then use 
 - `references/discovery.md` — CREATE, major REFINE, weak briefs, external research, competitive/category study, reference study, evidence classification, question protocol.
 - `references/marketing.md` — creating or materially changing page intent, proposition, narrative, proof, CTA, or structure; defines the page-intent and visitor-state models used throughout the skill.
 - `references/design-quality.md` — CREATE, major REFINE, art direction, divergence and selection, visual grammar, any premium/award-caliber request.
+- `references/visual-production.md` — when generated or edited raster imagery is material to the direction or deliverable: FLUX-first capability acquisition, art direction, generation/editing, persistence, integration and browser QA.
 - `references/control.md` — read at DIRECT for CREATE/major REFINE and again only when material new evidence or a possible pivot appears: unequal decision inertia, bidirectional learning, refine vs re-diverge, anti-rigidity.
 - `references/technical-excellence.md` — award-caliber, animation-heavy, 3D/WebGL/canvas, cinematic, or creative-development work.
 - `references/verification.md` — before completing any material CREATE/REFINE when browser/rendering tools are available: falsifiers/oracles, build-render loop, QA, critique lenses, severity, stop rule.
@@ -102,24 +105,25 @@ Escalate depth only when evidence shows the problem is broader than first observ
 12. **System, not collage.** Typography, color, spacing, shape, imagery, layout, motion, and interaction behave like one visual language.
 13. **Composition before components.** Hierarchy, mass, rhythm, and relationships before cards, pills, badges, grids, or generic containers.
 14. **Rendered output is visual truth.** Source code cannot prove visual quality.
-15. **Deterministic evidence where possible.** Build, console, overflow, links, accessibility and similar properties are checked by tools, not guessed.
-16. **Technical ambition must earn its cost.** Advanced motion/graphics are media, not prestige signals.
-17. **Mobile is a composition, not a shrink operation.** Preserve thesis and conversion path across device constraints.
-18. **Do not stop at plausible.** A successful first render begins refinement.
-19. **Do not finish with known material defects.**
+15. **Material imagery is production, not decoration.** For generated/edited imagery that materially carries the direction, prefer official Black Forest Labs FLUX; keep the quality bar invariant; do not treat a successful generation as completion.
+16. **Deterministic evidence where possible.** Build, console, overflow, links, accessibility and similar properties are checked by tools, not guessed.
+17. **Technical ambition must earn its cost.** Advanced motion/graphics are media, not prestige signals.
+18. **Mobile is a composition, not a shrink operation.** Preserve thesis and conversion path across device constraints.
+19. **Do not stop at plausible.** A successful first render begins refinement.
+20. **Do not finish with known material defects.**
 
 # Method
 
 Each phase names its output; the procedure lives in the reference that owns it.
 
-0. **ORIENT** — classify the mode; inspect the repo/page and declared project commands; identify framework, primitives, tokens, assets, fonts, routing, existing patterns; identify available web/search, browser, screenshot, image-generation/design-canvas, accessibility and performance tools; establish whether a design/brand system exists and is authoritative. Preserve project architecture unless the outcome truly requires changing it.
+0. **ORIENT** — classify the mode; inspect the repo/page and declared project commands; identify framework, primitives, tokens, assets, fonts, routing, existing patterns; identify available web/search, browser, screenshot, image-generation/design-canvas, accessibility and performance tools; when generated imagery may be material, also identify whether official FLUX is already available through the host, remote MCP, or configured BFL API/tooling; establish whether a design/brand system exists and is authoritative. Preserve project architecture unless the outcome truly requires changing it.
 1. **DISCOVER** (`discovery.md`) — for CREATE and major REFINE, reconstruct the brief from internal evidence, then use only research lanes or reference pools whose expected information can materially change a decision. When a page decision depends on the adjacent journey, inspect only enough of the incoming source/promise and immediate post-action destination/expectation to make that decision correctly; do not expand into full-funnel analysis by default.
 2. **SYNTHESIZE** (`discovery.md`, `marketing.md`) — compress evidence into the page-intent model plus only the market/creative constraints that change decisions. Classify truth-bearing items as `KNOWN`, `INFERRED` or `UNKNOWN`; creative choices are a separate concern, not an evidence status. Resolve discoverable facts, safe reversible inferences and professional creative decisions yourself; ask only about an `UNKNOWN` that blocks truth, authority or an irreversible fork. When behavioral data exists, separate observation from explanation: use behavior to prioritize hypotheses, not as automatic proof of cause.
-3. **DIRECT** (`design-quality.md`, `control.md`) — establish the compact direction contract owned by `control.md`, then express it through only the media relevant to this brief. Treat direction as a revisable hypothesis, not a schema. Under material creative uncertainty, diverge into structurally different directions and select the strongest yourself. Exploration may begin intuitively; commitment must become defensible. Prototype the uncertain thing when making will teach more than additional rationale. Before committing a major new direction, challenge the most available competent-but-generic solution for this brief; if the chosen route resembles it, require a specific reason from the brief rather than novelty or avoidance for its own sake.
+3. **DIRECT** (`design-quality.md`, `control.md`) — establish the compact direction contract owned by `control.md`, then express it through only the media relevant to this brief. Treat direction as a revisable hypothesis, not a schema. Under material creative uncertainty, diverge into structurally different directions and select the strongest yourself. Exploration may begin intuitively; commitment must become defensible. Prototype the uncertain thing when making will teach more than additional rationale. Before committing a major new direction, challenge the most available competent-but-generic solution for this brief; if the chosen route resembles it, require a specific reason from the brief rather than novelty or avoidance for its own sake. If the preferred direction materially depends on generated imagery, run the capability preflight in `visual-production.md` before treating it as production-ready; do not select a weaker direction merely because it is easier for the current host to execute.
 4. **COMPOSE** (`marketing.md`) — use the visitor-state model there to derive regions from unresolved visitor needs rather than section names. Every region has one distinct communication job, a meaningful state transition, its strongest message/evidence/medium, and a reason the next region follows. The first viewport is a thesis; the whole page has rhythm.
 5. **SYSTEMIZE** (`design-quality.md`) — stabilize the visual grammar as roles and relationships, extending an existing system deliberately rather than creating a second language. Systemize strongly enough for coherence, not so rigidly that composition becomes template execution.
-6. **REALIZE** — build production-oriented code in the existing environment: semantic HTML and native browser behavior; the project's framework, routing, component and dependency conventions unless change is justified; primitives reused where they fit, never forced onto a composition that needs another model; dependencies only for meaningful capability; understandable component ownership; real supplied assets, and central assets created or obtained through available tools rather than rough placeholders; visible text code-native unless it intrinsically belongs inside an image; primary actions real when destinations exist. Build in visual slices (`verification.md`), rendering between slices. Type, imagery, motion and responsive recomposition follow `design-quality.md`; animation-heavy or 3D work follows `technical-excellence.md`.
-7. **REFINE** (`verification.md`, `control.md`) — the first successful render begins QA. For each material quality claim, identify a falsifier and valid evidence source; run deterministic checks, viewport QA and perceptual QA; find the largest remaining defect and identify the lowest level that explains it. Correct expression/execution failures without gratuitous restart. If repeated local exceptions accumulate, question the next upstream decision rather than stacking patches. When behavioral evidence points to a material problem, form plausible causes and seek the cheapest discriminating evidence before changing the page; do not claim causal uplift from design judgment alone. When rendered evidence materially falsifies the governing direction, re-diverge from still-valid truth and intent. Render again.
+6. **REALIZE** — build production-oriented code in the existing environment: semantic HTML and native browser behavior; the project's framework, routing, component and dependency conventions unless change is justified; primitives reused where they fit, never forced onto a composition that needs another model; dependencies only for meaningful capability; understandable component ownership; real supplied assets, and central assets created or obtained through available tools rather than rough placeholders; visible text code-native unless it intrinsically belongs inside an image; primary actions real when destinations exist. When central generated/edited imagery is required, follow `visual-production.md`: produce the real asset, persist it, integrate it into the implementation, and do not substitute generic placeholder quality if the required capability is unavailable. Build in visual slices (`verification.md`), rendering between slices. Type, imagery, motion and responsive recomposition follow `design-quality.md`; animation-heavy or 3D work follows `technical-excellence.md`.
+7. **REFINE** (`verification.md`, `control.md`) — the first successful render begins QA. For each material quality claim, identify a falsifier and valid evidence source; run deterministic checks, viewport QA and perceptual QA; find the largest remaining defect and identify the lowest level that explains it. Correct expression/execution failures without gratuitous restart. If repeated local exceptions accumulate, question the next upstream decision rather than stacking patches. When behavioral evidence points to a material problem, form plausible causes and seek the cheapest discriminating evidence before changing the page; do not claim causal uplift from design judgment alone. When rendered evidence materially falsifies the governing direction, re-diverge from still-valid truth and intent. For generated imagery, judge the asset again inside the real page across relevant viewports; edit/regenerate/recompose when the isolated image succeeds but the browser composition fails. Render again.
 8. **CRITIQUE** (`verification.md`, `control.md`) — for premium work, run separate lenses because each exposes different falsifiers: first-time visitor, creative director, craft reviewer, creative developer/technical jury. Findings should identify severity and causal level, not merely aesthetic preference. Treat counterfeit quality as a material defect when a proxy is hiding an unresolved underlying decision. Fix every `BLOCKER` and `MATERIAL` finding before completion; polish until further change no longer produces meaningful improvement.
 
 # Quality gates
@@ -133,7 +137,7 @@ A material CREATE/REFINE result is exceptional only when every applicable qualit
 - **Coherence** — typography, color, imagery, shape, motion, spacing and layout behave as one system without collapsing into mechanical uniformity.
 - **Expression** — appropriate emotional character without sacrificing comprehension or familiar interaction where familiarity matters.
 - **Distinction** — one memorable signature; novelty concentrated where it adds meaning, emotion or recall.
-- **Craft** — no important region looks approximate, templated, unfinished or weaker than the rest, at macro, meso and micro scale.
+- **Craft** — no important region or central image looks approximate, templated, stock-like, unfinished or weaker than the rest, at macro, meso and micro scale.
 - **Technical mastery** — meaningful semantics, disciplined runtime behavior, intentional responsive adaptation, purposeful motion, accessible interaction, graceful degradation.
 - **Reality** — functional, free of material rendering/runtime defects, strong outside the ideal screenshot.
 
@@ -141,7 +145,7 @@ Before completing CREATE or major REFINE, run the anti-generic/counterfeit-quali
 
 # Hard stops
 
-Do not declare completion while any applicable material issue remains: broken build/runtime or console failure; primary CTA or required interaction not functioning; clipped/unreadable primary content or accidental horizontal overflow; inferior or broken mobile composition; fabricated or unsupported proof; missing central font/image/asset; major contrast/focus/keyboard defect when testable; uncontrolled type/spacing/system drift; a central composition or major section still generic or prototype-grade for a premium task; a known large mismatch against an accepted concept; preventable jank, resource waste or broken reduced-motion behavior; advanced canvas/WebGL hiding essential content or action; a research-dependent factual claim with no adequate source; an unresolved authority question that would make publication unsafe or misleading. The full defect list is in `verification.md`.
+Do not declare completion while any applicable material issue remains: broken build/runtime or console failure; primary CTA or required interaction not functioning; clipped/unreadable primary content or accidental horizontal overflow; inferior or broken mobile composition; fabricated or unsupported proof; missing central font/image/asset; a generated image material to the chosen direction that is only described, placeholder-quality, unpersisted, not integrated or not inspected in the real page; unavailable image-production capability when no equal-or-stronger producible alternative can preserve the chosen direction; major contrast/focus/keyboard defect when testable; uncontrolled type/spacing/system drift; a central composition or major section still generic or prototype-grade for a premium task; a known large mismatch against an accepted concept; preventable jank, resource waste or broken reduced-motion behavior; advanced canvas/WebGL hiding essential content or action; a research-dependent factual claim with no adequate source; an unresolved authority question that would make publication unsafe or misleading. The full defect list is in `verification.md`.
 
 If blocked by missing capability or external authority, report the blocker precisely instead of pretending the result was verified.
 
@@ -149,6 +153,6 @@ If blocked by missing capability or external authority, report the blocker preci
 
 Do the work; do not narrate every design decision. A non-expert should be able to give a weak brief and receive a resolved page, not a questionnaire.
 
-At handoff, report concisely: what was created or materially changed; the core direction/signature when useful; checks actually performed; any unresolved blocker or evidence gap. Never claim browser inspection, accessibility, performance, research, or other evidence that was not collected.
+At handoff, report concisely: what was created or materially changed; the core direction/signature when useful; checks actually performed; any unresolved blocker or evidence gap. Never claim browser inspection, accessibility, performance, research, image production, or other evidence that was not collected.
 
 **North star:** the page should feel inevitable for the product, memorable for the right reason, technically effortless, and unusually difficult to improve.

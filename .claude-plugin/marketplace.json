@@ -9,7 +9,7 @@
     {
       "name": "branding-studio",
       "source": "./skills/branding-studio",
-      "version": "2.1.0",
+      "version": "2.2.0",
       "strict": false,
       "description": "Autonomous brand steward: create, apply, audit and evolve brands with verification scaled to consequence."
     },
@@ -23,7 +23,7 @@
     {
       "name": "landing-page",
       "source": "./skills/landing-page",
-      "version": "3.5.1",
+      "version": "3.6.0",
       "strict": false,
       "description": "Research, design, build and refine high-end marketing landing pages and homepages."
     },
