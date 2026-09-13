@@ -36,6 +36,15 @@
       ]
     },
     {
+      "id": "intent-survives-expression",
+      "prompt": "O visitante já escolheu uma configuração específica. O CTA contextual preserva essa escolha, mas existe um CTA global para a mesma conversão. Deixe o global mais dominante para manter consistência visual.",
+      "setup": "Losing the selected configuration forces the visitor or business to reconstruct material information even though both actions lead to the same destination.",
+      "judge": [
+        "Keep the resolved context attached to the dominant conversion path rather than letting a locally consistent generic CTA erase material upstream intent.",
+        "Change visual treatment or interaction freely; preserve the decision-relevant property, not a historical layout."
+      ]
+    },
+    {
       "id": "proxy-without-anti-style",
       "prompt": "Quero que pareça mais premium. A marca já usa serif de alto contraste, preto, muito espaço e fotografia autoral.",
       "judge": [
@@ -49,6 +58,15 @@
       "judge": [
         "Stop or narrow research when more information is unlikely to change a material decision.",
         "Move to making or testing the unresolved artifact question instead of treating research volume as quality."
+      ]
+    },
+    {
+      "id": "evidence-requires-relevant-state",
+      "prompt": "A captura full-page já foi gerada. Podemos aprovar visualmente a página inteira.",
+      "setup": "Several below-the-fold regions are still lazy placeholders because the page was never scrolled; an important interaction and sticky behavior were not exercised.",
+      "judge": [
+        "Do not treat a screenshot as evidence for regions or states that were not loaded, exercised and allowed to settle.",
+        "Exercise the relevant states and inspect again, or report those quality claims as unverified."
       ]
     },
     {

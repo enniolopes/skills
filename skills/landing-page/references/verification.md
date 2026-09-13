@@ -14,7 +14,9 @@ A build can pass while the page is visually poor. A screenshot can look excellen
 
 For each applicable quality claim, use:
 
-`quality claim → plausible falsifier → cheapest valid oracle/evidence → finding severity`
+`quality claim → relevant state → plausible falsifier → cheapest valid oracle/evidence → finding severity`
+
+Evidence only answers a claim for the state it actually observed. Before judging or capturing a region/state, exercise what makes it real and allow relevant lazy, async, loading, animation or interaction-driven behavior to settle. A screenshot of an unloaded lazy region, a closed menu, or an unexercised sticky/interactive state is not evidence for that state.
 
 Examples:
 
@@ -98,6 +100,16 @@ Scroll at normal reading speed. Ask:
 - Does the CTA architecture stay coherent?
 - Does the footer feel like part of the same system?
 
+### Semantic reverse-read
+
+Before consulting the intended rationale, infer from the rendered artifact itself:
+
+- what job the page appears to perform;
+- which action appears primary and what visitor context it preserves or discards;
+- what seems to make the offer specific or credible.
+
+Compare that reconstruction with the page intent and any active invariants from `control.md`. A material mismatch is semantic drift even when each local design decision looks competent.
+
 ### Craft sweep
 
 Inspect high-risk details such as headline line breaks, paragraph measures, image crops, icon consistency, optical alignment, control typography/states, section transitions, sticky content, forms/error states, and mobile spacing/wrapping. These examples are not exhaustive.
@@ -135,29 +147,30 @@ Do not silently reinterpret the accepted design into a generic component system.
 
 For material CREATE work, do not write the whole page blindly and review only at the end:
 
-1. implement the first viewport and system foundation;
+1. implement the smallest representative slice that tests the highest material uncertainty or active invariant; this is often the first viewport, but not necessarily;
 2. render and correct large drift;
 3. implement the next narrative slice;
 4. render and check continuity;
 5. continue until complete;
 6. run full-page rhythm and responsive passes.
 
-This preserves a coherent direction while reducing late-stage visual debt.
+This preserves a coherent direction while reducing late-stage visual debt and exposes semantic drift while the solution is still cheap to change.
 
 ## Render loop
 
 The first successful render begins QA. When browser/render tools exist:
 
 1. run the app using repository-declared commands;
-2. inspect the first viewport and complete narrative;
-3. exercise primary interactions and conversion actions;
-4. inspect representative desktop/mobile and any additional warranted viewports;
-5. capture screenshots when useful;
-6. run deterministic checks available in the environment;
-7. use perceptual/multi-lens review to find the largest remaining falsifier;
-8. identify the lowest causal layer that explains it;
-9. make a targeted correction and render again;
-10. repeat until no material falsifier remains or a concrete blocker prevents improvement.
+2. exercise the relevant page states and let lazy/async/interaction-driven content settle;
+3. inspect the first viewport and complete narrative;
+4. exercise primary interactions and conversion actions;
+5. inspect representative desktop/mobile and any additional warranted viewports;
+6. capture screenshots when useful;
+7. run deterministic checks available in the environment;
+8. use perceptual/multi-lens review to find the largest remaining falsifier;
+9. identify the lowest causal layer that explains it;
+10. make a targeted correction and render again;
+11. repeat until no material falsifier remains or a concrete blocker prevents improvement.
 
 ## Refinement strategy
 
@@ -180,6 +193,7 @@ Follow WCAG 2.2 AA where applicable and reasonably testable. In particular, prot
 - keyboard access and visible focus;
 - semantic headings/landmarks/controls;
 - accessible names for interactive controls;
+- text alternatives for informative imagery that preserve the information relevant to its communication or decision role; decorative imagery should not create redundant noise;
 - text contrast (generally at least 4.5:1 for normal text and 3:1 for large text, subject to WCAG exceptions);
 - reflow/resizing;
 - non-color-only communication;
@@ -278,7 +292,7 @@ Do not hand off with known BLOCKER or MATERIAL findings that are fixable in the 
 
 ## Final pass and stop rule
 
-Before handoff, walk every **applicable** quality dimension from `SKILL.md`. For each, ask what remaining observation could still falsify the claim that it is resolved and whether the valid oracle available in this environment has been applied. Do not create a second checklist of quality definitions here.
+Before handoff, walk every **applicable** quality dimension from `SKILL.md`. For each, ask what remaining observation could still falsify the claim that it is resolved and whether the valid oracle has been applied to the relevant exercised state. Re-run the semantic reverse-read when active invariants were material to the work. Do not create a second checklist of quality definitions here.
 
 Stop refinement when:
 
