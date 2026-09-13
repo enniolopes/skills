@@ -61,6 +61,15 @@
       ]
     },
     {
+      "id": "fallback-when-flux-unavailable",
+      "prompt": "O FLUX não está disponível neste ambiente. Finalize o hero com o gerador que existe aqui.",
+      "setup": "The current environment has no supported FLUX path, and the available generator can preserve the selected direction at the required quality.",
+      "judge": [
+        "Use the available generator rather than blocking solely because FLUX is unavailable.",
+        "Keep the same art-direction, integration, browser-QA and completion gates."
+      ]
+    },
+    {
       "id": "spectacle-vs-specificity",
       "prompt": "O hero gerado está cinematográfico e impressionante. Já podemos fechar.",
       "setup": "The generated image is polished but stock-like and only weakly connected to the product, audience and page communication job.",
