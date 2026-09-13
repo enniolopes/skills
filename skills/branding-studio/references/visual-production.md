@@ -39,11 +39,11 @@ Once a promising direction materially depends on generated imagery, verify that 
 
 Use this order:
 
-1. Inspect whether an **official Black Forest Labs FLUX capability** is already exposed by the host.
-2. Prefer the official remote FLUX MCP when the host supports remote MCP (`https://mcp.bfl.ai`).
-3. Otherwise use already-configured official BFL API/tooling when the environment can execute it safely. Treat `BFL_API_KEY` as a secret; never print it, persist it in runtime files, or ask the user to paste it into chat.
-4. If FLUX is not connected and the imagery is material, ask the user to connect/configure FLUX through the host's supported connection or secret mechanism before silently changing backend.
-5. Use another available image generator only when FLUX cannot reasonably be made available in the current environment and the alternative can independently meet the same quality bar for this artifact.
+1. If an **official Black Forest Labs FLUX capability** is already usable through the host, use it.
+2. Otherwise prefer the official remote FLUX MCP when the host supports remote MCP (`https://mcp.bfl.ai`), then already-configured official BFL API/tooling when the environment can execute it safely. Treat `BFL_API_KEY` as a secret; never print it, persist it in runtime files, or ask the user to paste it into chat.
+3. If FLUX is supported but requires a user connection/configuration action, ask for that action before changing backend.
+4. Treat FLUX as unavailable only when the current environment has no supported path to it, the required setup cannot be completed in the current session, or a reasonable attempt to use the supported path fails.
+5. Only then use another available image generator, and only if it can independently meet the same quality bar for this artifact.
 6. If no available path can preserve the direction at the required quality, keep the direction and mark the affected deliverable **blocked**. Do not downgrade it to something merely producible.
 
 If the user explicitly requires another backend, respect that constraint and keep the same production/quality gates.
