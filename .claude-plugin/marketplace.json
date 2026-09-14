@@ -9,7 +9,7 @@
     {
       "name": "branding-studio",
       "source": "./skills/branding-studio",
-      "version": "2.4.0",
+      "version": "2.5.0",
       "strict": false,
       "description": "Autonomous brand steward: create, apply, audit and evolve brands with verification scaled to consequence."
     },
