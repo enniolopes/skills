@@ -1,197 +1,257 @@
 # research
 
-Agent skills for scientific research: method, memory across sessions, and adversarial
-review. A **system**: one install, several pieces that work together and are versioned
-separately.
+Scientific research system for Claude Code. Version 0.8 turns the plugin from a lifecycle prompt into an **epistemic control system**: creative exploration remains available, while consequential commitments, executions, inferences and claims leave inspectable artifacts and mechanical provenance.
 
-## Status
-
-**First real session absorbed** (plugin 0.7.0, pieces 0.6.0, 2026-09-11). All three pieces
-exist and pass the repository's structural checks and unit tests. Version 0.7.0 is the
-response to the first session of the plugin on a real research (roadmap step 8): every
-rule that was violated there while stated only in prose became an artifact `validate`
-reads — a `reached` gate names its evidence, a brief's reference names its decision, a
-decision has a title and a non-empty revision condition, an `rm:ignore` has a reason, a
-table under `documents` respects the floor — and the map lost the four sections that only
-copied other files. Still open, and the pieces say so themselves:
-
-- the method sources behind `reference/` were *located* (publisher landing page or DOI
-  found with matching metadata) but not *read* at source, because the build environment
-  blocked scholarly domains; `development/research/design/sources-verified.md` records the
-  level per source and is the first thing to upgrade in a session with network access;
-- no adjudicated behavioural run has been recorded against `development/research/evals/`;
-  the four `session-*` scenarios there are the first to re-run against 0.7.0.
-
-The consolidated design, the references it draws on, the origin case and the roadmap live
-in `development/research/design/`.
+Scope: observational quantitative research, especially administrative data.
 
 ## Install
-
-One command, in Claude Code:
 
 ```text
 /plugin marketplace add enniolopes/skills
 /plugin install research@enniolopes
 ```
 
-That installs `scientific-method`, `research-map`, the `reviewer-2` agent and, through the
-plugin's `dependencies`, the standalone `explorer` skill. Later, `/plugin update research`
-brings new pieces as they ship.
+The plugin depends on `explorer` and installs the rest as one system.
 
-## How to use
+## One public entry point
 
-There is one entry point for the method: **`scientific-method`**. You talk to it; it
-decides which other piece owns the next step and calls `explorer` and `reviewer-2` for you.
-The one piece you also call yourself is `research-map`, the session ritual below. Plugin
-skills are namespaced; the short form works when no other skill has the same name.
+Use:
 
 ```text
-/research:scientific-method <what you want to do with this research>
+/research:scientific-method start <idea or question>
+/research:scientific-method status
+/research:scientific-method review [manuscript]
+/research:scientific-method <normal research request>
 ```
 
-The skill also fires on its own when it recognises a phase trigger: you are about to fit
-a model, about to cite, about to write a results paragraph, about to compute a number that
-will leave the analysis environment.
+Talk normally after `start`. The method invokes `research-map`, `statistical-analysis`, `research-graph`, `explorer` and `reviewer-2` internally. Direct component commands remain available for debugging/power use; normal users do not need a resume/update/validate ritual.
 
-### A research from the start
+## Kernel
+
+Five operations:
 
 ```text
-/research:scientific-method start: does enrolment in programme P concentrate service units
-toward the areas of greatest need, relative to the distribution inherited before P?
+EXPLORE → COMMIT → EXECUTE → JUSTIFY → CHALLENGE
 ```
 
-Phase 1 has two gates. 1A formulates: the problem statement — claim kind, unit of
-analysis, estimand, refutation, the obvious objection, who cares, non-goals — as a section
-of the protocol that `validate` checks field by field, with `explorer` supplying the
-hypothesis lineages. 1B demonstrates: a descriptive study, the problem brief, that shows the
-problem exists, how large against a reference fixed beforehand, for whom, how it is handled
-today, and what was tried to make it disappear; its verdict (`SHOWN`, `NOT_SHOWN`,
-`INCONCLUSIVE`) sits in the map and the protocol cannot freeze before `SHOWN`. `NOT_SHOWN`
-is a result: the research closes or reformulates before any model is fit. Each surviving
-lineage from `explorer` becomes a hypothesis; its discriminating test becomes the primary
-test, its failure condition the refutation clause.
-Then literature (every source verified at its DOI), protocol (prediction and refutation
-per hypothesis, one primary test each, assumptions → check → fallback per model,
-equivalence bounds fixed before any test), and so on. Every phase ends with a gate that
-can fail; every hypothesis ends in a named state: `CONFIRMED`, `REFUTED`, `INCONCLUSIVE`,
-`BLOCKED`, `NOT_VERIFIED`.
+Five laws:
 
-### Every session
+1. **Evidence outranks narrative.** Read/executed evidence beats memory, confidence and explanation.
+2. **Commitment precedes exposure.** Choices a result could influence are recorded/frozen before that exposure.
+3. **Discovery is not confirmation.** Data that materially generated a hypothesis do not independently confirm it.
+4. **Claims require lineage.** A material claim traces through an explicit inference to identified result/source evidence and design.
+5. **Material claims face an adversary.** The process that built the claim is not sufficient to release it.
 
-`research-map` keeps one `RESEARCH.map` per research: where things are and the disclosure
-floor, question and registration status, hypotheses (at most three open), state per gate
-**with the artifact that proves it**, deferred ideas, and what to do next. Facts that were
-once wrong, provenance, verification commands and open decisions are optional sections,
-present only when no other file already says it.
+The existing eight phases remain the research lifecycle: problem, literature, protocol, data, analysis, writing, review, publication. Preflights govern the action immediately before a consequential step.
+
+## Problem first
+
+Phase 1 remains the highest-leverage gate. It does not demand that the initial story be true. It frames the question, explores structurally distinct explanations/hypotheses under a budget, then tries to make the empirical premise disappear.
+
+The problem state is:
 
 ```text
-/research:research-map resume     # before the first action: restate the state in one screen
-/research:research-map update     # after any gate, state or number changes, and before a commit
-/research:research-map validate   # before any commit, from the installed skill; a hook may call the same path
+SHOWN | NOT_SHOWN | INCONCLUSIVE
 ```
 
-`validate` is mechanical: a number quoted in a document that no committed aggregate
-contains is reported (presence, not provenance — the source table is still required), and
-an `rm:ignore` marker needs a reason; a `reached` gate needs its evidence; a decision has a
-title and a non-empty revision condition, and decision ids that live in table rows are
-counted, not passed; a table under `documents` has no count below the floor; every citation
-resolves; no committed notebook has outputs; every pointer in the map resolves. A check
-with nothing to examine says `NOT_VERIFIED`, never `PASS`.
+`NOT_SHOWN` closes or reformulates before expensive modelling; it is a useful result. The system prevents the third-kind error: a precise answer to the wrong problem.
 
-`/research:research-map init` builds the map once from an existing protocol and decision
-log. Every gate starts `pending` and is earned by its artifact; the validator stays with the
-plugin and is never copied into the research repository. `Layout` is also the whole answer
-to "how should this research be organised": six paths and a floor. The method does not do
-software engineering — packages, test suites, build systems, CI are the analyst's, and the
-skill says so and stops when asked for them.
+## Preflights
 
-### The moment before a mistake
+The method automatically runs the relevant boundary check:
+
+- **FIT** — before a confirmatory result is exposed: estimand, primary test, assumptions/checks/failure actions, dependence, interpretation boundary, freezes, registration and data exposure must be coherent.
+- **CHANGE_PLAN** — a post-freeze idea becomes `SPECIFICATION`, `EXPLORATORY`, `DEFERRED` or explicit `REOPEN`; never a silent rewrite.
+- **CLAIM** — result/run/test/checks and interpretation boundary must support the material claim; hypothesis-deciding claims use the frozen primary test.
+- **CITE** — DOI/URL identity is not semantic support; the relevant source content must be retrieved/read before supporting a proposition.
+- **PUBLISH** — material claim lineage, review, disclosure/reporting and human-owned publication/ethics requirements must be complete.
+
+## Authoritative artifacts
+
+Each artifact has one job:
+
+| Artifact | Owns |
+|---|---|
+| `protocol.md` | question, hypotheses, estimands and scientific commitments |
+| `analysis-plan.md` | analytic commitments, decision rules and interpretation boundaries |
+| `decisions.md` | methodological choices and revision conditions |
+| code/notebooks | executable procedures |
+| `.research/runs/RUN-*.json` | what ran, against what, under which frozen commits |
+| `aggregates/` | computed results |
+| `references.bib` + inspected source content | bibliographic identity/evidence |
+| `RESEARCH.map` | one-screen operational state/navigation |
+| `.research/graph.json` | disposable derived index of relations (rebuildable) |
+| manuscript | scientific communication |
+| reviewer output | adversarial challenge/adjudication evidence |
+
+`RESEARCH.map` remains deliberately small. It never becomes a second protocol, result store or graph database.
+
+## Analysis plan
+
+Before confirmatory analysis, the method creates/reviews `analysis-plan.md`. Each hypothesis block carries stable IDs:
 
 ```text
-Vou ajustar um modelo de contagem para o número de unidades por município.
+H1 hypothesis
+E1 estimand
+T1 primary test
+A1 assumption
+K1 check
 ```
 
-`scientific-method` recognises a phase-5 trigger and, before any fit, requires the list of
-assumptions, the check for each and the fallback if a check fails (invariant 5). It asks
-the dependence structure of the outcome before any interval is reported. It refuses a
-number that did not come out of executed code in the current repository state.
+and records `Generated from:`, dependence, decision rules, `A → K → failure action`, sensitivity/specification dimensions and `May claim` / `May not claim`.
 
-### Review
+`statistical-analysis` starts from:
 
 ```text
-/research:scientific-method review paper/manuscript.qmd
+QUESTION → CLAIM TYPE → ESTIMAND → IDENTIFICATION/DESIGN → DATA STRUCTURE
+→ DEPENDENCE → ESTIMATOR → INFERENCE → DIAGNOSTICS → SENSITIVITY → INTERPRETATION
 ```
 
-Phase 7 hands the manuscript to `reviewer-2`, an independent, non-editing agent that
-treats the author's text as untrusted narrative and looks for the falsifying observation
-first: forking paths, a number without interval or source table, causal language in an
-ecological design, a figure that does not match its code or data, a citation that does not
-say what it is cited for. It returns fixed headings: `VERDICT` (`PASS` / `FAIL` /
-`NOT_VERIFIED`), `CLAIMS`, `FINDINGS`, `CHECKS RUN`, `NOT_VERIFIED`, `BASIS`. The gate
-passes when every `FAIL` has a logged response.
+It does not route `binary → logistic` or `count → Poisson` by reflex. Method-specific policy is added only from primary sources that have actually been read for the condition encoded.
 
-### When a new idea appears mid-way
+The initial 0.8 statistical references cover estimands, exploratory-analysis boundaries, dependence and missingness. Families of estimators are added only when real research/evals justify them.
+
+## Temporal provenance
+
+A prose statement that something was pre-specified is insufficient. Every material run records:
+
+```json
+{
+  "id": "RUN-001",
+  "mode": "confirmatory",
+  "commit": "<execution commit>",
+  "protocol_freeze": "<earlier commit>",
+  "analysis_plan_freeze": "<earlier commit>",
+  "hypothesis": "H1",
+  "estimand": "E1",
+  "test": "T1",
+  "inputs": [
+    {"id": "DATA2", "path": "data.csv", "role": "confirmatory"}
+  ],
+  "outputs": [
+    {"result": "R1", "artifact": "aggregates/h1-primary.csv"}
+  ]
+}
+```
+
+The validator checks Git ancestry. A fallback/plan frozen after the deciding run cannot be presented as prospective.
+
+Historical analyses with no trustworthy temporal evidence remain `NOT_VERIFIED` on that property; the system never fabricates a historical freeze.
+
+## Discovery exposure
+
+Datasets use stable `DATA<n>` IDs and run input roles:
 
 ```text
-Apareceu um método novo, acho que a gente devia testar também.
+discovery | confirmatory | validation
 ```
 
-Opening is cheap only before the protocol freezes; phase 1 opens wide, on a logged budget,
-and converges to at most three hypotheses. After the freeze, "we should also test X" has
-four destinations and the skill routes it: a specification-curve dimension (absorbed), a
-labelled exploratory analysis, the map's `## Deferred` with the condition under which it
-would enter (the default), or reopening phase 3 by a decision that names what leaves.
-`resume` shows the count of open hypotheses and deferred items every session.
+If H1 was materially generated from DATA1, a confirmatory run of H1 using DATA1 as independent confirmatory evidence is rejected. Registration after exposure does not erase exposure. The work can remain exploratory, use defensible held-out/independent evidence, or reopen the design.
 
-### What it never does
+## Claim lineage and graph
 
-Invent a human-owned decision: what question matters, which institution to call, what a
-field term means in practice, authorship, ethics approval, venue. A missing capability or
-decision degrades to `BLOCKED` or `NOT_VERIFIED`, never to a guess.
+Material claims are annotated near the prose:
+
+```text
+<!-- claim:C1 inference:I1 result:R1 -->
+<!-- claim:C2 inference:I2 result:R2 decides:H1 -->
+```
+
+`research-graph` derives a disposable graph from authoritative artifacts. Its core nodes are hypotheses, estimands, tests, assumptions/checks, decisions, datasets, runs, results, inference/warrants, claims and sources.
+
+A claim path is approximately:
+
+```text
+H/E ← T → RUN → R → I → C
+```
+
+`I` is important: a result does not magically imply a sentence. The inference/warrant is the public bridge from result + design/checks to wording. Mechanical validation proves lineage structure; `reviewer-2` attacks whether that bridge is scientifically adequate.
+
+Graph views (`trace`, `argument`, `why`, `changed`) are navigation/mind-map/argument-map projections, never sources of truth. `.research/graph.json` is rebuildable.
+
+## Validation
+
+`research-map validate` composes the original 0.7 checks with four 0.8 checks.
+
+Existing:
+
+```text
+map · numbers · decisions · disclosure · citations · notebooks
+```
+
+Added:
+
+```text
+plan · runs · lineage · exposure
+```
+
+Run directly when debugging:
+
+```text
+python3 <installed research-map>/scripts/validate_all.py RESEARCH.map --offline
+```
+
+`PASS` means only that coded invariants passed. It does **not** mean the design, estimator, source interpretation or claim is scientifically true.
+
+## Adversarial review
+
+`reviewer-2` is independent and non-editing. It starts from material claim lineage rather than author explanation, looks for the falsifying observation first, inspects temporal provenance, data exposure, primary-test use, estimator/estimand fit, checks, aggregates/code, source entailment and reporting checklists.
+
+Its fixed output remains:
+
+```text
+VERDICT
+CLAIMS
+FINDINGS
+CHECKS RUN
+NOT_VERIFIED
+BASIS
+```
+
+The same agent that built a claim is not sufficient evidence for accepting it.
+
+## Behavioral efficacy is measured, not assumed
+
+`development/research/evals/scenarios.json` contains eight safety mechanisms plus three liveness mechanisms. The harness generates deterministic repository fixtures and runs the same prompt/model under:
+
+```text
+CONTROL   Claude Code without research
+TREATMENT same Claude Code with local research + explorer plugins
+```
+
+The runner does not receive `expect`. A separate blinded judge receives the completed transcript/diff/validator output and the criterion only after the run. Repetitions are required because model behavior is nondeterministic.
+
+Dry-run harness:
+
+```text
+python development/research/evals/run.py --scenario assumptions-before-fit --condition both
+```
+
+Execute and judge (incurs Claude usage):
+
+```text
+python development/research/evals/run.py --scenario assumptions-before-fit --condition both --repetitions 3 --execute --judge
+```
+
+Raw eval run artifacts are ignored by Git. Adjudicated summaries can be committed separately. The existence of scenario specifications is not evidence that the plugin passes them.
+
+## Release discipline
+
+A new runtime rule needs a distinct failure mechanism. Prefer the smallest artifact/check/state that prevents the mechanism; otherwise leave it to adversarial judgement or drop it. Do not accumulate good-practice prose.
+
+0.8 is mechanically releasable only when repository validation/unit tests pass. Claims of behavioral uplift additionally require adjudicated control/treatment runs with no material liveness regression.
 
 ## Pieces
 
-| Piece | Kind | Owns |
-|---|---|---|
-| scientific-method | skill, entry point | the research lifecycle: problem → literature → protocol → data → analysis → writing → review → publication, each phase with an exit gate; distilled, source-verified method knowledge in `reference/` (design record §2, in `development/research/design/`) |
-| research-map | skill | memory and navigation across sessions: `RESEARCH.map`, modes `init`, `resume`, `update`, `validate` (design record §3) |
-| reviewer-2 | agent | independent, non-editing review of a manuscript against its own protocol and reporting checklists (design record §4) |
-| explorer | skill, dependency | phase 1: hypothesis portfolio with bridge certificates; a standalone unit at `skills/explorer/`, pulled in by `dependencies` |
-
-## Where things live
-
-| What | Path |
+| Piece | Role |
 |---|---|
-| plugin manifest (name, version, dependencies) | `systems/research/.claude-plugin/plugin.json` |
-| `scientific-method` kernel and one reference per phase | `systems/research/skills/scientific-method/` |
-| `research-map` kernel, map grammar, blank map, `validate` script | `systems/research/skills/research-map/` |
-| `reviewer-2` agent | `systems/research/agents/reviewer-2.md` |
-| design, references studied, sources verified, origin case, roadmap | `development/research/design/` |
-| evaluation scenarios and the adversarial fixture generator | `development/research/evals/` |
-| unit tests (`validate` script; reference shape) | `development/research/tests/` |
+| `scientific-method` | single public orchestrator; lifecycle + five laws + preflights |
+| `research-map` | operational memory + composed mechanical validation |
+| `statistical-analysis` | estimand-first analysis planning and EDA boundary |
+| `research-graph` | derived epistemic lineage and query views |
+| `reviewer-2` | independent non-editing adversarial review |
+| `explorer` | structural divergence/hypothesis generation dependency |
 
-## Principles
+## Non-goals
 
-1. The research repository is the source of truth; skills say *how to decide* and *where
-   to record*, never *what was decided*.
-2. Evidence is something read or run against an identified target; confidence is not
-   evidence. A number that did not come out of executed code is not a result.
-3. Phases end with gates that can fail. What cannot fail is not a gate.
-4. Mechanical checks before judgement: if a script can verify it, the script does.
-5. Method knowledge is distilled, source-verified and dated. Nothing enters `reference/`
-   from memory.
-6. Inconclusive is a legitimate terminal state and has a name.
-7. Acceptance is by retro-test: a skill is ready when, applied to the origin case as it
-   stood before the audit, it produces the audit's findings before a human does.
-8. A rule stated only in prose is a hope. What a session violated becomes an artifact the
-   model must produce and a check that reads it, or a definition that removes the
-   ambiguity, or it is dropped — never a second sentence saying the same thing louder.
-
-## Origin
-
-Designed during the `delbem-research/cozsolidarias-research` project (September 2026),
-where a method audit found ten defects in an already-careful pipeline and a session
-boundary let wrong numbers survive. Both are recorded in
-`development/research/design/origin-case.md` as the first evaluation scenarios. The first
-real session of the plugin (2026-09-10) is the second source: its findings are roadmap
-step 8 and the `session-*` scenarios.
+0.8 is not an autonomous scientist, automatic truth verifier, complete statistical library, universal knowledge graph, GUI graph editor, multi-agent society or automatic paper author. Those capabilities enter only when an observed failure mechanism demonstrates that the additional complexity is necessary.
