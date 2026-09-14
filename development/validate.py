@@ -4,7 +4,7 @@
 One command locally and in CI:  python development/validate.py
 
 CI proves only mechanical properties: installability, stable Agent Skills metadata,
-runtime boundaries, direct SKILL references, dependency/version projections, syntax and
+runtime boundaries, direct SKILL references, packaging/version projections, syntax and
 unit contracts. It does not judge semantic or creative quality.
 """
 
@@ -127,9 +127,7 @@ def check_agent(path: Path, names: dict[str, str], errors: list[str]) -> None:
             errors.append(f"{rel(path)}: runtime depends on repository path {ref!r}")
 
 
-def discover_runtime(
-    errors: list[str], plugins: dict[str, dict]
-) -> tuple[set[str], dict[str, tuple[str, str, str]]]:
+def discover_runtime(errors: list[str]) -> tuple[set[str], dict[str, tuple[str, str, str]]]:
     names: dict[str, str] = {}
     units: set[str] = set()
     expected_plugins: dict[str, tuple[str, str, str]] = {}
@@ -171,10 +169,12 @@ def discover_runtime(
                     errors.append(f"{rel(manifest)}: version must be semver")
                 if data.get("license") != LICENSE:
                     errors.append(f"{rel(manifest)}: license must be {LICENSE}")
-                for dep in data.get("dependencies", []):
-                    dep_name = dep if isinstance(dep, str) else dep.get("name")
-                    if dep_name not in plugins:
-                        errors.append(f"{rel(manifest)}: unknown plugin dependency {dep_name!r}")
+                if data.get("dependencies"):
+                    errors.append(
+                        f"{rel(manifest)}: hard plugin dependencies are not shipped here — "
+                        "an unresolved dependency can make a side-loaded system disappear. "
+                        "Install delegates separately and define explicit runtime degradation instead."
+                    )
 
             expected_plugins[system.name] = (f"./systems/{system.name}", "system", version)
 
@@ -261,7 +261,7 @@ def run_tests(units: set[str], errors: list[str]) -> int:
 def main() -> int:
     errors: list[str] = []
     plugins = marketplace(errors)
-    units, expected = discover_runtime(errors, plugins)
+    units, expected = discover_runtime(errors)
     check_marketplace(plugins, expected, errors)
     compile_python(errors)
     suites = run_tests(units, errors)
