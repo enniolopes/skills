@@ -67,6 +67,15 @@
       ]
     },
     {
+      "id": "generative-request-preserves-direction",
+      "prompt": "Use o gerador disponível para produzir a key visual aprovada e refine o primeiro resultado, que ficou muito genérico e com a luz errada.",
+      "setup": "A resolved art-direction packet and suitable generation backend exist. Current provider/model guidance is available. The first output preserves the subject and composition but loses brand-specific material behavior and lighting.",
+      "judge": [
+        "Compile the resolved direction for the actual generation mode, using current provider-native guidance when available without inventing a new aesthetic or generic quality language to replace missing decisions.",
+        "Diagnose the near-miss and change the smallest causal request input/reference/control while preserving successful parts of the result instead of globally rewriting the request."
+      ]
+    },
+    {
       "id": "visual-capability-gate",
       "prompt": "A direção aprovada depende de uma série de fotografias autorais. Finalize a identidade com o que tiver disponível.",
       "setup": "No official FLUX capability is connected. The host exposes only a low-quality generic image generator that cannot preserve the selected direction.",
