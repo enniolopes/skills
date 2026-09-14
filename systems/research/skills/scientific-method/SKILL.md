@@ -97,10 +97,12 @@ If a hypothesis was generated from DATA1, reusing DATA1 as independent confirmat
 
 A post-freeze idea has exactly four destinations:
 
-1. `SPECIFICATION` — a prospective, scientifically defensible alternative preserving the same estimand;
+1. `SPECIFICATION` — an already-prospective, scientifically defensible alternative preserving the same estimand;
 2. `EXPLORATORY` — result-driven/hypothesis-generating, never allowed to rewrite confirmatory history;
 3. `DEFERRED` — recorded with entry condition;
 4. `REOPEN` — changes the confirmatory commitment through a logged decision and new freeze.
+
+The route must become durable before CHANGE_PLAN is complete. `SPECIFICATION` points to the already-frozen T<n>/dimension and becomes a specification run if executed; an executed `EXPLORATORY` route gets an exploratory run manifest, while an unexecuted retained idea is written to `Deferred`; `DEFERRED` is written to the map with its entry condition; `REOPEN` appends a decision and creates new freezes. A verbal classification alone is not state.
 
 Silent rewrite is not a state.
 
@@ -147,14 +149,14 @@ Read only the entered phase reference, plus `reference/preflights.md` when a pre
 | 4 | Data | EXECUTE | input provenance, linkage/quality/exposure roles and disclosure boundary explicit | `reference/04-data.md` |
 | 5 | Analysis | EXECUTE → JUSTIFY | analysis plan frozen; valid run lineage; planned checks/results complete; hypothesis terminal state | `reference/05-analysis.md` |
 | 6 | Writing | JUSTIFY | every material number/claim has source/result lineage; interpretation stays inside boundary | `reference/06-writing.md` |
-| 7 | Review | CHALLENGE | reviewer `PASS`, or each `FAIL` has an explicit response and affected checks rerun | `reference/07-review.md` |
+| 7 | Review | CHALLENGE | separate reviewer invoked; durable `.research/reviews/REVIEW-<n>.md` records the reviewed commit and verdict; reviewer `PASS`, or each `FAIL` has an explicit response and affected checks rerun | `reference/07-review.md` |
 | 8 | Publication | CHALLENGE → RELEASE | PUBLISH preflight passes; venue/ethics/human requirements present | `reference/08-publication.md` |
 
 A later finding can reopen an earlier phase. Skipping a required phase is a logged decision with revision condition, never silence. A gate is reached by the artifact/evidence it produces, not by narrative history.
 
 ## Delegation
 
-- `explorer` — phase 1 structural divergence and hypothesis lineages.
+- `explorer` — separately installed phase 1 structural divergence/hypothesis-lineage delegate. Its absence makes the affected exploration `NOT_VERIFIED`; it does not disable the rest of `research`.
 - `statistical-analysis` — estimand-first analysis plan, EDA boundary, dependence and missingness decisions.
 - `research-map` — operational memory and composed mechanical validation.
 - `research-graph` — derived lineage/index and trace/argument queries.
@@ -179,4 +181,4 @@ After commit, change it only by a later block with `Supersedes: D-<k>`.
 
 Keep system mechanics mostly invisible. Report the scientific state, material block/finding and next concrete action. Do not require the user to memorize internal commands. When a preflight blocks an action, state what evidence/decision is missing and the legitimate route forward.
 
-A research is complete when every hypothesis has a terminal state, material claims passed adversarial review, publication requirements passed, and the map records the final state.
+A research is complete when every hypothesis has a terminal state, material claims passed independent adversarial review, publication requirements passed, and the map records the final state.
