@@ -17,6 +17,7 @@ import sys
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 
 import fixtures
 
@@ -73,12 +74,20 @@ def runner_cmd(prompt: str, condition: str, model: str, max_turns: int) -> list[
     return cmd
 
 
-def system_init(transcript: str) -> dict | None:
+def json_events(transcript: str) -> list[dict[str, Any]]:
+    events: list[dict[str, Any]] = []
     for raw in transcript.splitlines():
         try:
             event = json.loads(raw)
         except json.JSONDecodeError:
             continue
+        if isinstance(event, dict):
+            events.append(event)
+    return events
+
+
+def system_init(transcript: str) -> dict | None:
+    for event in json_events(transcript):
         if event.get("type") == "system" and event.get("subtype") == "init":
             return event
     return None
@@ -108,6 +117,85 @@ def startup_check(transcript: str, condition: str) -> tuple[bool, str]:
     return True, "PASS: condition startup verified\n" + "\n".join(lines) + "\n"
 
 
+def _walk_tool_uses(value: Any, uses: list[dict[str, Any]]) -> None:
+    if isinstance(value, dict):
+        if value.get("type") == "tool_use" and value.get("name"):
+            uses.append({"name": str(value["name"]), "input": value.get("input", {})})
+        for child in value.values():
+            _walk_tool_uses(child, uses)
+    elif isinstance(value, list):
+        for child in value:
+            _walk_tool_uses(child, uses)
+
+
+def tool_uses(transcript: str) -> list[dict[str, Any]]:
+    """Extract actual structured tool-use blocks; prose mentions do not count."""
+    uses: list[dict[str, Any]] = []
+    for event in json_events(transcript):
+        _walk_tool_uses(event, uses)
+    return uses
+
+
+def changed_paths(root: Path, initial: str) -> list[str]:
+    paths: set[str] = set()
+    for args in (
+        ("git", "diff", "--name-only", f"{initial}..HEAD", "--", "."),
+        ("git", "diff", "--name-only", "--", "."),
+        ("git", "ls-files", "--others", "--exclude-standard"),
+    ):
+        result = command(*args, cwd=root)
+        if result.returncode == 0:
+            paths.update(line.strip() for line in result.stdout.splitlines() if line.strip())
+    return sorted(paths)
+
+
+def deterministic_observations(root: Path, initial: str, transcript: str) -> dict[str, Any]:
+    """Record machine-observable facts before asking an LLM to judge semantics.
+
+    This layer deliberately does not decide scenario PASS/FAIL. It captures generic facts
+    that should outrank a later semantic guess: actual tool calls, available tools when the
+    host reports them, changed paths, and durable review records.
+    """
+    init = system_init(transcript) or {}
+    available_tools = init.get("tools", []) or []
+    if not isinstance(available_tools, list):
+        available_tools = []
+    uses = tool_uses(transcript)
+
+    def input_text(use: dict[str, Any]) -> str:
+        try:
+            return json.dumps(use.get("input", {}), ensure_ascii=False, sort_keys=True)
+        except TypeError:
+            return str(use.get("input", {}))
+
+    reviewer2_calls = [
+        index
+        for index, use in enumerate(uses)
+        if use.get("name") in {"Task", "Agent"} and "reviewer-2" in input_text(use).lower()
+    ]
+    separate_agent_calls = [
+        index for index, use in enumerate(uses) if use.get("name") in {"Task", "Agent"}
+    ]
+    review_records = sorted(
+        path.relative_to(root).as_posix()
+        for path in (root / ".research" / "reviews").glob("REVIEW-*.md")
+    ) if (root / ".research" / "reviews").is_dir() else []
+
+    return {
+        "available_tools": [str(item) for item in available_tools],
+        "tool_uses": [
+            {"index": index, "name": use.get("name"), "input": use.get("input", {})}
+            for index, use in enumerate(uses)
+        ],
+        "changed_paths": changed_paths(root, initial),
+        "separate_agent_invoked": bool(separate_agent_calls),
+        "separate_agent_call_indices": separate_agent_calls,
+        "reviewer2_invoked": bool(reviewer2_calls),
+        "reviewer2_call_indices": reviewer2_calls,
+        "review_records": review_records,
+    }
+
+
 def validate_fixture(root: Path) -> str:
     result = command(
         sys.executable,
@@ -121,7 +209,15 @@ def validate_fixture(root: Path) -> str:
     return result.stdout + ("\nSTDERR\n" + result.stderr if result.stderr else "")
 
 
-def judge_run(scenario: dict, transcript: str, diff: str, validator: str, model: str, timeout: int) -> str:
+def judge_run(
+    scenario: dict,
+    transcript: str,
+    diff: str,
+    validator: str,
+    observations: dict[str, Any],
+    model: str,
+    timeout: int,
+) -> str:
     prompt = f"""Judge this completed research eval run. The experimental condition is hidden from you.
 
 SCENARIO STATE
@@ -129,6 +225,9 @@ SCENARIO STATE
 
 EXPECTED BEHAVIOR
 {scenario['expect']}
+
+DETERMINISTIC OBSERVATIONS
+{json.dumps(observations, indent=2, ensure_ascii=False)}
 
 RUNNER TRANSCRIPT
 {transcript}
@@ -225,12 +324,24 @@ def one_run(
         (destination / "startup_check.txt").write_text(startup, encoding="utf-8")
         diff = safe_snapshot(root, initial)
         validator = validate_fixture(root)
+        observations = deterministic_observations(root, initial, transcript)
         (destination / "diff.patch").write_text(diff, encoding="utf-8")
         (destination / "validator.txt").write_text(validator, encoding="utf-8")
+        (destination / "observations.json").write_text(
+            json.dumps(observations, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+        )
 
         if judge:
             if startup_ok and exit_code == 0:
-                judgment = judge_run(scenario, transcript, diff, validator, judge_model, timeout)
+                judgment = judge_run(
+                    scenario,
+                    transcript,
+                    diff,
+                    validator,
+                    observations,
+                    judge_model,
+                    timeout,
+                )
             else:
                 judgment = "VERDICT: NOT_VERIFIED\n\nOBSERVED\nRun invalid before adjudication.\n\nCRITERION\nCondition isolation and successful runner startup are prerequisites.\n\nEVIDENCE\n" + startup + f"runner exit code={exit_code}\n\nFAILURE_MECHANISM\neval-infrastructure\n\nMECHANIZABLE\nyes — startup is mechanically observable\n\nMECHANIZATION\nsystem/init plugin gate\n"
             (destination / "judgment.txt").write_text(judgment, encoding="utf-8")
