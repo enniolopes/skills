@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
-"""Run blinded control/treatment behavioral evals for the research plugin.
+"""Run condition-hidden control/treatment behavioral evals for the research plugin.
 
 Dry by default. Pass --execute to invoke Claude Code and incur model usage.
+Executed runs use Claude Code bare mode so host plugins, skills, hooks, memory and CLAUDE.md
+cannot contaminate the control. Bare mode requires provider credentials (for the Anthropic
+API, ANTHROPIC_API_KEY). Treatment loads only the local research and explorer plugins.
 """
 
 from __future__ import annotations
@@ -9,7 +12,6 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import shutil
 import subprocess
 import sys
 import tempfile
@@ -25,6 +27,7 @@ JUDGE_PROMPT = HERE / "judge" / "research-eval-judge.md"
 PLUGIN = REPO / "systems" / "research"
 EXPLORER = REPO / "skills" / "explorer"
 VALIDATOR = PLUGIN / "skills" / "research-map" / "scripts" / "validate_all.py"
+EXPECTED_TREATMENT_PLUGINS = {"research", "explorer"}
 
 
 def command(*args: str, cwd: Path | None = None, timeout: int | None = None) -> subprocess.CompletedProcess[str]:
@@ -51,6 +54,7 @@ def safe_snapshot(root: Path, initial: str) -> str:
 def runner_cmd(prompt: str, condition: str, model: str, max_turns: int) -> list[str]:
     cmd = [
         "claude",
+        "--bare",
         "-p",
         prompt,
         "--model",
@@ -69,6 +73,41 @@ def runner_cmd(prompt: str, condition: str, model: str, max_turns: int) -> list[
     return cmd
 
 
+def system_init(transcript: str) -> dict | None:
+    for raw in transcript.splitlines():
+        try:
+            event = json.loads(raw)
+        except json.JSONDecodeError:
+            continue
+        if event.get("type") == "system" and event.get("subtype") == "init":
+            return event
+    return None
+
+
+def startup_check(transcript: str, condition: str) -> tuple[bool, str]:
+    init = system_init(transcript)
+    if init is None:
+        return False, "FAIL: no system/init event; condition isolation cannot be verified\n"
+    plugins = {
+        str(item.get("name", ""))
+        for item in init.get("plugins", [])
+        if isinstance(item, dict) and item.get("name")
+    }
+    errors = init.get("plugin_errors", []) or []
+    lines = [f"plugins={sorted(plugins)}", f"plugin_errors={errors}"]
+    if errors:
+        return False, "FAIL: plugin load errors\n" + "\n".join(lines) + "\n"
+    if condition == "control":
+        contaminated = plugins & EXPECTED_TREATMENT_PLUGINS
+        if contaminated:
+            return False, "FAIL: control contaminated by treatment plugin(s): " + ", ".join(sorted(contaminated)) + "\n" + "\n".join(lines) + "\n"
+    else:
+        missing = EXPECTED_TREATMENT_PLUGINS - plugins
+        if missing:
+            return False, "FAIL: treatment missing plugin(s): " + ", ".join(sorted(missing)) + "\n" + "\n".join(lines) + "\n"
+    return True, "PASS: condition startup verified\n" + "\n".join(lines) + "\n"
+
+
 def validate_fixture(root: Path) -> str:
     result = command(
         sys.executable,
@@ -83,7 +122,7 @@ def validate_fixture(root: Path) -> str:
 
 
 def judge_run(scenario: dict, transcript: str, diff: str, validator: str, model: str, timeout: int) -> str:
-    prompt = f"""Judge this completed research eval run. You are blinded to condition.
+    prompt = f"""Judge this completed research eval run. The experimental condition is hidden from you.
 
 SCENARIO STATE
 {scenario['state']}
@@ -103,6 +142,7 @@ VALIDATOR OUTPUT
     with tempfile.TemporaryDirectory(prefix="research-judge-") as tmp:
         result = command(
             "claude",
+            "--bare",
             "-p",
             prompt,
             "--model",
@@ -158,6 +198,7 @@ def one_run(
             "initial_fixture_commit": initial,
             "command": cmd,
             "prompt": full_prompt,
+            "isolation": "claude --bare; treatment loads only local research + explorer via --plugin-dir",
         }
         (destination / "metadata.json").write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
 
@@ -179,19 +220,25 @@ def one_run(
         (destination / "transcript.jsonl").write_text(transcript, encoding="utf-8")
         (destination / "stderr.txt").write_text(stderr, encoding="utf-8")
         (destination / "exit_code.txt").write_text(str(exit_code) + "\n", encoding="utf-8")
+
+        startup_ok, startup = startup_check(transcript, condition)
+        (destination / "startup_check.txt").write_text(startup, encoding="utf-8")
         diff = safe_snapshot(root, initial)
         validator = validate_fixture(root)
         (destination / "diff.patch").write_text(diff, encoding="utf-8")
         (destination / "validator.txt").write_text(validator, encoding="utf-8")
 
         if judge:
-            judgment = judge_run(scenario, transcript, diff, validator, judge_model, timeout)
+            if startup_ok and exit_code == 0:
+                judgment = judge_run(scenario, transcript, diff, validator, judge_model, timeout)
+            else:
+                judgment = "VERDICT: NOT_VERIFIED\n\nOBSERVED\nRun invalid before adjudication.\n\nCRITERION\nCondition isolation and successful runner startup are prerequisites.\n\nEVIDENCE\n" + startup + f"runner exit code={exit_code}\n\nFAILURE_MECHANISM\neval-infrastructure\n\nMECHANIZABLE\nyes — startup is mechanically observable\n\nMECHANIZATION\nsystem/init plugin gate\n"
             (destination / "judgment.txt").write_text(judgment, encoding="utf-8")
         return destination
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Run research behavioral evals (dry by default).")
+    parser = argparse.ArgumentParser(description="Run isolated research behavioral evals (dry by default).")
     parser.add_argument("--scenario", action="append", help="scenario id; repeatable; default all")
     parser.add_argument("--condition", choices=["control", "treatment", "both"], default="both")
     parser.add_argument("--repetitions", type=int, default=3)
@@ -200,8 +247,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--max-turns", type=int, default=20)
     parser.add_argument("--timeout", type=int, default=900)
     parser.add_argument("--out", type=Path, default=HERE / "runs" / repo_sha())
-    parser.add_argument("--execute", action="store_true", help="actually invoke Claude Code; otherwise only build fixtures/commands")
-    parser.add_argument("--judge", action="store_true", help="invoke a blinded judge after each executed run")
+    parser.add_argument("--execute", action="store_true", help="invoke Claude Code in bare mode; requires provider credentials")
+    parser.add_argument("--judge", action="store_true", help="invoke a condition-hidden judge after each valid executed run")
     args = parser.parse_args(argv)
 
     scenarios = load_scenarios()
@@ -211,6 +258,8 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("unknown scenario(s): " + ", ".join(unknown))
     if args.repetitions < 1:
         parser.error("--repetitions must be >= 1")
+    if args.execute and not os.environ.get("ANTHROPIC_API_KEY"):
+        print("warning: --bare does not use Claude subscription OAuth; set ANTHROPIC_API_KEY (or configured provider credentials)", file=sys.stderr)
     conditions = ["control", "treatment"] if args.condition == "both" else [args.condition]
 
     outputs: list[Path] = []
