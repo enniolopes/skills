@@ -1,6 +1,6 @@
 ---
 name: research-graph
-description: Build and query the derived epistemic graph of a research repository. Reconstructs hypothesis, estimand, test, run, result, inference, claim and source lineage from authoritative artifacts; the graph is a disposable index, never a second source of truth. Use internally for claim preflight, adversarial review, trace/argument views, and questions such as why a result exists or what it changed.
+description: Build and query the derived epistemic graph of a research repository. Reconstructs hypothesis, estimand, test, data exposure, run, result, inference, claim and source lineage from authoritative artifacts; the graph is a disposable index, never a second source of truth. Use internally for claim preflight, adversarial review, trace/argument views, and questions such as why a result exists or what it changed.
 license: CC-BY-NC-4.0
 metadata:
   version: 0.8.0
@@ -13,11 +13,11 @@ The repository artifacts are authoritative. The graph only stores identity and r
 
 Node kinds in this version are limited to:
 
-`H` hypothesis · `E` estimand · `T` test · `A` assumption · `K` check · `D` decision · `RUN` execution · `R` result · `I` inference/warrant · `C` claim · `SRC` source.
+`H` hypothesis · `E` estimand · `T` test · `A` assumption · `K` check · `D` decision · `DATA` dataset/exposure · `RUN` execution · `R` result · `I` inference/warrant · `C` claim · `SRC` source.
 
 Relations are limited to:
 
-`estimates`, `tests`, `requires`, `checked_by`, `fallback_to`, `executed_as`, `produces`, `derived_from`, `supports`, `challenges`, `supersedes`, `appears_in`, `generated_from`.
+`estimates`, `tests`, `requires`, `checked_by`, `fallback_to`, `executed_as`, `uses`, `produces`, `derived_from`, `supports`, `challenges`, `supersedes`, `appears_in`, `generated_from`.
 
 Run:
 
@@ -56,4 +56,4 @@ The result's run supplies the test, hypothesis and estimand. The inference node 
 
 ## Exposure
 
-An analysis-plan hypothesis may state `Generated from: D1, D2`. Run manifests identify input datasets and their epistemic roles. The graph records `generated_from`; the validator rejects independent-confirmation claims that reuse the same discovery dataset in a confirmatory run.
+An analysis-plan hypothesis may state `Generated from: DATA1, DATA2`. Run manifests identify input datasets and their epistemic roles. The graph records both `generated_from` and `uses`; the validator rejects independent-confirmation claims that reuse the same discovery dataset in a confirmatory run.
