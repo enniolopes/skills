@@ -6,3 +6,6 @@
 
 # Python bytecode
 __pycache__/
+
+# Behavioral eval transcripts and repository diffs
+development/research/evals/runs/
