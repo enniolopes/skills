@@ -243,7 +243,6 @@ def check_runs(root: Path, map_path: Path, plan: dict[str, dict]) -> tuple[Resul
             continue
         if run_id in run_index:
             result.fail(f"{rel}: duplicate run id {run_id}")
-        run_index[run_id] = data
 
         mode = str(data.get("mode", "")).lower()
         analysis_role = str(data.get("analysis_role", "")).lower()
@@ -255,10 +254,10 @@ def check_runs(root: Path, map_path: Path, plan: dict[str, dict]) -> tuple[Resul
         hypothesis = str(data.get("hypothesis", "")).upper()
         estimand = str(data.get("estimand", "")).upper()
         test = str(data.get("test", "")).upper()
-        if hypothesis not in plan:
-            result.fail(f"{rel}: hypothesis {hypothesis or 'missing'} is not in analysis-plan.md")
-        elif estimand != plan[hypothesis]["estimand"]:
-            result.fail(f"{rel}: estimand {estimand or 'missing'} disagrees with {hypothesis} current plan ({plan[hypothesis]['estimand']})")
+        if not re.fullmatch(r"H\d+", hypothesis):
+            result.fail(f"{rel}: hypothesis must be H<n>")
+        if not re.fullmatch(r"E\d+", estimand):
+            result.fail(f"{rel}: estimand must be E<n>")
         if not re.fullmatch(r"T\d+", test):
             result.fail(f"{rel}: test must be T<n>")
 
@@ -267,6 +266,7 @@ def check_runs(root: Path, map_path: Path, plan: dict[str, dict]) -> tuple[Resul
         plan_freeze = str(data.get("analysis_plan_freeze", ""))
         registration = str(data.get("registration", "")).strip()
         frozen_primary = ""
+        frozen_generated: list[str] = []
         frozen_tests: set[str] = set()
         temporal_ready = False
 
@@ -296,7 +296,10 @@ def check_runs(root: Path, map_path: Path, plan: dict[str, dict]) -> tuple[Resul
                         else:
                             frozen_entry = frozen_index[hypothesis]
                             frozen_primary = frozen_entry["primary_test"]
+                            frozen_generated = list(frozen_entry["generated_from"])
                             frozen_tests = frozen_entry["tests"]
+                            if frozen_entry["mode"] != "confirmatory":
+                                result.fail(f"{rel}: {hypothesis} was not confirmatory at analysis-plan freeze {plan_freeze}")
                             if estimand != frozen_entry["estimand"]:
                                 result.fail(f"{rel}: estimand {estimand} disagrees with frozen {hypothesis} estimand {frozen_entry['estimand']}")
                             if analysis_role == "primary" and test != frozen_primary:
@@ -311,8 +314,19 @@ def check_runs(root: Path, map_path: Path, plan: dict[str, dict]) -> tuple[Resul
             elif not have_git:
                 temporal_unverified += 1
                 result.lines.append(f"{rel}: git unavailable/not a work tree; temporal ancestry NOT_VERIFIED")
-        elif have_git and COMMIT.fullmatch(commit) and commit_exists(root, commit):
-            temporal_ready = True
+        else:
+            current_entry = plan.get(hypothesis)
+            if current_entry is None:
+                result.fail(f"{rel}: non-confirmatory run references {hypothesis}, which is not in current analysis-plan.md")
+            elif estimand != current_entry["estimand"]:
+                result.fail(f"{rel}: estimand {estimand} disagrees with current {hypothesis} plan ({current_entry['estimand']})")
+            if have_git and COMMIT.fullmatch(commit) and commit_exists(root, commit):
+                temporal_ready = True
+
+        run_record = dict(data)
+        run_record["_frozen_primary_test"] = frozen_primary
+        run_record["_frozen_generated_from"] = frozen_generated
+        run_index[run_id] = run_record
 
         inputs = data.get("inputs", [])
         if not isinstance(inputs, list):
@@ -417,9 +431,7 @@ def check_lineage(root: Path, map_path: Path, plan: dict[str, dict], result_inde
                 result.fail(f"{label}: result {result_id} has no run manifest lineage")
                 continue
             if decides:
-                if decides not in plan:
-                    result.fail(f"{label}: decides unknown hypothesis {decides}")
-                elif lineage["hypothesis"] != decides:
+                if lineage["hypothesis"] != decides:
                     result.fail(f"{label}: {result_id} belongs to {lineage['hypothesis']}, not deciding hypothesis {decides}")
                 elif lineage["mode"] != "confirmatory":
                     result.fail(f"{label}: {result_id} comes from a {lineage['mode']} run and cannot decide confirmatory hypothesis {decides}")
@@ -439,24 +451,33 @@ def check_lineage(root: Path, map_path: Path, plan: dict[str, dict], result_inde
 def check_exposure(plan: dict[str, dict], runs: dict[str, dict]) -> Result:
     result = Result("exposure")
     checked = 0
-    for hypothesis, item in plan.items():
-        generated = set(item.get("generated_from", []))
+    unverifiable = 0
+    for run_id, run in runs.items():
+        if str(run.get("mode", "")).lower() != "confirmatory":
+            continue
+        hypothesis = str(run.get("hypothesis", "")).upper()
+        generated = set(run.get("_frozen_generated_from", []))
+        if not generated and hypothesis in plan:
+            # Best-effort fallback when temporal plan recovery was unavailable. The runs check
+            # already marks temporal provenance NOT_VERIFIED in that case.
+            generated = set(plan[hypothesis].get("generated_from", []))
+            if generated and not run.get("_frozen_primary_test"):
+                unverifiable += 1
         if not generated:
             continue
-        for run_id, run in runs.items():
-            if str(run.get("hypothesis", "")).upper() != hypothesis or str(run.get("mode", "")).lower() != "confirmatory":
-                continue
-            confirmatory_inputs = {
-                str(inp.get("id", "")).upper()
-                for inp in run.get("inputs", [])
-                if isinstance(inp, dict) and str(inp.get("role", "")).lower() == "confirmatory"
-            }
-            overlap = generated & confirmatory_inputs
-            checked += 1
-            if overlap:
-                result.fail(f"{run_id}: {hypothesis} was generated from {', '.join(sorted(overlap))} and reuses the same data as independent confirmatory evidence")
-    if not plan:
-        result.unverified("no analysis plan; exposure cannot be checked")
+        confirmatory_inputs = {
+            str(inp.get("id", "")).upper()
+            for inp in run.get("inputs", [])
+            if isinstance(inp, dict) and str(inp.get("role", "")).lower() == "confirmatory"
+        }
+        overlap = generated & confirmatory_inputs
+        checked += 1
+        if overlap:
+            result.fail(f"{run_id}: {hypothesis} was generated from {', '.join(sorted(overlap))} and reuses the same data as independent confirmatory evidence")
+    if not plan and not runs:
+        result.unverified("no analysis plan or runs; exposure cannot be checked")
+    elif result.status == "PASS" and unverifiable:
+        result.unverified(f"{checked} comparison(s); {unverifiable} relied on current rather than frozen exposure state")
     elif result.status == "PASS":
         result.summary = f"{checked} discovery/confirmatory overlap comparison(s)"
     return result
