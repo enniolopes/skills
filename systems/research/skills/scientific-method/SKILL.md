@@ -1,191 +1,184 @@
 ---
 name: scientific-method
-description: Run an empirical research project as a lifecycle with gates — problem, literature, protocol, data, analysis, writing, review, publication — for observational quantitative studies on administrative data. Use it to start a research, to check which gate you are at, to review a manuscript, and whenever you are about to fit a model, cite a source, report a number or write results. Delegates hypothesis generation to explorer, session memory to research-map, and review to the reviewer-2 agent.
-when_to_use: Triggers include "vou ajustar/rodar o modelo", "let me fit", "vou citar", "escrever os resultados", "deu/não deu efeito", "no effect", "qual o intervalo", "definir a amostra/população", "o raio de 500 m", "os dois resultados discordam", "pré-registro", "protocolo", "hipótese", "revisar o manuscrito", "submeter o artigo", "a gente devia testar também", "apareceu um método novo", "abrir mais uma frente", "qual é a pergunta", "definir o problema", "estimando", "para quem isso importa", "o problema é óbvio", "mostrar que o problema existe", "qual o tamanho do problema", "isso já não está resolvido?".
+description: Orchestrate observational quantitative research as an epistemic control system: formulate and try to falsify the problem first, explore before commitment, freeze consequential choices before result exposure, execute against identified evidence, require claim lineage, and challenge material claims independently. This is the single public entry point; it delegates exploration, statistical planning, memory, graph lineage and review internally.
+when_to_use: Use to start or continue a research, check status, review a manuscript, and before fitting a model, changing a frozen plan, citing a source, reporting a material result, writing a claim or publishing. Also use when a new hypothesis or method appears after data exposure or protocol freeze.
 license: CC-BY-NC-4.0
 metadata:
-  version: 0.6.0
-argument-hint: '<start | phase | review <manuscript> | what you are about to do>'
+  version: 0.8.0
+argument-hint: '<start <question> | status | review [manuscript] | what you want to do>'
 ---
 
 # Scientific method
 
-Own the lifecycle of an empirical research project and the quality of its artifacts. The
-model already knows the statistics; what fails is applying the right discipline at the
-right moment. This capability supplies the moment.
+Own the epistemic lifecycle of an empirical research project. Scope: observational quantitative research with administrative data. Other designs may reuse the kernel, but phase procedures in this version are written for this scope.
 
-Scope of this version: observational quantitative research with administrative data. Other
-designs may use the invariants; the phase references are written for this scope.
+This is the public entry point. The user talks to this skill; internal skills and agents are invoked as needed. Do not make the user operate the architecture.
 
-## Arguments
+## Five laws
 
-- `start <question>` → phase 1, then onward.
-- `phase` → report the current phase and gate from the research map, nothing else.
-- `review <path>` → phase 7 on that manuscript.
-- anything else → match it against the phase table below; a match fires that phase; no
-  match is answered as asked, without a phase.
+1. **Evidence outranks narrative.** What was read or executed against an identified target outranks memory, confidence and author explanation. A number not produced by executed code is not a result.
+2. **Commitment precedes exposure.** A choice that can be influenced by a result must be recorded and frozen before exposure to that result.
+3. **Discovery is not confirmation.** Evidence that materially generated or selected a hypothesis does not independently confirm it.
+4. **Claims require lineage.** Every material scientific claim must be traceable through an explicit inference to identified result/source evidence and the design that permits the inference.
+5. **Material claims face an adversary.** The process that built a material claim is insufficient to release it; independent adversarial review is required.
 
-Every response ends with one report line. If a phase trigger fired this turn:
+These laws generate the detailed rules. Do not add a second prose rule when an important failure can instead be represented as an artifact, state, relation, temporal fact or invalid transition.
+
+## Five operations
+
+The behavioral kernel is:
 
 ```text
-Phase <n> <name> · Gate: PASS | FAIL — <unmet criterion> · states changed: <H1 → INCONCLUSIVE, …> · decisions: <D-n, …> · next: <one concrete step>
+EXPLORE → COMMIT → EXECUTE → JUSTIFY → CHALLENGE
 ```
 
-Otherwise: `Phase: none · no gate touched · next: <one concrete step>`.
+- **EXPLORE** — high creative freedom: formulate/reformulate the problem, generate mechanisms, hypotheses, alternatives, objections and falsifications.
+- **COMMIT** — make the scientific target and consequential decision rules explicit: estimand, protocol, primary test, assumptions/checks/failure actions, interpretation boundary; then freeze.
+- **EXECUTE** — run identified code against identified inputs; produce run manifests, diagnostics, aggregates and results. Confirmatory execution follows the frozen plan rather than inventing a better story after exposure.
+- **JUSTIFY** — decide what the result permits the project to claim, given estimand, design, checks, sensitivity and interpretation boundary.
+- **CHALLENGE** — seek falsifying evidence first; run mechanical validation and independent review before release.
 
-## Ownership
+The eight research phases below remain the lifecycle/navigation layer. Preflights, not phase vocabulary, control the action immediately before an epistemically consequential step.
 
-Owns: phases, gates, terminal states, the quality of protocol, data, analysis, manuscript
-and deposit. Does **not** own domain judgement (which question matters, which institution
-to call, what a field term means in practice), authorship, ethics approval, or the choice
-of venue. Those belong to humans and are never invented; when one is missing the state is
-`BLOCKED`, named, with who unblocks it.
+## Arguments and session UX
 
-Does **not** own software engineering. The topology of a research is the map's `Layout`:
-protocol, decisions, aggregates, documents, notebooks, references. "Structure this
-research" means making those six keys true — `research-map init` — and nothing more.
-Packages, test suites, build systems, CI, hooks and code architecture are the analyst's
-engineering, not this method; when asked for them, say so in one line and stop.
+- `start <question>` — start phase 1, initialize/resume memory, then proceed through the smallest next action.
+- `status` — internally resume and validate; return one-screen state and next action.
+- `review [path]` — run phase 7 on the manuscript under `documents` or the supplied path.
+- anything else — answer the user's normal research request, but run the applicable preflight before a consequential action.
 
-## Invariants
+On an existing repository, invoke `research-map resume` before the first research action. The user does not need to request it. Update the map on observable state changes and validate before commits/release.
 
-1. **The protocol is the source of truth.** Paper, abstract, registration text, slides and
-   e-mails are projections of it, regenerated from it, never edited into disagreement.
-2. **Evidence is something read or run against an identified target.** A number that did
-   not come out of executed code in the current repository state is a claim, not a result.
-3. **Every hypothesis carries a prediction and a refutation condition** before any
-   confirmatory analysis runs. One primary test per hypothesis.
-4. **Exploratory and confirmatory are separated by an artifact, not by intent**: a public
-   registration recorded in the research map, and confirmatory code that runs only with
-   the outcome permuted (`DRY_RUN`) while `Registration: none`.
-5. **Every model lists assumptions → check → fallback before fitting.** A fallback chosen
-   after seeing residuals is a forking path.
-6. **Bounds for any "no effect" claim are fixed before the test.**
-7. **Every analytic choice that could reasonably have gone another way is a
-   specification-curve dimension**, not a footnote.
-8. **Every linkage step reports match rates and errors. Every table written under the
-   map's `documents` respects its `floor`** — whoever writes it, this method included.
-9. **Every citation is verified at its DOI record or landing page before it is written**;
-   a finding read only from an excerpt is marked as such.
-10. **Every methodological decision is logged** with date, rationale and revision
-    condition. Methodological means: a reviewer, or the supplementary material, would need
-    it to judge the results. Anything else — tooling, file layout, wording — is a commit
-    message. The log is append-only from the commit onward.
-11. **Terminal states are named**: `CONFIRMED`, `REFUTED`, `INCONCLUSIVE`, `BLOCKED`
-    (missing human decision or data), `NOT_VERIFIED` (a check could not run). Silence is
-    not a state.
-12. **A missing capability degrades explicitly** to `NOT_VERIFIED` or `BLOCKED`, never to a
-    guess.
+## Preflights
 
-## The problem first: formulated, then shown
+Read `reference/preflights.md` whenever an action matches one of these boundaries:
 
-"Understanding the problem" is not time spent; it is two artifacts, complete and checked by
-`validate`. Gate 1A: the **problem statement** (`reference/problem-statement.md`) —
-what is claimed, for whom, with what estimand, what would refute it. Gate 1B: the **problem
-brief** (`reference/problem-brief.md`) — a descriptive study that shows the problem exists,
-how large against a reference set by a logged decision, for whom, how it is handled today,
-and what was tried to make it disappear. Its verdict lives in the map: `Problem: SHOWN |
-NOT_SHOWN | INCONCLUSIVE`. The protocol does not freeze before `SHOWN`; `NOT_SHOWN` ends or
-reformulates the research and is the cheapest good result a research can have. Every later
-gate re-reads both; a change is a logged decision, never a silent rewrite. The error this
-prevents has a name — the error of the third kind, a precise answer to the wrong problem.
+- **FIT** — before a confirmatory run can expose its result.
+- **CHANGE_PLAN** — before changing a frozen hypothesis, estimand, method, population, threshold, outcome or fallback.
+- **CLAIM** — before a material result becomes prose or changes a hypothesis state.
+- **CITE** — before a source supports a scientific or methodological proposition.
+- **PUBLISH** — before anything leaves the repository as a scientific product.
 
-## Scope: open wide once, then pay to reopen
+A failed preflight is resolved by inspecting/computing/recording the missing evidence, or by `BLOCKED`/`NOT_VERIFIED`. Never satisfy it with a plausible explanation of what the missing artifact probably says.
 
-Divergence is a phase with a budget, not a disposition. In phase 1 the exploration budget
-(lineages, time, stopping rule) is logged as a decision **before** `explorer` runs; the
-default is three to five structurally different lineages and stop at revised saturation.
-After the protocol freezes, a new method, concept, test or front has exactly four
-destinations, and "open it" is the most expensive:
+## Authority boundary
 
-1. a **specification-curve dimension**, when it is an alternative way of doing something
-   already in the protocol — absorbed, no new front;
-2. an **exploratory analysis**, labelled as such, hypothesis-generating, never confirmatory;
-3. the map's **`## Deferred`** section, dated, with the condition under which it would enter
-   — the default destination for "we should also test X";
-4. **reopening phase 3**, only by a logged decision that says what leaves the protocol for
-   this to enter; a research carries at most three hypotheses without a terminal state, and a
-   fourth requires that trade in the same decision.
+Own: lifecycle, gates, epistemic states, preflights and the quality/integrity of research artifacts.
 
-`resume` reports the count of open hypotheses and of deferred items every session, so
-growth is seen, not felt.
+Do not invent human authority: which question matters, field meaning not recoverable from evidence, authorship, ethics approval, institutional decisions or venue choice. Ask only the smallest decision that changes the research; record it. Everything else is inspected, searched, computed or degraded explicitly.
 
-## Memory across sessions
+Do not own software engineering. Research topology remains the map's six layout pointers: protocol, decisions, aggregates, documents, notebooks, references. Packages, CI, application architecture and build systems are separate engineering concerns.
 
-`research:research-map` owns it. Run its `resume` before the first action of a session,
-its `validate` before any commit, and its `update` after any gate change, terminal-state
-change or corrected number — not "at the end", which nothing signals. Never narrate a
-resume, update or validate you did not perform.
+## Problem first
+
+Phase 1 is not ceremony. Before optimizing an answer, establish that the research has a precise, falsifiable question and that any empirical premise needed to justify the research survives an attempt to make it disappear.
+
+Gate 1A writes the problem statement from `reference/problem-statement.md`: claim, unit, estimand, refutation, objection, who cares and non-goals. Log the exploration budget before invoking `explorer`; converge to at most three open hypotheses; route non-adopted lineages to `Deferred`.
+
+Gate 1B writes the problem brief from `reference/problem-brief.md`. It tests construct, population, measure, pre-fixed reference and magnitude using executed evidence, and attempts falsification before assertion. Its verdict is `SHOWN | NOT_SHOWN | INCONCLUSIVE`. `NOT_SHOWN` closes or reformulates the research; it is not failure. The confirmatory protocol does not freeze while a required premise is unestablished.
+
+Read `reference/01-problem.md` when entering/reopening phase 1.
+
+## Analysis plan and freeze
+
+Before confirmatory Phase 5 execution, create `analysis-plan.md` using `templates/analysis-plan.md` and invoke `statistical-analysis` to review it.
+
+For each confirmatory hypothesis the plan carries stable IDs for hypothesis, estimand and primary test; `Generated from:` exposure; dependence; decision rules; assumptions `A<n>`; checks `K<n>`; prospective failure actions; sensitivity/specification dimensions; and `May claim` / `May not claim` interpretation boundaries.
+
+`protocol_freeze` and `analysis_plan_freeze` are Git commits, not prose labels. Every material run writes `.research/runs/RUN-<n>.json` with those freezes, the run commit, hypothesis/estimand/test, typed data inputs and result artifacts. Temporal ancestry is evidence that a commitment preceded exposure.
+
+A historical analysis without trustworthy temporal provenance remains historical/`NOT_VERIFIED`; never reconstruct a freeze retrospectively as if it were observed.
+
+## Exposure and exploration
+
+Datasets used in material hypothesis generation are identified as `DATA<n>` and recorded in `Generated from:`. Run inputs state `role: discovery | confirmatory | validation`.
+
+If a hypothesis was generated from DATA1, reusing DATA1 as independent confirmatory evidence for that hypothesis is invalid. Route the result to `EXPLORATORY`, use a defensible independent/held-out source, or reopen the design. Registration after exposure does not erase exposure.
+
+A post-freeze idea has exactly four destinations:
+
+1. `SPECIFICATION` — an already-prospective, scientifically defensible alternative preserving the same estimand;
+2. `EXPLORATORY` — result-driven/hypothesis-generating, never allowed to rewrite confirmatory history;
+3. `DEFERRED` — recorded with entry condition;
+4. `REOPEN` — changes the confirmatory commitment through a logged decision and new freeze.
+
+The route must become durable before CHANGE_PLAN is complete. `SPECIFICATION` points to the already-frozen T<n>/dimension and becomes a specification run if executed; an executed `EXPLORATORY` route gets an exploratory run manifest, while an unexecuted retained idea is written to `Deferred`; `DEFERRED` is written to the map with its entry condition; `REOPEN` appends a decision and creates new freezes. A verbal classification alone is not state.
+
+Silent rewrite is not a state.
+
+## Claims and lineage
+
+A material claim is one that reports/decides a result, comparison, no-effect/equivalence conclusion, material mechanism or causal/substantive inference.
+
+After the CLAIM preflight, annotate the source near the claim:
+
+```text
+<!-- claim:C1 inference:I1 result:R1 -->
+```
+
+If it decides a hypothesis:
+
+```text
+<!-- claim:C2 inference:I2 result:R2 decides:H1 -->
+```
+
+`research-graph` derives `C → I → R → RUN → T → H/E` lineage from authoritative artifacts. `I<n>` is the public warrant from result + design/checks to wording. Mechanical validation can prove that the chain exists and uses the planned primary test; reviewer judgement decides whether the inference is scientifically adequate.
+
+## Sources
+
+A source has operational states: `DISCOVERED → RETRIEVED → READ → USED_FOR_CLAIM → REVIEWED`. DOI/landing-page resolution establishes identity/reachability, not semantic entailment. A methodological rule is not promoted into runtime policy from model memory or an indexed summary; the relevant primary source must have been read.
+
+## Terminal states
+
+Hypotheses end in exactly one of:
+
+`CONFIRMED | REFUTED | INCONCLUSIVE | BLOCKED | NOT_VERIFIED`.
+
+`CONFIRMED` and `REFUTED` are decisions under the recorded rule, not global truth labels. Missing capability/authority becomes `NOT_VERIFIED` or `BLOCKED`, never a guess.
 
 ## Phases
 
-Each phase has an entry trigger, a procedure (in `reference/`), an exit gate that can fail,
-and terminal states; phase 1 has two gates. Read the phase file when the phase is entered or
-when its trigger fires; do not read all of them at once. When a trigger fires implicitly, say which phase
-fired and apply its requirements **before** doing the thing.
+Read only the entered phase reference, plus `reference/preflights.md` when a preflight fires.
 
-| # | Phase | Trigger (what the conversation shows) | Exit gate | Read |
+| # | Phase | Dominant operation | Exit gate | Read |
 |---|---|---|---|---|
-| 1A | Problem — formulate | a research starts, restarts, gains a hypothesis or comes under the method; the question is stated in one sentence and someone wants to start analysing | exploration budget logged, then `explorer` invoked on it; problem statement complete (claim, unit, estimand, refutation, objection, who cares, non-goals); lineages not adopted in `## Deferred` | `reference/01-problem.md`, `reference/problem-statement.md` |
-| 1B | Problem — demonstrate | the statement exists; "the problem is obvious"; anyone reaches for a solution or a model before the problem is shown | problem brief complete (construct validated, population, measure, reference named by its decision, magnitude from executed code, falsification attempted, verdict); `Problem: SHOWN` in the map, or the research reformulates or closes | `reference/problem-brief.md` |
-| 2 | Literature | a citation is about to be typed; a claim about the state of knowledge | verification log complete (each source at DOI, or `NOT_VERIFIED` and not in the text); gap in one paragraph | `reference/02-literature.md` |
-| 3 | Protocol | hypotheses, tests, populations or thresholds set or changed; a round-number threshold or radius proposed; "no effect" planned; "we should also test X" after the freeze | protocol frozen; registration text derived; assumption tables, bounds and dimensions listed; anything admitted after the freeze has its trade logged | `reference/03-protocol.md` |
-| 4 | Data | an input enters; sources are joined; a population or pool is named for the first time; a table is written under `documents` | linkage report per join; provenance per input; no identifiable row outside the cache; no cell under `documents` below `floor` | `reference/04-data.md` |
-| 5 | Analysis | "vou ajustar / rodar o modelo", "let me fit"; an interval or statistic about to be reported; two results disagree | assumptions → check → fallback listed before fitting; dependence structure asked; `DRY_RUN` status confirmed; every pre-specified check has a result; terminal state per hypothesis; discordance reported and the primary test decides | `reference/05-analysis.md` |
-| 6 | Writing | a number is about to be written into prose; any prose that will leave the repository | every number exists in a committed aggregate with interval and source table; figure provenance; definitions with misreadings | `reference/06-writing.md` |
-| 7 | Review | before submission; after any confirmatory run on demand; `review <path>` | reviewer verdict `PASS`, or every `FAIL` has a logged response and re-run checks | `reference/07-review.md` |
-| 8 | Publication | anything leaves for a venue, funder or repository of record | DOIs recorded in the protocol; DMP and AI declaration in the venue's shape; PII check passed | `reference/08-publication.md` |
+| 1A | Problem — formulate | EXPLORE → COMMIT | exploration budget logged; explorer invoked; complete problem statement; <=3 open hypotheses; others Deferred | `reference/01-problem.md`, `reference/problem-statement.md` |
+| 1B | Problem — establish | EXECUTE → CHALLENGE | problem brief complete; `SHOWN`, or explicit `NOT_SHOWN`/`INCONCLUSIVE` consequence | `reference/problem-brief.md` |
+| 2 | Literature | EXPLORE → JUSTIFY | relevant sources identified/retrieved/read at the level used; gap stated | `reference/02-literature.md` |
+| 3 | Protocol | COMMIT | hypotheses/estimands/tests/rules fixed; registration derived; protocol freeze recorded | `reference/03-protocol.md` |
+| 4 | Data | EXECUTE | input provenance, linkage/quality/exposure roles and disclosure boundary explicit | `reference/04-data.md` |
+| 5 | Analysis | EXECUTE → JUSTIFY | analysis plan frozen; valid run lineage; planned checks/results complete; hypothesis terminal state | `reference/05-analysis.md` |
+| 6 | Writing | JUSTIFY | every material number/claim has source/result lineage; interpretation stays inside boundary | `reference/06-writing.md` |
+| 7 | Review | CHALLENGE | separate reviewer invoked; durable `.research/reviews/REVIEW-<n>.md` records the reviewed commit and verdict; reviewer `PASS`, or each `FAIL` has an explicit response and affected checks rerun | `reference/07-review.md` |
+| 8 | Publication | CHALLENGE → RELEASE | PUBLISH preflight passes; venue/ethics/human requirements present | `reference/08-publication.md` |
 
-Phases are ordered by dependency, not ceremony. A later phase may send work back to an
-earlier one (a review finding that changes a number reopens phase 6; a new hypothesis
-reopens phases 1 and 3). Skipping a phase is a logged decision with a revision condition,
-never silence. A gate is `reached` when the artifact it produces exists and the map's
-`Gates` row points to it; until then it is `pending`, whatever the history says. This is
-also how a research that already exists comes under the method: every gate `pending`, each
-earned by its artifact.
+A later finding can reopen an earlier phase. Skipping a required phase is a logged decision with revision condition, never silence. A gate is reached by the artifact/evidence it produces, not by narrative history.
 
 ## Delegation
 
-- **`explorer`** (skill; `explorer:explorer` when installed from the marketplace, pulled in
-  as a dependency) — phase 1: hypothesis portfolio with bridge certificates. Each surviving
-  lineage's discriminating test becomes the primary test; its failure condition becomes
-  the refutation clause.
-- **`research:research-map`** (skill) — memory across sessions, above. Its `validate` is
-  the mechanical half of invariants 2, 8, 9 and 10.
-- **`research:reviewer-2`** (agent) — phase 7 and on demand. Supply the brief exactly as its
-  "Required brief" section lists it, checklist included. It does not edit and does not
-  inherit your reasoning.
+- `explorer` — separately installed phase 1 structural divergence/hypothesis-lineage delegate. Its absence makes the affected exploration `NOT_VERIFIED`; it does not disable the rest of `research`.
+- `statistical-analysis` — estimand-first analysis plan, EDA boundary, dependence and missingness decisions.
+- `research-map` — operational memory and composed mechanical validation.
+- `research-graph` — derived lineage/index and trace/argument queries.
+- `reviewer-2` — independent, non-editing adversarial review.
 
-Delegating is invoking: the Skill tool for a skill, the Agent tool for the agent. Reading a
-skill's file with `cat` is not invoking it. A delegate that is not installed or cannot be
-invoked is not simulated: the step is `NOT_VERIFIED` with what is missing named.
+Invoke delegates; do not simulate them by reading their instructions. If a needed delegate cannot run, the affected check is `NOT_VERIFIED`.
 
-## Decision log entry
+## Decision log
 
-A methodological decision (invariant 10: a reviewer would need it) goes to the repository's
-decision log in this shape; the map's `validate` requires the heading and a non-empty
-revision condition:
+A methodological decision keeps the existing append-only contract:
 
 ```text
-### D-<n> · <YYYY-MM-DD> · <title, five words>
-<what was decided, one or two sentences>
-Rationale: <why; evidence or source>
-Revision condition: <the observation that would reopen this; or "not revisable: <why>">
+### D-<n> · <YYYY-MM-DD> · <short title>
+<decision>
+Rationale: <evidence/source>
+Revision condition: <observation that reopens it; or not revisable with reason>
 ```
 
-Before its commit a block is a draft and is rewritten in place; after, only a new block with
-`Supersedes: D-<k>` changes it.
+After commit, change it only by a later block with `Supersedes: D-<k>`.
 
-## Human gates
+## Reporting to the user
 
-Stop and ask only when the missing answer belongs to a human authority (domain judgement,
-authorship, ethics, venue, a scoping decision on unobtainable data). Ask the smallest
-decision-changing question, with the consequence stated in plain language and a
-recommended default — always the option that changes the least; record the answer as a
-decision. Everything else is inspected, computed or degraded explicitly — never asked.
+Keep system mechanics mostly invisible. Report the scientific state, material block/finding and next concrete action. Do not require the user to memorize internal commands. When a preflight blocks an action, state what evidence/decision is missing and the legitimate route forward.
 
-## Completion
-
-A phase is complete when its report line reads `Gate: PASS`. A research is complete when
-every hypothesis has a terminal state, phase 8's gate passed, and the research map's
-`update` recorded it.
+A research is complete when every hypothesis has a terminal state, material claims passed independent adversarial review, publication requirements passed, and the map records the final state.
