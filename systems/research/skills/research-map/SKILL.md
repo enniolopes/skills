@@ -1,106 +1,88 @@
 ---
 name: research-map
-description: Memory and navigation across sessions for a research project. Keeps one RESEARCH.map per research — question, registration status, hypotheses, gate states with their evidence, deferred ideas, last session — read before the first action of a session (resume), written after any gate, state or number changes (update), built once (init) and checked mechanically before every commit (validate). Use /research:research-map <init|resume|update|validate>.
-when_to_use: Triggers include the start of any session in a repository that has a RESEARCH.map, "onde parei", "resume", "o que mudou", "antes de commitar", "validate", "esse número está certo?", "de onde veio esse número", "atualiza o mapa", "como organizo a pasta da pesquisa".
+description: Operational memory and mechanical validation across sessions for one research repository. Keeps a small RESEARCH.map pointing to authoritative artifacts, resumes state before work, updates on observable state changes, and composes legacy integrity checks with research 0.8 plan/run/lineage/exposure checks. Normally invoked internally by scientific-method; direct modes remain available for debugging and power users.
+when_to_use: Use internally at the start of an existing research session, after gate/hypothesis/registration/corrected-number changes, and before commits or release. Direct triggers include resume, status, validate, update the map, or initialize an existing research.
 license: CC-BY-NC-4.0
 metadata:
-  version: 0.6.0
+  version: 0.8.0
 argument-hint: 'init|resume|update|validate [path to RESEARCH.map]'
 ---
 
 # Research map
 
-Nothing an agent learns persists past the session unless it is written where the next
-session reads first. `RESEARCH.map` is that place: an operational index of one research,
-pointing at the protocol, notebooks and aggregates that are the truth, never a second copy
-of them. The repository stays the source of truth; the map says where it is and what state
-it is in.
+`RESEARCH.map` is the one-screen operational index of a research. It is not a second copy of protocol, analysis plan, results, lineage or history. The repository artifacts remain authoritative; the map says where they are and what state the research is in.
 
-## The map
+`scientific-method` normally invokes this skill automatically. Do not require the user to perform a session ritual manually.
 
-One file per research, Markdown, fixed sections in this order. Six are required — the
-state no other file holds; four are optional and hold only what no file in `Layout`
-already says (if the README or the protocol says it, point, never copy). The grammar and
-an example are in `reference/map-schema.md`; a blank one is in `templates/RESEARCH.map`.
+## Map contract
+
+The grammar and examples live in `reference/map-schema.md`; a blank map is `templates/RESEARCH.map`.
+
+Fixed sections, in order:
 
 | Section | Holds |
 |---|---|
-| `## Layout` | where things are: `protocol`, `decisions`, `aggregates`, `documents`, `notebooks`, `references`; `floor`, the minimum cell size for anything under `documents` |
-| `## Question` | one line with a pointer to the protocol's problem statement (seven required fields, checked); `Problem: PENDING \| SHOWN \| NOT_SHOWN \| INCONCLUSIVE → \`<problem-brief.md>\`` (the brief's seven fields, its Verdict and the decision its Reference names are checked; no gate ≥ 3 is reached before `SHOWN`); `Registration: none \| <URL or DOI, date>` — while `none`, confirmatory code is `DRY_RUN` |
-| `## Hypotheses` | one row each: prediction, refutation, terminal state, pointer; at most three without a terminal state |
-| `## Gates` | one row per phase, all eight: `reached` / `pending` / `blocked`; a `blocked` row names who unblocks it, a `reached` row names its **evidence** — the artifact the gate produced, as a pointer or DOI |
-| `## Facts that were once wrong` (optional) | the wrong value, the right value, the notebook that now produces it |
-| `## Provenance` (optional) | inputs the README or protocol do not already list |
-| `## Verification` (optional) | the commands, when no Makefile or README holds them |
-| `## Open decisions` (optional) | what is undecided and not already a `blocked` gate row |
-| `## Deferred` | ideas, methods and fronts that appeared after the freeze and were not admitted: `- YYYY-MM-DD: <idea> — enters when: <condition>`; the destination for "we should also test X" |
-| `## Last session` | a dated line per change and one `Next:` line |
+| `## Layout` | `protocol`, `decisions`, `aggregates`, `documents`, `notebooks`, `references`; optional disclosure `floor` |
+| `## Question` | question pointer; `Problem:` state/brief; `Registration:` state |
+| `## Hypotheses` | prediction, refutation, terminal state and pointer; at most three open |
+| `## Gates` | one row per phase; state plus evidence for every reached gate |
+| `## Facts that were once wrong` | optional correction memory only when no authoritative artifact already communicates it |
+| `## Provenance` | optional input pointers not already captured elsewhere |
+| `## Verification` | optional repository-specific commands not documented elsewhere |
+| `## Open decisions` | optional unresolved decisions not already represented as a blocked gate |
+| `## Deferred` | post-freeze ideas not admitted, dated with entry condition |
+| `## Last session` | dated state changes and exactly one `Next:` line |
 
-Backticks in the map are reserved for pointers: repository-relative paths, optionally with
-`#anchor`; `validate` resolves every one of them.
+Do not add analysis-plan contents, run manifests or graph edges to the map. `analysis-plan.md` is authoritative for analytic commitment; `.research/runs/` for executions; `research-graph` derives lineage.
 
-## Modes
+## `init`
 
-### `init`
+Build a map from an existing protocol and decision log. Fill only state that belongs in the map. Every gate starts `pending` and becomes `reached` only when the artifact the gate produces exists and the gate row points to it. Finish with `validate`.
 
-Build the map from an existing protocol and decision log. Read them; fill every section
-from what they say, never from memory. Write `Layout` first — everything else depends on
-it, and it is the whole answer to "how should this research be organised": six paths and a
-floor. Every gate starts `pending`; a gate is `reached` only when its evidence artifact
-exists and the row points to it. Leave optional sections out rather than copying what the
-README already says. Finish by running `validate`.
+## `resume`
 
-### `resume` — before the first action of a session
+Before the first research action in an existing repository, read the map and return one screen in this order: next action; validation failures; gates; problem state; registration; hypotheses/terminal states and open count; blockers; deferred count/nearest entry condition; last recorded change. Then run `validate` before other research work.
 
-Read the map. Restate the state in one screen, in this order: the next action; gates and
-their states; the problem's state (`SHOWN` or not, and why); registration status;
-hypotheses with terminal states, and the count without one (more than three is a scope
-finding); who unblocks each `blocked` gate; deferred items, as a count and the one whose
-entry condition is closest; what changed last session. The reader cannot hold "step
-3 of 5" between messages — the agent is that reader. Then run `validate` and report its
-result before any other work; a `FAIL` is the first item of the session.
+A stale map never outranks current executable/source evidence. If map narrative conflicts with current code/data/artifacts, surface the contradiction, use verifiable current evidence and preserve the correction.
 
-### `update` — after any change of state
+## `update`
 
-Nothing signals "the end of the session", so `update` is bound to observable events: a gate
-changed, a hypothesis changed terminal state, a number was corrected, registration
-happened, a commit is about to be made. On each: add a dated line to `Last session` and
-rewrite its `Next:`; make `Gates` (state and evidence), `Hypotheses` and `Registration`
-match what the protocol and decision log now say; add any corrected number to `Facts that
-were once wrong` with the notebook that now produces it. Run `validate`; a `FAIL` that
-cannot be fixed now becomes the `Next:` line. A `resume` that finds `Last session` older
-than the last commit reports the missed `update` as its first finding.
+Update only on observable events: gate state/evidence changed, hypothesis terminal state changed, registration changed, a material number was corrected, or a commit is about to record those changes. Keep `Gates`, `Hypotheses`, `Question` state and `Last session` synchronized with their authoritative artifacts; never copy result prose into the map. Run `validate` after the update.
 
-### `validate` — mechanical, before any commit
+## `validate`
+
+Run the composed 0.8 validator:
 
 ```bash
-python3 "${CLAUDE_SKILL_DIR}/scripts/validate.py" RESEARCH.map --offline
+python3 "${CLAUDE_SKILL_DIR}/scripts/validate_all.py" RESEARCH.map --offline
 ```
 
-The script lives with this capability and runs from where it is installed; the consuming
-repository carries no copy. `${CLAUDE_SKILL_DIR}` is this skill's directory when invoked
-through the Skill tool; if it is not resolved, the installed path is
-`~/.claude/plugins/cache/<marketplace>/research/<version>/skills/research-map` — use it,
-never copy the script. A pre-commit hook, if the repository wants one, calls that same path.
+Legacy checks remain unchanged:
 
-Six checks, each `PASS`, `FAIL` or `NOT_VERIFIED` with the offending lines; the rules are
-in `reference/map-schema.md`: `map` (structure, pointers, gates with evidence, the
-hypotheses cap, registration, problem statement and problem brief fields, the
-problem-before-protocol rule), `numbers` (a number quoted in a document that no aggregate
-contains at the quoted precision is reported — a match is presence, not provenance; the
-source table is still required), `decisions` (title, non-empty revision condition and
-`Supersedes` per `D-<n>` block; ids unique and increasing; decision ids in table rows
-counted and reported as not checked), `disclosure` (no count cell under `documents` below
-`floor`), `citations` (resolution; `NOT_VERIFIED` with `--offline`), `notebooks` (no
-outputs). A check with nothing to examine reports `NOT_VERIFIED`, never `PASS`. Exit code
-is non-zero on any `FAIL`; `--strict` also fails on `NOT_VERIFIED`.
+- `map` — schema, pointers, gates/evidence, hypothesis cap, problem-before-protocol and state integrity;
+- `numbers` — document/problem-brief numbers are present in committed aggregates at quoted precision (presence, not provenance);
+- `decisions` — append-only decision blocks and revision conditions;
+- `disclosure` — no count cell below the map floor under documents;
+- `citations` — bibliographic resolution; offline is `NOT_VERIFIED`;
+- `notebooks` — no committed notebook outputs/execution counts.
 
-A number the checker cannot find is reported, not silently accepted. A line that
-legitimately carries a number with no aggregate is marked `<!-- rm:ignore: <reason> -->`
-on the same line; the reason is required and the summary counts the markers. Deleting the
-number to pass is a change to what the document claims, not a fix.
+0.8 adds:
 
-## What this is not
+- `plan` — stable H/E/T IDs, decision rules, assumptions/checks/failure actions, dependence and interpretation boundary;
+- `runs` — manifest integrity, result artifacts and confirmatory Git freeze ancestry;
+- `lineage` — material claim annotations resolve through inference/result/run and hypothesis-deciding claims use the planned primary test;
+- `exposure` — discovery data recorded as generating a hypothesis are not silently reused as independent confirmatory evidence.
 
-Not a copy of the protocol, not a changelog, not a place for results, not a build system.
-A number belongs in an aggregate; a decision in the decision log; the map points at both.
+A check with nothing to examine reports `NOT_VERIFIED`, never `PASS`. Exit is nonzero on `FAIL`; `--strict` also treats `NOT_VERIFIED` as failure.
+
+Use `--only` to isolate checks, for example:
+
+```bash
+python3 "${CLAUDE_SKILL_DIR}/scripts/validate_all.py" RESEARCH.map --offline --only plan,runs,lineage,exposure
+```
+
+Mechanical `PASS` means only that those invariants passed. It never means the design, method or claim is scientifically true.
+
+## Boundaries
+
+A number belongs in an aggregate; a scientific commitment in protocol/analysis plan; a methodological choice in the decision log; an execution in a run manifest; a claim in the manuscript; relations in the derived graph. The map points and navigates. It does not absorb those roles.
