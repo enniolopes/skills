@@ -119,12 +119,14 @@ A prose statement that something was pre-specified is insufficient. Every materi
 {
   "id": "RUN-001",
   "mode": "confirmatory",
-  "commit": "<execution commit>",
+  "analysis_role": "primary",
+  "commit": "<execution commit containing the result artifact>",
   "protocol_freeze": "<earlier commit>",
   "analysis_plan_freeze": "<earlier commit>",
   "hypothesis": "H1",
   "estimand": "E1",
   "test": "T1",
+  "registration": "https://registry.example/record",
   "inputs": [
     {"id": "DATA2", "path": "data.csv", "role": "confirmatory"}
   ],
@@ -134,7 +136,9 @@ A prose statement that something was pre-specified is insufficient. Every materi
 }
 ```
 
-The validator checks Git ancestry. A fallback/plan frozen after the deciding run cannot be presented as prospective.
+`analysis_role` is one of `primary | sensitivity | specification | diagnostic`. A confirmatory `primary` run must use the frozen primary test. Other confirmatory roles are allowed only when their test ID was already named in the frozen analysis plan and cannot decide the hypothesis.
+
+The validator checks Git ancestry and verifies that input/output paths existed at the run commit. A result artifact is anchored to its run commit: silently changing the current aggregate under the same R<n> fails validation. A changed result needs a new run/result identity (or restoration of the committed artifact).
 
 Historical analyses with no trustworthy temporal evidence remain `NOT_VERIFIED` on that property; the system never fabricates a historical freeze.
 
@@ -212,14 +216,16 @@ The same agent that built a claim is not sufficient evidence for accepting it.
 
 ## Behavioral efficacy is measured, not assumed
 
-`development/research/evals/scenarios.json` contains eight safety mechanisms plus three liveness mechanisms. The harness generates deterministic repository fixtures and runs the same prompt/model under:
+`development/research/evals/scenarios.json` contains eight safety mechanisms plus three liveness mechanisms. The harness generates reproducible Git-backed repository fixtures and runs the same prompt/model under isolated conditions:
 
 ```text
-CONTROL   Claude Code without research
-TREATMENT same Claude Code with local research + explorer plugins
+CONTROL   Claude Code bare mode, no research/explorer plugin
+TREATMENT Claude Code bare mode, local research + explorer loaded explicitly
 ```
 
-The runner does not receive `expect`. A separate blinded judge receives the completed transcript/diff/validator output and the criterion only after the run. Repetitions are required because model behavior is nondeterministic.
+Bare mode prevents globally installed plugins, hooks, memory, CLAUDE.md and other host configuration from contaminating the comparison. The harness verifies the `system/init` plugin list before adjudication; an invalid/missing treatment plugin or contaminated control becomes an eval-infrastructure `NOT_VERIFIED`, not a research result.
+
+The runner never receives `expect`. A separate **condition-hidden** judge receives the completed transcript/diff/validator output and criterion only after the run. The transcript can reveal plugin/tool names, so this is not claimed as perfect perceptual blinding; the judge is explicitly instructed not to reward plugin vocabulary. Repetitions are required because model behavior is nondeterministic.
 
 Dry-run harness:
 
@@ -227,13 +233,14 @@ Dry-run harness:
 python development/research/evals/run.py --scenario assumptions-before-fit --condition both
 ```
 
-Execute and judge (incurs Claude usage):
+Execute and judge (incurs Claude/API usage):
 
 ```text
-python development/research/evals/run.py --scenario assumptions-before-fit --condition both --repetitions 3 --execute --judge
+ANTHROPIC_API_KEY=... python development/research/evals/run.py \
+  --scenario assumptions-before-fit --condition both --repetitions 3 --execute --judge
 ```
 
-Raw eval run artifacts are ignored by Git. Adjudicated summaries can be committed separately. The existence of scenario specifications is not evidence that the plugin passes them.
+The scripted harness uses Claude Code `--bare`; for Anthropic API execution that means provider credentials rather than subscription OAuth. Raw eval run artifacts are ignored by Git. Adjudicated summaries can be committed separately. The existence of scenario specifications is not evidence that the plugin passes them.
 
 ## Release discipline
 
