@@ -108,7 +108,7 @@ Inference: clustered interval
 Why this estimates E1: targets the recorded contrast
 
 ### Sensitivity
-- S1: alternate defensible specification
+- S1 / T2: alternate defensible pre-specified analysis of E1
 
 ### Specification dimensions
 - none
@@ -148,19 +148,30 @@ def build_base(root: Path, plan_text: str = PLAN) -> str:
     return commit(root, "freeze protocol and plan")
 
 
-def add_run(root: Path, freeze: str, *, run_id: str = "RUN-001", test: str = "T1", mode: str = "confirmatory", generated_input: str = "DATA2") -> str:
+def add_run(
+    root: Path,
+    freeze: str,
+    *,
+    run_id: str = "RUN-001",
+    test: str = "T1",
+    mode: str = "confirmatory",
+    analysis_role: str = "primary",
+    generated_input: str = "DATA2",
+    registration: str = "https://example.org/registration",
+) -> str:
     (root / "aggregates" / "h1.csv").write_text("estimate,lower,upper\n-0.3,-0.5,-0.1\n", encoding="utf-8")
     run_commit = commit(root, "execute analysis")
     manifest = {
         "id": run_id,
         "mode": mode,
+        "analysis_role": analysis_role,
         "commit": run_commit,
         "protocol_freeze": freeze,
         "analysis_plan_freeze": freeze,
         "hypothesis": "H1",
         "estimand": "E1",
         "test": test,
-        "registration": "https://example.org/registration",
+        "registration": registration,
         "inputs": [{"id": generated_input, "path": "data.csv", "role": "confirmatory" if mode == "confirmatory" else "discovery"}],
         "outputs": [{"result": "R1", "artifact": "aggregates/h1.csv"}],
     }
@@ -207,12 +218,14 @@ class EpistemicValidatorTests(unittest.TestCase):
             manifest = {
                 "id": "RUN-001",
                 "mode": "confirmatory",
+                "analysis_role": "primary",
                 "commit": run_commit,
                 "protocol_freeze": freeze,
                 "analysis_plan_freeze": late_freeze,
                 "hypothesis": "H1",
                 "estimand": "E1",
                 "test": "T1",
+                "registration": "https://example.org/registration",
                 "inputs": [{"id": "DATA2", "path": "data.csv", "role": "confirmatory"}],
                 "outputs": [{"result": "R1", "artifact": "aggregates/h1.csv"}],
             }
@@ -223,11 +236,21 @@ class EpistemicValidatorTests(unittest.TestCase):
             self.assertEqual(result.status, "FAIL")
             self.assertTrue(any("does not predate" in line for line in result.lines))
 
+    def test_confirmatory_sensitivity_is_allowed_when_prespecified(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            freeze = build_base(root)
+            add_run(root, freeze, test="T2", analysis_role="sensitivity")
+            _, plan, _ = ep.check_plan(root)
+            result, _, results = ep.check_runs(root, root / "RESEARCH.map", plan)
+            self.assertEqual(result.status, "PASS")
+            self.assertEqual(results["R1"]["analysis_role"], "sensitivity")
+
     def test_non_primary_result_cannot_decide_hypothesis(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             freeze = build_base(root)
-            add_run(root, freeze, test="T2", mode="exploratory")
+            add_run(root, freeze, test="T2", mode="exploratory", analysis_role="sensitivity")
             (root / "paper" / "results.md").write_text(
                 "Exploratory result decides H1. <!-- claim:C1 inference:I1 result:R1 decides:H1 -->\n",
                 encoding="utf-8",
@@ -236,7 +259,44 @@ class EpistemicValidatorTests(unittest.TestCase):
             _, _, results = ep.check_runs(root, root / "RESEARCH.map", plan)
             lineage = ep.check_lineage(root, root / "RESEARCH.map", plan, results)
             self.assertEqual(lineage.status, "FAIL")
-            self.assertTrue(any("primary test" in line for line in lineage.lines))
+            self.assertTrue(any("cannot decide confirmatory" in line for line in lineage.lines))
+
+    def test_confirmatory_sensitivity_cannot_decide_hypothesis(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            freeze = build_base(root)
+            add_run(root, freeze, test="T2", analysis_role="sensitivity")
+            (root / "paper" / "results.md").write_text(
+                "Sensitivity decides H1. <!-- claim:C1 inference:I1 result:R1 decides:H1 -->\n",
+                encoding="utf-8",
+            )
+            _, plan, _ = ep.check_plan(root)
+            _, _, results = ep.check_runs(root, root / "RESEARCH.map", plan)
+            lineage = ep.check_lineage(root, root / "RESEARCH.map", plan, results)
+            self.assertEqual(lineage.status, "FAIL")
+            self.assertTrue(any("only the frozen primary analysis" in line for line in lineage.lines))
+
+    def test_confirmatory_run_requires_registration(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            freeze = build_base(root)
+            add_run(root, freeze, registration="none")
+            _, plan, _ = ep.check_plan(root)
+            result, _, _ = ep.check_runs(root, root / "RESEARCH.map", plan)
+            self.assertEqual(result.status, "FAIL")
+            self.assertTrue(any("registration" in line for line in result.lines))
+
+    def test_result_artifact_drift_after_run_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            freeze = build_base(root)
+            add_run(root, freeze)
+            (root / "aggregates" / "h1.csv").write_text("estimate,lower,upper\n9.9,9.8,10.0\n", encoding="utf-8")
+            commit(root, "silently alter old result")
+            _, plan, _ = ep.check_plan(root)
+            result, _, _ = ep.check_runs(root, root / "RESEARCH.map", plan)
+            self.assertEqual(result.status, "FAIL")
+            self.assertTrue(any("drifted after run commit" in line for line in result.lines))
 
     def test_discovery_data_cannot_confirm_generated_hypothesis(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -252,7 +312,7 @@ class EpistemicValidatorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             freeze = build_base(root, PLAN.replace("Generated from: none", "Generated from: DATA1"))
-            add_run(root, freeze, mode="exploratory", generated_input="DATA1")
+            add_run(root, freeze, mode="exploratory", analysis_role="diagnostic", generated_input="DATA1")
             _, plan, _ = ep.check_plan(root)
             _, runs, _ = ep.check_runs(root, root / "RESEARCH.map", plan)
             exposure = ep.check_exposure(plan, runs)
