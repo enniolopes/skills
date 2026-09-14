@@ -31,7 +31,7 @@
       "name": "research",
       "source": "./systems/research",
       "version": "0.8.0",
-      "description": "Epistemic control for empirical research: problem-first method, prospective analysis commitments, run provenance, derived claim lineage, statistical planning and adversarial review. Depends on explorer."
+      "description": "Epistemic control for empirical research: problem-first method, prospective analysis commitments, run provenance, derived claim lineage, statistical planning and adversarial review. Install explorer alongside for full phase-1 exploration."
     }
   ]
 }
