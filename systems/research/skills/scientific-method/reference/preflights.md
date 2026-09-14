@@ -24,14 +24,21 @@ A missing material condition blocks the fit. Do not satisfy a failed preflight w
 
 A post-freeze change is classified before editing the confirmatory plan:
 
-- `SPECIFICATION` when it is a defensible alternative that preserves the same estimand and was admitted prospectively;
+- `SPECIFICATION` when it is a defensible alternative that preserves the same estimand **and was already admitted prospectively in the frozen plan**;
 - `EXPLORATORY` when it is result-driven or hypothesis-generating;
 - `DEFERRED` when it does not enter the current research;
 - `REOPEN` when it changes the confirmatory scientific commitment. `REOPEN` requires a logged decision and a new freeze.
 
-A previous run remains judged against the plan commit frozen for that run. A reopen governs subsequent work; it does not rewrite historical provenance.
+Classification is not complete when it exists only in the conversation. Before returning from the preflight, make the destination durable in the artifact that owns it:
 
-Silent rewrite is not a state.
+- `SPECIFICATION` — reference the already-frozen T<n>/dimension; if executed, its run manifest uses `analysis_role: specification`;
+- `EXPLORATORY` — if executed, record an exploratory run manifest; if retained but not executed, place it in `RESEARCH.map` `Deferred` as an exploratory candidate with its entry condition;
+- `DEFERRED` — write it to `RESEARCH.map` `Deferred` with the condition that would admit/revisit it;
+- `REOPEN` — append a methodological decision and create new protocol/analysis-plan freezes before subsequent confirmatory work.
+
+A genuinely new post-freeze alternative cannot be relabeled `SPECIFICATION` to keep confirmatory status. A previous run remains judged against the plan commit frozen for that run. A reopen governs subsequent work; it does not rewrite historical provenance.
+
+Silent rewrite and verbal-only routing are not states.
 
 ## CLAIM
 
@@ -45,7 +52,9 @@ A source may suggest a search while merely discovered. It supports a scientific 
 
 ## PUBLISH
 
-Before release, require material claims to have complete lineage and adversarial review; no unresolved `FAIL`; material `NOT_VERIFIED` explicitly disclosed or resolved; reporting/disclosure requirements satisfied; and human-owned publication/ethics decisions present.
+Before release, require material claims to have complete lineage and an independent adversarial review; no unresolved `FAIL`; material `NOT_VERIFIED` explicitly disclosed or resolved; reporting/disclosure requirements satisfied; and human-owned publication/ethics decisions present.
+
+Independent review is evidenced by a durable `.research/reviews/REVIEW-<n>.md` record containing the reviewed repository commit, manuscript path and the returned reviewer verdict/findings. The record is written from an actual separate reviewer invocation (`research:reviewer-2` when available), not from the orchestrator reviewing its own work inline. If the independent reviewer capability cannot run, the review requirement is `NOT_VERIFIED`; do not simulate independence. A review record that predates material manuscript/result changes is stale and does not satisfy PUBLISH until the affected review is rerun.
 
 ## Forbidden transitions
 
@@ -58,6 +67,8 @@ SOURCE_DISCOVERED -> SUPPORTS_CLAIM
 UNEXECUTED_NUMBER -> RESULT
 SECONDARY_TEST -> DECIDES_HYPOTHESIS_AGAINST_PRIMARY
 FROZEN_PROTOCOL -> SILENT_REWRITE
+VERBAL_CHANGE_CLASSIFICATION -> COMPLETED_CHANGE_PLAN
+INLINE_SELF_REVIEW -> INDEPENDENT_REVIEW
 VALIDATOR_PASS -> SCIENTIFICALLY_TRUE
 ```
 
