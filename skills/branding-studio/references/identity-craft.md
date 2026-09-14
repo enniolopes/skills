@@ -13,6 +13,10 @@ Start from the committed creative thesis and define the smallest relationships t
 - recurring distinctive cues;
 - interaction/motion/sound only when relevant.
 
+For each material expressive mechanism, resolve enough of its **role**, its **relationships** to the rest of the identity, and its meaningful **variation boundaries** that future work can adapt to content and medium without inventing a new brand decision. These are reasoning axes, not required fields or documentation sections.
+
+Prefer relationships that survive changes of format, scale, density and medium over fixed surface recipes. Use exact values when identity, accessibility or production reproducibility genuinely depends on them.
+
 Not every brand needs every dimension. Omit inactive mechanisms instead of filling a checklist.
 
 A system is stronger when different artifacts can vary substantially while still sharing an intelligible logic.
