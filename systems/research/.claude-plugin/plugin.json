@@ -1,7 +1,7 @@
 {
   "name": "research",
-  "version": "0.7.0",
-  "description": "Scientific research system: method with gates (scientific-method), memory across sessions (research-map) and adversarial review (reviewer-2).",
+  "version": "0.8.0",
+  "description": "Epistemic control system for empirical research: problem-first method, prospective analysis commitments, run provenance, derived claim lineage, statistical planning and adversarial review.",
   "author": {
     "name": "Ennio Politi Lopes"
   },
@@ -12,6 +12,7 @@
     "scientific-method",
     "reproducibility",
     "pre-registration",
+    "provenance",
     "review"
   ],
   "dependencies": [
