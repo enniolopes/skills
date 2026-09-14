@@ -2,6 +2,8 @@
 
 Use APPLY when the current brand contract is sufficient and a new artifact/touchpoint is needed. Apply the system; do not redesign the brand by default.
 
+When the requested touchpoint is a material visual deliverable, load `visual-artifact-production.md` and produce the actual inspectable artifact rather than stopping at a description, mockup concept or implementation brief.
+
 ## 1. Compile the smallest sufficient context
 
 Read only what can materially change this artifact:

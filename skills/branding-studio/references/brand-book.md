@@ -61,6 +61,8 @@ Do not add empty sections to resemble a conventional guideline table of contents
 
 The brand book is a branded touchpoint. Its writing, typography, pacing, image treatment, composition and interaction should demonstrate the system at a high level of craft.
 
+When a visual brand book or standards deck is a final deliverable, use `visual-artifact-production.md` to build, render/view and refine the actual document. An outline, content-complete draft or generic document export is not the finished branded artifact.
+
 Do not sacrifice clarity to self-expression, but do not deliver a generic corporate PDF that contradicts the identity it describes.
 
 ## 7. Separate principle from exact specification

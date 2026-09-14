@@ -83,6 +83,8 @@ For each trial:
 
 Use these trials to expose missing guidance, not just execution defects. Ask whether a legitimate application required inventing a brand-level decision the current system did not provide. Keep artifact-specific choices local; when the same ambiguity or missing decision recurs or clearly generalizes across materially different applications, repair the grammar at the lowest level that explains it and re-test.
 
+When a representative application is itself a requested visual deliverable, treat it as finished design work rather than only a test fixture: use `visual-artifact-production.md` and produce the actual inspectable artifact/source at the requested maturity.
+
 A strong system should produce variation that still feels unmistakably related. If every application needs the same layout/logo placement to look on-brand, the grammar is under-resolved.
 
 ## 7. Refine or re-diverge
