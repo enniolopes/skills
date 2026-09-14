@@ -3,7 +3,7 @@ name: branding-studio
 description: "Autonomous brand steward for creating, applying, auditing and evolving brands. Use for branding, naming, identity, logo, positioning, touchpoints, audits and rebrands. Reply in the user's language."
 license: CC-BY-NC-4.0
 metadata:
-  version: 2.2.0
+  version: 2.3.0
 ---
 
 # Branding Studio
@@ -49,6 +49,8 @@ Converge and recommend. Do not outsource routine professional judgment through a
 
 ### BUILD SYSTEM
 Translate the direction into the smallest verbal/visual grammar that can generate new work without copying old layouts. Define only dimensions that matter to declared touchpoints.
+
+Resolve expression far enough that future artifacts require application rather than reinterpretation. Define the smallest portable grammar another competent operator needs to create materially new work without copying existing layouts or inventing new brand decisions. Do not resolve dimensions that declared or representative use does not require.
 
 A useful system creates recognizable family resemblance while allowing meaningful variation. Repetition alone is not coherence.
 

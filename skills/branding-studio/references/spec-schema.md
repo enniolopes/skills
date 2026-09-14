@@ -113,6 +113,8 @@ Examples of legitimate keys when needed:
 - `verbal.principles`, `verbal.tone_by_moment`, `verbal.message_behavior`, `verbal.excludes`;
 - `visual.identity_grammar`, `visual.typography`, `visual.palette`, `visual.logo`, `visual.imagery`, `visual.iconography`, `visual.composition`, `visual.motion`, `visual.tokens`, `visual.contrast_pairs`.
 
+When a visual decision governs future work, persist the durable behavior or relationship another operator needs, not merely the asset or value. Preserve meaningful variation boundaries when their absence would force reinterpretation or drift. Keep examples, channel recipes and one-off application choices out of canonical state.
+
 Exact structures may be domain-specific. Prefer the smallest shape that another competent operator can apply correctly.
 
 ## Naming

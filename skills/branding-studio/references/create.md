@@ -81,6 +81,8 @@ For each trial:
 5. fix the lowest layer that explains them;
 6. re-test when the correction is systemic.
 
+Use these trials to expose missing guidance, not just execution defects. Ask whether a legitimate application required inventing a brand-level decision the current system did not provide. Keep artifact-specific choices local; when the same ambiguity or missing decision recurs or clearly generalizes across materially different applications, repair the grammar at the lowest level that explains it and re-test.
+
 A strong system should produce variation that still feels unmistakably related. If every application needs the same layout/logo placement to look on-brand, the grammar is under-resolved.
 
 ## 7. Refine or re-diverge
