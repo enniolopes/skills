@@ -9,9 +9,10 @@ Scope: observational quantitative research, especially administrative data.
 ```text
 /plugin marketplace add enniolopes/skills
 /plugin install research@enniolopes
+/plugin install explorer@enniolopes
 ```
 
-The plugin depends on `explorer` and installs the rest as one system.
+`explorer` is installed alongside `research`, not declared as a hard manifest dependency. This is deliberate: a missing hard dependency can make a side-loaded plugin disappear entirely, while the research runtime already has explicit degradation semantics. Without `explorer`, phase 1A structural exploration is `NOT_VERIFIED`; the rest of `research` remains available.
 
 ## One public entry point
 
@@ -61,10 +62,10 @@ SHOWN | NOT_SHOWN | INCONCLUSIVE
 The method automatically runs the relevant boundary check:
 
 - **FIT** — before a confirmatory result is exposed: estimand, primary test, assumptions/checks/failure actions, dependence, interpretation boundary, freezes, registration and data exposure must be coherent.
-- **CHANGE_PLAN** — a post-freeze idea becomes `SPECIFICATION`, `EXPLORATORY`, `DEFERRED` or explicit `REOPEN`; never a silent rewrite.
+- **CHANGE_PLAN** — a post-freeze idea becomes `SPECIFICATION`, `EXPLORATORY`, `DEFERRED` or explicit `REOPEN`; never a silent rewrite. The route is incomplete until its owning artifact records it.
 - **CLAIM** — result/run/test/checks and interpretation boundary must support the material claim; hypothesis-deciding claims use the frozen primary test.
 - **CITE** — DOI/URL identity is not semantic support; the relevant source content must be retrieved/read before supporting a proposition.
-- **PUBLISH** — material claim lineage, review, disclosure/reporting and human-owned publication/ethics requirements must be complete.
+- **PUBLISH** — material claim lineage, a current independent-review record, disclosure/reporting and human-owned publication/ethics requirements must be complete.
 
 ## Authoritative artifacts
 
@@ -81,8 +82,8 @@ Each artifact has one job:
 | `references.bib` + inspected source content | bibliographic identity/evidence |
 | `RESEARCH.map` | one-screen operational state/navigation |
 | `.research/graph.json` | disposable derived index of relations (rebuildable) |
+| `.research/reviews/REVIEW-*.md` | durable independent-review evidence for a reviewed commit/manuscript |
 | manuscript | scientific communication |
-| reviewer output | adversarial challenge/adjudication evidence |
 
 `RESEARCH.map` remains deliberately small. It never becomes a second protocol, result store or graph database.
 
@@ -212,11 +213,13 @@ NOT_VERIFIED
 BASIS
 ```
 
-The same agent that built a claim is not sufficient evidence for accepting it.
+The orchestrator persists the returned review under `.research/reviews/REVIEW-<n>.md`, together with the reviewed repository commit and manuscript path. Inline self-review is not equivalent to independent review. Material changes after the reviewed commit make the affected review stale and require another independent review before PUBLISH. If the separate reviewer cannot run, the requirement is `NOT_VERIFIED`; the orchestrator does not simulate it.
 
 ## Behavioral efficacy is measured, not assumed
 
-`development/research/evals/scenarios.json` contains eight safety mechanisms plus three liveness mechanisms. The harness generates reproducible Git-backed repository fixtures and runs the same prompt/model under isolated conditions:
+There is an adjudicated historical baseline for research 0.7 at `development/research/evals/baseline-0.7.md`. It found uplift concentrated where rules already had durable artifact support and zero movement for `assumptions-before-fit`, `contradictory-specification` and `post-freeze-change`; it also observed that `reviewer-2` was never actually invoked in the treatment review runs. Those findings motivated parts of 0.8. They are **not** evidence that 0.8 fixes them.
+
+`development/research/evals/scenarios.json` contains eight safety mechanisms plus three liveness mechanisms. The 0.8 harness generates reproducible Git-backed repository fixtures and runs the same prompt/model under isolated conditions:
 
 ```text
 CONTROL   Claude Code bare mode, no research/explorer plugin
@@ -225,7 +228,7 @@ TREATMENT Claude Code bare mode, local research + explorer loaded explicitly
 
 Bare mode prevents globally installed plugins, hooks, memory, CLAUDE.md and other host configuration from contaminating the comparison. The harness verifies the `system/init` plugin list before adjudication; an invalid/missing treatment plugin or contaminated control becomes an eval-infrastructure `NOT_VERIFIED`, not a research result.
 
-The runner never receives `expect`. A separate **condition-hidden** judge receives the completed transcript/diff/validator output and criterion only after the run. The transcript can reveal plugin/tool names, so this is not claimed as perfect perceptual blinding; the judge is explicitly instructed not to reward plugin vocabulary. Repetitions are required because model behavior is nondeterministic.
+Before semantic judgment, the harness records deterministic observations from the structured transcript/repository state: actual tool-use blocks, available tools when reported by the host, changed paths and durable review records. These facts outrank a later semantic guess. The runner never receives `expect`; a separate **condition-hidden** judge receives the deterministic observations, completed transcript/diff/validator output and criterion only after the run. The transcript can reveal plugin/tool names, so this is not claimed as perfect perceptual blinding; the judge is explicitly instructed not to reward plugin vocabulary. If a mechanism depends on a capability the host did not provide, it is `NOT_VERIFIED`, never a vacuous PASS. Repetitions are required because model behavior is nondeterministic.
 
 Dry-run harness:
 
@@ -246,7 +249,7 @@ The scripted harness uses Claude Code `--bare`; for Anthropic API execution that
 
 A new runtime rule needs a distinct failure mechanism. Prefer the smallest artifact/check/state that prevents the mechanism; otherwise leave it to adversarial judgement or drop it. Do not accumulate good-practice prose.
 
-0.8 is mechanically releasable only when repository validation/unit tests pass. Claims of behavioral uplift additionally require adjudicated control/treatment runs with no material liveness regression.
+0.8 is mechanically releasable only when repository validation/unit tests pass. Claims of behavioral uplift additionally require adjudicated 0.8 control/treatment runs with no material liveness regression. The 0.7 baseline is diagnostic history, not a substitute for that gate.
 
 ## Pieces
 
@@ -257,7 +260,7 @@ A new runtime rule needs a distinct failure mechanism. Prefer the smallest artif
 | `statistical-analysis` | estimand-first analysis planning and EDA boundary |
 | `research-graph` | derived epistemic lineage and query views |
 | `reviewer-2` | independent non-editing adversarial review |
-| `explorer` | structural divergence/hypothesis generation dependency |
+| `explorer` | separately installed structural divergence/hypothesis-generation delegate; absence degrades the affected exploration to `NOT_VERIFIED` |
 
 ## Non-goals
 
