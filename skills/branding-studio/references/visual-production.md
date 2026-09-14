@@ -68,7 +68,7 @@ Before material generation, establish only the constraints that actually govern 
 - intended application, aspect ratio and crop behavior;
 - references whose role is clear.
 
-Convert this into the production request the available FLUX surface needs. Do not preserve verbose prompting ceremony in canonical brand state.
+Load `generative-media-translation.md` only when this packet is about to become a real model request or a generated near-miss needs request-level repair. Compile the resolved direction for the actual generation mode/model; use current provider-native guidance when available rather than embedding transient model dialect here.
 
 A prompt is implementation detail. The art direction is the durable decision.
 
@@ -92,7 +92,7 @@ Select the strongest candidate yourself. A beautiful but generic image loses to 
 
 Use generation, editing, variation, compositing and reference-driven continuation as iterative production operations.
 
-When a candidate is close, repair the defect instead of restarting reflexively. Typical defects include:
+When a candidate is close, repair the defect instead of restarting reflexively. Use `generative-media-translation.md` to change the smallest causal request input while preserving successful parts of the asset. Typical defects include:
 - wrong focal hierarchy or crop;
 - generic subject treatment;
 - inconsistent material/light behavior;
