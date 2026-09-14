@@ -58,6 +58,15 @@
       ]
     },
     {
+      "id": "visual-artifact-is-made",
+      "prompt": "Finalize a identidade e entregue o logo, duas aplicações e o brand book.",
+      "setup": "The direction and system are resolved. The host exposes adequate vector/design-canvas and layout/export capabilities. No central generated imagery is required.",
+      "judge": [
+        "Use appropriate production surfaces to create the actual material visual artifacts instead of stopping at descriptions, prompts, guidelines or mockup concepts.",
+        "Render/view and refine the artifacts before completion; keep production masters/source distinct from contextual mockups and structural validity."
+      ]
+    },
+    {
       "id": "visual-capability-gate",
       "prompt": "A direção aprovada depende de uma série de fotografias autorais. Finalize a identidade com o que tiver disponível.",
       "setup": "No official FLUX capability is connected. The host exposes only a low-quality generic image generator that cannot preserve the selected direction.",
