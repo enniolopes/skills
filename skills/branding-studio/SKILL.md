@@ -3,7 +3,7 @@ name: branding-studio
 description: "Autonomous brand steward for creating, applying, auditing and evolving brands. Use for branding, naming, identity, logo, positioning, touchpoints, audits and rebrands. Reply in the user's language."
 license: CC-BY-NC-4.0
 metadata:
-  version: 2.3.0
+  version: 2.4.0
 ---
 
 # Branding Studio
@@ -58,6 +58,8 @@ When generated or edited raster imagery is material to the direction, load `refe
 
 ### TEST IN USE
 Use representative applications that expose materially different stresses. Make/render/inspect the work in realistic context whenever the environment permits it.
+
+Material visual deliverables must be made and inspected, not merely specified. When an adequate production surface exists, create the actual artifact, render or view it in representative context, critique the result and refine before claiming completion. A description, prompt, technically valid file or polished mockup alone is not a substitute for the designed artifact.
 
 One-off failure stays local. Repeated failures across legitimate applications indicate a guidance or system problem. A weak governing idea, recurring genericity or failure to generate coherent range is a reason to re-open direction rather than polish harder.
 
@@ -133,7 +135,7 @@ A familiar mechanism remains valid when the brief independently earns it. Constr
 
 For an existing identity with no spec, reconstruct what is already true and valuable before changing it. Absence of a spec is not evidence that the brand needs redesign.
 
-Load `references/creative-direction.md` only when creating or materially reopening expression; `references/identity-craft.md` for visual identity/system craft; `references/visual-production.md` when generated or edited raster imagery is material to the direction or deliverable; `references/verbal-identity.md` when proposition, messaging, voice/tone or a broader verbal identity is in scope; `references/naming.md` when naming is in scope; `references/brand-book.md` when guidelines or a brand book are deliverables; `references/knowledge.md` when evidence strength/current facts/methodology need calibration; and `references/spec-schema.md` when canonical state is created or changed.
+Load `references/creative-direction.md` only when creating or materially reopening expression; `references/identity-craft.md` for visual identity/system craft; `references/visual-artifact-production.md` when a material designed visual artifact must be produced and judged from the artifact itself; `references/visual-production.md` when generated or edited raster imagery is material to the direction or deliverable; `references/verbal-identity.md` when proposition, messaging, voice/tone or a broader verbal identity is in scope; `references/naming.md` when naming is in scope; `references/brand-book.md` when guidelines or a brand book are deliverables; `references/knowledge.md` when evidence strength/current facts/methodology need calibration; and `references/spec-schema.md` when canonical state is created or changed.
 
 For APPLY/AUDIT, compile the smallest relevant subset of state.
 
@@ -150,6 +152,8 @@ Version meaningful contract changes. Preserve evidence references only when futu
 Tool availability is not production proof. Capability limits may lower the maturity of what can truthfully be delivered, but they do not lower the quality bar for an artifact claimed as final:
 
 `final master → tested prototype → concept → recommendation`
+
+For material designed visual artifacts, use `references/visual-artifact-production.md`: choose the strongest appropriate production surface, make the real artifact/source or master at the requested maturity, inspect the rendered result and iterate before completion.
 
 For material generated imagery, use `references/visual-production.md`: prefer official FLUX production, persist accepted assets, integrate them into representative use, inspect them again in context, and iterate. If no available production path can preserve the committed direction at the required quality, stop before false completion and report the capability blocker.
 
