@@ -15,10 +15,6 @@ For a targeted change, run only the regression cases that can distinguish it. Fo
 
 Keep baseline and candidate isolated. Give them the same prompt, evidence and tools. Review artifacts before rationales whenever an artifact exists.
 
-## Field evidence
-
-`field/` keeps one curated file per real engagement: what the user observed, which artifact showed it, and which sensor (runtime rule, deterministic check, eval case) should have caught it. Attributed causes are hypotheses. Every recurring mechanism there must have a regression case here; a symptom without a case is a gap in this file, not in the runtime.
-
 ## Judge
 
 Use seven dimensions:
