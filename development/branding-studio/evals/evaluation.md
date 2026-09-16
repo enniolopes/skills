@@ -23,7 +23,7 @@ Use seven dimensions:
 2. **Decision quality** — autonomy is appropriate; exploration, commitment and correction happen at the right level.
 3. **Specificity** — consequential choices depend on this brand rather than category autocomplete or arbitrary novelty.
 4. **Generativity** — the system can make materially different new work without copying one layout, phrase or device.
-5. **Craft, ambition and reality** — representative artifacts survive perceptual, functional and production constraints relevant to the brief, and the strongest one holds beside the adjacent-category bar named at direction; when generated imagery is material, judge art direction, relevance, asset craft, coherence across the image family, persistence/integration and contextual performance rather than generator success.
+5. **Craft, ambition and reality** — representative artifacts survive perceptual, functional and production constraints relevant to the brief, and the strongest one holds beside the adjacent-category bar named at direction; force is judged through its mechanisms (one dominant decision, one decisive jump, type as image, color by proportion, restraint), not as a taste verdict; when generated imagery is material, judge art direction, relevance, asset craft, coherence across the image family, persistence/integration and contextual performance rather than generator success.
 6. **Reader fit** — every reader-facing deliverable is in the audience's language and register, has been rendered and looked at on the reader's surfaces, and carries nothing from the process.
 7. **Context efficiency** — extra process, rules or state must earn their cost; completeness and polish are not quality proxies.
 

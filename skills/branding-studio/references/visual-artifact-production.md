@@ -15,9 +15,9 @@ This reference owns the production loop. `identity-craft.md` owns the visual sys
 
 ## Produce the real artifact
 
-- **Logo, wordmark, symbol or lockup:** construct final geometry in a controlled vector path, refine optically, test scale, monochrome and reversal behavior, and keep only variants real use requires. A generated or traced raster concept is not a final master.
+- **Logo, wordmark, symbol or lockup:** construct final geometry in a controlled vector path, refine optically, test scale, monochrome and reversal behavior, and keep only variants real use requires. This is the one owner of the master boundary: a generated or traced raster concept is never a final master, however polished, and `final` is earned only when the available production path reproduces the master and the result has been looked at.
 - **Board:** compose a visual argument, not an image dump: signature at full force on a declared touchpoint, type on real words, color at scale, one dense and one expressive application. Boards for different lineages use the same touchpoints and content so they can be compared.
-- **Brand application:** real or representative content, dimensions and constraints. Build the application, then see it where it lives: every declared touchpoint gets at least one contextual render, and one left unrendered is a named gap with a lowered maturity label.
+- **Brand application:** real or representative content, dimensions and constraints. Build the application, then see it where it lives (`SKILL.md`, TEST IN USE); a physical touchpoint's scene follows `visual-production.md`, contextual scenes.
 - **Brand book:** `brand-book.md` for what it must teach and how it is shaped; then design the actual pages with deliberate hierarchy, pacing and sequencing. Content completeness is not visual completion.
 - **Motion:** an inspectable time-based path; judge timing, transition, hierarchy and reduced-motion behavior. A storyboard is a concept unless it is the requested deliverable.
 
@@ -25,9 +25,9 @@ This reference owns the production loop. `identity-craft.md` owns the visual sys
 
 `MAKE → RENDER → LOOK → CRITIQUE → REFINE → LOOK AGAIN`
 
-Looking means capturing the rendered artifact at the scale and on the surface where its reader will meet it, and reading the capture as that reader. A document: desktop, phone and print. A physical touchpoint: a scene that shows material, distance and light, composited or generated. A screen: the real viewport. A browser render measures; it does not substitute for the object in context.
+Looking means capturing the rendered artifact at the scale and on the surface where its reader will meet it, and reading the capture as that reader. A document: desktop, phone and print. A physical touchpoint: a scene that shows material, distance and light. A screen: the real viewport.
 
-Prove representative slices before scaling: the core mark before a logo suite, a spread before a full book, one expressive and one dense application before a template family. Judge with the macro/meso/micro criteria in `identity-craft.md`; fix the largest causal defect first; reopen system or direction only when the artifact exposes a recurring upstream problem.
+Prove representative slices before scaling: the core mark before a logo suite, a spread before a full book, one expressive and one dense application before a template family. Judge force first and then the macro/meso/micro criteria, both in `identity-craft.md`; fix the largest causal defect first; reopen system or direction only when the artifact exposes a recurring upstream problem.
 
 ## Completion gate
 

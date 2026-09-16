@@ -45,9 +45,15 @@ When a candidate is close, repair the smallest causal input (one reference, one 
 
 When the brand needs multiple images, stabilize family resemblance deliberately through approved key assets and references: subject treatment, framing, light and materiality, palette interaction, stylization level, recurring cues. Generate enough range to test whether the grammar survives different subjects and touchpoints. Individually strong images that read as unrelated campaigns are an unresolved system; identical compositions are not coherence.
 
-## 6. Keep master boundaries honest
+## 6. Contextual scenes
 
-Generated raster may inform logo exploration; a generated raster mark is never a final logo master. Final marks, wordmarks and precise icons require a controlled vector path with inspection and deterministic checks. Generated mockup polish does not prove the identity; use contextual scenes to expose scale, material and environment, not to hide weak decisions.
+A contextual scene exists to expose scale, material, distance and light, not to hide weak decisions or to prove the identity by polish. Three rules govern it:
+
+1. **The scene is this brand's world.** Place, objects, people, hour and light come from the brand's reality and its imagery behavior, never from the category's stock scene. A scene that would serve a competitor equally well has failed before the mark enters it.
+2. **The mark enters by faithful reproduction or by recomposition of the master, and every render is checked against the master at magnification.** A generator given the mark reproduces it faithfully on a simple surface and silently redraws it on a hard one (curved, textured, oblique, small), and color alone does not separate the two cases; so the check is per render, on the drawn form, never a batch pass. When the drawn form deviates, keep the scene and recompose the master over it; do not discard a strong scene for a weaker composite and do not accept the redrawn mark.
+3. **A recomposed element belongs to the scene.** It takes the scene's perspective, its light where the surface is uniform, and the material's response (ink on paper, print on fabric, enamel on metal); an element that sits on top of the photograph instead of inside it is a defect of craft, not of compliance.
+
+Generated raster may inform logo exploration; what a final master requires is owned by `visual-artifact-production.md`.
 
 ## 7. Persist, integrate, look again
 
@@ -55,6 +61,6 @@ An accepted asset becomes a real file in the project; a temporary service URL is
 
 Judge the image again inside the actual application: hierarchy with type and identity elements, crop at real sizes, palette and material relationships, whether it carries the meaning without narration, whether the application stays specific when the logo is secondary, and whether the set preserves family resemblance with range. An excellent isolated image in a weak application is not finished for that use.
 
-## Completion gate
+## Completion
 
-Do not declare an identity, image system, application, board set or brand book complete while a material image required by the direction is only described, prompted, placeholder-quality, unpersisted or uninspected in context. When capability is unavailable, report the precise blocker, preserve the strongest direction, and label any production brief as a brief, not as the missing asset.
+The completion gate is owned by `visual-artifact-production.md`; an image counts toward it only once persisted, integrated and re-inspected in the application. When capability is unavailable, report the precise blocker, preserve the strongest direction, and label any production brief as a brief, not as the missing asset.
