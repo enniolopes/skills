@@ -1,6 +1,8 @@
 # Visual production — make the brand imagery real
 
-Load this reference when the committed direction materially depends on generated or edited raster imagery: photography, illustration, key art, complex image compositing, campaign imagery, image-led mockups, or a branded image system.
+Load this reference when generated or edited raster imagery is material to exploration or to the deliverable: photography, illustration, key art, complex image compositing, campaign imagery, image-led mockups, or a branded image system.
+
+Generated imagery has two roles here. **Exploration**: boards that make lineages comparable, contextual scenes onto which vector work is composited so a declared touchpoint (packaging, apron, storefront, signage) can be seen where it lives, and reference boards that show an imagery behavior (light, distance, framing, subject) before it is written down as an instruction. **Production**: the brand's own image assets. Use the exploration role whenever a capable backend exists, whether or not final assets will be generated.
 
 The objective is not to generate pictures. It is to produce **relevant, specific, coherent and exceptional visual assets that make the chosen brand direction materially stronger in use**.
 
@@ -24,6 +26,7 @@ Prefer controlled/vector/code-native production for:
 - layout and brand-book composition.
 
 Use generative raster production when it materially improves the direction, especially for:
+- exploration boards and contextual scenes for declared touchpoints;
 - bespoke photography or photographic worlds;
 - illustration and expressive image systems;
 - key visuals and campaign imagery;

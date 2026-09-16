@@ -38,11 +38,11 @@ Search for different **organizing ideas**, not different palettes or logo shapes
 
 Use research and references as stimulus, not templates. Identify the competent category-default answer before committing; a route may use familiar forms, but only when this brand independently earns them.
 
-Do not target a fixed concept count. Continue while additional exploration creates materially different useful possibilities.
+Do not target a fixed concept count. Continue while additional exploration creates materially different useful possibilities. Exploration ends as rendered boards the owner can compare, never as prose.
 
-## 4. Commit a working creative thesis
+## 4. Present and commit a working creative thesis
 
-Choose the direction that best combines:
+Show the owner the ranked boards, the recommendation and the names the system's elements will carry; the owner ratifies or redirects before anything is built. Choose the direction that best combines:
 - strategic relevance;
 - specificity to this brand;
 - perceptible distinction without arbitrariness;
@@ -69,9 +69,9 @@ Define only what declared touchpoints need. Depending on the brand, this may inc
 
 Do not complete media because a template contains them. The goal is a grammar that can generate new work, not a checklist of brand ingredients.
 
-## 6. Test the system in representative use
+## 6. Test the system in the declared touchpoints
 
-Choose a small set of applications that expose materially different stresses: small/large, dense/expressive, institutional/promotional, screen/print, static/motion, internal/external, or other tensions relevant to the actual brand.
+Start from `meta.touchpoints`: each declared touchpoint is made and seen in the context where it lives. Add applications that expose further stresses (small/large, dense/expressive, institutional/promotional, screen/print, static/motion) until range is proven.
 
 For each trial:
 1. state the artifact job;
@@ -101,10 +101,12 @@ Use **provisional** when the business thesis, offer, market or identity still ha
 
 Use **full** only when the work justifies production-grade depth across durable touchpoints. Full does not mean “fill more fields”; it means resolve the material system and production dependencies the organization actually needs.
 
-Package only durable decisions into `brand-spec.json` using `spec-schema.md`. Keep the contract sparse. Exploration history, routine trials and research dumps remain outside canonical state.
+Package only durable decisions into `brand-spec.json` using `spec-schema.md`. Keep the contract sparse and private. Exploration history, routine trials, research dumps and open questions remain outside canonical state.
 
-When naming is in scope, use `naming.md`. When a brand book/guidelines are required, use `brand-book.md` after the system has survived representative applications.
+When naming is in scope, use `naming.md`. When a brand book/guidelines are required, use `brand-book.md` after the system has survived the declared touchpoints.
+
+If the owner reframes the request mid-work (for example from reconstructing an existing identity to creating one), re-route: reopen DIVERGE with rendered boards rather than continuing to systematize.
 
 ## Delivery
 
-Deliver the preferred brand system, required production assets or explicit concept/production briefs, representative applications, the sparse canonical contract when needed, and only the unresolved dependencies that can materially change future decisions.
+Deliver the brand system as its package (book and assets, in the audience's language), the contract as a separate operating file, and the contextual renders of the declared touchpoints. Report rationale, verification performed and unresolved dependencies to the operator, never inside the package.

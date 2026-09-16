@@ -1,89 +1,50 @@
-# Brand book — teach the system through a branded artifact
+# Brand book — a served touchpoint that teaches the system
 
-Use when guidelines, a brand book, standards deck or equivalent handoff is a deliverable. Build it after the identity has survived representative applications.
+Use when guidelines, a brand book or an equivalent handoff is a deliverable. Build it after the identity has survived the declared touchpoints. It is written for people who did not participate in the project, so they can make correct new work and recognize drift.
 
-A brand book is not a serialized `brand-spec.json`. It must help someone who did not participate in the project understand what the brand is trying to do, make correct new work, and recognize when an execution has drifted.
+The brand book is a touchpoint of the brand: it is designed, rendered, looked at and refined like any other application. It is not a serialized contract and it is not written in the process's vocabulary.
 
-## 1. Design for use
+## 1. Readers decide language, medium and register
 
-Identify the actual readers and decisions the document must support: internal teams, external agencies, product/design teams, vendors, leadership, partners or another audience.
+Name the actual readers before writing: typically a designer or agency, a supplier or printer, and the person who operates the brand day to day without design training. Add leadership or partners only when they will genuinely read it.
 
-Include only guidance that changes real execution. Prefer concise, high-information pages over exhaustive ceremonial documentation.
+- **Language** is the audience's language (`strategy.audience.language`). Repository or host conventions govern code and commits, never a touchpoint.
+- **Medium** is one self-contained HTML document. Type, color and composition must demonstrate themselves; a format that cannot render the system is never the medium. Print is a stylesheet, not a second artifact: A4 pages come from the browser, never from the agent typesetting a PDF.
+- **Register** is instruction. The reader obeys the book and puts it down; persuasion belongs to the brand's own touchpoints.
 
-## 2. Explain the logic before the inventory
+## 2. Three layers with different owners
 
-Teach the causal chain in a compact way:
+**Reference** — exact values, inventories, lockup variants, minimum sizes, contrast pairs, downloads. Derived from the contract and from the asset folder, never retyped. An inventory or download grid is generated from the folder; the readable name of an asset comes from the asset itself (its title), not from a second list. Every enumeration in the book matches the folder it describes.
 
-`brand job → position / desired meaning → creative thesis → system principles → application behavior`
+**How-to** — one imperative rule per task, with the reason in a visually secondary layer and the optional variation last. Titles predict content: someone who has read nothing else knows what a section holds. Every term is defined at first use or replaced by a plain one; design jargon is glossed where it first appears; no coined term appears in a title, and no coined term collides with a standard name in this skill (voice, signature, thesis).
 
-Do not turn strategy into a long manifesto unless the organization genuinely uses one. The reader should understand why the identity behaves as it does before encountering tokens and specifications.
+**Explanation** — the causal chain `brand job → position → thesis → principles → behavior`, compact, separable from the rules. This is the only layer where the brand's voice may lead the prose, and only if the organization genuinely uses one.
 
-## 3. Show range, not only rules
+Process vocabulary never reaches any layer: contract, specification, schema, version of a file, evidence, unresolved, open questions, route names. Pending matters go to the delivery report, never into the book.
 
-Use real or representative applications to demonstrate:
-- what remains constant;
-- what may vary;
-- how expression changes by medium, audience or moment;
-- how the system handles dense and expressive situations;
-- how distinctive cues work when the logo is secondary;
-- what failure looks like.
+## 3. The document is a showpiece
 
-One polished mockup repeated across pages is not evidence of a flexible brand system.
+The design layer demonstrates the system at the level of the best work in adjacent categories: a cover with the signature at full force, type specimens at display scale, full-bleed color fields, illustration and imagery at the size they were made for, range pages that show two very different applications sharing one logic, and a failure page that explains the mechanism of a wrong use rather than banning a placement.
 
-## 4. Use examples as decoding aids
+Do not sacrifice clarity to self-expression, and do not deliver a generic corporate document that contradicts the identity it describes. Use `visual-artifact-production.md` to build, render and refine the actual pages.
 
-For important principles, show enough examples that a competent reader can infer the decision rule without copying a single layout.
+## 4. Package shape
 
-Use `do / avoid`, comparison or counter-example pages when they reveal the rule more clearly. Avoid arbitrary prohibitions that merely preserve the original designer's taste.
+One folder the host already serves statically (for example the public directory of a site), containing:
+- the book at the folder root, self-contained: fonts embedded with their license notice, no scripts, no external requests;
+- assets in subfolders by kind (logo, illustration, pattern, imagery, applications), every file downloadable;
+- relative references only, so the folder survives download, offline use and a change of host;
+- a print stylesheet for A4;
+- a short stable route that resolves inside the folder, so relative references keep working; the redirect or rewrite is the host's mechanism.
 
-A useful negative explains the failure mechanism, for example: “do not use the signature device as decoration when it no longer expresses the governing behavior,” rather than “never place it here.”
+Folder and path names follow the audience's language or the host's convention. The contract lives outside the served folder unless the owner decides the strategy is public. If the host needs a README, it is a one-line pointer to the book; every rule has exactly one address.
 
-## 5. Cover only active brand dimensions
+## 5. Verify by looking
 
-Depending on the actual system, document the relevant subset of:
-- strategy/brand job and desired meaning;
-- creative thesis and principles;
-- naming/signature usage;
-- verbal identity and tone by moment;
-- typography;
-- color and accessibility-critical pairings;
-- imagery/illustration/iconography;
-- composition/spatial behavior;
-- distinctive devices;
-- motion/sound/sensory behavior;
-- production masters and asset access;
-- portfolio/architecture relationships;
-- governance or escalation when genuinely needed.
-
-Do not add empty sections to resemble a conventional guideline table of contents.
-
-## 6. Make the document itself exemplary
-
-The brand book is a branded touchpoint. Its writing, typography, pacing, image treatment, composition and interaction should demonstrate the system at a high level of craft.
-
-When a visual brand book or standards deck is a final deliverable, use `visual-artifact-production.md` to build, render/view and refine the actual document. An outline, content-complete draft or generic document export is not the finished branded artifact.
-
-Do not sacrifice clarity to self-expression, but do not deliver a generic corporate PDF that contradicts the identity it describes.
-
-## 7. Separate principle from exact specification
-
-Use principle-level guidance for choices that require judgment. Use exact values where reproducibility matters: master files, color values, contrast-critical pairs, minimum sizes, lockups, export settings or other production constraints.
-
-Do not create precise numbers merely to make the book feel authoritative.
-
-## 8. Verify before delivery
-
-Audit the brand book as both instruction and artifact:
-- Can a new operator make a materially different but correct application from it?
-- Are any important rules only understandable because the original team already knows the answer?
-- Are examples consistent with the written rule?
-- Does the book reveal the brand's range rather than freeze one campaign?
-- Are production claims reproducible?
-- Does the document itself look and read on-brand?
-- Are obsolete exploration routes, internal reasoning or unsupported market claims absent?
+Render the book on desktop, on a phone and as print, and look at each capture as each named reader: can the supplier find the file they need, can the operator apply a rule without asking, would the designer make a materially different correct application from it? Check the contrast of every text role on every background it appears on with `color_tools.py` when the eye suspects; check every count against the folder; check that nothing from the process is visible. Fix, re-render, look again.
 
 If a guideline repeatedly needs exceptions, fix the system or rewrite the rule instead of documenting more cases.
 
 ## Delivery
 
-Deliver the brand book/guidelines in the requested medium plus referenced production assets where applicable. Keep the canonical spec as the source of durable operating decisions; treat the brand book as the human-facing teaching view.
+Deliver the folder: book and assets. Deliver the contract separately, as an operating file. Report pending matters in the conversation, never in the book.

@@ -1,0 +1,62 @@
+{
+  "engagement": "Create a complete brand for a public food-solidarity network; brand book served from a Next.js site's static folder at a short route.",
+  "runtime_version_observed": "2.5.0",
+  "host": "Claude Code (remote), Chromium available, FLUX available but never called",
+  "observations": [
+    {
+      "stage": "DIVERGE / COMMIT DIRECTION",
+      "symptom": "Direction was committed in prose; zero rendered boards; the owner saw nothing before the finished book.",
+      "sensor_that_should_have_fired": "none in runtime or evals",
+      "attributed_cause": "hypothesis: render was a hedged value, not a stage output; direction was read as a routine agent choice",
+      "regression_case": "direction-seen-before-build"
+    },
+    {
+      "stage": "TEST IN USE",
+      "symptom": "Five convenient HTML mockups; none of the five declared touchpoints (apron, packaging, storefront, deck, feed) rendered in context.",
+      "sensor_that_should_have_fired": "none; meta.touchpoints was validated as non-empty and consumed by no stage",
+      "attributed_cause": "hypothesis: representative applications were chosen on the measuring surface, not where the brand lives",
+      "regression_case": "declared-touchpoints-are-seen"
+    },
+    {
+      "stage": "ROUTE",
+      "symptom": "Brief moved from reconstruct to create; the agent kept systematizing.",
+      "sensor_that_should_have_fired": "none",
+      "attributed_cause": "hypothesis: routing table mapped once with no re-route rule",
+      "regression_case": "reframe-reroutes"
+    },
+    {
+      "stage": "PACKAGE (book)",
+      "symptom": "Three rewrites: metaphorical prose in brand voice, aphoristic titles, undefined jargon; delivered first in Markdown and in English for a pt-BR audience; process vocabulary on the cover and an open-questions section; a hand-written asset strip showing 6 of 34 illustrations; a text role on a colored field that the eye judged too light.",
+      "sensor_that_should_have_fired": "none; color_tools was applied to the palette, never to the document; the reader identified in brand-book.md had no consequence downstream",
+      "attributed_cause": "hypothesis: readers, language and medium had no consumer; the book was a PACKAGE output, not a touchpoint under the render-and-look loop; process vocabulary had no other legitimate container",
+      "regression_case": "book-written-for-its-readers",
+      "note": "The reported 3.81:1 contrast figure was not reproducible from the delivered file; the symptom stands as 'no sensor on the document', the number does not."
+    },
+    {
+      "stage": "PACKAGE (contract)",
+      "symptom": "brand-spec.json carried an evidence table with statuses, rejected fixes and an 'accepted as delivered' note; the user asked three times to remove process residue; the contract was published in the served folder next to the book.",
+      "sensor_that_should_have_fired": "inverted: the validator accepted status=superseded and reported evidence counts as passes",
+      "attributed_cause": "hypothesis: per-item lifecycle fields turn an instrument into a ledger; no owner for the public/private decision",
+      "regression_case": "contract-stays-an-instrument",
+      "note": "The 30% evidence share is testimony; the delivered spec had already been pruned and history was squashed."
+    },
+    {
+      "stage": "BUILD SYSTEM",
+      "symptom": "Colors named after the source institution, renamed three times, each rename touching three files.",
+      "sensor_that_should_have_fired": "none",
+      "attributed_cause": "hypothesis: no role-based naming rule; display name embedded in a description string with no field of its own",
+      "regression_case": "contract-stays-an-instrument"
+    },
+    {
+      "stage": "TEST IN USE",
+      "symptom": "One SVG with a long filter chain froze the browser rasterizer; found hours later.",
+      "sensor_that_should_have_fired": "the render-and-look loop, had it run per touchpoint before 'final'",
+      "attributed_cause": "hypothesis: local execution defect surfaced late because rendering was not a stage output",
+      "regression_case": "declared-touchpoints-are-seen"
+    }
+  ],
+  "what_worked": [
+    "The visual system itself was judged correct and survived use.",
+    "Brand book as one self-contained HTML file served from the site's static folder at a short route, with assets downloadable beside it and print from the browser; adopted as the canonical package shape in 3.0.0."
+  ]
+}

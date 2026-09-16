@@ -29,19 +29,19 @@ Create the artifact in the form appropriate to its job and claimed maturity.
 
 - **Logo, wordmark, symbol or lockup:** construct final geometry in a controlled vector path, refine optically, test relevant scale/monochrome/reversal behavior, and keep only variants real use requires. A generated or traced raster concept is not a final master.
 - **Reference or mood board:** compose a visual argument rather than a link/image dump. Select references for decision-changing properties, arrange them so the intended territory and contrasts are legible, and preserve source/provenance only where future work needs it.
-- **Brand application:** use real or representative content, dimensions and constraints. Build the application itself; use mockups afterward to test contextual behavior rather than as a substitute for the design.
+- **Brand application:** use real or representative content, dimensions and constraints. Build the application itself, then see it in context: every touchpoint declared in the contract gets at least one contextual render, and a declared touchpoint left unrendered is a named gap with a lowered maturity label.
 - **Brand book, standards deck or visual guideline:** use `brand-book.md` for what the document must teach, then design the actual pages/screens/slides with deliberate hierarchy, pacing, image treatment and sequencing. Content completeness is not visual completion.
 - **Motion or time-based artifact:** use an inspectable time-based production path and judge timing, transition, hierarchy and reduced-motion/accessibility behavior where relevant; a storyboard alone is a concept unless that is the requested deliverable.
 
 When central photography, illustration, key art, textures or composited imagery are generated/edited, follow `visual-production.md`, persist the accepted assets, and integrate the real files before judging the final composition.
 
-## 3. Work in visual slices
+## 3. Work in visual slices, and look
 
-Do not accumulate a large amount of unseen visual production when the environment can show intermediate results.
+Do not accumulate unseen visual production. Use the loop:
 
-Use the loop:
+`MAKE → RENDER → LOOK → CRITIQUE → REFINE → LOOK AGAIN`
 
-`MAKE → RENDER / VIEW → CRITIQUE → REFINE → RE-VIEW`
+Looking means capturing the rendered artifact at the scale and on the surface where its reader will meet it, and reading the capture as that reader. For a document: desktop, phone and print. For a physical touchpoint: a scene that shows material, distance and light, composited or generated (`visual-production.md`). For a screen: the real viewport. A browser render measures; it does not substitute for the object in context.
 
 For complex deliverables, prove representative slices before scaling: the core mark before a logo suite, a representative spread before a full book, one expressive and one dense application before a template family. Scale a solution only after the relevant visual logic survives inspection.
 
@@ -64,7 +64,8 @@ Do not claim a material visual deliverable is final while any of the following i
 - the deliverable is only described, prompted, outlined or represented by a mockup;
 - the claimed master cannot be reproduced or inspected through the available production path;
 - a central asset required by the committed direction remains placeholder-quality or unresolved;
-- representative viewing exposes a known material hierarchy, composition, optical, legibility or coherence defect;
+- representative viewing exposes a known material hierarchy, composition, optical, legibility or coherence defect, or nobody has looked at the rendered result;
+- the work does not hold beside the bar named at direction;
 - the artifact depends on a production capability that is unavailable and no equal-quality alternative exists.
 
 Deliver the actual artifact at the highest truthful maturity available, plus only the source/master, exports, contextual views and production notes future use genuinely needs.

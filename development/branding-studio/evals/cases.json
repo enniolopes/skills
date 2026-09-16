@@ -121,6 +121,50 @@
       ]
     },
     {
+      "id": "direction-seen-before-build",
+      "prompt": "Crie a marca desta padaria e entregue o manual.",
+      "setup": "Render capability exists and the owner is reachable. Nothing prevents building immediately after choosing a direction.",
+      "judge": [
+        "Direction candidates reach the owner as rendered, comparable boards with a ranked recommendation before any system is built; a written rationale alone is not a direction.",
+        "Direction ratification is treated as an owner gate, not as a routine agent choice."
+      ]
+    },
+    {
+      "id": "declared-touchpoints-are-seen",
+      "prompt": "Teste o sistema em uso e finalize.",
+      "setup": "meta.touchpoints declares apron, packaging, storefront window, presentation deck and social feed. A browser is the most convenient render surface.",
+      "judge": [
+        "Each declared touchpoint is rendered in the context where it lives, or reported as a named gap with a lowered maturity label.",
+        "Convenient substitute mockups on the measuring surface do not count as having seen the touchpoint."
+      ]
+    },
+    {
+      "id": "reframe-reroutes",
+      "prompt": "Na verdade não é reconstruir o material anexo; você é o designer, quero o branding completo.",
+      "setup": "The session began as a reconstruction of an existing undocumented identity and has already systematized part of it.",
+      "judge": [
+        "The reframe re-routes to CREATE and reopens DIVERGE with rendered boards instead of continuing to systematize the inherited material."
+      ]
+    },
+    {
+      "id": "book-written-for-its-readers",
+      "prompt": "Entregue o manual da marca.",
+      "setup": "strategy.audience.language is pt-BR; readers are a designer, a printer and a kitchen coordinator with no design training. The repository's own conventions are in English.",
+      "judge": [
+        "The book is a self-contained HTML touchpoint in the audience's language, with imperative task rules, titles that predict content, terms defined at first use, and no process vocabulary (contract, specification, schema, evidence, open questions).",
+        "The book has been rendered on desktop, phone and print and looked at as each named reader before delivery; every inventory matches the asset folder."
+      ]
+    },
+    {
+      "id": "contract-stays-an-instrument",
+      "prompt": "Persista o estado da marca.",
+      "setup": "During refinement three fixes were rejected and one color was renamed twice.",
+      "judge": [
+        "brand-spec.json records only what is in force: no evidence table, statuses, rejected fixes, renames or open questions; provenance appears only as a one-sentence basis on the clause that needs it.",
+        "Pending matters go to the delivery report, and the contract is not placed in a publicly served directory by default."
+      ]
+    },
+    {
       "id": "verbal-generativity",
       "prompt": "Crie o sistema verbal para um software de manutenção predial que reduz perda de contexto entre turnos. Demonstre homepage, onboarding, aviso de inspeção atrasada e email executivo. Não há evidência de liderança, superioridade ou confiança medida.",
       "judge": [
@@ -147,5 +191,6 @@
       "brief": "Brand a high-fee service coordinating complex elder-care logistics across medical, legal, home and financial providers. It must feel calm, capable and humane without luxury, wellness or hospital-admin clichés."
     }
   ],
-  "transfer_test": "Give a fresh operator only the produced guidelines plus an unseen relevant touchpoint. Judge the new artifact before the guideline: it should preserve the system, serve the new job and avoid copying an example."
+  "transfer_test": "Give a fresh operator only the produced guidelines plus an unseen relevant touchpoint. Judge the new artifact before the guideline: it should preserve the system, serve the new job and avoid copying an example. Separately, give the book to a reader with no design training in the audience's language and ask them to apply one rule; they should manage without asking.",
+  "ambition_test": "Place the strongest rendered application beside the two or three adjacent-category identities named as the bar at direction. Judge whether it holds; correct-and-competent is a failure."
 }

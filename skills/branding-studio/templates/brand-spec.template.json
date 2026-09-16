@@ -1,6 +1,6 @@
 {
   "meta": {
-    "schema_version": 4,
+    "schema_version": 5,
     "version": "1.0.0",
     "brand_name": "",
     "tier": "provisional | full",
@@ -11,7 +11,8 @@
       "statement": ""
     },
     "audience": {
-      "primary": ""
+      "primary": "",
+      "language": ""
     },
     "offer_truth": {
       "statement": ""

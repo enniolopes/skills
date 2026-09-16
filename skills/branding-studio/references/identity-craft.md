@@ -21,6 +21,10 @@ Not every brand needs every dimension. Omit inactive mechanisms instead of filli
 
 A system is stronger when different artifacts can vary substantially while still sharing an intelligible logic.
 
+Name every element by its role in the system, never by its origin, its source institution or what it looks like: the green that marks the network is the network green, not the university green. Names travel into every document, so confirm them with the owner at direction ratification, before any document uses them. A coined term must not collide with a standard name in this skill (voice, signature, thesis, principle).
+
+Every application has a hero moment where the signature performs at full force; scale contrast, whitespace and cropping are decisions there, not defaults. Resolve force and hierarchy first, compliance second: a compliant artifact nobody would stop to look at has failed.
+
 ## 2. Logo, wordmark and signature
 
 Treat the logo as one asset inside the system, not the explanation for the whole brand.
@@ -79,7 +83,7 @@ Sound or sensory elements require a functional/recognition role and production c
 
 ## 8. Test family resemblance and range
 
-Create representative applications with different jobs and stresses. Do not reuse one hero composition as proof of system breadth.
+Start from the declared touchpoints: each is made and seen in the context where it lives. Add applications with different jobs and stresses until range is proven. Do not reuse one hero composition as proof of system breadth.
 
 Ask:
 - Can the brand be recognized when the logo is not dominant?

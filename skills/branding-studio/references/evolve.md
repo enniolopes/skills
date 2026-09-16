@@ -71,7 +71,7 @@ Update `brand-spec.json` only with durable changed decisions. Increment the vers
 
 Do not store a verbose internal changelog when repository/document version history already records the delta. Deliver an explicit before/after summary with the change itself.
 
-Legacy v3 state may be compressed to v4 during a meaningful evolution. Migration is not a reason to redesign; preserve valid strategy, equity and production rules while removing exploration history and inactive schema fields.
+Legacy state (schema 4, v3 or earlier) may be compressed to schema 5 during a meaningful evolution. Migration is not a reason to redesign; preserve valid strategy, equity and production rules while folding needed evidence into `basis` and removing lifecycle fields, exploration history and inactive schema fields.
 
 ## Provisional → full
 

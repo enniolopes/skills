@@ -15,16 +15,21 @@ For a targeted change, run only the regression cases that can distinguish it. Fo
 
 Keep baseline and candidate isolated. Give them the same prompt, evidence and tools. Review artifacts before rationales whenever an artifact exists.
 
+## Field evidence
+
+`field/` keeps one curated file per real engagement: what the user observed, which artifact showed it, and which sensor (runtime rule, deterministic check, eval case) should have caught it. Attributed causes are hypotheses. Every recurring mechanism there must have a regression case here; a symptom without a case is a gap in this file, not in the runtime.
+
 ## Judge
 
-Use six dimensions:
+Use seven dimensions:
 
 1. **Truth and evidence fit** — no invented reality; each claim uses evidence capable of settling it.
 2. **Decision quality** — autonomy is appropriate; exploration, commitment and correction happen at the right level.
 3. **Specificity** — consequential choices depend on this brand rather than category autocomplete or arbitrary novelty.
 4. **Generativity** — the system can make materially different new work without copying one layout, phrase or device.
-5. **Craft and reality** — representative artifacts survive perceptual, functional and production constraints relevant to the brief; when generated imagery is material, judge art direction, relevance, asset craft, coherence across the image family, persistence/integration and contextual performance rather than generator success.
-6. **Context efficiency** — extra process, rules or state must earn their cost; completeness and polish are not quality proxies.
+5. **Craft, ambition and reality** — representative artifacts survive perceptual, functional and production constraints relevant to the brief, and the strongest one holds beside the adjacent-category bar named at direction; when generated imagery is material, judge art direction, relevance, asset craft, coherence across the image family, persistence/integration and contextual performance rather than generator success.
+6. **Reader fit** — every reader-facing deliverable is in the audience's language and register, has been rendered and looked at on the reader's surfaces, and carries nothing from the process.
+7. **Context efficiency** — extra process, rules or state must earn their cost; completeness and polish are not quality proxies.
 
 Across creative briefs, flag repeated aesthetic or verbal solutions only when recurrence lacks brief-specific causality. Recurrence itself is not a failure.
 
