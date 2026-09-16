@@ -2,7 +2,6 @@ import json
 import os
 import tempfile
 import unittest
-from copy import deepcopy
 from pathlib import Path
 import sys
 
@@ -11,7 +10,6 @@ ROOT = REPO_ROOT / "skills" / "branding-studio"
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import asset_checks
-import portfolio_collision
 import validate_structure
 
 
@@ -36,13 +34,6 @@ def valid_spec():
     spec["visual"] = {
         "logo": {"production": {"status": "final", "master_format": "svg", "master_path": "assets/logo.svg"}},
         "tokens": {"color": {"ink": {"$type": "color", "$value": "#101010", "name": "Ink"}}},
-    }
-    spec["portfolio_summary"] = {
-        "name": {"name": "Northstar", "approach": "suggestive", "construct": "real-word"},
-        "primary_color_oklch": {"L": 0.55, "C": 0.10, "H": 0},
-        "logo_morphology": ["wordmark"],
-        "creative_territory": ["precise"],
-        "shared_cues": [],
     }
     return spec
 
@@ -101,19 +92,6 @@ class BrandingStudioScriptTests(unittest.TestCase):
             "visual": {"typography": {"hierarchy": {"mode": "custom", "rules": ["Explicit relationship"]}}},
         }
         self.assertEqual(validate_structure.validate(legacy)["verdict"], "STRUCTURALLY_VALID")
-
-    def test_portfolio_comparison_is_advisory(self):
-        candidate = valid_spec()["portfolio_summary"]
-        sister = deepcopy(candidate)
-        sister["name"]["name"] = "Northstar Labs"
-        sister["logo_morphology"] = []
-        result = portfolio_collision.compare(
-            candidate,
-            sister,
-            portfolio_collision.DEFAULT_POLICIES["branded-house"],
-        )
-        self.assertNotIn("severity", result["morphology"])
-        self.assertIsNone(result["morphology"]["tag_jaccard"])
 
     def test_raster_content_blocks_svg_master(self):
         svg = '<svg xmlns="http://www.w3.org/2000/svg"><image href="data:image/png;base64,AAAA"/></svg>'

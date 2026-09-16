@@ -152,7 +152,7 @@ A familiar mechanism remains valid when the brief independently earns it. Constr
 
 For an existing identity with no spec, reconstruct what is already true and valuable before changing it. Absence of a spec is not evidence that the brand needs redesign. A reframe by the owner re-routes.
 
-Load `references/creative-direction.md` when creating or materially reopening expression; `references/identity-craft.md` for visual identity/system craft; `references/visual-artifact-production.md` when a material designed visual artifact must be produced and judged from the artifact itself; `references/visual-production.md` when generated or edited raster imagery is material to exploration, a touchpoint render or the deliverable; `references/generative-media-translation.md` only when resolved art direction is about to become a real generative image/video request or a generated near-miss needs request-level repair; `references/verbal-identity.md` when proposition, messaging, voice/tone or a broader verbal identity is in scope; `references/naming.md` when naming is in scope; `references/brand-book.md` when guidelines or a brand book are deliverables; `references/knowledge.md` when evidence strength/current facts/methodology need calibration; and `references/spec-schema.md` when canonical state is created or changed.
+Load `references/creative-direction.md` when creating or materially reopening expression; `references/identity-craft.md` for visual identity/system craft; `references/visual-artifact-production.md` when a material designed visual artifact must be produced and judged from the artifact itself; `references/visual-production.md` when generated or edited raster imagery is material to exploration, a touchpoint render or the deliverable; `references/verbal-identity.md` when proposition, messaging, voice/tone or a broader verbal identity is in scope; `references/naming.md` when naming is in scope; `references/brand-book.md` when guidelines or a brand book are deliverables; `references/knowledge.md` when evidence strength/current facts/methodology need calibration; and `references/spec-schema.md` when canonical state is created or changed.
 
 For APPLY/AUDIT, compile the smallest relevant subset of state.
 
@@ -171,8 +171,7 @@ Tool availability is not production proof. Capability limits may lower the matur
 Seeing is done by rendering and looking: at representative scale, on the surfaces the reader will use, as each named reader. Deterministic tools establish only the exact properties code can decide:
 - `scripts/validate_structure.py spec.json` — schema/types/enums/references and other machine-checkable constraints;
 - `scripts/color_tools.py ...` — exact color/contrast calculations for any text role on any background it appears on, in the brand and in the brand book itself;
-- `scripts/asset_checks.py logo.svg` — deterministic SVG production checks;
-- `scripts/portfolio_collision.py portfolio.json spec.json` — advisory comparison signals only, never proof of distinctiveness or legal/confusion risk.
+- `scripts/asset_checks.py logo.svg` — deterministic SVG production checks.
 
 Do not label a master `final` until the available production path can reproduce it and you have looked at the result.
 

@@ -65,8 +65,6 @@ Define behavior that materially constrains production: subject, framing, crop, p
 
 For icons, define semantic clarity, construction logic, stroke/fill behavior, optical size and accessibility. Use a grid only when it improves the system.
 
-Generated imagery can support exploration or production when rights/process permit it; visual novelty is not evidence of legal uniqueness or brand ownership.
-
 ## 6. Composition and spatial behavior
 
 Specify relationships rather than frozen layouts: alignment, margin behavior, density, symmetry/asymmetry, image/type interaction, dominant axes, cropping logic, responsive behavior and recurring spatial devices when relevant.
@@ -105,16 +103,4 @@ Inspect at macro, meso and micro levels.
 
 **Micro:** kerning, optical alignment, curves, joins, line endings, crop edges, icon consistency, spacing, production details and accessible states.
 
-A system is not finished merely because it is internally consistent.
-
-## 10. Adversarial quality review
-
-Before finalizing, look specifically for counterfeit quality:
-- Which decision is only signaling `premium`, `modern`, `innovative`, `timeless` or `creative` rather than producing it?
-- Which important choice has weak causal dependence on this brand?
-- Where did repetition replace coherent variation?
-- Where did mockup polish hide a weak system?
-- Where is novelty adding cost without meaning?
-- Which rule exists because a template expected one rather than because future work needs it?
-
-Repair the underlying property. Do not ban a surface form simply because it is common.
+A system is not finished merely because it is internally consistent. Before finalizing, hunt the counterfeit list in `SKILL.md` against the rendered work and repair the underlying property rather than banning a surface form.

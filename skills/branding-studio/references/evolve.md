@@ -4,79 +4,28 @@ Use EVOLVE when a committed strategy, direction or system may need material chan
 
 ## 1. Diagnose before redesigning
 
-Start from the current contract, real artifacts and the trigger for change.
+Start from the current contract, real artifacts and the trigger for change. Classify the problem by the lowest layer that explains it (execution, one artifact, recurring system behavior, creative direction, strategy, external reality) and match the resolver to the question as in `SKILL.md`.
 
-Classify the problem by the lowest layer that explains it:
-- execution/craft;
-- one artifact;
-- recurring guidance/system behavior;
-- creative direction;
-- strategy / brand job;
-- external market/legal reality.
+Do not treat boredom, leadership taste, trend pressure or one weak artifact as proof that the whole brand is obsolete. New market evidence is not required to correct a demonstrably weak creative execution; self-critique cannot manufacture new market truth.
 
-Do not treat boredom, leadership taste, trend pressure or one weak artifact as proof that the whole brand is obsolete.
+## 2. Preserve what remains valid
 
-## 2. Match the resolver to the question
+For each affected element decide **preserve**, **refine**, **replace**, **retire** or **add**. Trace dependencies only as far upstream as the evidence requires. Do not preserve a broken decision because it is old; do not destroy a valid one because change is attractive.
 
-Different failures require different evidence:
-- visible craft/composition problems can be established through professional judgment and rendered/source inspection;
-- recurring failures across legitimate touchpoints can establish a system defect;
-- a direction that repeatedly produces generic, narrow or incoherent work can be rejected on creative/system evidence;
-- factual strategy assumptions require factual evidence;
-- claims about perception, recall, preference or behavior require real external evidence;
-- consequential legal claims require current authoritative sources and appropriate specialist review.
+If the governing thesis itself is the problem, return to `creative-direction.md` and explore genuinely different lineages, rendered and shown to the owner. Do not disguise a new route as a minor polish pass. When strategy changed, restate the brand job and affected desired meaning before generating new expression.
 
-New market evidence is not required to correct a demonstrably weak creative execution. Conversely, self-critique cannot manufacture new market truth.
+## 3. Prove the delta in use
 
-## 3. Preserve what remains valid
+Test the materially affected touchpoints, old beside new where comparison reveals whether the diagnosed problem improved. Check that unchanged valid elements remain coherent, that the change creates no new category or production problem, that the system still generates range, and that any high-equity removal has evidence or authority proportional to its consequence.
 
-For each affected element decide:
-- **preserve** — rationale and performance remain valid;
-- **refine** — same governing idea, better execution/rule;
-- **replace** — underlying decision no longer serves;
-- **retire** — obsolete or harmful equity;
-- **add** — new capability/touchpoint need not covered before.
+A high-cost market change with weak external evidence remains a recommendation or experiment, not automatic contract mutation.
 
-Trace dependencies only as far upstream as the evidence requires:
-- production defect → repair production;
-- repeated typography failure → reopen typography before identity;
-- new touchpoint → test application before redesign;
-- direction cannot generate required range → reopen creative direction;
-- position/offer/audience truth changed → re-frame affected strategy and downstream expression.
+## 4. Commit a sparse new version
 
-Do not preserve a broken decision because it is old. Do not destroy a valid one because change is attractive.
+Update `brand-spec.json` only with durable changed decisions and increment `meta.version` by the semantic magnitude of the change. Version control records the delta; the contract does not. Legacy state may be compressed to schema 5 during a meaningful evolution (`spec-schema.md`); migration is not a reason to redesign.
 
-## 4. Re-diverge when the premise failed
-
-If the governing creative thesis is the problem, return to `creative-direction.md` and explore genuinely different lineages. Do not disguise a new route as a minor polish pass.
-
-When strategy changed, restate the brand job and affected desired meaning before generating new expression.
-
-## 5. Prove the delta in use
-
-Compare old and new only where comparison reveals whether the actual problem improved.
-
-Test materially affected applications. Check that:
-- the new solution addresses the diagnosed defect;
-- unchanged valid elements remain coherent;
-- the change does not create new category/portfolio confusion or production problems;
-- the system still generates range rather than one presentation-perfect route;
-- any high-equity removal has evidence/authority proportional to its consequence.
-
-A high-cost market change with weak external evidence remains a recommendation/experiment, not automatic contract mutation.
-
-## 6. Commit a sparse new version
-
-Update `brand-spec.json` only with durable changed decisions. Increment the version according to the actual semantic magnitude of the contract change.
-
-Do not store a verbose internal changelog when repository/document version history already records the delta. Deliver an explicit before/after summary with the change itself.
-
-Legacy state (schema 4, v3 or earlier) may be compressed to schema 5 during a meaningful evolution. Migration is not a reason to redesign; preserve valid strategy, equity and production rules while folding needed evidence into `basis` and removing lifecycle fields, exploration history and inactive schema fields.
-
-## Provisional → full
-
-Promotion means resolving the material system needed for durable operation, not filling more fields. Complete the production assets, legal/current dependencies and representative touchpoint coverage that actually matter. Preserve valid creative reasoning unless new evidence or system performance invalidates it.
+**Provisional → full** means resolving the production assets, legal and current-fact dependencies and touchpoint coverage that actually matter, not filling more fields.
 
 ## Delivery
 
-Deliver the minimum justified change, affected assets/applications, concise evidence/authority basis, migration consequences where relevant, and unresolved external or specialist dependencies that can still change the decision.
+The minimum justified change, affected assets and applications rendered in context, a concise before/after summary, and unresolved external or specialist dependencies reported to the operator.

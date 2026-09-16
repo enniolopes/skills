@@ -21,7 +21,7 @@ A schema-5 contract keeps only the always-useful decision core:
 - `strategy` — brand job, audience (with the language the brand speaks to it), offer truth, alternatives, position, right to win and desired meaning;
 - `creative_direction` — thesis, principles and signature.
 
-Add expression/domain blocks only when they are materially active: `verbal`, `visual`, `naming`, `architecture`, `portfolio_summary`, or other medium-specific rules future operators genuinely need.
+Add expression/domain blocks only when they are materially active: `verbal`, `visual`, `naming`, `architecture`, or other medium-specific rules future operators genuinely need.
 
 Absence means "not material to this contract," not "forgot to complete the template."
 
@@ -51,37 +51,16 @@ When a clause depends on a fact that a future operator might otherwise overturn 
 
 Prefer concise causal language over a rationale on every object. Most clauses need no `basis`.
 
-## Strategy fields
+## Strategy and direction fields
 
-### `brand_job`
-The business/organizational transition the brand must help produce. This is not a mission statement.
-
-### `audience`
-`primary` — who the system primarily needs to serve. `language` — the language the brand speaks to them (BCP 47 tag, for example `pt-BR`); every reader-facing deliverable is written in it. Add a `not_for` boundary only when it materially improves future judgment.
-
-### `offer_truth`
-The relevant truth about the product, service or organization that expression must not contradict.
-
-### `alternatives`
-The meaningful alternatives/category context against which the brand must be understood. Keep only decision-changing alternatives.
-
-### `position`
-The intended place/meaning the brand should establish relative to those alternatives. Do not store a slogan here unless the slogan itself is the durable strategic decision.
-
-### `right_to_win`
-The credible basis that makes the position defensible.
-
-### `desired_meaning`
-What the designed system intends to make understandable/associable. Actual achieved perception remains an external claim.
-
-## Creative direction fields
-
-Keep the durable direction compact:
-- `thesis` — governing expressive idea;
-- `principles` — only behavioral rules that materially change choices;
-- `signature` — characteristic behavior/cue that helps the system cohere.
-
-Add `excludes` only when likely false routes/collisions need to be prevented in future work.
+- `brand_job` — the business/organizational transition the brand must help produce; not a mission statement.
+- `audience.primary` — who the system primarily needs to serve; `audience.language` — the language the brand speaks to them (BCP 47 tag such as `pt-BR`), which every reader-facing deliverable is written in; `audience.not_for` only when it materially improves future judgment.
+- `offer_truth` — what expression must not contradict.
+- `alternatives` — only the decision-changing alternatives against which the brand must be understood.
+- `position` — the intended meaning relative to those alternatives; a slogan only when the slogan itself is the durable decision.
+- `right_to_win` — the credible basis that makes the position defensible.
+- `desired_meaning` — what the system intends to make associable; achieved perception remains an external claim.
+- `creative_direction.thesis`, `principles` (only rules that materially change choices), `signature` (the characteristic cue that makes the system cohere), and `excludes` only when likely false routes need preventing.
 
 ## Verbal and visual blocks
 
@@ -103,9 +82,9 @@ When a visual decision governs future work, persist the durable behavior or rela
 
 Add `naming` only when naming is part of the brand contract. Preserve the selected name, its strategic job when needed, material exclusions and dated clearance/linguistic triage. Triage does not become definitive legal clearance merely because it is persisted.
 
-## Architecture / portfolio
+## Architecture
 
-Add architecture or portfolio state only for brands that actually participate in a multi-brand relationship. `portfolio_summary` is an optional compact projection for comparison workflows, not proof of market distinctiveness.
+Add `architecture` only for brands that participate in a multi-brand relationship (`house-of-brands`, `endorsed`, `branded-house`, `hybrid`). Architecture policy can intentionally require shared cues; similarity is not universally a defect.
 
 ## Production state
 
@@ -118,13 +97,7 @@ This is the current state of an asset, not a history. Do not promote raster or g
 
 ## Machine-checkable structures
 
-When declared:
-- design tokens should use a consistent machine-consumable shape and resolvable aliases;
-- contrast pairs should reference actual colors used for a real text/UI relationship;
-- modular typography should provide enough numbers for its math to be checked;
-- custom/fluid typography may use explicit rules without a modular ratio.
-
-Machine validation establishes only those structural/technical properties.
+When declared, tokens use a consistent shape with resolvable aliases, contrast pairs reference the actual colors of a real text/background relationship, and modular typography carries enough numbers for its math to be checked. Validation establishes only those structural properties.
 
 ## Publication
 

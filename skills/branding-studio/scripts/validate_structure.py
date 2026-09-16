@@ -308,24 +308,6 @@ def _validate_optional_enums(spec, failures, passed):
                 passed.append(f"naming clearance state declared: {status}")
 
 
-def _validate_portfolio_projection(spec, failures, passed):
-    color = _get(spec, "portfolio_summary.primary_color_oklch")
-    if color is None:
-        return
-    if not isinstance(color, dict):
-        failures.append("portfolio_summary.primary_color_oklch must be an object or null")
-        return
-    try:
-        values = [float(color[key]) for key in ("L", "C", "H")]
-    except (KeyError, TypeError, ValueError):
-        failures.append("portfolio_summary.primary_color_oklch requires numeric L, C and H")
-        return
-    if not (0 <= values[0] <= 1 and values[1] >= 0 and 0 <= values[2] <= 360):
-        failures.append("portfolio_summary.primary_color_oklch values out of range")
-    else:
-        passed.append("portfolio OKLCH projection is structurally valid (H=0 is valid)")
-
-
 def _validate_current(spec, failures, warnings, passed):
     tier = str(_get(spec, "meta.tier", "")).strip().lower()
     if tier not in VALID_TIERS:
@@ -369,7 +351,6 @@ def _validate_current(spec, failures, warnings, passed):
     _validate_typography(spec, failures, passed)
     _validate_logo(spec, tier, failures, warnings, passed)
     _validate_optional_enums(spec, failures, passed)
-    _validate_portfolio_projection(spec, failures, passed)
 
 
 def _validate_legacy(spec, label, findings, require_ids, failures, warnings, passed):
@@ -388,7 +369,6 @@ def _validate_legacy(spec, label, findings, require_ids, failures, warnings, pas
     _validate_typography(spec, failures, passed)
     _validate_logo(spec, tier, failures, warnings, passed)
     _validate_optional_enums(spec, failures, passed)
-    _validate_portfolio_projection(spec, failures, passed)
 
 
 def validate(spec):

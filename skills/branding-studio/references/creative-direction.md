@@ -68,15 +68,3 @@ Re-diverge when representative use shows that the thesis:
 - cannot explain recurring system failures.
 
 Refine instead when the thesis remains strong and the defect is downstream craft or execution.
-
-## Negative control
-
-Do not use:
-- symbolism as a substitute for meaning;
-- novelty or complexity as a substitute for sophistication;
-- style signals as a substitute for specificity or premium quality;
-- repetition as a substitute for coherence;
-- a polished presentation as a substitute for a working system;
-- a written rationale as a substitute for a board someone has looked at.
-
-The mechanism remains valid when the brief independently earns it.
