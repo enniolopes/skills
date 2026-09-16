@@ -39,7 +39,7 @@ Compile that packet for the actual operation, not for a generic prompt: generati
 
 For a central image or a new image grammar, do not accept the first plausible generation. Produce a small set of materially different candidates, varying the visual solution rather than seed-level cosmetics, and select the strongest yourself against the quality target and the named bar. A beautiful but generic image loses to a specific, causally earned one.
 
-When a candidate is close, repair the smallest causal input (one reference, one control, one instruction) while preserving what succeeded, instead of rewriting the whole request. If repeated local repairs reveal that the art direction is under-resolved, return the issue upstream. A technically successful request is not a quality pass.
+When a candidate is close, repair the smallest causal input (one reference, one control, one instruction) while preserving what succeeded, instead of rewriting the whole request. Look for the generator's typical defects before judging the idea: wrong crop or focal hierarchy, generic subject treatment, inconsistent light or material, anatomy and detail failures, accidental text or pseudo-marks, palette drift. If repeated local repairs reveal that the art direction is under-resolved, return the issue upstream. A technically successful request is not a quality pass.
 
 ## 5. Build an imagery system, not a gallery
 

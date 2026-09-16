@@ -20,7 +20,7 @@ A distinctive asset is one that is actually recognized; do not assume a cue is d
 
 Verify current authoritative sources when materially relevant: trademark procedures, fees, timelines and filing rules; classification for a specific filing; current domain/handle availability; jurisdiction-specific accessibility or legal obligations; current competitor and product facts.
 
-Trademark searching by the agent is triage, not definitive legal clearance. Escalate to qualified counsel when consequence justifies it.
+Trademark searching by the agent is triage, not definitive legal clearance. Escalate to qualified counsel when consequence justifies it. A generated image looking original is not evidence of legal uniqueness or ownership.
 
 ## Accessibility
 

@@ -160,7 +160,7 @@ For APPLY/AUDIT, compile the smallest relevant subset of state.
 
 `brand-spec.json` is a sparse private operating contract shaped by `templates/brand-spec.template.json` (schema 5). Persist a decision only when its absence would materially increase future drift.
 
-The contract records what is in force, not how it got there. Provenance is a one-sentence `basis` on the clause that depends on it. No item carries a status, a lifecycle or a history; version control owns history. Do not persist exploration, rejected routes, routine trials, research notes, prompts, open questions or ceremonial fields. Omit irrelevant blocks instead of filling them.
+The contract records what is in force, not how it got there. Provenance is a one-sentence `basis` on the clause that depends on it. No item carries a status, a lifecycle or a history; version control owns history. Do not persist exploration, rejected routes, routine trials, research notes, prompts, open questions or ceremonial fields. Omit irrelevant blocks instead of filling them with placeholders or speculative detail.
 
 Keep the contract outside any directory the host serves publicly unless the owner decides the strategy is public.
 

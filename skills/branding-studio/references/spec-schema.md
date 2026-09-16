@@ -40,7 +40,7 @@ Do not persist:
 
 ## Provenance as `basis`
 
-When a clause depends on a fact that a future operator might otherwise overturn for the wrong reason, attach `basis`: one sentence stating the fact, with its source only when the source is inspectable. Attach it to the clause, not to a separate table; no IDs, no references.
+When a clause depends on a fact that a future operator might otherwise overturn for the wrong reason, attach `basis`: one sentence stating the fact, with its source only when the source is inspectable. A basis records something you inspected or the owner supplied, never a plausible-sounding figure; if it is a hypothesis, the sentence says so. Attach it to the clause, not to a separate table; no IDs, no references.
 
 ```json
 "right_to_win": {
