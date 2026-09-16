@@ -21,6 +21,10 @@ Not every brand needs every dimension. Omit inactive mechanisms instead of filli
 
 A system is stronger when different artifacts can vary substantially while still sharing an intelligible logic.
 
+Name every element by its role in the system, never by its origin, its source institution or what it looks like: the green that marks the network is the network green, not the university green. Names travel into every document, so confirm them with the owner at direction ratification, before any document uses them. A coined term must not collide with a standard name in this skill (voice, signature, thesis, principle).
+
+Every application has a hero moment where the signature performs at full force; scale contrast, whitespace and cropping are decisions there, not defaults. Resolve force and hierarchy first, compliance second: a compliant artifact nobody would stop to look at has failed.
+
 ## 2. Logo, wordmark and signature
 
 Treat the logo as one asset inside the system, not the explanation for the whole brand.
@@ -61,8 +65,6 @@ Define behavior that materially constrains production: subject, framing, crop, p
 
 For icons, define semantic clarity, construction logic, stroke/fill behavior, optical size and accessibility. Use a grid only when it improves the system.
 
-Generated imagery can support exploration or production when rights/process permit it; visual novelty is not evidence of legal uniqueness or brand ownership.
-
 ## 6. Composition and spatial behavior
 
 Specify relationships rather than frozen layouts: alignment, margin behavior, density, symmetry/asymmetry, image/type interaction, dominant axes, cropping logic, responsive behavior and recurring spatial devices when relevant.
@@ -79,7 +81,7 @@ Sound or sensory elements require a functional/recognition role and production c
 
 ## 8. Test family resemblance and range
 
-Create representative applications with different jobs and stresses. Do not reuse one hero composition as proof of system breadth.
+Start from the declared touchpoints: each is made and seen in the context where it lives. Add applications with different jobs and stresses until range is proven. Do not reuse one hero composition as proof of system breadth.
 
 Ask:
 - Can the brand be recognized when the logo is not dominant?
@@ -101,16 +103,4 @@ Inspect at macro, meso and micro levels.
 
 **Micro:** kerning, optical alignment, curves, joins, line endings, crop edges, icon consistency, spacing, production details and accessible states.
 
-A system is not finished merely because it is internally consistent.
-
-## 10. Adversarial quality review
-
-Before finalizing, look specifically for counterfeit quality:
-- Which decision is only signaling `premium`, `modern`, `innovative`, `timeless` or `creative` rather than producing it?
-- Which important choice has weak causal dependence on this brand?
-- Where did repetition replace coherent variation?
-- Where did mockup polish hide a weak system?
-- Where is novelty adding cost without meaning?
-- Which rule exists because a template expected one rather than because future work needs it?
-
-Repair the underlying property. Do not ban a surface form simply because it is common.
+A system is not finished merely because it is internally consistent. Before finalizing, hunt the counterfeit list in `SKILL.md` against the rendered work and repair the underlying property rather than banning a surface form.

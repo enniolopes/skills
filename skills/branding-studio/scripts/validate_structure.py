@@ -4,8 +4,9 @@
 The validator proves only structural/technical properties that can be decided from the
 file itself. It does not score strategy, creativity, meaning, distinctiveness or craft.
 
-Schema v4 is the sparse canonical contract. Legacy v3/pre-v3 specs remain operable and
-are validated only for compatible machine-checkable properties.
+Schema 5 is the sparse canonical contract: an instrument with no lifecycle fields.
+Legacy schema-4/v3/pre-v3 specs remain operable and are validated only for compatible
+machine-checkable properties.
 """
 
 from __future__ import annotations
@@ -20,7 +21,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from color_tools import check_pair  # noqa: E402
 
 
-SCHEMA_VERSION = 4
+SCHEMA_VERSION = 5
+LEGACY_SCHEMA_VERSIONS = {4}
+LEDGER_KEYS = {"evidence", "history", "changelog", "decisions", "open_questions", "unresolved", "log"}
 VALID_TIERS = {"provisional", "full"}
 VALID_EVIDENCE_KINDS = {"fact", "observation", "hypothesis"}
 VALID_EVIDENCE_STATES = {"active", "challenged", "superseded"}
@@ -172,9 +175,7 @@ def _validate_evidence(findings, require_ids, failures, warnings, passed):
 
         checked += 1
 
-    if checked:
-        passed.append(f"evidence records structurally checked: {checked}")
-    elif findings:
+    if findings and not checked:
         warnings.append("evidence list exists but has no usable records")
     return ids
 
@@ -307,25 +308,7 @@ def _validate_optional_enums(spec, failures, passed):
                 passed.append(f"naming clearance state declared: {status}")
 
 
-def _validate_portfolio_projection(spec, failures, passed):
-    color = _get(spec, "portfolio_summary.primary_color_oklch")
-    if color is None:
-        return
-    if not isinstance(color, dict):
-        failures.append("portfolio_summary.primary_color_oklch must be an object or null")
-        return
-    try:
-        values = [float(color[key]) for key in ("L", "C", "H")]
-    except (KeyError, TypeError, ValueError):
-        failures.append("portfolio_summary.primary_color_oklch requires numeric L, C and H")
-        return
-    if not (0 <= values[0] <= 1 and values[1] >= 0 and 0 <= values[2] <= 360):
-        failures.append("portfolio_summary.primary_color_oklch values out of range")
-    else:
-        passed.append("portfolio OKLCH projection is structurally valid (H=0 is valid)")
-
-
-def _validate_v4(spec, failures, warnings, passed):
+def _validate_current(spec, failures, warnings, passed):
     tier = str(_get(spec, "meta.tier", "")).strip().lower()
     if tier not in VALID_TIERS:
         failures.append("meta.tier must be provisional or full")
@@ -342,6 +325,7 @@ def _validate_v4(spec, failures, warnings, passed):
     required_strings = (
         "strategy.brand_job.statement",
         "strategy.audience.primary",
+        "strategy.audience.language",
         "strategy.offer_truth.statement",
         "strategy.position.statement",
         "strategy.right_to_win.statement",
@@ -357,33 +341,34 @@ def _validate_v4(spec, failures, warnings, passed):
     if not _nonempty_list(principles):
         failures.append("creative_direction.principles must contain at least one operating principle")
 
-    findings = _get(spec, "evidence", [])
-    ids = _validate_evidence(findings, True, failures, warnings, passed)
-    _validate_evidence_refs(spec, ids, failures)
+    ledger = sorted(LEDGER_KEYS.intersection(spec))
+    if ledger:
+        failures.append(
+            "contract is an instrument, not a ledger; remove top-level record blocks: " + ", ".join(ledger)
+        )
+
     _validate_tokens_and_contrast(spec, failures, warnings, passed)
     _validate_typography(spec, failures, passed)
     _validate_logo(spec, tier, failures, warnings, passed)
     _validate_optional_enums(spec, failures, passed)
-    _validate_portfolio_projection(spec, failures, passed)
 
 
-def _validate_legacy(spec, major, failures, warnings, passed):
+def _validate_legacy(spec, label, findings, require_ids, failures, warnings, passed):
     warnings.append(
-        f"legacy v{major or 'pre-versioned'} contract accepted; compress to sparse schema v4 on the next meaningful CREATE/EVOLVE operation"
+        f"legacy {label} contract accepted; compress to sparse schema {SCHEMA_VERSION} on the next meaningful CREATE/EVOLVE operation"
     )
 
     tier = str(_get(spec, "meta.tier", "")).strip().lower()
     if tier and tier not in VALID_TIERS:
         failures.append("meta.tier must be provisional or full when declared")
 
-    findings = _get(spec, "research.findings")
-    require_ids = major >= 3
-    _validate_evidence(findings, require_ids, failures, warnings, passed)
+    ids = _validate_evidence(findings, require_ids, failures, warnings, passed)
+    if require_ids:
+        _validate_evidence_refs(spec, ids, failures)
     _validate_tokens_and_contrast(spec, failures, warnings, passed)
     _validate_typography(spec, failures, passed)
     _validate_logo(spec, tier, failures, warnings, passed)
     _validate_optional_enums(spec, failures, passed)
-    _validate_portfolio_projection(spec, failures, passed)
 
 
 def validate(spec):
@@ -402,17 +387,28 @@ def validate(spec):
         failures.append("meta.version must be semantic version x.y.z")
 
     schema_version = _schema_version(spec)
-    if schema_version is not None:
-        if schema_version != SCHEMA_VERSION:
-            failures.append(
-                f"meta.schema_version={schema_version} is unsupported by this validator; expected {SCHEMA_VERSION}"
-            )
-        else:
-            passed.append(f"brand-spec schema version detected: {schema_version}")
-            _validate_v4(spec, failures, warnings, passed)
+    if schema_version == SCHEMA_VERSION:
+        passed.append(f"brand-spec schema version detected: {schema_version}")
+        _validate_current(spec, failures, warnings, passed)
+    elif schema_version in LEGACY_SCHEMA_VERSIONS:
+        _validate_legacy(
+            spec, f"schema {schema_version}", _get(spec, "evidence"), True, failures, warnings, passed
+        )
+    elif schema_version is not None:
+        failures.append(
+            f"meta.schema_version={schema_version} is unsupported by this validator; expected {SCHEMA_VERSION}"
+        )
     else:
         legacy_major = _major(brand_version)
-        _validate_legacy(spec, legacy_major, failures, warnings, passed)
+        _validate_legacy(
+            spec,
+            f"v{legacy_major or 'pre-versioned'}",
+            _get(spec, "research.findings"),
+            legacy_major >= 3,
+            failures,
+            warnings,
+            passed,
+        )
 
     return {
         "verdict": "STRUCTURALLY_INVALID" if failures else "STRUCTURALLY_VALID",

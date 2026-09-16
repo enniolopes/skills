@@ -9,9 +9,9 @@
     {
       "name": "branding-studio",
       "source": "./skills/branding-studio",
-      "version": "2.5.0",
+      "version": "3.0.0",
       "strict": false,
-      "description": "Autonomous brand steward: create, apply, audit and evolve brands with verification scaled to consequence."
+      "description": "Autonomous brand steward: create, apply, audit and evolve brands; direction shown before building, touchpoints seen where they live, brand book served as a touchpoint."
     },
     {
       "name": "explorer",
