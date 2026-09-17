@@ -10,7 +10,37 @@ ROOT = REPO_ROOT / "skills" / "branding-studio"
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import asset_checks
+import book_checks
 import validate_structure
+
+
+BOOK = """<!doctype html><html lang="pt-BR"><head><title>Manual</title>
+<style>
+@font-face {{ font-family: X; src: url(data:font/woff2;base64,AAAA); }}
+@media print {{ body {{ margin: 0; }} }}
+.cover {{ background: url("logo/marca.svg"); }}
+</style></head><body>
+<img src="logo/marca.svg" alt="Marca principal">
+<img srcset="foto/prato.jpg 1x, foto/prato%202x.jpg 2x" src="foto/prato.jpg" alt="Prato">
+<a href="logo/marca.svg" download>Baixar</a>
+<a href="https://example.org/licenca">Licença</a>
+{extra}
+</body></html>"""
+
+SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect width="10" height="10"/></svg>'
+
+
+def write_package(root: Path, extra: str = "", orphan: bool = False, contract: bool = False):
+    (root / "logo").mkdir()
+    (root / "foto").mkdir()
+    (root / "logo" / "marca.svg").write_text(SVG)
+    (root / "foto" / "prato.jpg").write_bytes(b"\xff\xd8\xff")
+    (root / "foto" / "prato 2x.jpg").write_bytes(b"\xff\xd8\xff")
+    (root / "index.html").write_text(BOOK.format(extra=extra))
+    if orphan:
+        (root / "foto" / "antiga.jpg").write_bytes(b"\xff\xd8\xff")
+    if contract:
+        (root / "brand-spec.json").write_text(json.dumps({"meta": {"schema_version": 5}}))
 
 
 def valid_spec():
@@ -92,6 +122,39 @@ class BrandingStudioScriptTests(unittest.TestCase):
             "visual": {"typography": {"hierarchy": {"mode": "custom", "rules": ["Explicit relationship"]}}},
         }
         self.assertEqual(validate_structure.validate(legacy)["verdict"], "STRUCTURALLY_VALID")
+
+    def test_self_contained_package_is_valid(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write_package(Path(tmp))
+            report = book_checks.inspect_folder(tmp)
+        self.assertEqual(report["verdict"], "PACKAGE_VALID", report["failures"])
+        self.assertEqual(report["counts"]["images"], 2)
+
+    def test_package_defects_are_each_named(self):
+        extra = (
+            '<script src="app.js"></script>'
+            '<link rel="stylesheet" href="https://fonts.example/css">'
+            '<img src="/foto/prato.jpg">'
+            '<img src="foto/nada.jpg" alt="">'
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            write_package(Path(tmp), extra=extra, orphan=True, contract=True)
+            report = book_checks.inspect_folder(tmp)
+        self.assertEqual(report["verdict"], "PACKAGE_INVALID")
+        joined = "\n".join(report["failures"])
+        for expected in ("scripts found", "external requests", "absolute paths",
+                         "unresolved references", "without alt", "contract served",
+                         "never reaches"):
+            self.assertIn(expected, joined)
+        self.assertTrue(any("empty alt" in w for w in report["warnings"]))
+
+    def test_missing_print_stylesheet_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write_package(Path(tmp))
+            html = (Path(tmp) / "index.html").read_text().replace("@media print", "@media screen")
+            (Path(tmp) / "index.html").write_text(html)
+            report = book_checks.inspect_folder(tmp)
+        self.assertTrue(any("print stylesheet" in f for f in report["failures"]))
 
     def test_raster_content_blocks_svg_master(self):
         svg = '<svg xmlns="http://www.w3.org/2000/svg"><image href="data:image/png;base64,AAAA"/></svg>'

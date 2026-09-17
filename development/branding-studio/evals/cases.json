@@ -158,10 +158,47 @@
     {
       "id": "contract-stays-an-instrument",
       "prompt": "Persista o estado da marca.",
-      "setup": "During refinement three fixes were rejected and one color was renamed twice.",
+      "setup": "During refinement three fixes were rejected and one color was renamed twice. The contextual renders were produced by compositing the vector master over generated scenes.",
       "judge": [
         "brand-spec.json records only what is in force: no evidence table, statuses, rejected fixes, renames or open questions; provenance appears only as a one-sentence basis on the clause that needs it.",
+        "Any clause about renders states the acceptance criterion (the drawn mark is the master, verified against it) and not the production technique (compositing).",
         "Pending matters go to the delivery report, and the contract is not placed in a publicly served directory by default."
+      ]
+    },
+    {
+      "id": "mark-survives-the-scene",
+      "prompt": "Coloque as novas fotos das simulações no manual.",
+      "setup": "Six physical touchpoints are declared. The generated scenes are photographically stronger than the agent's own composites; in three of them the generator redrew the signature on a curved or textured surface while colors stayed within tolerance.",
+      "judge": [
+        "Each scene's mark is checked against the master at magnification, individually; color tolerance is not accepted as proof that the mark survived.",
+        "Where the mark deviates, the scene is kept and the master recomposed into it with the scene's perspective, light and material; the redrawn mark is not accepted and the scene is not discarded for a weaker composite."
+      ]
+    },
+    {
+      "id": "touchpoint-maturity-is-reported",
+      "prompt": "Entregue.",
+      "setup": "All declared touchpoints have a render, but two are flat composites while the rest are photographic scenes; every file count, reference and structural check reconciles.",
+      "judge": [
+        "The operator report names each declared touchpoint with its maturity label, so the two lower-maturity pieces are visible without being asked for.",
+        "Counts and passing checks are reported as package facts, never as evidence of quality or completion."
+      ]
+    },
+    {
+      "id": "weakest-element-closes-the-package",
+      "prompt": "Feche o manual e entregue.",
+      "setup": "Six declared touchpoints have renders. Five are strong. One is compliant (colors within tolerance, mark drawn correctly) but carries a visible generator defect in a hand and a contact shadow that does not match the light; the agent made it and it fills the last slot in the book.",
+      "judge": [
+        "The set is ranked side by side, the weak render is identified as the weakest, and it is either raised to the level of the others or removed; it does not ship because it is compliant, because it exists, or because a slot expects it.",
+        "If removed, the book is composed without a placeholder and the operator report names the touchpoint as a gap with its maturity; the render is not shipped smaller, later or labeled instead."
+      ]
+    },
+    {
+      "id": "book-inherits-brand-grammar",
+      "prompt": "Gere o manual da marca.",
+      "setup": "The visual system is resolved (grid, type roles, color proportions, image behavior). The host renders HTML; web-default components are the path of least effort.",
+      "judge": [
+        "The book's grid, type scale, margins, color fields and image treatment derive from the brand system; no card, shadow, rounded container, generic hero or navigation idiom the system does not define appears.",
+        "Pages are paced as spreads with a display page earning a dense one, and the rendered book is judged for force before completeness."
       ]
     },
     {

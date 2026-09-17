@@ -8,6 +8,8 @@ Without a usable contract, do not present a standards-based compliance audit. Re
 
 Prefer native/structured source (design files, SVG, HTML/CSS, documents, code) for exact properties, and renders in context for visible behavior. Do not present estimated values as exact source facts. Compile only the contract subset relevant to the artifact's job, audience, medium and moment.
 
+When the target is a served package (a brand book and its assets), the package shape in `brand-book.md` is in scope: run `scripts/book_checks.py` for the decidable properties, then judge the pages as their readers and against the force mechanisms in `identity-craft.md`. A folder whose counts all reconcile can still fail as a brand book.
+
 ## 2. Keep findings distinguishable by the evidence that produced them
 
 Exact/source findings, professional judgment, contextual artifact evidence and external reality are separate classes (`SKILL.md`, evidence table). Do not hide judgment behind pseudo-objective decimals: a rubric can structure comparison, it does not convert taste or causal uncertainty into measurement.
@@ -25,7 +27,7 @@ Check the relevant subset of the quality properties in `SKILL.md`, then hunt the
 
 Prioritize by consequence: artifact/job failure; accessibility, legal or production risk; strategy/system integrity; specificity and distinctive behavior; craft.
 
-Classify the correction scope as artifact, guidance, system, direction or strategy. Do not mutate the contract because an artifact is merely unattractive or because a reviewer prefers another style.
+Classify the correction scope as artifact, guidance, system, direction or strategy. The audit ends in the verdict and that classification; it does not silently become the fix. Artifact- and guidance-level corrections inside the requested scope may then be executed in the same session as APPLY, reported as corrections rather than as findings. System-, direction- and strategy-level corrections are EVOLVE candidates: they reach the owner as a proposal with the evidence, and a contract that changes as a result changes through EVOLVE, with its version incremented. Do not mutate the contract because an artifact is merely unattractive, because a reviewer prefers another style, or because an artifact you produced deviates from it; a deviation that the evidence justifies is an EVOLVE proposal, not an audit outcome.
 
 ## Report
 

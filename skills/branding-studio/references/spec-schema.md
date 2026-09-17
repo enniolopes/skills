@@ -51,6 +51,10 @@ When a clause depends on a fact that a future operator might otherwise overturn 
 
 Prefer concise causal language over a rationale on every object. Most clauses need no `basis`.
 
+## Criteria, not techniques
+
+For anything the brand produces repeatedly (a contextual render, a lockup export, a piece of copy), the contract persists the acceptance criterion, never the production technique: what must hold in the result and how a future operator verifies it. A criterion survives a change of tool; a technique becomes false the day the capability changes, and a contract that records one forces a rewrite or, worse, a compliant regression. When a criterion cannot be automated, the clause may say why in one sentence, so that nobody replaces it with a check that measures the wrong thing.
+
 ## Strategy and direction fields
 
 - `brand_job` — the business/organizational transition the brand must help produce; not a mission statement.
@@ -70,7 +74,7 @@ Examples of legitimate keys when needed:
 - `verbal.principles`, `verbal.tone_by_moment`, `verbal.message_behavior`, `verbal.excludes`;
 - `visual.identity_grammar`, `visual.typography`, `visual.palette`, `visual.logo`, `visual.imagery`, `visual.iconography`, `visual.composition`, `visual.motion`, `visual.tokens`, `visual.contrast_pairs`.
 
-Name every element by its role in the system, never by its origin or appearance. A token or palette entry carries the role as its key and the reader-facing name, in the audience's language, in `name`; renaming is then one edit.
+A token or palette entry carries its role (`identity-craft.md`, naming of elements) as its key and the reader-facing name, in the audience's language, in `name`; renaming is then one edit.
 
 ```json
 "green": { "$type": "color", "$value": "#1F6E43", "name": "Verde Rede" }
@@ -93,7 +97,7 @@ For production assets such as a logo, use explicit status when needed:
 - `concept` — direction exists but production remains unresolved;
 - `external_craft_required` — specialist execution is needed and acceptance criteria/brief should be supplied.
 
-This is the current state of an asset, not a history. Do not promote raster or generated concepts to `final` because they look polished.
+This is the current state of an asset, not a history; what earns `final` is owned by `visual-artifact-production.md`.
 
 ## Machine-checkable structures
 

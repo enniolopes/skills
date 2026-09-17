@@ -11,13 +11,13 @@ This reference owns the production loop. `identity-craft.md` owns the visual sys
 3. **Source is not mockup.** A contextual render tests scale, material and environment; it does not replace the master or application source.
 4. **Rendered output is the evidence.** File validity, layer structure or successful tool execution cannot establish hierarchy, optical quality, composition or brand fit.
 5. **The first successful build starts refinement.**
-6. **Capability limits change maturity, not the quality bar.** When no available surface can realize the direction honestly, deliver the strongest truthful lower-maturity state and expose the blocker.
+6. **Capability limits change scope and maturity, not the quality bar.** When no available surface can bring an element to the floor, the element leaves the reader-facing package and the operator report carries it as a named gap with its maturity and blocker. Lower-maturity work is never placed beside finished work in the same artifact (`SKILL.md`, PACKAGE).
 
 ## Produce the real artifact
 
-- **Logo, wordmark, symbol or lockup:** construct final geometry in a controlled vector path, refine optically, test scale, monochrome and reversal behavior, and keep only variants real use requires. A generated or traced raster concept is not a final master.
+- **Logo, wordmark, symbol or lockup:** construct final geometry in a controlled vector path, refine optically, test scale, monochrome and reversal behavior, and keep only variants real use requires. This is the one owner of the master boundary: a generated or traced raster concept is never a final master, however polished, and `final` is earned only when the available production path reproduces the master and the result has been looked at.
 - **Board:** compose a visual argument, not an image dump: signature at full force on a declared touchpoint, type on real words, color at scale, one dense and one expressive application. Boards for different lineages use the same touchpoints and content so they can be compared.
-- **Brand application:** real or representative content, dimensions and constraints. Build the application, then see it where it lives: every declared touchpoint gets at least one contextual render, and one left unrendered is a named gap with a lowered maturity label.
+- **Brand application:** real or representative content, dimensions and constraints. Build the application, then see it where it lives (`SKILL.md`, TEST IN USE); a physical touchpoint's scene follows `visual-production.md`, contextual scenes.
 - **Brand book:** `brand-book.md` for what it must teach and how it is shaped; then design the actual pages with deliberate hierarchy, pacing and sequencing. Content completeness is not visual completion.
 - **Motion:** an inspectable time-based path; judge timing, transition, hierarchy and reduced-motion behavior. A storyboard is a concept unless it is the requested deliverable.
 
@@ -25,12 +25,14 @@ This reference owns the production loop. `identity-craft.md` owns the visual sys
 
 `MAKE → RENDER → LOOK → CRITIQUE → REFINE → LOOK AGAIN`
 
-Looking means capturing the rendered artifact at the scale and on the surface where its reader will meet it, and reading the capture as that reader. A document: desktop, phone and print. A physical touchpoint: a scene that shows material, distance and light, composited or generated. A screen: the real viewport. A browser render measures; it does not substitute for the object in context.
+Looking means capturing the rendered artifact at the scale and on the surface where its reader will meet it, and reading the capture as that reader. A document: desktop, phone and print. A physical touchpoint: a scene that shows material, distance and light. A screen: the real viewport.
 
-Prove representative slices before scaling: the core mark before a logo suite, a spread before a full book, one expressive and one dense application before a template family. Judge with the macro/meso/micro criteria in `identity-craft.md`; fix the largest causal defect first; reopen system or direction only when the artifact exposes a recurring upstream problem.
+Then look where a human eye is expert without training and a model's reading is weakest: crops at 100% and 200% of hands, faces, letters, the mark's edges, contact shadows, reflections and transitions of material. A defect there is detected by any reader before they know why, and it disqualifies the render whatever its composition. Judge in comparison rather than in the absolute whenever a set exists: which of these is the weakest, and why, is a reliable question; is this one good is not.
+
+Prove representative slices before scaling: the core mark before a logo suite, a spread before a full book, one expressive and one dense application before a template family. Judge force first and then the macro/meso/micro criteria, both in `identity-craft.md`. Within one artifact, fix the largest causal defect first; across a set, raise the weakest element first, because the set is read at the level of its weakest. Reopen system or direction only when the artifact exposes a recurring upstream problem.
 
 ## Completion gate
 
 Do not claim a material visual deliverable final while it is only described, prompted or represented by a mockup; while the claimed master cannot be reproduced through the available path; while a central asset remains placeholder-quality; while nobody has looked at the rendered result or looking exposed a known material defect; while the work does not hold beside the bar named at direction; or while it depends on an unavailable capability with no equal-quality alternative.
 
-Deliver the artifact at the highest truthful maturity, plus only the source, exports and contextual views future use genuinely needs.
+Deliver the artifact at the highest truthful maturity that clears the floor, plus only the source, exports and contextual views future use genuinely needs.

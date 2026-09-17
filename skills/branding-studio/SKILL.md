@@ -3,7 +3,7 @@ name: branding-studio
 description: "Autonomous brand steward for creating, applying, auditing and evolving brands. Use for branding, naming, identity, logo, positioning, touchpoints, brand books, audits and rebrands. Reply in the user's language."
 license: CC-BY-NC-4.0
 metadata:
-  version: 3.0.0
+  version: 3.1.0
 ---
 
 # Branding Studio
@@ -66,9 +66,9 @@ When generated or edited raster imagery is material to the direction, load `refe
 ### TEST IN USE
 Test the declared touchpoints. `meta.touchpoints` is the list of applications to make: each gets at least one render in the context where it lives (a photographic or composited scene for a physical object, a real screen for a digital one), plus whatever further stresses (dense/expressive, small/large, static/motion) the system needs to prove range.
 
-A browser render measures. It does not substitute for seeing the object where people will meet it. A touchpoint left unrendered is a named gap in delivery with a lowered maturity label, never a silent omission.
+A browser render measures. It does not substitute for seeing the object where people will meet it. A touchpoint left unrendered is a named gap in delivery with a lowered maturity label, never a silent omission. A render made here exists to expose problems; whether it reaches a reader is decided in PACKAGE by the minimum rule, never by the fact that it exists.
 
-Material visual deliverables must be made and inspected, not merely specified. Load `references/visual-artifact-production.md`. Judge force and hierarchy before compliance: an artifact that is correct but that nobody would stop to look at has failed.
+Material visual deliverables must be made and inspected, not merely specified. Load `references/visual-artifact-production.md`. Judge force before compliance, with the mechanisms in `references/identity-craft.md`: an artifact that is correct but that nobody would stop to look at has failed.
 
 One-off failure stays local. Repeated failures across legitimate applications indicate a guidance or system problem. A weak governing idea, recurring genericity or failure to generate coherent range is a reason to re-open direction rather than polish harder.
 
@@ -87,7 +87,9 @@ The package is two things: the brand book, a served touchpoint of the brand itse
 
 Everything a reader sees is in the audience's language. Nothing from the process—contract versions, evidence, open questions, schema, file names, route names—reaches a published artifact.
 
-Before delivery ask: if this brand were created today, exactly like this, what in these files would not need to exist? Remove it.
+The reader judges the package by its weakest visible element, because every element is evidence about the judgment behind all the others: a strong one is ambiguous evidence, a weak one is conclusive. A package is therefore closed by a minimum, never by an average or by coverage. As the last pass, put every visible element side by side, name the weakest, and raise it to the level of the next or remove it; repeat until the weakest holds beside the bar named at direction. A removed element is a named gap in the operator report, and it costs less than the trust a weak element destroys. Lower-maturity work never sits beside finished work in the same artifact. When an independent context is available, have it rank the set blind, without the rationale; the maker ranks own work leniently.
+
+Then ask: if this brand were created today, exactly like this, what in these files would not need to exist? Remove it.
 
 ## Resolve uncertainty with the right evidence
 
@@ -135,6 +137,7 @@ Reject counterfeit quality:
 - style signals are not specificity, distinctiveness, premium quality or timelessness;
 - repetition is not coherence or recognizability;
 - mockup polish is not system performance;
+- coverage is not quality: a visible element below the floor is worse than the gap it fills;
 - generated spectacle is not relevance or art direction;
 - research volume is not insight;
 - a defensible rationale is not a direction anyone has seen.
@@ -152,7 +155,7 @@ A familiar mechanism remains valid when the brief independently earns it. Constr
 
 For an existing identity with no spec, reconstruct what is already true and valuable before changing it. Absence of a spec is not evidence that the brand needs redesign. A reframe by the owner re-routes.
 
-Load `references/creative-direction.md` when creating or materially reopening expression; `references/identity-craft.md` for visual identity/system craft; `references/visual-artifact-production.md` when a material designed visual artifact must be produced and judged from the artifact itself; `references/visual-production.md` when generated or edited raster imagery is material to exploration, a touchpoint render or the deliverable; `references/verbal-identity.md` when proposition, messaging, voice/tone or a broader verbal identity is in scope; `references/naming.md` when naming is in scope; `references/brand-book.md` when guidelines or a brand book are deliverables; `references/knowledge.md` when evidence strength/current facts/methodology need calibration; and `references/spec-schema.md` when canonical state is created or changed.
+The stages above name the reference each one loads. Beyond those: `references/identity-craft.md` whenever visual system or craft is judged; `references/verbal-identity.md` and `references/naming.md` when verbal identity or naming is in scope; `references/knowledge.md` when evidence strength, current facts or methodology need calibration.
 
 For APPLY/AUDIT, compile the smallest relevant subset of state.
 
@@ -171,10 +174,11 @@ Tool availability is not production proof. Capability limits may lower the matur
 Seeing is done by rendering and looking: at representative scale, on the surfaces the reader will use, as each named reader. Deterministic tools establish only the exact properties code can decide:
 - `scripts/validate_structure.py spec.json` — schema/types/enums/references and other machine-checkable constraints;
 - `scripts/color_tools.py ...` — exact color/contrast calculations for any text role on any background it appears on, in the brand and in the brand book itself;
-- `scripts/asset_checks.py logo.svg` — deterministic SVG production checks.
+- `scripts/asset_checks.py logo.svg` — deterministic SVG production checks;
+- `scripts/book_checks.py <served-folder>` — the decidable properties of a served brand-book package: self-containment, resolvable relative references, alt text, orphan files, print stylesheet, no contract inside the folder.
 
-Do not label a master `final` until the available production path can reproduce it and you have looked at the result.
+What earns a master the label `final` is owned by `references/visual-artifact-production.md`.
 
 ## Delivery
 
-Two channels. The artifact carries only what its reader needs, in the reader's language. The report to the operator carries the committed recommendation, concise rationale where it improves future judgment, the verification actually performed, and material unresolved truth/authority/reality/craft/capability dependencies. Nothing from the second channel enters the first. Do not return internal exploration transcripts.
+Two channels. The artifact carries only what its reader needs, in the reader's language. The report to the operator carries the committed recommendation, concise rationale where it improves future judgment, the verification actually performed, and material unresolved truth/authority/reality/craft/capability dependencies. Every declared touchpoint appears in the report with its maturity label, including those the minimum rule kept out of the package, so nothing is one rung below the others without the operator knowing; counts of files, renders or passing checks describe the package, never its quality. Nothing from the second channel enters the first. Do not return internal exploration transcripts.

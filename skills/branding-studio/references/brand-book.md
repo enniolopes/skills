@@ -16,7 +16,7 @@ Name the actual readers before writing, from the audience and the owner's operat
 
 **Reference** — exact values, inventories, lockup variants, minimum sizes, contrast pairs, downloads. Derived from the contract and from the asset folder, never retyped, and never invented: a number appears only where reproduction depends on it and the contract holds it, not to make the book feel authoritative. An inventory or download grid is generated from the folder; the readable name of an asset comes from the asset itself (its title), not from a second list. Every enumeration in the book matches the folder it describes.
 
-**How-to** — one imperative rule per task, with the reason in a visually secondary layer and the optional variation last. Titles predict content: someone who has read nothing else knows what a section holds. Every term is defined at first use or replaced by a plain one; design jargon is glossed where it first appears; no coined term appears in a title, and no coined term collides with a standard name in this skill (voice, signature, thesis).
+**How-to** — one imperative rule per task, with the reason in a visually secondary layer and the optional variation last. Titles predict content: someone who has read nothing else knows what a section holds. Every term is defined at first use or replaced by a plain one; design jargon is glossed where it first appears; no coined term appears in a title. Element names are the ones fixed at direction (`identity-craft.md`).
 
 **Explanation** — the causal chain `brand job → position → thesis → principles → behavior`, compact, separable from the rules. This is the only layer where the brand's voice may lead the prose, and only if the organization genuinely uses one.
 
@@ -26,7 +26,11 @@ Cover only the dimensions the system actually has; no empty section exists to re
 
 The design layer demonstrates the system at the level of the best work in adjacent categories: a cover with the signature at full force, type specimens at display scale, full-bleed color fields, illustration and imagery at the size they were made for, range pages that show two very different applications sharing one logic, and a failure page that explains the mechanism of a wrong use rather than banning a placement.
 
-Do not sacrifice clarity to self-expression, and do not deliver a generic corporate document that contradicts the identity it describes. Use `visual-artifact-production.md` to build, render and refine the actual pages.
+The book's page grammar is an application of the brand grammar, not of the medium's defaults. Grid, type scale, margins, color fields and image treatment derive from the system; a component the system does not define (a card, a shadow, a rounded container, an icon set, a centered hero block, a generic navigation bar) does not enter because the medium makes it easy. Any element that would look at home on an unrelated brand's website is a defect. The book is paced as spreads, not as a feed of equal sections: a display page earns the dense page that follows it, and a reader scrolling or turning pages feels the rhythm of the identity itself.
+
+**Admission.** No image enters the book because it exists. A render from TEST IN USE was made to expose problems; it is admitted only by a separate decision with the showpiece bar: would the strongest identity named as the bar publish this image, at this size, in its own book? The layout follows the admitted images; the book has no slot per touchpoint waiting to be filled. Fewer, larger images beat complete coverage. A touchpoint with no admitted image is taught by its rules and reported to the operator as a gap, never illustrated by a weaker image. A book is an argument that these rules produce good work, and one weak image inside it is a counter-example printed in the argument.
+
+Do not sacrifice clarity to self-expression, and do not deliver a generic corporate document that contradicts the identity it describes. Use `visual-artifact-production.md` to build, render and refine the actual pages, and judge them with the force mechanisms in `identity-craft.md` before judging their completeness.
 
 ## 4. Package shape
 
@@ -39,9 +43,11 @@ One folder the host already serves statically (for example the public directory 
 
 Folder and path names follow the audience's language or the host's convention. The contract lives outside the served folder unless the owner decides the strategy is public. If the host needs a README, it is a one-line pointer to the book; every rule has exactly one address.
 
+`scripts/book_checks.py <folder>` decides the mechanical part of this shape: no scripts or external requests, every relative reference resolving inside the folder, every image with alt text, no file the book does not reach, a print stylesheet present, no contract inside the folder. Run it before looking; it establishes nothing about what the pages teach or how they look.
+
 ## 5. Verify by looking
 
-Render the book on desktop, on a phone and as print, and look at each capture as each named reader: can the supplier find the file they need, can the operator apply a rule without asking, would the designer make a materially different correct application from it? Check the contrast of every text role on every background it appears on with `color_tools.py` when the eye suspects; check every count against the folder; check that nothing from the process is visible. Fix, re-render, look again.
+Render the book on desktop, on a phone and as print, and look at each capture as each named reader: can the supplier find the file they need, can the operator apply a rule without asking, would the designer make a materially different correct application from it? Check the contrast of every text role on every background it appears on with `color_tools.py` when the eye suspects; check that nothing from the process is visible. Every statement the book makes about an asset is a projection of that asset and is verified against it: a count against the folder, a caption or alt text against the image it sits under, a description of how a render was made against the render. When a render is replaced, every such statement is re-verified. Fix, re-render, look again.
 
 If a guideline repeatedly needs exceptions, fix the system or rewrite the rule instead of documenting more cases.
 
