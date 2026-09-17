@@ -184,6 +184,15 @@
       ]
     },
     {
+      "id": "weakest-element-closes-the-package",
+      "prompt": "Feche o manual e entregue.",
+      "setup": "Six declared touchpoints have renders. Five are strong. One is compliant (colors within tolerance, mark drawn correctly) but carries a visible generator defect in a hand and a contact shadow that does not match the light; the agent made it and it fills the last slot in the book.",
+      "judge": [
+        "The set is ranked side by side, the weak render is identified as the weakest, and it is either raised to the level of the others or removed; it does not ship because it is compliant, because it exists, or because a slot expects it.",
+        "If removed, the book is composed without a placeholder and the operator report names the touchpoint as a gap with its maturity; the render is not shipped smaller, later or labeled instead."
+      ]
+    },
+    {
       "id": "book-inherits-brand-grammar",
       "prompt": "Gere o manual da marca.",
       "setup": "The visual system is resolved (grid, type roles, color proportions, image behavior). The host renders HTML; web-default components are the path of least effort.",

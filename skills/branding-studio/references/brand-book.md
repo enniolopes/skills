@@ -28,6 +28,8 @@ The design layer demonstrates the system at the level of the best work in adjace
 
 The book's page grammar is an application of the brand grammar, not of the medium's defaults. Grid, type scale, margins, color fields and image treatment derive from the system; a component the system does not define (a card, a shadow, a rounded container, an icon set, a centered hero block, a generic navigation bar) does not enter because the medium makes it easy. Any element that would look at home on an unrelated brand's website is a defect. The book is paced as spreads, not as a feed of equal sections: a display page earns the dense page that follows it, and a reader scrolling or turning pages feels the rhythm of the identity itself.
 
+**Admission.** No image enters the book because it exists. A render from TEST IN USE was made to expose problems; it is admitted only by a separate decision with the showpiece bar: would the strongest identity named as the bar publish this image, at this size, in its own book? The layout follows the admitted images; the book has no slot per touchpoint waiting to be filled. Fewer, larger images beat complete coverage. A touchpoint with no admitted image is taught by its rules and reported to the operator as a gap, never illustrated by a weaker image. A book is an argument that these rules produce good work, and one weak image inside it is a counter-example printed in the argument.
+
 Do not sacrifice clarity to self-expression, and do not deliver a generic corporate document that contradicts the identity it describes. Use `visual-artifact-production.md` to build, render and refine the actual pages, and judge them with the force mechanisms in `identity-craft.md` before judging their completeness.
 
 ## 4. Package shape

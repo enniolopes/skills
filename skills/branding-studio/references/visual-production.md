@@ -16,6 +16,8 @@ Generated imagery has two roles. **Exploration**: boards that make lineages comp
 
 Controlled vector or code-native production for final logo masters, precise icons and symbols, deterministic patterns, UI, diagrams, editable text, layout and book composition. Generative raster when it materially improves the direction: exploration boards and contextual scenes, bespoke photography or photographic worlds, illustration systems, key visuals, materials and textures, editing and reference-driven variation. Do not generate an asset merely because a generator is available.
 
+The photographic register is the highest-risk class a reader will see: it is read first, it is judged by an eye that is expert without training, and it is the register the agent controls least. Choose it for a delivered image only where it can be brought to the floor on that surface; otherwise choose a register the agent controls (vector, code-native, an illustration system of the brand's own) or one excellent scene in place of several average ones. Decide this in BUILD SYSTEM, before any render exists, not after a weak render is already in hand.
+
 ## 2. Preflight the production path
 
 Once a direction materially depends on generated imagery, verify a production path before treating it as production-ready, in this order:

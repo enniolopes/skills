@@ -66,7 +66,7 @@ When generated or edited raster imagery is material to the direction, load `refe
 ### TEST IN USE
 Test the declared touchpoints. `meta.touchpoints` is the list of applications to make: each gets at least one render in the context where it lives (a photographic or composited scene for a physical object, a real screen for a digital one), plus whatever further stresses (dense/expressive, small/large, static/motion) the system needs to prove range.
 
-A browser render measures. It does not substitute for seeing the object where people will meet it. A touchpoint left unrendered is a named gap in delivery with a lowered maturity label, never a silent omission.
+A browser render measures. It does not substitute for seeing the object where people will meet it. A touchpoint left unrendered is a named gap in delivery with a lowered maturity label, never a silent omission. A render made here exists to expose problems; whether it reaches a reader is decided in PACKAGE by the minimum rule, never by the fact that it exists.
 
 Material visual deliverables must be made and inspected, not merely specified. Load `references/visual-artifact-production.md`. Judge force before compliance, with the mechanisms in `references/identity-craft.md`: an artifact that is correct but that nobody would stop to look at has failed.
 
@@ -87,7 +87,9 @@ The package is two things: the brand book, a served touchpoint of the brand itse
 
 Everything a reader sees is in the audience's language. Nothing from the process—contract versions, evidence, open questions, schema, file names, route names—reaches a published artifact.
 
-Before delivery ask: if this brand were created today, exactly like this, what in these files would not need to exist? Remove it.
+The reader judges the package by its weakest visible element, because every element is evidence about the judgment behind all the others: a strong one is ambiguous evidence, a weak one is conclusive. A package is therefore closed by a minimum, never by an average or by coverage. As the last pass, put every visible element side by side, name the weakest, and raise it to the level of the next or remove it; repeat until the weakest holds beside the bar named at direction. A removed element is a named gap in the operator report, and it costs less than the trust a weak element destroys. Lower-maturity work never sits beside finished work in the same artifact. When an independent context is available, have it rank the set blind, without the rationale; the maker ranks own work leniently.
+
+Then ask: if this brand were created today, exactly like this, what in these files would not need to exist? Remove it.
 
 ## Resolve uncertainty with the right evidence
 
@@ -135,6 +137,7 @@ Reject counterfeit quality:
 - style signals are not specificity, distinctiveness, premium quality or timelessness;
 - repetition is not coherence or recognizability;
 - mockup polish is not system performance;
+- coverage is not quality: a visible element below the floor is worse than the gap it fills;
 - generated spectacle is not relevance or art direction;
 - research volume is not insight;
 - a defensible rationale is not a direction anyone has seen.
@@ -178,4 +181,4 @@ What earns a master the label `final` is owned by `references/visual-artifact-pr
 
 ## Delivery
 
-Two channels. The artifact carries only what its reader needs, in the reader's language. The report to the operator carries the committed recommendation, concise rationale where it improves future judgment, the verification actually performed, and material unresolved truth/authority/reality/craft/capability dependencies. Every declared touchpoint appears in the report with its maturity label, so a piece delivered one rung below the others is visible without being asked for; counts of files, renders or passing checks describe the package, never its quality. Nothing from the second channel enters the first. Do not return internal exploration transcripts.
+Two channels. The artifact carries only what its reader needs, in the reader's language. The report to the operator carries the committed recommendation, concise rationale where it improves future judgment, the verification actually performed, and material unresolved truth/authority/reality/craft/capability dependencies. Every declared touchpoint appears in the report with its maturity label, including those the minimum rule kept out of the package, so nothing is one rung below the others without the operator knowing; counts of files, renders or passing checks describe the package, never its quality. Nothing from the second channel enters the first. Do not return internal exploration transcripts.
